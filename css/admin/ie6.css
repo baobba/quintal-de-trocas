@@ -1,0 +1,29 @@
+#navbar ul.nav {
+	margin-top:0;
+	top:-2px;
+}
+
+#header #search {
+	margin-top:2px;
+}
+
+ul.dash li a {
+ background:url('../../img/admin/largebut_ie6.png') 0 0 no-repeat;
+}
+
+
+ul.dash li a:hover {
+ background:url('../../img/admin/largebut_ie6_hover.png') 0 0 no-repeat;
+}
+
+ul.nav li a:hover {
+	background:none;
+}
+
+#sidebar ul li {
+ background:url('../../img/admin/arrow_left.gif') 5px 8px no-repeat;
+}
+
+#sidebar ul li:hover {
+ background:none;
+}

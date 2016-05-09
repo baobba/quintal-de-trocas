@@ -1,0 +1,85 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2016-01-23 00:03:31 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 00:05:37 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 00:34:20 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 00:38:29 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 00:39:24 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 03:39:07 --> 404 Page Not Found --> include
+ERROR - 2016-01-23 04:15:39 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 04:16:09 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 04:23:26 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 04:28:32 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 04:55:18 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 04:55:19 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 05:34:24 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 06:45:39 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 07:00:14 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 07:18:09 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 07:36:23 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 08:24:26 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 08:25:07 --> 404 Page Not Found --> parceiros/www.playtoy.com.br
+ERROR - 2016-01-23 09:29:35 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 09:29:35 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 09:51:50 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 09:51:51 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 09:51:51 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 10:12:15 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 10:17:15 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 10:20:14 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 11:18:17 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 11:18:17 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 12:05:01 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 12:49:45 --> Severity: Warning  --> Missing argument 1 for colunas_novidades::detalhe() /home/quint659/public_html/system/application/controllers/colunas_novidades.php 52
+ERROR - 2016-01-23 12:49:45 --> Severity: Notice  --> Undefined variable: slug /home/quint659/public_html/system/application/controllers/colunas_novidades.php 56
+ERROR - 2016-01-23 12:49:45 --> Severity: Warning  --> Cannot modify header information - headers already sent by (output started at /home/quint659/public_html/system/libraries/Exceptions.php:166) /home/quint659/public_html/system/helpers/url_helper.php 543
+ERROR - 2016-01-23 13:13:48 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 13:13:48 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 13:18:00 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 14:24:33 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 14:35:21 --> 404 Page Not Found --> apple-touch-icon-precomposed.png
+ERROR - 2016-01-23 14:35:21 --> 404 Page Not Found --> apple-touch-icon.png
+ERROR - 2016-01-23 14:35:22 --> 404 Page Not Found --> apple-touch-icon-precomposed.png
+ERROR - 2016-01-23 14:35:22 --> 404 Page Not Found --> apple-touch-icon.png
+ERROR - 2016-01-23 15:07:49 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 15:14:34 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 15:54:20 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 16:02:26 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 16:19:38 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 17:13:17 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 17:16:20 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 18:26:29 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 18:26:29 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 18:45:27 --> 404 Page Not Found --> -d%20allow_url_include%3DOn+-d%20auto_prepend_file%3Dhttp:
+ERROR - 2016-01-23 18:57:56 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 18:58:47 --> 404 Page Not Found --> js
+ERROR - 2016-01-23 19:06:53 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 19:14:38 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 19:14:46 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 20:24:47 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 20:55:12 --> Severity: Warning  --> Missing argument 1 for produtos::detalhe() /home/quint659/public_html/system/application/controllers/produtos.php 170
+ERROR - 2016-01-23 20:55:12 --> Severity: Notice  --> Undefined variable: toyId /home/quint659/public_html/system/application/controllers/produtos.php 172
+ERROR - 2016-01-23 20:55:12 --> Severity: Warning  --> Cannot modify header information - headers already sent by (output started at /home/quint659/public_html/system/libraries/Exceptions.php:166) /home/quint659/public_html/system/helpers/url_helper.php 543
+ERROR - 2016-01-23 21:11:14 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 21:25:02 --> 404 Page Not Found --> -d%20allow_url_include%3DOn+-d%20auto_prepend_file%3Dhttp:
+ERROR - 2016-01-23 21:35:10 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 21:35:10 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 22:27:18 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 22:27:19 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 22:39:36 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 22:39:54 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 22:41:10 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 22:44:55 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 22:45:00 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 22:46:35 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 22:52:31 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 22:52:54 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 22:54:03 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 23:07:44 --> 404 Page Not Found --> browserconfig.xml
+ERROR - 2016-01-23 23:12:15 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 23:12:20 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 23:16:07 --> 404 Page Not Found --> robots.txt
+ERROR - 2016-01-23 23:17:26 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 23:17:28 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 23:19:56 --> 404 Page Not Found --> uploads
+ERROR - 2016-01-23 23:47:39 --> 404 Page Not Found --> uploads

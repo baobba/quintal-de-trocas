@@ -1,0 +1,12 @@
+@import 'core.css';
+
+@import 'skin_gray.css';
+/*@import 'skin_clean.css';*/
+
+
+/* REPLACE WITH YOUR FAV COLOR OR REMOVE THE LINE FOR THE SIMPLE SKIN */
+/*@import 'color_blue.css';*/
+/*@import 'color_red.css';*/
+ 
+@import 'plugins.css';
+@import 'css3.css';

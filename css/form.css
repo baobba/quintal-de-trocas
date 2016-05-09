@@ -1,0 +1,328 @@
+/* custom forms styles */
+.customForm-hidden {
+	display: block !important;
+	position: absolute !important;
+	left:-9999px !important;
+}
+/* custom checkbox styles */
+.chk-area {
+	margin: 0 8px 0 0;
+	float: left;
+	overflow: hidden;
+	height: 14px;
+	width: 14px;
+}
+.chk-area span {
+	background: url(../img/bg-checkbox.png) no-repeat;
+	display: block;
+	height:100%;
+}
+.chk-checked span {background-position:0 -24px;}
+/* radio button styles */
+.rad-area {
+	margin: 0 15px 0 0;
+	float: left;
+	overflow: hidden;
+	height: 21px;
+	width: 21px;
+	background: url(../img/bg-radio.png) no-repeat;
+}
+.rad-area span {
+	display: block;
+	height:100%;
+}
+.rad-checked {background-position:-31px 0;}
+.rad-area.customForm-class-radio-2 {
+	width:13px;
+	height:13px;
+	background:url(../img/bg-radio2.png) no-repeat;
+	margin-right:10px;
+}
+.rad-checked.customForm-class-radio-2 {background-position:-23px 0;}
+/* custom select styles */
+.select-area {
+	background: url(../img/bg-select.png) no-repeat 100% -102px;
+	float: left;
+	position: relative;
+	overflow: hidden;
+	height: 41px;
+	font:16px/31px 'Lobster Two', cursive;
+	color:#fff;
+	text-align:left;
+}
+.select-area.select-cs-2 {
+	background:none;
+	height:40px;
+	color:#878787;
+	font:12px/31px 'Open Sans', Arial, Helvetica, sans-serif;
+}
+.select-area.select-cs-3 {
+	background:none;
+	height:39px;
+	color:#666;
+	font:13px/20px 'Open Sans', Arial, Helvetica, sans-serif;
+}
+.select-area .select-opener {
+	background: url(../img/ico-01.png) no-repeat;
+	position: absolute;
+	z-index: 3;
+	top: 50%;
+	margin:-11px 0 0;
+	right: 12px;
+	width: 22px;
+	height: 22px;
+}
+.select-area.select-cs-2 .select-opener {
+	background:url(../img/btn-cs-2.png) no-repeat;
+	width:37px;
+	height:40px;
+	margin-top:-20px;
+	right:0;
+}
+.select-area.select-cs-3 .select-opener {
+	background:url(../img/btn-cs-3.png) no-repeat;
+	width:23px;
+	right:11px;
+}
+.select-area .left {
+	background: url(../img/bg-select.png) no-repeat;
+	position: absolute;
+	width: 6px;
+	height: 41px;
+	z-index: 1;
+	top: 0;
+	left: 0;
+}
+.select-area.select-cs-2 .left {
+	width:7px;
+	height:40px;
+	background:url(../img/bg-cs-2.png) no-repeat;
+}
+.select-area.select-cs-3 .left {display:none;}
+.select-area .center {
+	white-space: nowrap;
+	position: relative;
+	cursor: default;
+	display: block;
+	padding: 5px 30px 5px 11px;
+	margin:0 8px 0 6px;
+	background:url(../img/bg-select.png) repeat-x 0 -51px;
+	z-index: 2;
+}
+.select-area.select-cs-2 .center {
+	background:url(../img/bg-cs-2.png) repeat-x 0 -50px;
+	margin:0 37px 0 7px;
+	padding:5px 5px 4px 9px;
+}
+.select-area.select-cs-3 .center {
+	background:#f0ebe1;
+	border:1px dashed #fff;
+	margin:0;
+	padding:8px 40px 9px 14px;
+}
+.select-area .center img {
+	margin: 5px 5px 0 0;
+	position: relative;
+	float: left;
+}
+.options-overflow div.drop-list {
+	overflow: auto;
+}
+.options-hidden {
+	position: absolute !important;
+	top: -9999px !important;
+	left: -9999px !important;
+}
+.select-options {
+	z-index: 3000;
+	background: #d6d964;
+	position: absolute;
+	font:16px/19px 'Lobster Two', cursive;
+}
+.select-options.drop-cs-2 {
+	background:none;
+	font:12px/15px 'Open Sans', Arial, Helvetica, sans-serif;
+}
+.select-options.drop-cs-3 {
+	background:none;
+	font:13px/16px 'Open Sans', Arial, Helvetica, sans-serif;
+}
+.select-options .drop-holder {
+	border: 2px dotted #fff;
+	border-width: 0 2px 2px;
+	height: 1%;
+	padding-bottom:8px;
+}
+.select-options-flipped .drop-holder {
+	border-width:2px 2px 0;
+	padding-bottom:0;
+	padding-top:8px;
+}
+.select-options.drop-cs-2 .drop-holder {
+	background:#fff;
+	border: 2px dashed #ccc;
+	border-width:0 1px 2px;
+	border-left-color:#eee;
+	margin-right:37px;
+	margin-top:-2px;
+}
+.select-options-flipped.drop-cs-2 .drop-holder {
+	border-width: 2px 1px 0;
+	margin-top:0;
+	margin-bottom:-2px;
+}
+.select-options.drop-cs-3 .drop-holder {
+	background:#f0ebe1;
+	border: 1px dashed #fff;
+	border-width:0 1px 1px;
+	margin-right:39px;
+	margin-top:-1px;
+}
+.select-options-flipped.drop-cs-3 .drop-holder {
+	border-width:1px 1px 0;
+	margin-top:0;
+	margin-bottom:-1px;
+}
+.select-options div.drop-list {
+	width: 100%;
+}
+.select-options ul {
+	overflow: hidden;
+	list-style: none;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+.select-options ul li {
+	overflow: hidden;
+	float: left;
+	width: 100%;
+}
+.select-options ul a {
+	text-decoration: none;
+	cursor: default;
+	color: #fff;
+	display: block;
+	overflow: hidden;
+	height: 1%;
+	padding: 5px 5px 5px 15px;
+}
+.select-options.drop-cs-2 ul a{color:#878787;}
+.select-options.drop-cs-3 ul a{
+	color:#666;
+	padding-left:14px;
+}
+.select-options ul a span {
+	cursor: default;
+	float: left;
+}
+.select-options .item-selected a {
+	text-decoration: none;
+	background: #666;
+	color: #fff;
+}
+.select-options.drop-cs-2 .item-selected a {
+	color:#f8ab43;
+	background:none;
+}
+.select-options.drop-cs-3 .item-selected a {
+	color:#f8ab43;
+	background:none;
+}
+.select-options ul a:hover {
+	text-decoration: none;
+}
+.select-options ul a:focus {
+	outline: none;
+}
+.select-options .optgroup strong{
+	cursor: default;
+	display: block;
+	width: 100%;
+}
+.select-options .optgroup strong em {
+	display: block;
+	padding: 5px;
+	height: 1%;
+}
+.select-options .optgroup ul a {
+	padding-left: 20px;
+}
+.select-options img {
+	margin: 2px 3px 0 0;
+	float: left;
+	border: 0;
+}
+/* custom input type file */
+.file-area {
+	position: relative;
+	line-height: 39px;
+	overflow: hidden;
+	padding: 0 7px 0 0;
+	float: left;
+	clear: both;
+	height: 39px;
+}
+.file-area .customForm-wrap {
+	position: relative;
+	overflow: hidden;
+	height: 39px;
+	width: 0;
+	margin: 0 0 -39px;
+	z-index: 100;
+	font-size: 0;
+	line-height: 0;
+}
+.file-area .customForm-input-wrapper {
+	position: relative;
+	overflow: hidden;
+	height: 39px;
+	float: left;
+}
+.file-area .customForm-fake-input {
+	background:#f0ebe1;
+	border:1px dashed #fff;
+	white-space: nowrap;
+	float: left;
+	color:#545454;
+	font-size:13px;
+	line-height:16px;
+}
+.file-area .customForm-fake-input span {
+	cursor: default;
+	overflow: hidden;
+	float: left;
+}
+.file-area .customForm-fake-input em {
+	float: left;
+	height:17px;
+	width:265px;
+	font-style: normal;
+	padding:10px 16px;
+	overflow: hidden;
+}
+.file-area .customForm-upload-button {
+	background: url(../img/btn-file.png) no-repeat;
+	color: #fff;
+	float: left;
+	width:65px;
+	height:34px;
+	font:italic 18px/31px 'Lobster Two', cursive;
+	text-align:center;
+	text-shadow:1px 2px 0 #c68936;
+	margin:0 0 0 5px;
+	position:relative;
+	top:2px;
+}
+.file-input-opacity {
+	z-index: 100;
+	position: absolute;
+	height: 31px;
+	line-height: 31px;
+}
+
+.file-area:hover .customForm-upload-button,
+.file-focus .customForm-upload-button {
+	background-position:-75px 0;
+	text-shadow:1px 2px 0 #d26900;
+}

@@ -1,0 +1,103 @@
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed'); ?>
+
+ERROR - 2015-12-08 00:01:05 --> 404 Page Not Found --> fckeditor
+ERROR - 2015-12-08 00:10:47 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 00:35:14 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 00:38:28 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 01:02:54 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 01:33:09 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 02:10:55 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 02:13:44 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 02:23:02 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 02:23:44 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 02:29:46 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 02:44:31 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 02:55:36 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 04:17:45 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 05:07:15 --> 404 Page Not Found --> wp-admin
+ERROR - 2015-12-08 05:13:02 --> 404 Page Not Found --> test
+ERROR - 2015-12-08 05:18:49 --> 404 Page Not Found --> wordpress
+ERROR - 2015-12-08 05:24:39 --> 404 Page Not Found --> blog
+ERROR - 2015-12-08 05:30:36 --> 404 Page Not Found --> wp
+ERROR - 2015-12-08 05:36:22 --> 404 Page Not Found --> old
+ERROR - 2015-12-08 06:02:01 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 06:17:47 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 06:28:02 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 06:49:09 --> Severity: Notice  --> getimagesize() [<a href='function.getimagesize'>function.getimagesize</a>]: Read error! /home/quint659/public_html/system/libraries/Image.php 178
+ERROR - 2015-12-08 06:49:09 --> Severity: Warning  --> imagecopyresampled() expects parameter 2 to be resource, null given /home/quint659/public_html/system/libraries/Image.php 355
+ERROR - 2015-12-08 06:49:09 --> Severity: Notice  --> getimagesize() [<a href='function.getimagesize'>function.getimagesize</a>]: Read error! /home/quint659/public_html/system/libraries/Image.php 178
+ERROR - 2015-12-08 06:49:09 --> Severity: Warning  --> imagecopyresampled() expects parameter 2 to be resource, null given /home/quint659/public_html/system/libraries/Image.php 355
+ERROR - 2015-12-08 06:50:10 --> Severity: Notice  --> getimagesize() [<a href='function.getimagesize'>function.getimagesize</a>]: Read error! /home/quint659/public_html/system/libraries/Image.php 178
+ERROR - 2015-12-08 06:50:10 --> Severity: Warning  --> imagecopyresampled() expects parameter 2 to be resource, null given /home/quint659/public_html/system/libraries/Image.php 355
+ERROR - 2015-12-08 06:50:10 --> Severity: Notice  --> getimagesize() [<a href='function.getimagesize'>function.getimagesize</a>]: Read error! /home/quint659/public_html/system/libraries/Image.php 178
+ERROR - 2015-12-08 06:50:10 --> Severity: Warning  --> imagecopyresampled() expects parameter 2 to be resource, null given /home/quint659/public_html/system/libraries/Image.php 355
+ERROR - 2015-12-08 07:10:16 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 07:11:12 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 07:50:57 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 08:00:17 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 08:46:55 --> 404 Page Not Found --> fancybox
+ERROR - 2015-12-08 08:46:56 --> 404 Page Not Found --> fancybox
+ERROR - 2015-12-08 08:46:56 --> 404 Page Not Found --> fancybox
+ERROR - 2015-12-08 08:46:57 --> 404 Page Not Found --> fancybox
+ERROR - 2015-12-08 08:46:57 --> 404 Page Not Found --> fancybox
+ERROR - 2015-12-08 08:46:58 --> 404 Page Not Found --> fancybox
+ERROR - 2015-12-08 08:46:58 --> 404 Page Not Found --> fancybox
+ERROR - 2015-12-08 08:46:59 --> 404 Page Not Found --> fancybox
+ERROR - 2015-12-08 09:29:33 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 09:29:38 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 09:30:21 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 09:56:27 --> 404 Page Not Found --> css
+ERROR - 2015-12-08 09:57:30 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 09:57:58 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 10:00:05 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 10:00:54 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 10:06:15 --> 404 Page Not Found --> css
+ERROR - 2015-12-08 10:07:56 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 10:08:20 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 10:13:35 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 10:24:02 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 10:56:04 --> 404 Page Not Found --> apple-touch-icon-precomposed.png
+ERROR - 2015-12-08 10:56:04 --> 404 Page Not Found --> apple-touch-icon.png
+ERROR - 2015-12-08 10:56:06 --> 404 Page Not Found --> apple-touch-icon-precomposed.png
+ERROR - 2015-12-08 10:56:06 --> 404 Page Not Found --> apple-touch-icon.png
+ERROR - 2015-12-08 11:38:53 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 12:23:00 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 12:23:11 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 12:32:37 --> 404 Page Not Found --> fck_uploads
+ERROR - 2015-12-08 12:46:58 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 13:15:32 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 13:36:21 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 13:56:26 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 14:56:38 --> 404 Page Not Found --> apple-touch-icon-precomposed.png
+ERROR - 2015-12-08 14:56:38 --> 404 Page Not Found --> apple-touch-icon.png
+ERROR - 2015-12-08 14:57:23 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 15:02:01 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 15:09:55 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 16:23:25 --> 404 Page Not Found --> apple-touch-icon.png
+ERROR - 2015-12-08 16:44:58 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 17:05:26 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 17:05:37 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 17:07:30 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 17:13:24 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 17:17:42 --> 404 Page Not Found --> parceiros/www.playtoy.com.br
+ERROR - 2015-12-08 17:23:07 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 18:03:55 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 18:45:28 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 19:06:44 --> 404 Page Not Found --> www.youtube.com
+ERROR - 2015-12-08 19:32:33 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 19:32:50 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 20:45:29 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 21:12:44 --> 404 Page Not Found --> robots.txt
+ERROR - 2015-12-08 22:30:25 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 22:32:02 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 22:32:17 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 22:32:28 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 22:32:35 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 22:32:41 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 22:32:49 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 22:32:56 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 22:33:02 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 22:35:05 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 22:35:27 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 22:37:06 --> 404 Page Not Found --> uploads
+ERROR - 2015-12-08 22:57:59 --> 404 Page Not Found --> robots.txt

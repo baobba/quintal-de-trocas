@@ -1,0 +1,212 @@
+@font-face {
+	font-family: 'OpenSansLight';
+	src: url('../fonts/OpenSans-Light-webfont.eot');
+	src: url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('../fonts/OpenSans-Light-webfont.woff') format('woff'),
+	     url('../fonts/OpenSans-Light-webfont.ttf') format('truetype'),
+	     url('../fonts/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../fonts/OpenSans-Regular-webfont.eot');
+	src: url('../fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+	     url('../fonts/OpenSans-Regular-webfont.woff') format('woff'),
+	     url('../fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+	     url('../fonts/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+body {min-width:1180px;}
+.wrapper,
+header,
+header .top,
+header .block,
+.visual,
+.visual-b,
+.step-area,
+.step-area .list,
+.step-area .list a,
+.step-area .list .item,
+.benefits,
+.benefits-in,
+.benefits .differences .head-box .img,
+.benefits .list,
+.benefits .list h3,
+.select-area .center,
+.visual .slide h2 .small,
+.visual .slide h2 .str,
+.page-title,
+.page-title .in,
+.main,
+.main .item-list,
+.product-area .item-list,
+.main .item-filter,
+.main .item-list .box,
+.product-area .item-list .box,
+.product-area .product-info .heading,
+.main .filter-list .list li,
+.main .post-preview .meta,
+.promo-area,
+.step-info,
+.contact-area,
+.contact-area .heading,
+.text,
+.reg-area,
+.reg-area .block,
+.reg-area .block .cols,
+.reg-area .block .cols-in,
+.login-section,
+.login-section .block,
+.login-section .block .cols,
+.login-section .block .cols-in,
+.login-section .login-form,
+.login-section .login-form .btn-holder,
+.user-area,
+.user-area .block,
+.user-area .personal-data,
+.user-area .personal-data .cols,
+.user-area .side-menu,
+.user-area .messages,
+.user-area .messages .item,
+.user-area .messages .msg-head,
+.user-area .messages .entity,
+.media-area,
+.media-area .media-list .meta,
+.partners-area,
+.partners-area .partner-list,
+.partners-area .partner-list a,
+.faq-area,
+.faq-area .block,
+.faq-area .faq-item,
+.faq-area .faq-item .ttl,
+.faq-area .faq-item .entity,
+.ui-accordion,
+.exchange-area .decor,
+.exchange-area,
+.exchange-area .block,
+.exchange-area .block .cols,
+.exchange-area .contact-list,
+.exchange-area .title,
+.exchange-area .add-info .list,
+.info-area,
+.info-area .cols,
+.product-area,
+.product-area .product-info .details,
+.product-area .product-info,
+.product-area .product-info .gallery .slide,
+.product-area .product-info .thumbs-list,
+.product-area .product-info .gallery,
+.popup .radio-list,
+.popup .textarea,
+.user-area .toy-info,
+.user-area .toy-info .form-in,
+.user-area .toy-info .file-block,
+.user-area .toy-info .option-area,
+.user-area .toy-info .option-list,
+.user-area .toy-info .radio-list,
+.user-area .toy-info .holder,
+.user-area .toy-info .radio-list li,
+.user-area .toy-info .ttl,
+.user-area .toy-info .row,
+.user-area .toy-info .btn-holder,
+footer,
+footer .top,
+footer .news,
+footer .bottom,
+footer .bottom .holder,
+footer .list li,
+footer .list a {zoom:1;}
+
+.visual .flex-control-nav a {background:url(../img/ico-11.png) no-repeat;}
+.visual .flex-control-nav a:hover,
+.visual .flex-control-nav a.flex-active {background:url(../img/ico-11.png) no-repeat -22px 0;}
+
+* +html .step-area .head h2,
+* +html .step-area .list li,
+* +html .benefits .list li,
+* +html .main .item-list li,
+* +html .media-area .media-list > li,
+* +html .partners-area .partner-list li,
+* +html .user-area .toys-list > li,
+* +html .page-title .breadcrumbs li,
+* +html .product-area .item-list li,
+* +html .main .paging li,
+* +html .main .filter-form label,
+* +html .main .filter-form .sep,
+* +html .media-area .filter-bar .form,
+* +html .exchange-area .contact-list li,
+* +html .exchange-area .title h2,
+* +html .exchange-area .add-info .list li,
+* +html .product-area .product-info .details dl,
+* +html .user-area .toy-info .option-list li {display:inline;}
+
+* +html .main .item-list .img,
+* +html header .user-box .tbl,
+* +html .product-area .product-info .thumbs-list .tbl,
+* +html .main .item-filter .tbl,
+* +html .user-area .toys-list .img,
+* +html .product-area .item-list .img,
+* +html .partners-area .partner-list .img,
+* +html .product-area .product-info .heading .tbl {
+	position:relative;
+	display:block;
+}
+* +html header .user-box .tbl {float:left;}
+* +html .main .item-list .img .tbl-cell,
+* +html header .user-box .tbl-cell,
+* +html .product-area .product-info .thumbs-list .tbl-cell,
+* +html .user-area .toys-list .img .tbl-cell,
+* +html .main .item-filter .tbl-cell,
+* +html .product-area .item-list .img .tbl-cell,
+* +html .partners-area .partner-list .img .tbl-cell,
+* +html .product-area .product-info .heading .tbl-cell {
+	position:absolute;
+	top:50%;
+}
+* +html header .user-box .tbl-cell {
+	position:relative;
+	float:left;
+}
+* +html .main .item-list .img img,
+* +html header .user-box .tbl-in,
+* +html .product-area .product-info .thumbs-list .tbl img,
+* +html .user-area .toys-list .img .tbl-cell img,
+* +html .main .item-filter .tbl-in,
+* +html .product-area .item-list .img img,
+* +html .partners-area .partner-list .img img,
+* +html .product-area .product-info .heading .tbl-in {
+	position:relative;
+	top:-50%;
+}
+* +html header nav li,
+* +html header .login-area li {
+	display:inline;
+	float:none;
+	vertical-align:top;
+}
+footer .bottom .col-r {max-width:400px;}
+* +html header .user-box,
+* +html header .user-box ul {
+	overflow:hidden;
+	float:none;
+}
+header .top,
+header .user-box,
+header .user-box .welcome .name,
+.media-area .media-list .meta,
+.partners-area .partner-list .web {font-weight:normal;}
+.media-area .media-list .name,
+.contact-area .feedback-form label,
+.partners-area .partner-list .name,
+.product-area .product-info .heading h2 {
+	font-family:'OpenSansLight';
+	font-weight:normal;
+}
+* +html .user-area .toys-list .img,
+* +html .partners-area .partner-list .img {text-align:left;}
+* +html .user-area .toys-list .img .tbl-cell,
+* +html .partners-area .partner-list .img .tbl-cell {text-align:center;}
+* +html .benefits .list h3 {padding-bottom:4px;}
+footer .list li {vertical-align:top;}

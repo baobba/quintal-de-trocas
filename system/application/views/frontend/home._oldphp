@@ -1,0 +1,118 @@
+<div class="visual">
+				<div class="visual-c">
+					<div class="visual-b">
+						<div class="flexslider" id="flexslider-1">
+							<ul class="slides">
+                                <li style="display: list-item;">
+                                    <div class="slide">
+                                        <div class="media-box">
+                                            <div class="media-box-in">
+                                                <iframe width="528" height="316" frameborder="0" allowfullscreen="" src="//www.youtube.com/embed/EEGcsYG_4Q4?rel=0"></iframe>
+                                            </div>
+                                        </div>
+                                        <div class="descr">
+                                            <div class="img"><img alt="image description" src="<?php echo $base_url; ?>img/img-01.png"></div>
+                                            <div class="holder">
+                                                <?php echo $box1; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+						</div>
+					</div>
+				</div>
+			</div><!-- /visual -->
+			<article class="step-area">
+				<div class="head">
+					<h2>
+						<span class="curve-l">&nbsp;</span>
+						<span class="curve-r">&nbsp;</span>
+						<span class="small">Quintal de trocas</span>
+						<span class="large">em 5 passos</span>
+					</h2>
+				</div>
+				<ul class="list">
+					<li>
+							<div class="item">
+								<img class="ie-fix" src="<?php echo $base_url; ?>img/img-03.jpg" alt="image description">
+								<span class="mask">&nbsp;</span>
+								<strong class="num ie-fix">1</strong>
+							</div>
+							<p>Seu filho escolhe qual brinquedo quer trocar</p>
+						
+					</li><li>
+							<div class="item item-2">
+								<img class="ie-fix" src="<?php echo $base_url; ?>img/img-04.jpg" alt="image description">
+								<span class="mask">&nbsp;</span>
+								<strong class="num ie-fix">2</strong>
+							</div>
+							<p>Voc&ecirc; tira foto do brinquedo e cadastra no site</p>
+					</li><li>
+							<div class="item item-3">
+								<img class="ie-fix" src="<?php echo $base_url; ?>img/img-05.jpg" alt="image description">
+								<span class="mask">&nbsp;</span>
+								<strong class="num ie-fix">3</strong>
+							</div>
+							<p>Seu filho escolhe o brinquedo que desperta seu interesse</p>
+					</li><li>
+							<div class="item item-4">
+								<img class="ie-fix" src="<?php echo $base_url; ?>img/img-06.jpg" alt="image description">
+								<span class="mask">&nbsp;</span>
+								<strong class="num ie-fix">4</strong>
+							</div>
+							<p>Ele escreve uma cartinha contando sua história com o brinquedo</p>
+					</li><li>
+							<div class="item item-5">
+								<img class="ie-fix" src="<?php echo $base_url; ?>img/img-07.jpg" alt="image description">
+								<span class="mask">&nbsp;</span>
+								<strong class="num ie-fix">5</strong>
+							</div>
+							<p>Efetua a troca</p>
+					</li>
+				</ul>
+			</article><!-- /step-area -->
+			<article class="benefits">
+				<div class="benefits-in">
+					<div class="col-l">
+						<h2 class="ttl">Vantagens da troca</h2>
+						<ul class="list">
+							<li>
+								<a href="<?php echo $base_url . URL_COMO_FUNCIONA;?>">
+									<div class="in">
+										<div class="img"><img src="<?php echo $base_url; ?>img/img-08.png" alt="image description"></div>
+										<h3>Sustentabilidade</h3>
+										<p>Estimula a crian&ccedil;a &agrave; pr&aacute;tica do consumo compartilhado</p>
+									</div>
+								</a>
+							</li><li>
+								<a href="<?php echo $base_url . URL_COMO_FUNCIONA;?>">
+									<div class="in">
+										<div class="img"><img src="<?php echo $base_url; ?>img/img-09.png" alt="image description"></div>
+										<h3>Menos dinheiro e mais brincadeiras</h3>
+										<p>Um brinquedo comprado uma vez se transforma em v&aacute;rios outros</p>
+									</div>
+								</a>
+							</li><li>
+								<a href="<?php echo $base_url . URL_COMO_FUNCIONA;?>">
+									<div class="in">
+										<div class="img"><img src="<?php echo $base_url; ?>img/img-10.png" alt="image description"></div>
+										<h3>Novos valores</h3>
+										<p>Cuidar dos seus brinquedos tamb&eacute;m faz parte da brincadeira</p>
+									</div>
+								</a>
+							</li>
+							<li>
+                                <a href="<?php echo $base_url . URL_COMO_FUNCIONA;?>">
+                                    <div class="in">
+                                        <div class="img"><img alt="image description" src="<?php echo $base_url; ?>img/img-10-v2.png"></div>
+                                        <h3>Resgate a Magia das Cartas</h3>
+                                        <p>Ao enviar o brinquedo, a criança poderá escrever uma cartinha para a outra que está recebendo.</p>
+                                    </div>
+                                </a>
+                            </li>
+						</ul>
+					</div>
+					<a href="produtos" class="cta">Comece agora</a>
+				</div>
+			</article><!-- /benefits -->
