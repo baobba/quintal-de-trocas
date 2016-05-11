@@ -14,6 +14,10 @@ Abra seu terminal após o clone do projeto e digite:
 
 `vagrant up`
 
+Edite o seu arquivo de hosts local e crie uma nova entrada indicando o endereço do seu ambiente local definido no Vagrantfile.
+
+`192.168.33.10  quintal.dev` 
+
 Aguarde a criação do ambiente + instalação das dependencias que são:
 
 * nano

@@ -54,6 +54,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         memory: "128",
         enabled: "yes",
         listen_ip: "0.0.0.0"
+      },
+      mysql: {
+        server_root_password: "root",
+        server_debian_password: "root",
+        server_repl_password: "root"
+      },
+      quintal: {
+          hostname: "quintal.dev",
+          database_name: "quintal",
+          test_database_name: "quintal_test"
       }
     }
 
@@ -69,6 +79,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       'recipe[quintal::nginx]',
       'recipe[nodejs::nodejs]',
       'recipe[quintal::nodejs]',
+      'recipe[quintal::mysql]',
       'recipe[php]',
       'recipe[quintal::php]',
       'recipe[composer]'

@@ -1,5 +1,5 @@
-default["application"]["current_path"] = "/var/www/app"
-default["application"]["public_path"] = "/var/www/app/public"
+default["application"]["current_path"] = "/var/www"
+default["application"]["public_path"] = "/var/www"
 default["application"]["hostname"] = "_"
 default["application"]["enviroment"] = "development"
 default["application"]["php_sock"] = "/var/run/php5-fpm.sock"
