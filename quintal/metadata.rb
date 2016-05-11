@@ -1,0 +1,7 @@
+name             'quintal'
+maintainer       'YOUR_NAME'
+maintainer_email 'YOUR_EMAIL'
+license          'All rights reserved'
+description      'Installs/Configures quintal'
+long_description 'Installs/Configures quintal'
+version          '0.1.0'
