@@ -1,3 +1,16 @@
 source "https://supermarket.chef.io"
 
 metadata
+
+cookbook "apt"
+cookbook "nano"
+cookbook "build-essential"
+cookbook "zsh"
+cookbook "git"
+cookbook "nginx"
+cookbook "nodejs"
+cookbook "php"
+cookbook "composer"
+cookbook "phpunit"
+cookbook "php-mcrypt"
+cookbook "memcached-cookbook"

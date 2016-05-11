@@ -1,0 +1,22 @@
+server {
+  listen        <%= node['application']['port'] %>;
+  server_name   <%= node['application']['hostname'] %>;
+  root          <%= node['application']['public_path'] %>;
+  sendfile      <%= node['application']['sendfile'] %>;
+  access_log    <%= node['nginx']['log_dir'] %>/access.log;
+  error_log     <%= node['nginx']['log_dir'] %>/error.log;
+
+  location / {
+    index index.php;
+    try_files $uri $uri/ /index.php$is_args$args;
+  }
+
+  location ~ \.php$ {
+    include       /etc/nginx/fastcgi_params;
+    fastcgi_pass  unix:<%= node['application']['php_sock'] %>;
+    fastcgi_index index.php;
+    fastcgi_param FUEL_ENV "<%= node['application']['enviroment'] %>";
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+  }
+
+}

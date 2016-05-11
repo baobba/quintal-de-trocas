@@ -3,6 +3,8 @@ uploads/*
 uploads/images
 fck_uploads
 fck_uploads/*
+.vagrant
+
 
 nbproject
 nbproject/private/

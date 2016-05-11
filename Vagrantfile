@@ -14,9 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.box = 'bento/ubuntu-14.04'
-
   config.vm.network "private_network", ip: "192.168.33.10"
-
   config.vm.synced_folder "./", "/var/www"
 
   # Provider-specific configuration so you can fine-tune various
@@ -50,16 +48,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.berkshelf.except = []
 
   config.vm.provision :chef_solo do |chef|
+
     chef.json = {
-      mysql: {
-        server_root_password: 'rootpass',
-        server_debian_password: 'debpass',
-        server_repl_password: 'replpass'
+      memcached: {
+        memory: "128",
+        enabled: "yes",
+        listen_ip: "0.0.0.0"
       }
     }
 
     chef.run_list = [
-      'recipe[quintal::default]'
+      'recipe[quintal::default]',
+      'recipe[quintal::nano]',
+      'recipe[quintal::htop]',
+      'recipe[build-essential::default]',
+      'recipe[zsh]',
+      'recipe[git::default]',
+      'recipe[memcached-cookbook]',
+      'recipe[nginx::default]',
+      'recipe[quintal::nginx]',
+      'recipe[nodejs::nodejs]',
+      'recipe[quintal::nodejs]',
+      'recipe[php]',
+      'recipe[quintal::php]',
+      'recipe[composer]'
     ]
   end
 end
