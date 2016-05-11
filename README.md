@@ -1,13 +1,12 @@
-# quintal-de-trocas
-Repositório do projeto Quintal de Trocas
+# Quintal de trocas
 
+Repositório do projeto Quintal de Trocas
 
 ## Requisitos Básicos
 
 * Virtualbox
 * Vagrant (vagrantup.com)
 * Chef SDK (https://downloads.chef.io/chef-dk/)
-
 
 ### Instruções
 
