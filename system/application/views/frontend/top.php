@@ -32,7 +32,6 @@
 	<script type="text/javascript" src="<?php echo $base_url; ?>js/admin/buscacep.js"></script>
 	<script type="text/javascript" src="<?php echo $base_url; ?>js/autocomplete.js"></script>
 	<script type="text/javascript" src="<?php echo $base_url; ?>js/jquery.jCombo.min.js"></script>
-	<script type="text/javascript" src="<?php echo $base_url; ?>js/jquery.jscroll.min.js"></script>
 	<script type="text/javascript" src="<?php echo $base_url; ?>js/chosen.jquery.js"></script>
 	<script type="text/javascript" src="<?php echo $base_url; ?>js/jquery.colorbox.js"></script>
 	<script type="text/javascript" src="<?php echo $base_url; ?>js/jquery.colorbox-min.js"></script>
