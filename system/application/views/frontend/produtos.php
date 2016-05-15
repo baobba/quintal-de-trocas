@@ -30,12 +30,7 @@
                 echo $toyList;
             ?>
 		</ul>
-		
-		<script>
-		    $(function(){
-		        $('.item-list').jscroll({nextSelector:'a.next'});
-            })
-		</script>
+    
 		<?php 
             if ($toys->num_rows == 0) {
                 echo '<h4>Nada encontrado</h4>';
