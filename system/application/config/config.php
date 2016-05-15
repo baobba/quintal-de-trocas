@@ -4,7 +4,7 @@ if (!defined('BASEPATH')) {
 	exit('No direct script access allowed');
 }
 
-$config['base_url'] = 'http://localhost/quintal';
+$config['base_url'] = 'http://quintal.dev';
 
 // fck editor
 $_SESSION['base_url'] = $config['base_url'];

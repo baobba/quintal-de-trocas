@@ -3,10 +3,10 @@
 $active_group = "local";
 $active_record = true;
 
-$db['local']['hostname'] = "localhost";
+$db['local']['hostname'] = "127.0.0.1";
 $db['local']['username'] = "root";
-$db['local']['password'] = "";
-$db['local']['database'] = "QuintalDev";
+$db['local']['password'] = "quintal";
+$db['local']['database'] = "quint659_prod";
 $db['local']['dbdriver'] = "mysql";
 $db['local']['dbprefix'] = "cms_";
 $db['local']['pconnect'] = true;

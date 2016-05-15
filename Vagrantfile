@@ -14,37 +14,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.box = 'bento/ubuntu-14.04'
-  config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network :private_network, ip: "192.168.20.13"
+  #config.vm.network "forwarded_port", guest: 80, host: 80
+  #config.vm.network "forwarded_port", guest: 3306, host: 3306
+
   config.vm.synced_folder "./", "/var/www"
 
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  # config.vm.provider :virtualbox do |vb|
-  #   # Don't boot with headless mode
-  #   vb.gui = true
-  #
-  #   # Use VBoxManage to customize the VM. For example to change memory:
-  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  # end
-  #
-  # View the documentation for the provider you're using for more
-  # information on available options.
-
-  # The path to the Berksfile to use with Vagrant Berkshelf
+  
   config.berkshelf.berksfile_path = "./quintal/Berksfile"
 
-  # Enabling the Berkshelf plugin. To enable this globally, add this configuration
-  # option to your ~/.vagrant.d/Vagrantfile file
+
   config.berkshelf.enabled = true
 
-  # An array of symbols representing groups of cookbook described in the Vagrantfile
-  # to exclusively install and copy to Vagrant's shelf.
   # config.berkshelf.only = []
 
-  # An array of symbols representing groups of cookbook described in the Vagrantfile
-  # to skip installing and copying to Vagrant's shelf.
   # config.berkshelf.except = []
 
   config.vm.provision :chef_solo do |chef|
@@ -56,14 +39,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         listen_ip: "0.0.0.0"
       },
       mysql: {
-        server_root_password: "root",
-        server_debian_password: "root",
-        server_repl_password: "root"
+        server_root_password: "quintal",
+        server_debian_password: "",
+        server_repl_password: ""
       },
       quintal: {
           hostname: "quintal.dev",
           database_name: "quintal",
-          test_database_name: "quintal_test"
+          test_database_name: "quintal-test"
       }
     }
 
@@ -79,10 +62,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       'recipe[quintal::nginx]',
       'recipe[nodejs::nodejs]',
       'recipe[quintal::nodejs]',
-      'recipe[quintal::mysql]',
       'recipe[php]',
       'recipe[quintal::php]',
-      'recipe[composer]'
+      'recipe[composer]',
+      'recipe[quintal::mysql]'
     ]
   end
 end

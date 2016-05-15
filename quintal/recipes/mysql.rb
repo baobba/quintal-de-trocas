@@ -1,50 +1,40 @@
-include_recipe "apt"
-include_recipe "dotdeb"
-include_recipe "php::default"
-include_recipe "php::module_mysql"
-include_recipe "composer"
-include_recipe "nodejs"
-
-mysql_chef_gem 'default' do
-    action :install
-end
-
-mysql_service 'default' do
-    port '3306'
-    version '5.6'
-    initial_root_password node['mysql']['server_root_password']
-    provider Chef::Provider::MysqlServiceSysvinit
-    action [:create, :start]
+mysql_service node['quintal']['database_name'] do
+  port '3306'
+  bind_address '0.0.0.0'
+  initial_root_password node['mysql']['server_root_password']
+  action [:create, :start]
 end
 
 mysql_client 'default' do
     action :create
 end
 
-link "/etc/my.cnf" do
-    to "/etc/mysql-default/my.cnf"
+mysql2_chef_gem 'default' do
+    action :install
 end
 
-mysql_database node['quintal']['database_name'] do
-	connection(
-		:host => 'localhost',
-		:username => 'root',
-		:password => node['mysql']['server_root_password'],
-        :socket => '/var/run/mysql-default/mysqld.sock'
-	)
-	action :create
+mysql_connection_info = {
+  :hostname => 'localhost',
+  :username => 'root',
+  :password => node['mysql']['server_root_password'],
+  :socket => '/run/mysql-quintal/mysqld.sock'
+}
+
+database node['quintal']['database_name'] do
+  connection mysql_connection_info
+  provider   Chef::Provider::Database::Mysql
+  action     :create
 end
 
-mysql_database node['quintal']['test_database_name'] do
-	connection(
-		:host => 'localhost',
-		:username => 'root',
-		:password => node['mysql']['server_root_password'],
-        :socket => '/var/run/mysql-default/mysqld.sock'
-	)
-	action :create
+database node['quintal']['test_database_name'] do
+  connection mysql_connection_info
+  provider   Chef::Provider::Database::Mysql
+  action     :create
 end
 
-execute "mysql-start-dump" do
-  command "mysql -S /var/run/mysql-default/mysqld.sock -u root -p#{node['mysql']['server_root_password']} < /var/www/quintal/dump.sql"      
+database node['quintal']['database_name'] do
+  connection mysql_connection_info
+  provider   Chef::Provider::Database::Mysql
+  sql { ::File.open('/var/www/quintal/dump/dump.sql').read }
+  action :query
 end

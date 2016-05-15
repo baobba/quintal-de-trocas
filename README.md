@@ -16,7 +16,7 @@ Abra seu terminal após o clone do projeto e digite:
 
 Edite o seu arquivo de hosts local e crie uma nova entrada indicando o endereço do seu ambiente local definido no Vagrantfile.
 
-`192.168.33.10  quintal.dev` 
+`192.168.20.13  quintal.dev` 
 
 Aguarde a criação do ambiente + instalação das dependencias que são:
 
@@ -29,6 +29,8 @@ Aguarde a criação do ambiente + instalação das dependencias que são:
 * nginx (instalação + virtualhost)
 * nodeJS
 * PHP 5 + Composer
+* MySQL 
 
+Infelizmente por algum motivo o dump ainda não roda automaticamente, é necessário a maquina virtual e se conectar ao mysql e executar a execução do dump manualmente:
 
-** Itens pendentes: Mysql + Dump
+`mysql -S /run/mysql-quintal/mysqld.sock -uroot -pquintal < /var/www/quintal/dump/dump.sql`
