@@ -116,6 +116,8 @@
 							</a>
 							<ul class="menu-geral">
 								<li><a href="<?php echo $base_url . URL_QUEM_SOMOS; ?>">Sobre</a></li>
+								<li><a href="<?php echo $base_url . URL_PRODUTOS; ?>">Quero Trocar</a></li>
+								<li><a href="<?php echo $base_url . URL_NA_MIDIA; ?>">Na Mídia</a></li>
 								<li><a href="<?php echo $base_url . URL_PARCEIROS; ?>">Parceiros</a></li>
 								<li><a href="<?php echo $base_url . URL_FAQ; ?>">Ajuda</a></li>
 								<li><a href="<?php echo $base_url . URL_PONTOS_DE_TROCAS; ?>">Pontos de Troca</a></li>
