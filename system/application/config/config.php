@@ -10,7 +10,7 @@ $config['base_url'] = 'http://quintal.dev';
 $_SESSION['base_url'] = $config['base_url'];
 
 $config['index_page'] 			= '';
-$config['uri_protocol']			= 'QUERY_STRING';
+$config['uri_protocol']			= 'REQUEST_URI';
 $config['url_suffix'] 			= '';
 $config['language']				= 'english';
 $config['charset'] 				= 'UTF-8';
