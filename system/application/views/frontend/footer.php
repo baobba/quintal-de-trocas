@@ -56,5 +56,6 @@
 <!-- /w1 -->
 </div>
 <!-- /wrapper -->
+<?php echo $this->load->view('ga'); ?>
 </body>
 </html>
