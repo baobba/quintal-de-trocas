@@ -18,8 +18,10 @@ if ($tabSelected !== null) {
 <article class="user-area" id="tabs-1">
     <aside>
         <div class="avatar">
-            <div class="img"><img alt="<?php echo trim($formxUserData->use_field('name')->get_posted()); ?>" src="<?php echo $base_url . URL_UPLOAD_IMAGE . $user['avatar']; ?>"></div>
-            <strong class="name"><?php echo trim(strtok($formxUserData->use_field('name')->get_posted(), ' ')); ?></strong>
+            <a href="<?php echo $base_url . URL_USUARIO_MEUS_DADOS; ?>">
+                <div class="img"><img alt="<?php echo trim($formxUserData->use_field('name')->get_posted()); ?>" src="<?php echo $base_url . URL_UPLOAD_IMAGE . $user['avatar']; ?>"></div>
+                <strong class="name"><?php echo trim(strtok($formxUserData->use_field('name')->get_posted(), ' ')); ?></strong>
+            </a>
         </div>
         <ul class="side-menu">
             <li><a href="#tab-1-1">Meus Dados</a></li>

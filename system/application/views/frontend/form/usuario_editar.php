@@ -37,9 +37,16 @@
 					</div>
 				</div>
 			</div>
-			<div class="file-block">
-				<input type="file" name="avatar" title="Selecione a foto">
-			</div>
+                    <div class="col-in">
+                        <div class="frame-1">
+                            <div class="">
+                                <div class="file-block">
+                                    <input type="file" name="avatar" id="avatar" style="display:none">
+                                    <button  id="browse" class="btn-submit">Trocar foto</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 		</div>
 		<div class="col">
 			<div class="col-in">
