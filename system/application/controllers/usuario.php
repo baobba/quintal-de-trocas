@@ -237,8 +237,8 @@ class usuario extends Controller
 	    $toyStates = CmsToyState::getCombo();
 	    
 	    $formxUserData = $this->useful->getUpdateAccountForm($preArray->estado());
-	    $formxNewToy = $this->useful->getNewToyForm($toyAges, $toyCategories, $toyBrands, $toyStates);
-
+	    //$formxNewToy = $this->useful->getNewToyForm($toyAges, $toyCategories, $toyBrands, $toyStates);
+	    $formxNewToy = $this->useful->getNewToyForm($toyAges, $toyCategories, $toyStates);
 	    $user = $this->useful->getLoggedUser();
 	    
 	    switch (true) {
@@ -296,6 +296,9 @@ class usuario extends Controller
 	    $user = $this->useful->getLoggedUser();
 	    
 	    $userToy = CmsToy::getUserToyByToyId($toyId);
+
+	    $preArray = new Prearray();
+	    $formxUserData = $this->useful->getUpdateAccountForm($preArray->estado());
 	    
 	    if (!$userToy instanceof stdClass) {
 	        redirect(URL_USUARIO_MEUS_DADOS_CRIAR_BRINQUEDO);
@@ -305,10 +308,12 @@ class usuario extends Controller
 	    $toyAges = CmsToyAge::getCombo();
 	    $toyCities = CmsToyCity::getCombo();
 	    $toyCategories = CmsToyCategory::getCombo();
-	    $toyBrands = CmsToyBrand::getCombo();
+	    //$toyBrands = CmsToyBrand::getCombo();
 	    $toyStates = CmsToyState::getCombo();
 	    
-	    $formxUpdateToy = $this->useful->getUpdateToyForm($userToy, $toyAges, $toyStates, $toyCities, $toyCategories, $toyBrands);
+	    //$formxUpdateToy = $this->useful->getUpdateToyForm($userToy, $toyAges, $toyStates, $toyCities, $toyCategories, $toyBrands);
+
+	    $formxUpdateToy = $this->useful->getUpdateToyForm($userToy, $toyAges, $toyStates, $toyCities, $toyCategories);
 	    
 	    $this->data['toyCity'] = $userToy->cms_toy_city_id;
 	    
@@ -318,16 +323,19 @@ class usuario extends Controller
 	    
 	    $this->load->view('frontend/top', $this->data);
 	    $this->load->view('frontend/editar_brinquedo', array(
+	    	'formxUserData' => $formxUserData,
             'formxUpdateToy' => $formxUpdateToy,
             'formxUpdateToyView' => $this->load->view('frontend/form/editar_brinquedo', array(
                 'images' => array($cmsToyImage, $cmsToyImageExtra1, $cmsToyImageExtra2),
                 'formxUpdateToy' => $formxUpdateToy,
+                'formxUserData' => $formxUserData,
     	        'toyId' => $toyId,
                 'toyAges' => $toyAges,
                 'toyCities' => $toyCities,
                 'toyStates' => $toyStates,
                 'toyCategories' => $toyCategories,
-                'toyBrands' => $toyBrands), true),
+                //'toyBrands' => $toyBrands
+                ), true),
             'user' => $user,
 	    ));
 	    $this->load->view('frontend/footer', array(

@@ -24,10 +24,10 @@
 				</div>
 				<p>Descrição: <?php echo $toy->description; ?></p>
 				<div class="details">
-					<dl>
+					<!--dl>
 						<dt>Marca:</dt>
 						<dd><?php echo $toy->brand; ?></dd>
-					</dl>
+					</dl-->
 					<dl>
 						<dt>Categoria:</dt>
 						<dd><?php echo $toy->category; ?></dd>
@@ -57,78 +57,6 @@
 						<dd><?php echo $reputation; ?></dd>
 					</dl>
 				</div>
-				
-				<?php 
-    				$toyAgeInterest = trim($toy->age_interest);
-    				$toyAgeInterest = strlen($toyAgeInterest) ? json_decode($toyAgeInterest, 1) : array();
-    				 
-    				$toyCategoryInterest = trim($toy->category_interest);
-    				$toyCategoryInterest = strlen($toyCategoryInterest) ? json_decode($toyCategoryInterest, 1) : array();
-    				 
-    				$toyBrandInterest = trim($toy->brand_interest);
-    				$toyBrandInterest = strlen($toyBrandInterest) ? json_decode($toyBrandInterest, 1) : array();
-    				
-    				if (count($toyAgeInterest) | count($toyCategoryInterest) | count($toyBrandInterest)) {
-                        echo '
-                            <div class="details">
-    			                <dl>
-                                    <dt>Interesses:</dt>
-                                </dl>
-						        <br />
-						        <br />
-						        ';
-                        
-                        if (count($toyBrandInterest)) {
-                            echo '
-                                <dl>
-                                    <dt>Marca do Brinquedo:</dt>
-                                    <dd>';
-                            
-                            echo implode(', ', $toyBrandInterest);
-                                                        
-                            echo '
-                                    </dd>
-				                </dl>
-    				            <br />
-    				        ';
-                        }
-                        
-                        if (count($toyAgeInterest)) {
-                            echo '
-                                <dl>
-                                    <dt>Faixa Etária:</dt>
-                                    <dd>';
-                        
-                            echo implode(', ', $toyAgeInterest);
-                        
-                            echo '
-                                    </dd>
-				                </dl>
-    				            <br />
-    				        ';
-                            
-                        }
-                        
-                        if (count($toyCategoryInterest)) {
-                            echo '
-                                <dl>
-                                    <dt>Tipo de Brinquedo:</dt>
-                                    <dd>';
-                        
-                            echo implode(', ', $toyCategoryInterest);
-                        
-                            echo '
-                                    </dd>
-				                </dl>
-    				            <br />
-    				        ';
-                        }
-						        
-					    echo '
-				            </div>';
-						        
-                    }
-				?>
 				
 				
 				<?php 

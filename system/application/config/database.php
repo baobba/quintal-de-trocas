@@ -5,8 +5,8 @@ $active_record = true;
 
 $db['local']['hostname'] = "127.0.0.1";
 $db['local']['username'] = "root";
-$db['local']['password'] = "quintal";
-$db['local']['database'] = "quint659_prod";
+$db['local']['password'] = "";
+$db['local']['database'] = "quintal";
 $db['local']['dbdriver'] = "mysql";
 $db['local']['dbprefix'] = "cms_";
 $db['local']['pconnect'] = true;
