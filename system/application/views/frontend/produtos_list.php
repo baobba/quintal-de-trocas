@@ -11,7 +11,7 @@
             </div>
         ', $base_url . URL_PRODUTOS_DETALHE . $toy->id, $base_url . URL_UPLOAD_IMAGE . $toy->image, $toy->name);
 
-        echo sprintf('<strong class="name"><a href="%s">%s</a></strong>', $base_url . URL_PRODUTOS_DETALHE . $toy->id, truncate($toy->name, 25));
+        echo sprintf('<strong class="name"><a href="%s">%s</a></strong>', $base_url . URL_PRODUTOS_DETALHE . $toy->id, strlen($toy->name) > 25 ? substr($toy->name, 0, 23) . "..." : $toy->name);
         echo sprintf('<a href="%s"><p>%s</p></a>', $base_url . URL_PRODUTOS_DETALHE . $toy->id, truncate($toy->description, 70));
         echo sprintf('<a href="%s" class="btn">Quero trocar</a>', $base_url . URL_PRODUTOS_DETALHE . $toy->id);
 

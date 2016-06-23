@@ -30,8 +30,8 @@
 
 <div id="home-destaque">
 	<div class="w1">
-		<h2>Troque seu brinquedo!</h2>
-		<p class="sub-title">Maior portal de troca de brinquedos do Brasil</p>
+		<h2>Por um mundo com mais trocas e conexões</h2>
+		<p class="sub-title">Um brinquedo que circula é uma brincadeira que continua</p>
 		<a href="<?php echo $base_url . URL_COMO_FUNCIONA;?>" class="btn-comoFunciona">Como funciona?</a>
 	</div>
 	<div class="w1">

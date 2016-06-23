@@ -45,7 +45,7 @@
                         dados</a></li>
             </ul>
         </div>
-        <div class="col">
+        <!--<div class="col">
             <h3>Apoio</h3>
             <a 
                 href="http://revistacrescer.globo.com/" 
@@ -55,7 +55,7 @@
                     width="150" 
                     alt="Revista Crescer">
             </a>
-        </div>
+        </div>-->
     </div>
     <!-- /bottom -->
 </footer>
