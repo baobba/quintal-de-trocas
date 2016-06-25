@@ -119,7 +119,6 @@
 								<li><a href="<?php echo $base_url . URL_PRODUTOS; ?>">Quero Trocar</a></li>
 								<li><a href="<?php echo $base_url . URL_NA_MIDIA; ?>">Na Mídia</a></li>
 								<li><a href="<?php echo $base_url . URL_PARCEIROS; ?>">Parceiros</a></li>
-								<li><a href="<?php echo $base_url . URL_FAQ; ?>">Ajuda</a></li>
 								<li><a href="<?php echo $base_url . 'apoie'; ?>">Apoie</a></li>
 								<li><a href="<?php echo $base_url . URL_PONTOS_DE_TROCAS; ?>">Pontos de Troca</a></li>
 							</ul>
@@ -134,7 +133,6 @@
 						?>
 						<div class="login-area">
 							<ul>
-								<li><a href="<?php echo $base_url . URL_USUARIO_CRIAR_CONTA; ?>">Criar conta</a></li>
 								<li><a href="<?php echo $base_url . URL_USUARIO_LOGIN; ?>">Login</a></li>
 							</ul>
 						</div>
