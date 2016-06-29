@@ -32,6 +32,7 @@
                 <li><a href="<?php echo $base_url . URL_FAQ; ?>">Perguntas
                         Frequentes</a></li>
                 <li><a href="<?php echo $base_url . 'apoie'; ?>">Apoie</a></li>
+                <li><a href="<?php echo $base_url . URL_FAQ; ?>">Ajuda</a></li>
             </ul>
         </div>
         <div class="col">

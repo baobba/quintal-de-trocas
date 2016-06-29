@@ -4,8 +4,10 @@ uploads/images
 fck_uploads
 fck_uploads/*
 .vagrant
+.idea
 
 
 nbproject
 nbproject/private/
 nbproject/*
+system/logs/*

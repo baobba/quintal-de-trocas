@@ -23,6 +23,8 @@ class CmsPress extends AbstractEntity {
 	public static function getPress($catId = null, $year = null)
 	{
 	    $where = array();
+		$where['p.active'] = 1;
+
 	    if ($catId) {
 	        $where['p.cms_press_category_id'] = $catId;
 	    }

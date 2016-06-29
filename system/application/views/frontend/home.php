@@ -29,27 +29,23 @@
 </div><!-- class 'w1' -->
 
 <div id="home-destaque">
-	<div class="w1">
+	<div class="w1 banner">
 		<h2>Por um mundo com mais trocas e conexões</h2>
 		<p class="sub-title">Um brinquedo que circula é uma brincadeira que continua</p>
 		<a href="<?php echo $base_url . URL_COMO_FUNCIONA;?>" class="btn-comoFunciona">Como funciona?</a>
-	</div>
-	<div class="w1">
 		<div class="bar-busca">
-			<p class="info">Encontre um brinquedo <span>perto de você!</span></p>
+			<!--<p class="info">Encontre um brinquedo perto de você!</p>-->
 			<form action="<?php echo $base_url ?>" method="post">
 				<input type="hidden" name="toy_name" value="<?php echo $toyName; ?>" />
-				<fieldset>
-					<select name="toy_state[]" onchange="this.form.submit()">
-						<option value="">Escolha o seu estado</option>
-						<?php 
-							foreach ($toyStates as $toyStateId => $toyState) {
-								$selected = in_array($toyStateId, $toyStateSelected) ? 'selected="selected"' : '';
-								echo sprintf('<option value="%s" %s>%s</option>', $toyStateId , $selected, $toyState); 
-							}
-							?>
-					</select>
-				</fieldset>
+				<select name="toy_state[]" onchange="this.form.submit()">
+					<option value="">Escolha o seu estado</option>
+					<?php
+						foreach ($toyStates as $toyStateId => $toyState) {
+							$selected = in_array($toyStateId, $toyStateSelected) ? 'selected="selected"' : '';
+							echo sprintf('<option value="%s" %s>%s</option>', $toyStateId , $selected, $toyState);
+						}
+					?>
+				</select>
 			</form>
 		</div>
 	</div>
@@ -72,7 +68,6 @@
 		<div class="clear"></div>
 	</div>
 </div>
-
 	<!--header>
 		<div class="search-form">
 			<form action="<'?php echo $base_url?>" method="post">
@@ -97,6 +92,13 @@
 	</header-->
 </div>
 
+<script>
+	$(document).ready(function ()  {
+		if ($.browser.mozilla) {
+			$('#home-destaque h2').addClass('firefox');
+		}
+	})
+</script>
 <div class="w1">
 <article class="main main-inverse">
 	<div class="content">

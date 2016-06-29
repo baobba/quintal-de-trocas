@@ -8,7 +8,7 @@
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo $base_url; ?>css/colorbox.css" media="all" />	
-        <link rel="stylesheet" type="text/css" href="<?php echo $base_url; ?>css/form.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $base_url; ?>css/form.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $base_url; ?>css/flexslider.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $base_url; ?>js/fancybox/jquery.fancybox-1.3.4.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $base_url; ?>css/jquery.rating.css" media="all" />
@@ -35,13 +35,11 @@
 	<script type="text/javascript" src="<?php echo $base_url; ?>js/chosen.jquery.js"></script>
 	<script type="text/javascript" src="<?php echo $base_url; ?>js/jquery.colorbox.js"></script>
 	<script type="text/javascript" src="<?php echo $base_url; ?>js/jquery.colorbox-min.js"></script>
-
 	<script>
 	   var base_url = '<?php echo $base_url; ?>';
 	   var selected_city = '<?php echo isset($toyCity) ? $toyCity : '';?>';
 	</script>
 	<script type="text/javascript" src="<?php echo $base_url; ?>js/scripts.js"></script>
-	
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<script type="text/javascript" src="<?php echo $base_url; ?>js/PIE.js"></script>
@@ -52,7 +50,6 @@
 <?php 
     if(preg_match("/www.*.quintaldetrocas.com.br/",$_SERVER['HTTP_HOST'])){
 ?>
-
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -61,7 +58,6 @@
 
 	  ga('create', 'UA-48166026-1', 'quintaldetrocas.com.br');
 	  ga('send', 'pageview');
-
 	</script>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
@@ -70,12 +66,11 @@
 	  js = d.createElement(s); js.id = id;
 	  js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=1404504076472014";
 	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script>
-
-<?php    	
+	}(document, 'script', 'facebook-jssdk'));
+	</script>
+<?php
     }
 ?>
-
 	<script>
 		jQuery(document).ready(function(){
 			jQuery('header .welcome').click(function(){
@@ -118,7 +113,6 @@
 								<li><a href="<?php echo $base_url . URL_QUEM_SOMOS; ?>">Sobre</a></li>
 								<li><a href="<?php echo $base_url . URL_PRODUTOS; ?>">Quero Trocar</a></li>
 								<li><a href="<?php echo $base_url . URL_NA_MIDIA; ?>">Na Mídia</a></li>
-								<li><a href="<?php echo $base_url . URL_PARCEIROS; ?>">Parceiros</a></li>
 								<li><a href="<?php echo $base_url . 'apoie'; ?>">Apoie</a></li>
 								<li><a href="<?php echo $base_url . URL_PONTOS_DE_TROCAS; ?>">Pontos de Troca</a></li>
 							</ul>
@@ -137,7 +131,6 @@
 							</ul>
 						</div>
 						<?php } else {
-
 								$user = $CI->useful->getLoggedUser();
 								$user['name'] = strtok($user['name'], ' ');
 
@@ -155,12 +148,9 @@
 										<li class="d-block"><a href="%s">SAIR</a></li>
 									</ul>
 								</div>', truncate($user['name'], 10), $base_url . URL_USUARIO_MEUS_DADOS, $base_url . URL_USUARIO_MEUS_DADOS_MEUS_BRINQUEDOS, $base_url . URL_USUARIO_MEUS_DADOS_MINHAS_TROCAS, $base_url . URL_USUARIO_LOGOUT);
-                            
 							}
 						?>
-					
                     </div>
 					<div class="clear"></div>
 				</div><!-- /top -->
 			</header><!-- /header -->
-			
