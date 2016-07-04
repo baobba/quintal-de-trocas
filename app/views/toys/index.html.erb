@@ -15,10 +15,11 @@
         <% ToyAge.all.each do |cat| %>
 
           <div class="checkbox" style="margin:0;"><label style="font-size: 11px;min-height:15px;">
-            <%= check_box_tag('q[toy_age_id_eq_any][]', cat.id) %> <%= cat.title %>
+            <%# f.check_box :toy_age_id_in, {}, cat.id, true, false %> 
+            <%= check_box_tag('q[toy_age_id_in][]', cat.id, params[:q] && params[:q][:toy_age_id_in] && params[:q][:toy_age_id_in].include?(cat.id.to_s) ? params[:q][:toy_age_id_in] : nil ) %> 
+            <%= cat.title %>
           </label></div>
         <% end %>
-        <%# f.select(:toy_category_id_eq, options_from_collection_for_select(ToyCategory.all, "id", "title", (params[:q][:toy_category_id_eq] if !params[:q].blank?)), {include_blank: "Selecione..."}, :class=> "form-control" ) %>
       </div>
 
       <div class="form-group">
@@ -26,7 +27,8 @@
         <% ToyCategory.all.each do |cat| %>
 
           <div class="checkbox" style="margin:0;"><label style="font-size: 11px;min-height:15px;">
-            <%= check_box_tag('q[toy_category_id_eq_any][]', cat.id) %> <%= cat.title %>
+            <%= check_box_tag('q[toy_category_id_in][]', cat.id, params[:q] && params[:q][:toy_category_id_in] && params[:q][:toy_category_id_in].include?(cat.id.to_s) ? params[:q][:toy_category_id_in] : nil ) %> 
+            <%= cat.title %>
           </label></div>
         <% end %>
         <%# f.select(:toy_category_id_eq, options_from_collection_for_select(ToyCategory.all, "id", "title", (params[:q][:toy_category_id_eq] if !params[:q].blank?)), {include_blank: "Selecione..."}, :class=> "form-control" ) %>
@@ -55,7 +57,7 @@
     </div>
 
     <div class="lead">
-      Mostrando <strong><%= Toy.default_per_page >= @toys.count ? @toys.count : Toy.default_per_page %></strong> de <%= Toy.count %> brinquedos
+      Mostrando <strong><%= Toy.default_per_page >= @toys.count ? @toys.count : Toy.default_per_page %></strong> de <%= @toys.total_count %> brinquedos
     </div>
 
     <ul class="cards list-unstyled">
