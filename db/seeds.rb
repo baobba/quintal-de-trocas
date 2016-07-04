@@ -26,9 +26,11 @@ end
 
 
 # create toys
+
 Toy.destroy_all
-(1..20).each_with_index do |a, index|
-  Toy.create title: "Brinquedo #{index}", description: "...", toy_category: ToyCategory.last || 0, toy_age: ToyAge.last || 0, user: User.first
+(1..50).each_with_index do |a, index|
+  a=Toy.create title: "Brinquedo #{index}", description: "...", toy_category_id: ToyCategory.all.map(&:id).sample, toy_age_id: ToyAge.all.map(&:id).sample || 0, user: User.first
+  a.toy_images.create image: File.open(Rails.root.join('public', "toy_images/image0#{[*1..6].sample}.jpg"))
 end
 
 
