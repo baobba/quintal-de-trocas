@@ -12,12 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap.min
 //= require turbolinks
 //= require jquery.mask.min
 //= require_tree .
 
 
-$(document).ready(function() {
+var ready;
+ready = function() {
+
 
   $('#user_zipcode').mask('00000-000');
 
@@ -66,5 +69,8 @@ $(document).ready(function() {
     codeAddress();
   });
 
-});
+}
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
 

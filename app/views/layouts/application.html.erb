@@ -7,7 +7,8 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+
+<body class="<%= params[:controller] %>">
 
   <%= render '/layouts/header' %>
 
@@ -21,8 +22,5 @@
   <%= render '/layouts/footer' %>
 
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" crossorigin="anonymous"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=codeAddress" async defer></script>
-  
 </body>
 </html>
