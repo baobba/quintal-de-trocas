@@ -1,0 +1,29 @@
+<%= simple_form_for(@place) do |f| %>
+  <% if @place.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@place.errors.count, "error") %> prohibited this place from being saved:</h2>
+
+      <ul>
+      <% @place.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+    <%= f.input :title %>
+
+    <%= f.input :office_hours %>
+
+    <%= f.input :phone %>
+    <%= f.input :phone_alt %>
+
+    <%= f.input :zipcode %>
+    <%= f.input :street %>
+    <%= f.input :city %>
+    <%= f.input :state %>
+
+    <%= f.submit %>
+<% end %>

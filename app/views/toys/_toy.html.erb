@@ -1,0 +1,24 @@
+<li>
+  <a href="#">
+    <div class="thumb">
+      <% if toy.toy_images.count > 0 %>
+        <%= image_tag toy.toy_images.first.image.url(:medium) %>
+      <% end %>
+    </div>
+    <div class="content">
+      <h2><%= link_to toy.title, toy %></h2>
+
+      <small>
+        Idade: <%= toy.toy_age.title if toy.toy_age %><br>
+        Categoria: <%= toy.toy_category.title if toy.toy_category %>
+      </small>
+
+    </div>
+    <div class="text-center">
+      <a href="#" class="btn btn-success btn-block">Quero trocar</a>
+    </div>
+    <span class="content_bottom">
+      <a class="show_login_popup" href="/collections"><span class="icon-heart"></span></a>
+    </span>
+  </a>
+</li>

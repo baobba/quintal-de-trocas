@@ -1,0 +1,176 @@
+<h1><%= @toy.title %></h1>
+
+<div class="row">
+  <div class="col-sm-6">
+
+    <section id="gallery" class="simplegallery">
+      <div class="thumb-nail">
+        <% @toy_images.each do |p| %>
+          <div class="thumb">
+            <a href="#" rel="1">
+              <%= image_tag p.image.url(:thumb) %>
+            </a>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="content">
+        <% @toy_images.each do |p| %>
+          <%= image_tag p.image.url(:large), style: (p.featured? || @toy_images.count == 1 ? "display:block" : "display:none") %>
+        <% end %>
+      </div>
+
+      <div class="clear"></div>
+
+  </section>
+
+
+      
+    ...
+  </div>
+  <div class="col-sm-6">
+
+
+    <% if @toy.user.latitude %>
+      
+    <script type="text/javascript">
+
+// First, create an object containing LatLng and population for each city.
+var citymap = {
+  chicago: {
+    center: {lat: <%= @toy.user.latitude %>, lng: <%= @toy.user.longitude %>},
+  },
+  // newyork: {
+  //   center: {lat: 40.714, lng: -74.005},
+  //   population: 8405837
+  // },
+  // losangeles: {
+  //   center: {lat: 34.052, lng: -118.243},
+  //   population: 3857799
+  // },
+  // vancouver: {
+  //   center: {lat: 49.25, lng: -123.1},
+  //   population: 603502
+  // }
+};
+
+function codeAddress() {
+  // Create the map.
+  var map = new google.maps.Map(document.getElementById('mapCanvas'), {
+    zoom: 15,
+    center: {lat: <%= @toy.user.latitude %>, lng: <%= @toy.user.longitude %>},
+    mapTypeId: google.maps.MapTypeId.TERRAIN
+  });
+
+  // Construct the circle for each value in citymap.
+  // Note: We scale the area of the circle based on the population.
+  for (var city in citymap) {
+    // Add the circle for this city to the map.
+    var cityCircle = new google.maps.Circle({
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 0,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map: map,
+      center: citymap[city].center,
+      radius: 500
+    });
+  }
+}
+</script>
+
+    <% end %>
+
+
+
+<p>
+  <strong>Descrição:</strong><br>
+  <%= @toy.description %>
+</p>
+<p>
+  <strong>Categoria:</strong><br>
+  <%= @toy.toy_category.title %>
+</p>
+<p>
+  <strong>Faixa etária:</strong><br>
+  <%= @toy.toy_age.title %>
+</p>
+
+
+<hr>
+
+
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Trocar
+</button>
+<%= link_to 'Edit', edit_toy_path(@toy) %> |
+
+
+<hr>
+    <div id="mapCanvas"></div>
+  </div>
+</div>
+
+
+    <% if @toy.user.latitude %>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=codeAddress" async defer></script>
+<% end %>
+
+
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Escolha um brinquedo para trocar</h4>
+      </div>
+      <div class="modal-body">
+
+        <%= simple_form_for(@exchange) do |f| %>
+          <%= f.input :toy_from, as: :hidden %>
+          <%= f.input :toy_to, as: :select, collection: current_user.toys, prompt: "Selecione" %>
+          <%= f.input :exchange_type, as: :radio_buttons, collection: [['Pontos de troca', 'Pontos de troca'] ,['Correio', 'Correio']], item_wrapper_class: 'inline' %>
+          <%= f.submit "Trocar", class: "btn btn-primary" %>
+        <% end %>
+          
+        <div class="row toy-exchange" style="display:none">
+          <div class="col-sm-6 text-center">
+            <div class="toy-from">
+              <div class="title">Quero trocar esse briquedo</div>
+              <div class="inner">
+                <%= select_tag :toy, options_for_select(current_user.toys.collect{ |u| [u.title, u.id] }), class: "form-control", include_blank: "Selecione" %>
+
+                <div class="toy">
+                  <div class="thumb">
+                    <%= image_tag "no-image", width: 50 %>
+                  </div>
+                  selecione...
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6 text-center">
+            <div class="toy-to">
+              <div class="title">por esse</div>
+              <div class="inner">
+                <div class="toy">
+                  <div class="thumb">
+                    <%= image_tag @toy.fet_image.image.url(:thumb) %>
+                  </div>
+                  <%= @toy.title %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

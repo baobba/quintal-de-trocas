@@ -1,0 +1,51 @@
+<%= simple_form_for(@toy, html: { multipart: true }) do |f| %>
+  <% if @toy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@toy.errors.count, "error") %> prohibited this toy from being saved:</h2>
+
+      <ul>
+      <% @toy.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-sm-5">
+      
+      <%= f.input :title %>
+
+      <%= f.input :toy_age_id, collection: ToyAge.all, as: :select, prompt: "Select", rows: 5 %>
+
+      <%= f.input :toy_category_id, collection: ToyCategory.all, as: :select, prompt: "Select", rows: 5 %>
+
+      <%= f.input :description %>
+
+
+    </div>
+
+    <div class="col-sm-7">
+      
+      <%= f.input :tag_list %>
+
+      <p class="lead">Imagens</p>
+
+      <%= f.fields_for :toy_images do |p| %>
+        <div class="field" style="width:120px;float:left;margin-right: 10px;background-color: #eee;">
+
+          <% if p.object.image %>
+            <%= image_tag p.object.image.url, width: 50 %>
+          <% end %>
+          <br>
+          
+          <%= p.label :image, "Image" %><br>
+          <%= p.file_field :image %>
+          <%= p.check_box :featured %> Destaque?
+        </div>
+      <% end %>
+  </div>
+</div>
+
+  <%= f.button :submit, class: "btn btn-success btn-lg" %>
+<% end %>

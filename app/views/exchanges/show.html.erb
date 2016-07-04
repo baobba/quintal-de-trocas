@@ -1,0 +1,27 @@
+<h1></h1>
+
+<p>
+  <strong>Toy from:</strong>
+  <%= @exchange.toy_from %>
+</p>
+
+<p>
+  <strong>Toy to integer:</strong>
+  <%= @exchange.toy_to %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @exchange.status %>
+</p>
+
+<div class="alert alert-info">
+  Escolha um dos brinquedos da lista de <strong>NOME</strong> ou troque por 1 crédito. 1 crédito vale um brinquedo dentro da plataforma.
+</div>
+
+<hr>
+
+<input type="submit" name="">
+
+<%= link_to 'Edit', edit_exchange_path(@exchange) %> |
+<%= link_to 'Back', exchanges_path %>

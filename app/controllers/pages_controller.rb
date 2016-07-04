@@ -1,0 +1,22 @@
+class PagesController < ActionController::Base
+  layout 'application'
+
+  def how_it_works
+  end
+
+  def partners
+  end
+
+  def testimonials
+  end
+
+  def media
+  end
+
+  def busca_por_cep
+    render :json => BuscaEndereco.cep(params[:cep])
+  rescue RuntimeError
+    render :json => ["", "zipcode nao encontrado", "", "", ""].to_json
+  end
+
+end

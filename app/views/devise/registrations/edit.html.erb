@@ -1,0 +1,326 @@
+<div class="row">
+  <div class="col-sm-2">
+    <%= render '/layouts/nav_dashboard' %>
+  </div>
+  <div class="col-sm-10">
+    
+
+
+
+<script type="text/javascript">
+
+var geocoder;
+var map;
+var marker;
+
+codeAddress = function () {
+    geocoder = new google.maps.Geocoder();
+  
+  var zip = document.getElementById('user_zipcode').value;
+  var street = document.getElementById('user_street').value;
+  var city = document.getElementById('user_city').value;
+  var state = document.getElementById('user_state').value;
+
+  console.log(zip);
+  console.log(street);
+  console.log(city);
+  console.log(state);
+  console.log([zip,street,city,state].join(","));
+
+  geocoder.geocode( { 'address': [zip,street,city,state].join(",")}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      map = new google.maps.Map(document.getElementById('mapCanvas'), {
+    zoom: 16,
+            streetViewControl: false,
+          mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+              mapTypeIds:[google.maps.MapTypeId.HYBRID, google.maps.MapTypeId.ROADMAP] 
+    },
+    center: results[0].geometry.location,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+  });
+      map.setCenter(results[0].geometry.location);
+      marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location,
+          draggable: true,
+          title: 'My Title'
+      });
+      updateMarkerPosition(results[0].geometry.location);
+      geocodePosition(results[0].geometry.location);
+        
+      // Add dragging event listeners.
+  google.maps.event.addListener(marker, 'dragstart', function() {
+    updateMarkerAddress('Dragging...');
+  });
+      
+  google.maps.event.addListener(marker, 'drag', function() {
+    updateMarkerStatus('Dragging...');
+    updateMarkerPosition(marker.getPosition());
+  });
+  
+  google.maps.event.addListener(marker, 'dragend', function() {
+    updateMarkerStatus('Drag ended');
+    geocodePosition(marker.getPosition());
+      map.panTo(marker.getPosition()); 
+  });
+  
+  google.maps.event.addListener(map, 'click', function(e) {
+    updateMarkerPosition(e.latLng);
+    geocodePosition(marker.getPosition());
+    marker.setPosition(e.latLng);
+  map.panTo(marker.getPosition()); 
+  }); 
+  
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+function geocodePosition(pos) {
+  geocoder.geocode({
+    latLng: pos
+  }, function(responses) {
+    if (responses && responses.length > 0) {
+      updateMarkerAddress(responses[0].formatted_address);
+    } else {
+      updateMarkerAddress('Cannot determine address at this location.');
+    }
+  });
+}
+
+function updateMarkerStatus(str) {
+  document.getElementById('markerStatus').innerHTML = str;
+}
+
+function updateMarkerPosition(latLng) {
+  document.getElementById('info').innerHTML = [
+    latLng.lat(),
+    latLng.lng()
+  ].join(', ');
+}
+
+function updateMarkerAddress(str) {
+  document.getElementById('address').innerHTML = str;
+}
+</script>
+<div class="page-header">
+  <h1>Alterar dados pessoais</h1>
+</div>
+
+<br>
+<div class="row">
+  <div class="col-sm-3" style="display:none">
+    <p class="lead">Dados de acesso</p>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+        <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Update" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="col-sm-6">
+
+    <p class="lead">Dados pessoais</p>
+    
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= f.label :phone %>
+            <%= f.text_field :phone, placeholder: "(DDD) 0000-0000", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group">
+            <%= f.label :birthday %>
+            <%= f.text_field :birthday, class: "form-control" %>
+          </div>
+        </div>
+        
+        <div class="col-sm-5">
+          <div class="form-group">
+            <%= f.label :gender %><br>
+            <label class="radio-inline">
+              <%= f.radio_button :gender, "M"  %> Masc
+            </label>
+            <label class="radio-inline">
+              <%= f.radio_button :gender, "F" %> Fem
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <%= f.label :zipcode %>
+            <%= f.text_field :zipcode, onblur: "codeAddress()", class: "form-control" %>
+            <span class="cep-feedback"></span>
+          </div>
+        </div>
+        
+        <div class="col-sm-7">
+          
+        </div>
+        
+      </div>
+
+
+      <div class="endereco">
+
+        <div class="add_fields" style="display:block">
+
+          <div class="form-group">
+            <%= f.label :street %>
+            <%= f.text_field :street, class: "form-control" %>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.label :city %>
+                <%= f.text_field :city, class: "form-control" %>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group">
+                <%= f.label :state %>
+                <%= f.select :state, [["Acre", "AC"],
+                  ["Alagoas", "AL"],
+                  ["Amapá", "AP"],
+                  ["Amazonas", "AM"],
+                  ["Bahia", "BA"],
+                  ["Ceará", "CE"],
+                  ["Distrito Federal", "DF"],
+                  ["Espírito Santo", "ES"],
+                  ["Goiás", "GO"],
+                  ["Maranhão", "MA"],
+                  ["Mato Grosso", "MT"],
+                  ["Mato Grosso do Sul", "MS"],
+                  ["Minas Gerais", "MG"],
+                  ["Pará", "PA"],
+                  ["Paraíba", "PB"],
+                  ["Paraná", "PR"],
+                  ["Pernambuco", "PE"],
+                  ["Piauí", "PI"],
+                  ["Rio de Janeiro", "RJ"],
+                  ["Rio Grande do Norte", "RN"],
+                  ["Rio Grande do Sul", "RS"],
+                  ["Rondônia", "RO"],
+                  ["Roraima", "RR"],
+                  ["Santa Catarina", "SC"],
+                  ["São Paulo", "SP"],
+                  ["Sergipe", "SE"],
+                  ["Tocantins", "TO"]
+                ], {}, class: "form-control" %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="hide">
+
+        <div id="mapCanvas"></div>
+
+        <div id="infoPanel">
+          <b>Marker status:</b>
+          <div id="markerStatus"><i>Click and drag the marker.</i></div>
+          <b>Current position:</b>
+          <div id="info"></div>
+          <b>Closest matching address:</b>
+          <div id="address"></div>
+
+          <br>
+          <br>
+          <div id="panel">
+            <input id="city_country" type="textbox" value="Berlin, Germany">
+            <input type="button" value="Geocode" onclick="codeAddress()">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <%= f.label :latitude %>
+          <%= f.text_field :latitude %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :longitude %>
+          <%= f.text_field :longitude %>
+        </div>
+      </div>
+
+    <div class="actions">
+      <%= f.submit class: "btn btn-success" %>
+    </div>
+
+  <% end %>
+
+  </div>
+  <div class="col-sm-5 col-sm-offset-1">
+    <p class="lead">Filhos</p>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <%= f.label :latitude %>
+        <%= f.text_field :latitude, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :longitude %>
+        <%= f.text_field :longitude, class: "form-control" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="hide">
+  <h3>Cancel my account</h3>
+
+  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=codeAddress" async defer></script>
+
+
+</div>
+</div>

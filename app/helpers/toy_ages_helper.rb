@@ -1,0 +1,2 @@
+module ToyAgesHelper
+end

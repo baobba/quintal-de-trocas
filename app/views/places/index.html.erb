@@ -1,0 +1,66 @@
+<div class="sub-header">
+  <h1>Pontos de troca</h1>
+  <p>O Quintal de Trocas é 100% gratuito e crianças de TODAS AS REGIÕES DO BRASIL
+podem trocar utilizando o site.</p>
+</div>
+
+<div class="row">
+  <div class="col-sm-8">
+
+    <div class="well">
+    <%= debug @q %>
+      <%= search_form_for(@q, class: "place-filter form-inline") do |f| %>
+
+        <div class="form-group">
+          <label>Buscar por:</label>
+          <%= f.text_field :title_cont, :class=> "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <label>Estado:</label>
+          <%= f.select(:state_eq, option_estados_for_select, { include_blank: "Selecione..." }, :class=> "form-control" ) %>
+        </div>
+      
+        <div class="form-group">
+          <%= f.submit "Filtrar", :class => "btn btn-primary" %>
+        </div>
+<br>
+        <%= link_to 'Sugerir Ponto de Troca', new_place_path, class: "btn btn-default" %>
+      <% end %>
+      
+    </div>
+
+
+    <ul class="cards list-unstyled">
+      <%= render @places %>
+    </ul>
+
+    <div class="clearfix"></div>
+
+    <div class="text-center">
+      <%= link_to_next_page @places, 'Veja mais', remote: true, id: "load_more_link", class: "btn btn-default btn-default" %>
+    </div>
+
+    
+  </div>
+  <div class="col-sm-4">
+    <div id="map" style="width: 100%;height:300px"></div>
+
+    <p class="lead">O que é um Ponto de Trocas?</p>
+    <p>É um estabelecimento parceiro do Quintal de Trocas que atua como uma referência física para os participantes do portal. O Ponto de Trocas compartilha dos mesmos valores do Quintal: sustentabilidade, consumo consciente e respeito a sociedade.</p>
+
+    <hr>
+    <p class="lead">Como trocar</p>
+ 
+    <ul>
+      <li>- Pelos Correios (que atendem todo o Brasil)</li>
+      <li>Pessoalmente, em qualquer lugar pré-combinado entre as partes *</li>
+      <li>Ou através dos Pontos de Trocas ....</li>
+
+      <small>(*) O Quintal sugere que a troca seja combinada num lugar movimentado (como museus, bibliotecas, etc.)</small>
+    </ul>
+
+  </div>
+
+</div>
+
