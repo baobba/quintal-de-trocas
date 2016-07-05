@@ -13,15 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap.min
-//= require turbolinks
 //= require jquery.mask.min
 //= require_tree .
 
 
-var ready;
-ready = function() {
-
-
+$(document).ready(function() {
+  
   $('#user_zipcode').mask('00000-000');
 
   var SPMaskBehavior = function (val) {
@@ -69,8 +66,5 @@ ready = function() {
     codeAddress();
   });
 
-}
-
-$(document).ready(ready);
-$(document).on('page:load', ready);
+});
 

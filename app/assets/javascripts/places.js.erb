@@ -1,7 +1,9 @@
-var ready;
-ready = function() {
+$(document).ready(function() {
+  
 
-  if ($('.places').length) {
+  if ($('body.places').length) {
+
+    console.log("Place page...");
 
     $(".place-filter").change(function(event) {
       event.preventDefault();
@@ -22,8 +24,8 @@ ready = function() {
       // }
     }).done(function(data) {
       citymap = data;
-      console.log( "success" );
-      console.log(citymap);
+      // console.log( "success" );
+      // console.log(citymap);
     });
 
 
@@ -50,18 +52,14 @@ ready = function() {
       // Note: We scale the area of the circle based on the population.
       citymap.forEach(function(city) {
 
-        console.log(city.id);
-        console.log(city.latitude);
-        console.log(city.longitude);
-        console.log("-----");
-        // console.log(citymap[0].latitude);
-        // console.log(citymap[0]['zipcode']);
+        // console.log(city.id);
+        // console.log(city.latitude);
+        // console.log(city.longitude);
+        // console.log("-----");
 
         // Add the circle for this city to the map.
         var cityCircle = new google.maps.Circle({
-          strokeColor: '#FF0000',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
+          strokeWeight: 0,
           fillColor: '#FF0000',
           fillOpacity: 0.35,
           map: map,
@@ -78,7 +76,5 @@ ready = function() {
     $("head").append(s);
   }
 
-}
+});
 
-$(document).ready(ready);
-$(document).on('page:load', ready);
