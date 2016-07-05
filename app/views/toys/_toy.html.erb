@@ -1,5 +1,5 @@
 <li>
-  <a href="#">
+  <a href="<%= url_for(toy) %>">
     <div class="thumb">
       <% if toy.toy_images.count > 0 %>
         <%= image_tag toy.toy_images.first.image.url(:medium) %>
