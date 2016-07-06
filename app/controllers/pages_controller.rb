@@ -1,6 +1,12 @@
 class PagesController < ActionController::Base
   layout 'application'
 
+  def about_us
+  end
+
+  def support
+  end
+
   def how_it_works
   end
 

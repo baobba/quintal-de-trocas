@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'sobre-nos' => 'pages#about_us', as: 'about_us'
+  get 'apoio' => 'pages#support', as: 'support'
   get 'como-funciona' => 'pages#how_it_works', as: 'how_it_works'
   get 'depoimentos' => 'pages#testimonials', as: 'testimonials'
   get 'parceiros' => 'pages#partners', as: 'partners'
