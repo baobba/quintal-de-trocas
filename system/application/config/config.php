@@ -4,13 +4,13 @@ if (!defined('BASEPATH')) {
 	exit('No direct script access allowed');
 }
 
-$config['base_url'] = 'http://quintal.dev';
+$config['base_url'] = '/';
 
 // fck editor
 $_SESSION['base_url'] = $config['base_url'];
 
 $config['index_page'] 			= '';
-$config['uri_protocol']			= 'REQUEST_URI';
+$config['uri_protocol']			= 'AUTO';
 $config['url_suffix'] 			= '';
 $config['language']				= 'english';
 $config['charset'] 				= 'UTF-8';

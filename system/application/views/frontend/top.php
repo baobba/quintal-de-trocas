@@ -94,8 +94,9 @@ if (preg_match("/www.*.quintaldetrocas.com.br/", $_SERVER['HTTP_HOST'])) {
     <div class="w1-extra">
         <header>
             <div class="top">
-                <a href="<?php echo $base_url; ?>" class="header-logo"><img
-                        src="<?php echo $base_url; ?>img/logo-quintalDeTrocas.svg"/></a>
+                <a href="<?php echo $base_url; ?>" class="header-logo">
+                    <img src="<?php echo $base_url; ?>img/logo-horizontal.jpg" />
+                </a>
                 <div class="socials">
                     <ul>
                         <li>
