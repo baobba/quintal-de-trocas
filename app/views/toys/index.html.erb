@@ -64,7 +64,11 @@
       <%= render @toys %>
     </ul>
 
-    <%= paginate @toys %>
+    <div class="clearfix"></div>
+
+    <div class="text-center">
+      <%= link_to_next_page @toys, 'Veja mais', remote: true, id: "load_more_link", class: "btn btn-default btn-default" %>
+    </div>
   </div>
 </div>
   

@@ -1,0 +1,2 @@
+$('.cards').append("<%= escape_javascript(render :partial => @toys)%>");
+$('#load_more_link').replaceWith("<%= escape_javascript(link_to_next_page(@toys, 'Veja mais', :remote => true, :id=>'load_more_link', :class=>'btn btn-default'))%>");
