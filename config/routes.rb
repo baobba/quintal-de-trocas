@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  devise_for :users, controllers: {registrations: 'registrations'}, path: 'usuario'
   ActiveAdmin.routes(self)
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -11,6 +10,11 @@ Rails.application.routes.draw do
   root 'toys#index'
 
   scope(path_names: { new: 'novo', edit: 'alterar' }) do
+    
+    devise_for :users, controllers: {registrations: 'registrations'}, path: 'usuario'
+    
+    resources :articles
+    
     resources :exchanges, path: 'trocas'
     get 'minhas-trocas' => 'exchanges#my_exchanges', as: :my_exchanges
 

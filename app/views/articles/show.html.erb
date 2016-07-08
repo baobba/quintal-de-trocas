@@ -1,0 +1,15 @@
+<div class="page-header">
+   <h1><%= @article.title %></h1>
+</div>
+
+<div class="meta">
+  <%= @article.created_at %> | 
+  <%= @article.category %> | 
+  <%= @article.user.name %>
+  
+</div>
+
+<%= simple_format @article.body %>
+
+
+<%= link_to 'Back', articles_path %>

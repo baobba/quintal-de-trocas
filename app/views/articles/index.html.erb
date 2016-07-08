@@ -1,0 +1,13 @@
+<div class="page-header">
+  <h1>Colunas e Novidades</h1>
+</div>
+
+<ul>
+  <% @articles.each do |article| %>
+    <li>
+      <div class="meta"><%= article.created_at %> | <%= article.category %> | <%= article.user.name %> |</div>
+      <%= link_to article.title, article %><br>
+      <%= truncate(article.body, length: 100) %><br>
+    </li>
+  <% end %>
+</ul>
