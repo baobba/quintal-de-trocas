@@ -7,7 +7,7 @@
 <div class="w1">
     <div class="contact-area">
         <div class="feedback-form ie-fix">
-            <div class="" style="padding: 0 30px;">
+            <div style="padding: 0 30px;">
                 <div style="float: left; width: 65%">
                     <p>
                         Queremos promover conexões entre pais do Brasil inteiro e para isso, precisamos de apoio.

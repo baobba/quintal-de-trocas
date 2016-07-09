@@ -156,7 +156,7 @@ header .top:after {
 
 header .socials {
     float: right;
-    margin: 10px 0 0 10px;
+    margin: 25px 0 0 10px;
 }
 
 header .socials .str {
@@ -6007,7 +6007,7 @@ header .top {
 header .top-menu {
     position: relative;
     float: right;
-    margin-top: 10px;
+    margin-top: 25px;
 }
 
 header .top-menu li {
@@ -6954,8 +6954,8 @@ header .socials li a {
 
 #container-carousel-na-midia .carousel .slider-carousel .img {
     margin: 0px auto 0px auto;
-    width: 100px;
-    height: 100px;
+    width: 900px;
+    height: 300px;
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;

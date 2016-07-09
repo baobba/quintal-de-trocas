@@ -12,17 +12,8 @@
             foreach ($press->result() as $_press) {
                 ?>
                 <div class="slider-carousel">
-                    <?php $baselink = $base_url . URL_UPLOAD_IMAGE . $_press->cover_image; ?>
+                    <?php $baselink = $base_url . 'img/slider' . $pos . '.png'; ?>
                     <div class='img' style='background-image: url(<?php echo $baselink; ?>)'></div>
-                    <h3>
-                        <?php echo $_press->name; ?>
-                    </h3>
-                    <h4>
-                        <?php echo $_press->category_name; ?>
-                    </h4>
-                    <h5>
-                        <?php echo date_create_from_format('Y-m-d H:i:s', $_press->publicated_at)->format('d/m/Y'); ?>
-                    </h5>
                 </div>
                 <?php
                 if ($pos == 5) {
