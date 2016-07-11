@@ -32,7 +32,6 @@
 
 
     <% if @toy.user.latitude %>
-      
     <script type="text/javascript">
 
 // First, create an object containing LatLng and population for each city.
@@ -107,7 +106,7 @@ function codeAddress() {
 <%= link_to 'Edit', edit_toy_path(@toy) %> |
 
 
-<hr>
+<hr><%= link_to @toy.user.name, user_path(@toy.user) %>
     <div id="mapCanvas"></div>
   </div>
 </div>
@@ -135,7 +134,7 @@ function codeAddress() {
 
         <%= simple_form_for(@exchange) do |f| %>
           <%= f.input :toy_from, as: :hidden %>
-          <%= f.input :toy_to, as: :select, collection: current_user.toys, prompt: "Selecione" %>
+          <%= f.input :toy_to, as: :select, collection: (current_user && current_user.toys ? current_user.toys : []), prompt: "Selecione" %>
           <%= f.input :exchange_type, as: :radio_buttons, collection: [['Pontos de troca', 'Pontos de troca'] ,['Correio', 'Correio']], item_wrapper_class: 'inline' %>
           <%= f.submit "Trocar", class: "btn btn-primary" %>
         <% end %>
@@ -145,7 +144,7 @@ function codeAddress() {
             <div class="toy-from">
               <div class="title">Quero trocar esse briquedo</div>
               <div class="inner">
-                <%= select_tag :toy, options_for_select(current_user.toys.collect{ |u| [u.title, u.id] }), class: "form-control", include_blank: "Selecione" %>
+                <%= select_tag :toy, options_for_select((current_user && current_user.toys ? current_user.toys.collect{ |u| [u.title, u.id] } : [])), class: "form-control", include_blank: "Selecione" %>
 
                 <div class="toy">
                   <div class="thumb">
@@ -174,3 +173,4 @@ function codeAddress() {
     </div>
   </div>
 </div>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=codeAddress"></script>

@@ -23,4 +23,9 @@ class Toy < ActiveRecord::Base
       toy_images.new
     end
   end
+
+  def to_param
+    [id, title.parameterize].join("-")
+  end
+      
 end

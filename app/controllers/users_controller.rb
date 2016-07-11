@@ -1,7 +1,7 @@
 # encoding: utf-8
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:show]
   # before_filter :authenticate_user!, :verify_is_admin, except: [:index, :edit]
 
   def index
@@ -75,6 +75,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:user_id, :nome, :cpf, :empresa, :sexo, :data_nascimento, :tel_comercial, :tel_celular, :escolaridade, :profissao, :site, :news_sandvik, :msg_sms, :atendente, :atendente_tipo, :email, :password, :password_confirmation, :current_password, :access, :region, :city)
+      params.require(:user).permit(:user_id, :name, :cpf, :empresa, :sexo, :data_nascimento, :tel_comercial, :tel_celular, :escolaridade, :profissao, :site, :news_sandvik, :msg_sms, :atendente, :atendente_tipo, :email, :password, :password_confirmation, :current_password, :access, :region, :city)
     end
 end

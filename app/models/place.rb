@@ -11,6 +11,9 @@ class Place < ActiveRecord::Base
 
   def hey
     [zipcode, "Brasil"].compact.join(', ')
-    ap [zipcode, "Brasil"].compact.join(', ')
+  end
+
+  def to_param
+    [id, title.parameterize].join("-")
   end
 end

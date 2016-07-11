@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :toy_categories, path: 'categorias'
     resources :toy_images, path: 'imagens'
     
+    resources :users, path: 'usuarios'
 
     resources :conversations, only: [:index, :show, :new, :create] do
       member do
