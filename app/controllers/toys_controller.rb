@@ -4,7 +4,7 @@ class ToysController < ApplicationController
 
   def index
     @q = Toy.includes(:toy_category, :toy_age).ransack(params[:q])
-    @toys = @q.result(distinct: true).order("RANDOM()").page params[:page]
+    @toys = @q.result(distinct: true).order("id DESC").page params[:page]
   end
 
   def show
