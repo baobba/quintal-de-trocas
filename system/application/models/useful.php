@@ -157,103 +157,6 @@ class useful extends Model
 	    return $formx;
 	}
 	  
-
-/*	    
-	public function getUpdateToyForm($toy, $toyAges = array(), $toyCities = array(), $toyStates = array(), $toyCategories = array(), $toyBrands = array())
-	{
-	    $CI =& get_instance();
-	    $CI->load->formx();
-	    
-	    $formx = new Formx(formx::METHOD_POST, '', '', '', 'new_toy');
-	    
-	    $toyAgeInterest = trim($toy->age_interest);
-	    $toyAgeInterest = strlen($toyAgeInterest) ? json_decode($toyAgeInterest, 1) : array();
-	    $toyAgeInterest = array_keys($toyAgeInterest);
-	    
-	    $toyCategoryInterest = trim($toy->category_interest);
-	    $toyCategoryInterest = strlen($toyCategoryInterest) ? json_decode($toyCategoryInterest, 1) : array();
-	    $toyCategoryInterest = array_keys($toyCategoryInterest);
-	    
-	    $toyBrandInterest = trim($toy->brand_interest);
-	    $toyBrandInterest = strlen($toyBrandInterest) ? json_decode($toyBrandInterest, 1) : array();
-	    $toyBrandInterest = array_keys($toyBrandInterest);
-	    
-	    $formx->add_text('name')->set_post_value($toy->name)->set_label('T&iacute;tulo do brinquedo')->set_validates(array('required'));
-	    $formx->add_text('description')->set_post_value($toy->description)->set_label('Descri&ccedil;&atilde;o do brinquedo')->set_validates(array('required'));
-	    $formx->add_text('weight')->set_post_value($toy->weight)->set_label('Peso do brinquedo');
-	    $formx->add_radio('toy_age')->set_label('Faixa et&aacute;ria')->set_validates(array('required'))->set_value($toyAges)->set_post_value($toy->cms_toy_age_id);
-	    
-	    $formx->add_multiple('toy_age_interest')->set_value($toyAges)->set_post_value($toyAgeInterest);
-	    $formx->add_multiple('toy_category_interest')->set_value($toyCategories)->set_post_value($toyCategoryInterest);
-	    $formx->add_multiple('toy_brand_interest')->set_value($toyBrands)->set_post_value($toyBrandInterest);
-	    
-	    $formx->add_radio('toy_category')->set_label('Tipo de Brinquedo')->set_validates(array('required'))->set_value($toyCategories)->set_post_value($toy->cms_toy_category_id);
-	    $formx->add_text('toy_state')->set_label('Estado')->set_validates(array('required'))->set_value($toyStates)->set_post_value(CmsToyCity::getStateIdById($toy->cms_toy_city_id));
-	    $formx->add_text('toy_city')->set_post_value($toy->cms_toy_city_id);
-	    $formx->add_radio('toy_brand')->set_label('Marca do brinquedo')->set_validates(array('required'))->set_value($toyBrands)->set_post_value($toy->cms_toy_brand_id);
-	    $formx->add_file('image');
-
-	    if ($formx->is_post()) {
-	        $cmsToyImage = CmsToyImage::getMainImageByToyId($toy->id);
-	        
-            if ($formx->use_field('image')->upload_image(array('uploadPath' => './uploads/image', 'width' => 481, 'height' => 316)) && $cmsToyImage !== null) {
-                @unlink(FCPATH . 'uploads' . DIRECTORY_SEPARATOR . 'image' . DIRECTORY_SEPARATOR . $cmsToyImage->getImage());
-                
-                $cmsToyImage->setImage($formx->use_field('image')->get_posted());
-                $cmsToyImage->setName('main');
-            }
-            
-	        if ($formx->has_error() === false) {
-	            $user = $this->getLoggedUser();
-	            
-	            $cmsToy = CmsToy::getById($toy->id);
-	            $cmsToy->setName($formx->use_field('name')->get_posted());
-	            $cmsToy->setDescription($formx->use_field('description')->get_posted());
-	            $cmsToy->setWeight($formx->use_field('weight')->get_posted());
-	            $cmsToy->setCreated_at(date('Y-m-d H:i:s'));
-	            $cmsToy->setCms_toy_brand_id($formx->use_field('toy_brand')->get_posted());
-	            $cmsToy->setCms_toy_category_id($formx->use_field('toy_category')->get_posted());
-	            $cmsToy->setCms_toy_city_id($formx->use_field('toy_city')->get_posted());
-	            $cmsToy->setCms_toy_age_id($formx->use_field('toy_age')->get_posted());
-	            $cmsToy->setCms_client_id($user['id']);
-	            
-	            $ageInterest = array();
-	            foreach ($formx->use_field('toy_age_interest')->get_posted() as $i) {
-	                $ageInterest[$i] = $toyAges[$i];
-	            }
-	            
-	            $cmsToy->setAge_interest(json_encode($ageInterest));
-	            
-	            $categoryInterest = array();
-	            foreach ($formx->use_field('toy_category_interest')->get_posted() as $i) {
-	                $categoryInterest[$i] = $toyCategories[$i];
-	            }
-	            
-	            $cmsToy->setCategory_interest(json_encode($categoryInterest));
-	            
-	            $brandInterest = array();
-	            foreach ($formx->use_field('toy_brand_interest')->get_posted() as $i) {
-	                $brandInterest[$i] = $toyBrands[$i];
-	            }
-	            
-	            $cmsToy->setBrand_interest(json_encode($brandInterest));
-	            
-	            $cmsToy->update();
-	            
-	            if ($cmsToyImage) {
-	               $cmsToyImage->update();
-	            }
-	            
-	            $formx->reset();
-	            $formx->set_is_sucess();
-	        }
-	    }
-	    
-	    return $formx;
-	}
-*/
-
-
 	public function getUpdateToyForm($toy, $toyAges = array(), $toyCities = array(), $toyStates = array(), $toyCategories = array())
 	{
 	    $CI =& get_instance();
@@ -307,7 +210,6 @@ class useful extends Model
 	    return $formx;
 	}
 
-	
 	public function getUpdateToyImageForm($toy)
 	{
 	    $CI =& get_instance();
@@ -381,7 +283,6 @@ class useful extends Model
 	    return $formx;
 	}
 	
-/*	
 	public function getNewToyForm($toyAges = array(), $toyCategories = array(), $toyBrands = array(), $toyStates = array())
 	{
 	    $CI =& get_instance();
@@ -486,87 +387,7 @@ class useful extends Model
 	     
 	    return $formx;
 	}
-*/	
 
-
-	public function getNewToyForm($toyAges = array(), $toyCategories = array(), $toyStates = array())
-	{
-	    $CI =& get_instance();
-	    $CI->load->formx();
-	     
-	    $formx = new Formx(formx::METHOD_POST, '', '', '', 'new_toy');
-	     
-	    $formx->add_text('name')->set_label('T&iacute;tulo do brinquedo')->set_validates(array('required'));
-	    $formx->add_text('description')->set_label('Descri&ccedil;&atilde;o do brinquedo')->set_validates(array('required'));
-	    $formx->add_select('toy_age')->set_label('Faixa et&aacute;ria')->set_validates(array('required'))->set_value($toyAges);
-	    $formx->add_select('toy_category')->set_label('Tipo de Brinquedo')->set_validates(array('required'))->set_value($toyCategories);
-	    $formx->add_text('toy_state')->set_label('Estado')->set_validates(array('required'))->set_value($toyStates);
-	    $formx->add_text('toy_city')->set_label('Cidade')->set_validates(array('required'));
-	    
-	    $formx->add_file('image_main');
-	    $formx->add_file('image_extra1');
-	    $formx->add_file('image_extra2');
-	
-	    if ($formx->is_post()) {
-	        $cmsToyImages = array();
-	        
-	        foreach (array(
-	                array('name' => CmsToyImage::NAME_MAIN, 'required' => true),
-	                array('name' => CmsToyImage::NAME_EXTRA1, 'required' => false),
-	                array('name' => CmsToyImage::NAME_EXTRA2, 'required' => false)) as $image) {
-
-    	        $cmsToyImage = new CmsToyImage();
-
-    	        $name = $image['name'];
-    	        $field = sprintf('image_%s', $name);
-    	        
-    	        if ($formx->use_field($field)->upload_image(array('uploadPath' => './uploads/image', 'width' => 481, 'height' => 316))) {
-    	            $cmsToyImage->setImage($formx->use_field($field)->get_posted());
-    	            $cmsToyImage->setName($name);
-    	            
-    	            $cmsToyImages[] = $cmsToyImage;
-    	        
-    	        } elseif ($image['required']) {
-    	            $formx->use_field($field)->set_error_message('Voc&ecirc; precisa informar uma imagem.');
-    	        }
-	        }
-	
-	        if ($formx->has_error() === false) {
-	            $user = $this->getLoggedUser();
-	             
-	            $cmsToy = new CmsToy();
-	            $cmsToy->setName($formx->use_field('name')->get_posted());
-	            $cmsToy->setDescription($formx->use_field('description')->get_posted());
-	            $cmsToy->setCreated_at(date('Y-m-d H:i:s'));
-	            $cmsToy->setCms_toy_category_id($formx->use_field('toy_category')->get_posted());
-	            $cmsToy->setCms_toy_city_id($formx->use_field('toy_city')->get_posted());
-	            $cmsToy->setCms_toy_age_id($formx->use_field('toy_age')->get_posted());
-	            $cmsToy->setCms_client_id($user['id']);
-	            $cmsToy->setDeleted(0);
-	            $cmsToy->setApproved(1);
-	             
-	            	            
-	            $cmsToy->save();
-	             
-	            foreach ($cmsToyImages as $cmsToyImage) {
-    	            $cmsToyImage->setCms_toy_id($cmsToy->getId());
-    	            $cmsToyImage->save();
-	            }
-	             
-	            _mail($user['email'], 'Seu produto foi recebido', 'produto_recebido', array(
-	               'name' => $user['name'],
-	               'toy' => $cmsToy->getName(),
-	            ));
-	            
-	            $formx->reset();
-	            $formx->set_is_sucess();
-	        }
-	    }
-	     
-	    return $formx;
-	}
-
-	
 	public function getNewsletterForm()
 	{
 	    $CI =& get_instance();
