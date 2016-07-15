@@ -19,6 +19,9 @@ class PagesController < ActionController::Base
   def media
   end
 
+  def faq
+  end
+
   def busca_por_cep
     render :json => BuscaEndereco.cep(params[:cep])
   rescue RuntimeError
