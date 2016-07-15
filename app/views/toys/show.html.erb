@@ -128,18 +128,20 @@ function codeAddress() {
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Escolha um brinquedo para trocar</h4>
+				<h4 class="modal-title" id="myModalLabel">Solicitar troca com <%= @toy.user.name %></h4>
 			</div>
 			<div class="modal-body">
 
-				<p class="lead">A pessoa receberá uma mensagem e solicitará um de seus brinquedos para a troca.</p>
+				<div class="alert alert-info">A pessoa receberá uma mensagem e solicitará um de seus brinquedos para a troca.</div>
 
 				<%= form_for(@exchange) do |f| %>
 					<%= f.hidden_field :user_id, value: (current_user ? current_user.id : nil) %>
 					<%= f.hidden_field :toy_to %>
-					<%= f.text_area :message, value: "Olá, gostaria de trocar esse brinquedo contigo...", class: "form-control" %>
 					<div class="form-group">
-					<%= f.submit "Ok, quero continuar", class: "btn btn-success" %>
+						<%= f.text_area :message, value: "Olá #{@toy.user.name},\nGostei bastante desse brinquedo e gostaria de saber se é possível trocarmos.", class: "form-control", rows: 4 %>
+					</div>
+					<div class="form-group">
+						<%= f.submit "Enviar solicitação", class: "btn btn-success btn-lg" %>
 					</div>
 				<% end %>
 
@@ -187,4 +189,5 @@ function codeAddress() {
 		</div>
 	</div>
 </div>
-			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=codeAddress"></script>
+			<script type="text/javascript" src="
+			callback=codeAddress"></script>
