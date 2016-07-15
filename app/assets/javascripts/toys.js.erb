@@ -1,0 +1,120 @@
+$(document).ready(function() {
+
+	if ($('body.toys').length) {
+
+		console.log("Toy page...");
+
+		$(".toy-exchange").on("change", "select", function(e){
+			console.log("changed");
+			console.log($(this).val());
+			$this = $(this);
+
+			$.ajax({
+				url: '/brinquedos/'+$(this).val(),
+				dataType: 'json'
+				// data: {param1: 'value1'},
+			})
+			.success(function(e) {
+
+				console.log("success");
+				console.log(e);
+				console.log($(this));
+				$this.parent().find(".toy").html(e.title);
+			});
+
+		});
+
+		$(".toy-filter").change(function(event) {
+			event.preventDefault();
+
+			console.log("form alterado");
+
+			$(this).submit();
+		});
+
+	}
+
+
+	// Asynchronously Load the map API
+	var script = document.createElement('script');
+	script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=initialize";
+	document.body.appendChild(script);
+
+});
+
+
+function initialize() {
+	var map;
+	var bounds = new google.maps.LatLngBounds();
+	var mapOptions = {
+			mapTypeId: 'roadmap'
+	};
+	var markers;
+
+	// Display a map on the page
+	map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+	map.setTilt(45);
+
+	// Multiple Markers
+
+	// Info Window Content
+	var infoWindowContent = [
+			['<div class="info_content">' +
+			'<h3>London Eye</h3>' +
+			'<p>The London Eye is a giant Ferris wheel situated on the banks of the River Thames. The entire structure is 135 metres (443 ft) tall and the wheel has a diameter of 120 metres (394 ft).</p>' +        '</div>'],
+			['<div class="info_content">' +
+			'<h3>Palace of Westminster</h3>' +
+			'<p>The Palace of Westminster is the meeting place of the House of Commons and the House of Lords, the two houses of the Parliament of the United Kingdom. Commonly known as the Houses of Parliament after its tenants.</p>' +
+			'</div>']
+	];
+
+	// var markers = [];
+	$.getJSON("<%= Rails.application.routes.url_helpers.index_near_toys_path %>", function( data ) {
+		console.log(data);
+		markers = data;
+		// $.each( data, function( key, val ) {
+		//   markers.push([val]);
+		// });
+
+		// Display multiple markers on a map
+		var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+		// Loop through our array of markers & place each one on the map
+		for( i = 0; i < markers.length; i++ ) {
+				var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+				bounds.extend(position);
+				marker = new google.maps.Marker({
+						position: position,
+						map: map,
+						title: markers[i][0]
+				});
+
+				// Allow each marker to have an info window
+				google.maps.event.addListener(marker, 'click', (function(marker, i) {
+						return function() {
+								infoWindow.setContent(markers[i][markers[i].length-1]);
+								infoWindow.open(map, marker);
+						}
+				})(marker, i));
+
+				// Automatically center the map fitting all markers on the screen
+				map.fitBounds(bounds);
+		}
+
+		// Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+		var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+				this.setZoom(14);
+				google.maps.event.removeListener(boundsListener);
+		});
+
+		// console.log(markers);
+	});
+	//Toy.limit(5).each{|x| a << [x.title, x.user.latitude, x.user.longitude] }
+
+	// var markers = [
+	//   ['London Eye, London', 51.503454,-0.119562],
+	//   ['Palace of Westminster, London', 51.499633,-0.124755]
+	// ];
+
+
+}

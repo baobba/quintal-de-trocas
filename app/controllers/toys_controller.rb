@@ -1,6 +1,6 @@
 class ToysController < ApplicationController
   before_action :set_toy, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :index_near]
 
   def index
     @q = Toy.includes(:toy_category, :toy_age).ransack(params[:q])
@@ -15,6 +15,13 @@ class ToysController < ApplicationController
       format.html { }
       format.json { render json: @toy }
     end
+  end
+
+  def index_near
+    city = request.location.city
+    @toys = Toy.near('88110-690, Brasil', 20, :units => :km) || nil
+    @toys = @toys.map{|f| [f.title, f.latitude, f.longitude, "<div class='info_content'><h3>#{f.title}</h3><p>#{f.description[0..100]}</p></div>"]} if @toys
+    render :json => @toys
   end
 
 
@@ -86,6 +93,6 @@ class ToysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def toy_params
-      params.require(:toy).permit(:title, :description, :toy_age_id, :toy_category_id, :user_id, :tag_list, toy_images_attributes: [:id, :toy_id, :image, :featured])
+      params.require(:toy).permit(:title, :description, :toy_age_id, :toy_category_id, :user_id, :tag_list, :zipcode, :latitude, :longitude, toy_images_attributes: [:id, :toy_id, :image, :featured])
     end
 end

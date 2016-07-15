@@ -11,10 +11,20 @@ class Toy < ActiveRecord::Base
 
   accepts_nested_attributes_for :toy_images, :allow_destroy => true, :reject_if => proc { |attributes| attributes['image'].blank? }
 
+  validates :title, :description, :toy_category, :toy_age, presence: true
+
   paginates_per 12
 
+  geocoded_by :zipcode
 
-  validates :title, :description, :toy_category, :toy_age, presence: true
+
+  before_validation :add_zipcode
+
+  def add_zipcode
+    self.zipcode = user.zipcode
+    self.latitude = user.latitude
+    self.longitude = user.longitude
+  end
 
   def fet_image
     if toy_images.count > 0
