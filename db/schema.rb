@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20160706140428) do
     t.time     "exchange_time"
     t.date     "exchange_date"
     t.string   "exchange_type"
+    t.text     "message"
     t.integer  "user_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false

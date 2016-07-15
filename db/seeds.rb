@@ -10,6 +10,12 @@ AdminUser.destroy_all
 AdminUser.create!(email: 'admin@example.com', password: 'admin123', password_confirmation: 'admin123')
 
 
+# create users
+User.destroy_all
+User.create email: "netto16@gmail.com", password: "admin123", name: "Osny", birthday: 1989, gender: "M", phone: "48 99355794", username: "osnysantos", zipcode: "88110690", street: "Rua Bernardo Halfeld, 471", city: "São José", state: "SC", latitude: -27.5807659, longitude: -48.6194795
+User.create email: "test@test.com", password: "admin123", name: "Joao", birthday: 2000, gender: "M", phone: "48 788728787", username: "joao", zipcode: "88111120"
+
+
 # create toy categories
 ToyCategory.destroy_all
 toy_categories = ["Bonecas", "Veículos Pequenos", "Veículos Grandes", "Quebra-cabeça", "Para montar", "Musicais", "Livros", "Jogos", "Fantasia", "Faz de conta", "Esportes", "Casinha de Boneca", "Bonecos", "Lego", "Outros"]
@@ -29,16 +35,10 @@ end
 # create toys
 
 Toy.destroy_all
-(1..50).each_with_index do |a, index|
+(1..20).each_with_index do |a, index|
   a=Toy.create title: "Brinquedo #{index}", description: "...", toy_category_id: ToyCategory.all.map(&:id).sample, toy_age_id: ToyAge.all.map(&:id).sample || 0, user_id: User.all.map(&:id).sample
-  a.toy_images.create image: File.open(Rails.root.join('public', "toy_images/image0#{[*1..6].sample}.jpg"))
+  a.toy_images.create! image: File.open(Rails.root.join('public', "toy_images/image0#{[*1..6].sample}.jpg"))
 end
-
-
-# create users
-User.destroy_all
-User.create email: "netto16@gmail.com", password: "admin123", name: "Osny", birthday: 1989, gender: "M", phone: "48 99355794", username: "osnysantos", zipcode: "88110690", street: "Rua Bernardo Halfeld, 471", city: "São José", state: "SC", latitude: -27.5807659, longitude: -48.6194795
-
 
 # create places
 Place.destroy_all

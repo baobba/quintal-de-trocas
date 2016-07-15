@@ -1,13 +1,13 @@
 class Toy < ActiveRecord::Base
 
   acts_as_taggable
-  
+
   belongs_to :toy_category
   belongs_to :toy_age
   belongs_to :user
   has_many :toy_images
 
-  has_many :exchanges, :foreign_key => "toy_from"
+  has_many :exchanges, :foreign_key => "toy_to"
 
   accepts_nested_attributes_for :toy_images, :allow_destroy => true, :reject_if => proc { |attributes| attributes['image'].blank? }
 
@@ -27,5 +27,5 @@ class Toy < ActiveRecord::Base
   def to_param
     [id, title.parameterize].join("-")
   end
-      
+
 end

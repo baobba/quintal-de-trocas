@@ -7,12 +7,13 @@ class ExchangesController < ApplicationController
   end
 
   def show
+  	@messages = @exchange.mailbox.conversations
   end
 
   # Dashboard
 
   def my_exchanges
-    @exchanges = current_user.exchanges
+    @exchanges = Exchange.where(["toy_from IN (?) OR toy_to IN (?) OR user_id = ?", current_user.toys.map(&:id), current_user.toys.map(&:id), current_user.id])
   end
 
   def new
@@ -25,14 +26,12 @@ class ExchangesController < ApplicationController
   def create
     @exchange = current_user.exchanges.new(exchange_params)
 
-    respond_to do |format|
-      if @exchange.save
-        format.html { redirect_to my_exchanges_path, success: 'Ponto de troca cadastrado com sucesso' }
-        format.json { render :show, status: :created, location: @exchange }
-      else
-        format.html { render :new }
-        format.json { render json: @exchanges.errors, status: :unprocessable_entity }
-      end
+    @exchange.send_message(@exchange.user, @exchange.message, "Bora trocar brinquedo?")
+
+    if @exchange.save
+      redirect_to exchange_path(@exchange), success: 'Pedido de troca realizado com sucesso'
+    else
+      render :new
     end
   end
 
@@ -64,6 +63,6 @@ class ExchangesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exchange_params
-      params.require(:exchange).permit(:toy_from, :toy_to, :exchange_time, :exchange_date, :status)
+      params.require(:exchange).permit(:toy_from, :toy_to, :exchange_time, :exchange_date, :exchange_date, :message, :status, :user_id)
     end
 end

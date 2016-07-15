@@ -1,4 +1,10 @@
-<h1></h1>
+<div class="row">
+  <div class="col-sm-2">
+    <%= render '/layouts/nav_dashboard' %>
+  </div>
+  <div class="col-sm-10">
+
+  <h1></h1>
 
 <p>
   <strong>Toy from:</strong>
@@ -21,7 +27,25 @@
 
 <hr>
 
+<p class="lead">Mensagens</p>
+
+<div class="well">
+
+</div>
+
+<% @messages.each do |msg| %>
+	<strong><%= msg.subject %></strong><br>
+	<%= msg.messages.first.body %>
+	<hr>
+<% end %>
+
+
+</div>
+
+
 <input type="submit" name="">
 
 <%= link_to 'Edit', edit_exchange_path(@exchange) %> |
-<%= link_to 'Back', exchanges_path %>
+
+</div>
+</div>

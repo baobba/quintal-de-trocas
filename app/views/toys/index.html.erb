@@ -1,3 +1,6 @@
+<p class="lead">
+	Voce esta em: <%= debug request.location %> - cidade: <%= request.location.city %>
+</p>
 
 <div class="row">
   <div class="col-sm-2">
@@ -15,8 +18,8 @@
         <% ToyAge.all.each do |cat| %>
 
           <div class="checkbox" style="margin:0;"><label style="font-size: 11px;min-height:15px;">
-            <%# f.check_box :toy_age_id_in, {}, cat.id, true, false %> 
-            <%= check_box_tag('q[toy_age_id_in][]', cat.id, params[:q] && params[:q][:toy_age_id_in] && params[:q][:toy_age_id_in].include?(cat.id.to_s) ? params[:q][:toy_age_id_in] : nil ) %> 
+            <%# f.check_box :toy_age_id_in, {}, cat.id, true, false %>
+            <%= check_box_tag('q[toy_age_id_in][]', cat.id, params[:q] && params[:q][:toy_age_id_in] && params[:q][:toy_age_id_in].include?(cat.id.to_s) ? params[:q][:toy_age_id_in] : nil ) %>
             <%= cat.title %>
           </label></div>
         <% end %>
@@ -27,13 +30,13 @@
         <% ToyCategory.all.each do |cat| %>
 
           <div class="checkbox" style="margin:0;"><label style="font-size: 11px;min-height:15px;">
-            <%= check_box_tag('q[toy_category_id_in][]', cat.id, params[:q] && params[:q][:toy_category_id_in] && params[:q][:toy_category_id_in].include?(cat.id.to_s) ? params[:q][:toy_category_id_in] : nil ) %> 
+            <%= check_box_tag('q[toy_category_id_in][]', cat.id, params[:q] && params[:q][:toy_category_id_in] && params[:q][:toy_category_id_in].include?(cat.id.to_s) ? params[:q][:toy_category_id_in] : nil ) %>
             <%= cat.title %>
           </label></div>
         <% end %>
         <%# f.select(:toy_category_id_eq, options_from_collection_for_select(ToyCategory.all, "id", "title", (params[:q][:toy_category_id_eq] if !params[:q].blank?)), {include_blank: "Selecione..."}, :class=> "form-control" ) %>
       </div>
-    
+
       <div class="form-group">
         <%= f.submit "Fitrar", :class => "btn btn-primary" %>
       </div>
@@ -52,7 +55,7 @@
 
     <div class="pull-right">
       Ordenar por:
-      <%= sort_link @q, :created_at, 'mais recentes', default_order: :desc %> | 
+      <%= sort_link @q, :created_at, 'mais recentes', default_order: :desc %> |
       <%= sort_link @q, :title, 'ordem alfabética' %>
     </div>
 
@@ -71,5 +74,5 @@
     </div>
   </div>
 </div>
-  
+
 

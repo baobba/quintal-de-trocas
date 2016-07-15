@@ -3,39 +3,53 @@
     <%= render '/layouts/nav_dashboard' %>
   </div>
   <div class="col-sm-10">
-    
-  
-<div class="page-header">
-  <h1>Minhas trocas</h1>
-</div>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Título</th>
-      <th></th>
-      <th>Envio</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @exchanges.each do |exchange| %>
-      <tr>
-        <td><%= exchange.created_at %></td>
-        <td>De: <%= exchange.toy.title if exchange.toy %></td>
-        <td><%= exchange.exchange_type %></td>
-        <td><%= link_to 'Show', exchange %></td>
-        <td><%= link_to 'Edit', edit_exchange_path(exchange) %></td>
-        <td><%= link_to 'Destroy', exchange, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+		<div class="page-header">
+		  <h1>Minhas trocas</h1>
+		</div>
 
-<br>
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th>Título</th>
+		      <th>Brinquedo</th>
+		      <th>Status</th>
+		      <th></th>
+		      <th>Envio</th>
+		      <th colspan="3"></th>
+		    </tr>
+		  </thead>
 
-<%= link_to 'New Place', new_place_path %>
+		  <tbody>
+		    <% @exchanges.each do |exchange| %>
+		      <tr>
+		        <td><%= exchange.created_at.strftime("%d/%m/%Y") %></td>
+		        <td><%= link_to exchange.toy.title, exchange_path(exchange) if exchange.toy %></td>
+		        <td>
+		        	<% if exchange.user == current_user %>
+		        		<p class="lead">Aguardando resposta de <%= exchange.toy.user.name %></p>
+		        	<% else %>
+		        		<p class="lead"><%= exchange.user.name %> quer trocar com você</p>
+		        		<a href="#" class="btn btn-default">Aceitar</a> -
+			        	<a href="#" class="btn btn-default">Recusar</a>
+		        	<% end %>
+		        </td>
+		        <td>
+			        <% if exchange.user == current_user %>
+				        <span class="label label-danger"><span class="glyphicon glyphicon-arrow-right"></span> Troca solicitada</span>
+				      <% else %>
+				        <span class="label label-success"><span class="glyphicon glyphicon-arrow-left"></span> Troca recebida</span>
+					    <% end %>
+			      </td>
+		        <td><%= exchange.exchange_type %></td>
+		        <td><%= link_to 'Show', exchange %></td>
+		        <td><%= link_to 'Edit', edit_exchange_path(exchange) %></td>
+		        <td><%= link_to 'Destroy', exchange, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>
 
-</div>
+	</div>
 </div>
