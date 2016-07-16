@@ -10,6 +10,13 @@ pt-BR:
         tag_list: "Palavras chave"
         toy_age_id: "Faixa etária"
         toy_category_id: "Categoria"
+      contact:
+        name: Nome completo
+        email: Email
+        city: Cidade
+        state: Estado
+        subject: Assunto
+        message: Mensagem
   activerecord:
     errors:
       messages:

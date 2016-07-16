@@ -1,39 +1,60 @@
-<div class="page-header">
-  <h1>Fale conosco</h1>
-</div>
-
 <div class="row">
-  <div class="col-sm-8">
+  <div class="col-sm-8 col-sm-offset-2">
 
-    <%= form_for @message, url: contact_path do |message_form| %>
-      <fieldset>
-        <div class="field">
-          <%= message_form.text_field :name, placeholder: "Name" %>
+    <div class="page-header">
+      <h1>Fale conosco</h1>
+    </div>
+
+    <%= simple_form_for @message, url: contact_path do |f| %>
+
+    <div class="row">
+      <div class="col-sm-7">
+        <%= f.input :name %>
+        <%= f.input :email %>
+        <div class="row">
+          <div class="col-sm-8">
+            <%= f.input :city %>
+          </div>
+          <div class="col-sm-4">
+            <%= f.input :state, as: :select, collection: [["Acre", "AC"],
+                  ["Alagoas", "AL"],
+                  ["Amapá", "AP"],
+                  ["Amazonas", "AM"],
+                  ["Bahia", "BA"],
+                  ["Ceará", "CE"],
+                  ["Distrito Federal", "DF"],
+                  ["Espírito Santo", "ES"],
+                  ["Goiás", "GO"],
+                  ["Maranhão", "MA"],
+                  ["Mato Grosso", "MT"],
+                  ["Mato Grosso do Sul", "MS"],
+                  ["Minas Gerais", "MG"],
+                  ["Pará", "PA"],
+                  ["Paraíba", "PB"],
+                  ["Paraná", "PR"],
+                  ["Pernambuco", "PE"],
+                  ["Piauí", "PI"],
+                  ["Rio de Janeiro", "RJ"],
+                  ["Rio Grande do Norte", "RN"],
+                  ["Rio Grande do Sul", "RS"],
+                  ["Rondônia", "RO"],
+                  ["Roraima", "RR"],
+                  ["Santa Catarina", "SC"],
+                  ["São Paulo", "SP"],
+                  ["Sergipe", "SE"],
+                  ["Tocantins", "TO"]
+                ], prompt: "Selecione" %>
+          </div>
         </div>
-
-        <div class="field">
-          <%= message_form.email_field :email, placeholder: "Email"%>
-        </div>
-
-        <div class="field">
-          <%= message_form.text_area :content, placeholder: "Message"%>
-        </div>
-      </fieldset>
-
-      <fieldset>
-        <div class="field">
-          <%= message_form.submit "Send" %>
-        </div>
-      </fieldset>
-    <% end %>
-
-  </div>
-  <div class="col-sm-4">
-
-    <div class="panel panel-default">
-      <div class="panel-body">
-        ...
+        <%= f.input :subject, as: :select, collection: ["Quero ser um ponto de troca", "Dúvidas e Sugestões", "Imprensa", "Publicidade", "Outros"], prompt: "Selecione" %>
       </div>
     </div>
+
+    <%= f.input :message, as: :text, :input_html => { :rows => 5 } %>
+    
+    <%= f.submit "Enviar mensagem", class: "btn btn-success" %>
+
+    <% end %>
+
   </div>
 </div>

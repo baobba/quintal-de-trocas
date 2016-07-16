@@ -66,7 +66,7 @@ var citymap = {
 function codeAddress() {
 	// Create the map.
 	var map = new google.maps.Map(document.getElementById('mapCanvas'), {
-		zoom: 15,
+		zoom: 13,
 		center: {lat: <%= @toy.user.latitude %>, lng: <%= @toy.user.longitude %>},
 		mapTypeId: google.maps.MapTypeId.TERRAIN
 	});
@@ -108,7 +108,7 @@ function codeAddress() {
 
 <hr>
 <div class="row">
-	<div class="col-sm-6">
+	<div class="col-sm-5">
 		<p><span class="glyphicon glyphicon-user"></span> Cadastrado por</p>
 		<%= link_to @toy.user.name, user_path(@toy.user) %>
 		<div class="text-muted">
@@ -116,8 +116,8 @@ function codeAddress() {
 			<%= @toy.user.city %> / <%= @toy.user.state %>
 		</div>
 	</div>
-	<div class="col-sm-6">
-		<div id="mapCanvas"></div>
+	<div class="col-sm-7">
+		<div id="mapCanvas" class="toy-detail-map"></div>
 	</div>
 </div>
 
