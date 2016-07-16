@@ -8,7 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body class="<%= params[:controller] %>">
+<body class="<%= params[:controller] %> <%= params[:controller] %>-<%= params[:action] %>">
 
   <%= render '/layouts/header' %>
 

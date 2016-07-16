@@ -22,6 +22,10 @@ class PagesController < ActionController::Base
   def faq
   end
 
+  def contact_us
+    @message = Contact.new
+  end
+
   def busca_por_cep
     render :json => BuscaEndereco.cep(params[:cep])
   rescue RuntimeError

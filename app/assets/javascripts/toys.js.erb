@@ -1,6 +1,21 @@
 $(document).ready(function() {
 
-	if ($('body.toys').length) {
+	if ($('body.toys-index').length) {
+
+		// Asynchronously Load the map API
+		var script = document.createElement('script');
+		script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=initialize";
+		document.body.appendChild(script);
+
+	}
+
+
+	if ($('body.toys-show').length) {
+
+		// Asynchronously Load the map API
+		var script = document.createElement('script');
+		script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=codeAddress";
+		document.body.appendChild(script);
 
 		console.log("Toy page...");
 
@@ -35,10 +50,7 @@ $(document).ready(function() {
 	}
 
 
-	// Asynchronously Load the map API
-	var script = document.createElement('script');
-	script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=initialize";
-	document.body.appendChild(script);
+	
 
 });
 

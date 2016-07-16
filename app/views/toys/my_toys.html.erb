@@ -1,9 +1,9 @@
 <div class="row">
-  <div class="col-sm-2">
+  <div class="col-sm-3">
     <%= render '/layouts/nav_dashboard' %>
   </div>
-  <div class="col-sm-10">
-    
+  <div class="col-sm-9">
+
 <div class="page-header">
   <h1>
     Meus brinquedos
@@ -42,7 +42,7 @@
 
         <td class="text-right">
           <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Alterar".html_safe, edit_toy_path(toy), :class => 'btn btn-sm btn-link' %>&nbsp;&nbsp;
-          
+
           <%= link_to "<span class='glyphicon glyphicon-trash'></span> Excluir".html_safe, toy, method: :delete, confirm: 'Você tem certeza que deseja excluir?', class: "delete btn btn-sm btn-link" %>
         </td>
       </tr>

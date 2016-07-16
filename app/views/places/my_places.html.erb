@@ -1,9 +1,9 @@
 <div class="row">
-  <div class="col-sm-2">
+  <div class="col-sm-3">
     <%= render '/layouts/nav_dashboard' %>
   </div>
-  <div class="col-sm-10">
-    
+  <div class="col-sm-9">
+
 
 <div class="page-header">
   <h1>
@@ -16,17 +16,26 @@
   <thead>
     <tr>
       <th>Título</th>
-      <th colspan="3"></th>
+      <th>Contatos</th>
+      <th>Local</th>
+      <th class="text-right"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @places.each do |place| %>
       <tr>
-        <td><%= place.title %></td>
-        <td><%= link_to 'Show', place %></td>
-        <td><%= link_to 'Edit', edit_place_path(place) %></td>
-        <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to place.title, place %></td>
+        <td>
+          <%= place.phone %>
+          <%= "<br>#{place.phone}".html_safe if place.phone %>
+        </td>
+        <td><%= place.city %></td>
+        <td class="text-right">
+          <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Alterar".html_safe, edit_place_path(place), :class => 'btn btn-sm btn-link' %>&nbsp;&nbsp;
+
+          <%= link_to "<span class='glyphicon glyphicon-trash'></span> Excluir".html_safe, place, method: :delete, confirm: 'Você tem certeza que deseja excluir?', class: "delete btn btn-sm btn-link" %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -1,9 +1,9 @@
 <div class="row">
-  <div class="col-sm-2">
+  <div class="col-sm-3">
     <%= render '/layouts/nav_dashboard' %>
   </div>
-  <div class="col-sm-10">
-    
+  <div class="col-sm-9">
+
 
 
 
@@ -55,8 +55,6 @@
 
   <div class="col-sm-6">
 
-    <p class="lead">Dados pessoais</p>
-    
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= devise_error_messages! %>
 
@@ -64,7 +62,7 @@
         <%= f.label :name %>
         <%= f.text_field :name, class: "form-control" %>
       </div>
-      
+
       <div class="row">
         <div class="col-sm-4">
           <div class="form-group">
@@ -78,7 +76,7 @@
             <%= f.text_field :birthday, class: "form-control" %>
           </div>
         </div>
-        
+
         <div class="col-sm-5">
           <div class="form-group">
             <%= f.label :gender %><br>
@@ -100,11 +98,11 @@
             <span class="cep-feedback"></span>
           </div>
         </div>
-        
+
         <div class="col-sm-7">
-          
+
         </div>
-        
+
       </div>
 
 
@@ -118,13 +116,13 @@
           </div>
 
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-7">
               <div class="form-group">
                 <%= f.label :city %>
                 <%= f.text_field :city, class: "form-control" %>
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-5">
               <div class="form-group">
                 <%= f.label :state %>
                 <%= f.select :state, [["Acre", "AC"],

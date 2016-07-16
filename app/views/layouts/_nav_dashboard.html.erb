@@ -1,11 +1,13 @@
-<br>
-<div class="text-muted" style="margin-bottom: 10px;">Minha conta</div>
-<div class="list-group">
-  <%= link_to "Alterar dados pessoais", edit_user_registration_path, class: (params[:controller] == "registrations" ? "list-group-item active" : "list-group-item") %>
+<div class="nav-dashboard">
+  <br>
+  <div class="text-muted" style="margin-bottom: 10px;">Minha conta</div>
+  <div class="list-group dashboard">
+    <%= link_to "Alterar dados pessoais", edit_user_registration_path, class: (params[:controller] == "registrations" ? "list-group-item active" : "list-group-item") %>
 
-  <%= link_to "Meus brinquedos", my_toys_path, class: (params[:controller] == "toys" ? "list-group-item active" : "list-group-item") %>
+    <%= link_to "Meus brinquedos", my_toys_path, class: (params[:controller] == "toys" ? "list-group-item active" : "list-group-item") %>
 
-  <%= link_to "Minhas trocas", my_exchanges_path, class: (params[:controller] == "exchanges" ? "list-group-item active" : "list-group-item") %>
+    <%= link_to "Minhas trocas", my_exchanges_path, class: (params[:controller] == "exchanges" ? "list-group-item active" : "list-group-item") %>
 
-  <%= link_to "Meus pontos de troca", my_places_path, class: (params[:controller] == "places" ? "list-group-item active" : "list-group-item") %>
+    <%= link_to "Meus pontos de troca", my_places_path, class: (params[:controller] == "places" ? "list-group-item active" : "list-group-item") %>
+  </div>
 </div>

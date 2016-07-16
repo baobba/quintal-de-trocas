@@ -171,6 +171,8 @@ pt-BR:
         city: Cidade
         state: Estado
         username: Nome de usuário
+      place:
+        title: Titulo
   number:
     currency:
       format:

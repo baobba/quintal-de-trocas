@@ -42,8 +42,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :contacts, only: [:new, :create]
+  post 'contact', to: 'messages#create'
+
   get 'sobre-nos' => 'pages#about_us', as: 'about_us'
   get 'faq' => 'pages#faq', as: 'faq'
+  get 'fale_conosco' => 'pages#contact_us', as: 'contact_us'
   get 'apoio' => 'pages#support', as: 'support'
   get 'como-funciona' => 'pages#how_it_works', as: 'how_it_works'
   get 'depoimentos' => 'pages#testimonials', as: 'testimonials'

@@ -1,5 +1,3 @@
-<h1><%= @toy.title %></h1>
-
 <div class="row">
 	<div class="col-sm-6">
 
@@ -29,6 +27,18 @@
 		...
 	</div>
 	<div class="col-sm-6">
+		<h1><%= @toy.title %></h1>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<span class="glyphicon glyphicon-list"></span> Categoria</span>
+				<p class="lead"><%= @toy.toy_category.title %></p>
+			</div>
+			<div class="col-sm-6">
+				<span class="glyphicon glyphicon-ban-circle"></span> Faixa etária</span>
+				<p class="lead"><%= @toy.toy_age.title %></p>
+			</div>
+		</div>
 
 
 		<% if @toy.user && @toy.user.latitude %>
@@ -87,15 +97,6 @@ function codeAddress() {
 	<strong>Descrição:</strong><br>
 	<%= @toy.description %>
 </p>
-<p>
-	<strong>Categoria:</strong><br>
-	<%= @toy.toy_category.title %>
-</p>
-<p>
-	<strong>Faixa etária:</strong><br>
-	<%= @toy.toy_age.title %>
-</p>
-
 
 <hr>
 
@@ -103,11 +104,24 @@ function codeAddress() {
 <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
 	Trocar
 </button>
-<%= link_to 'Edit', edit_toy_path(@toy) %> |
 
 
-<hr><%= link_to @toy.user.name, user_path(@toy.user) %>
+<hr>
+<div class="row">
+	<div class="col-sm-6">
+		<p><span class="glyphicon glyphicon-user"></span> Cadastrado por</p>
+		<%= link_to @toy.user.name, user_path(@toy.user) %>
+		<div class="text-muted">
+			<%= @toy.user.street %><br>
+			<%= @toy.user.city %> / <%= @toy.user.state %>
+		</div>
+	</div>
+	<div class="col-sm-6">
 		<div id="mapCanvas"></div>
+	</div>
+</div>
+
+</div>
 	</div>
 </div>
 
@@ -189,5 +203,3 @@ function codeAddress() {
 		</div>
 	</div>
 </div>
-			<script type="text/javascript" src="
-			callback=codeAddress"></script>

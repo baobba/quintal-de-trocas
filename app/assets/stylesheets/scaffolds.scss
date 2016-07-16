@@ -10,6 +10,39 @@ header {
   margin-bottom: 25px;
 }
 
+
+.nav-dashboard {
+  padding-right: 20px;
+}
+
+.dashboard {
+  border-radius: 0;
+
+  a.list-group-item {
+    border-radius: 0;
+    border: 0;
+    background-color: #ddd;
+    border-top: 1px solid #fff;
+    text-align: right;
+    padding-left: 0;
+    margin: 0;
+
+    &.active {
+      font-weight: bold;
+      color: #222;
+      background: #fff;
+      background: -webkit-linear-gradient(left, #ddd , #fff);
+      background: -o-linear-gradient(right, #ddd, #fff);
+      background: -moz-linear-gradient(right, #ddd, #fff);
+      background: linear-gradient(to right, #ddd , #fff);
+
+      &:hover {
+        border-top: 1px solid #fff;
+      }
+    }
+  }
+}
+
 .navbar-quintal {
   margin-bottom: 0;
   min-height: 40px;
@@ -148,7 +181,7 @@ ul.cards {
     display: block;
     float: left;
     width: 46%;
-    
+
     &:nth-of-type(2n+2) {
       margin-right: 0;
     }
@@ -239,9 +272,25 @@ ul.cards {
 }
 
 
+
+
 footer {
   background-color: #222;
   padding: 30px 0;
   margin-top: 25px;
   color: #666;
+
+  .lead {
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+
+  a {
+    color: #999;
+
+    &:hover {
+      color: #fff;
+      text-decoration: none;
+    }
+  }
 }
