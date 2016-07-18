@@ -2,12 +2,13 @@
   <h1>Colunas e Novidades</h1>
 </div>
 
-<ul>
-  <% @articles.each do |article| %>
-    <li>
-      <div class="meta"><%= article.created_at %> | <%= article.category %> | <%= article.user.name %> |</div>
-      <%= link_to article.title, article %><br>
-      <%= truncate(article.body, length: 100) %><br>
-    </li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="col-sm-8">
+    
+    <ul class="list-articles list-unstyled">
+      <%= render @articles %>
+    </ul>
+
+    <%= link_to_next_page @articles, 'Veja mais', remote: true, id: "load_more_link", class: "btn btn-default btn-default" %>
+  </div>
+</div>

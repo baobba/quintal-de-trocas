@@ -51,6 +51,6 @@ end
 
 Article.destroy_all
 article_titles = ["A experiência da troca", "A troca na aldeia do Kamayuras", "Pedalando no Quintal, mas sem pedal ?"]
-(1..10).each_with_index do |index|
+(1..30).each_with_index do |index|
   Article.create title: article_titles.sample, category: "Geral", user_id: User.all.map(&:id).sample, body: "Um dia do mês de fevereiro de 2014, estava eu navegando pela rede social Facebook, quando surgiu em meu feed de notícias um post chamado Quintal de Trocas, tratava-se de um vídeo muito interessante. Depois que o assisti fui pesquisar o assunto no site. E simplesmente fiquei encantada com o que descobri. Que ideia genial!!! - pensei. Expliquei para minha filha sobre a possibilidade de trocar seus brinquedos usados por outros e ela ficou bastante empolgada. Então selecionamos os brinquedos e em menos de 1 mês fizemos duas trocas. A primeira pelo correio com uma criança de Brasília, e a segunda pessoalmente, no Extra Anchieta/SP; experiências muito divertidas e também angustiosas, pois como é difícil para uma criança entre 0 a 10 anos aprender a esperar, aprender que nem tudo se resolve na hora que se quer, e nem do jeito que se deseja. (Foi um bom momento para ensinar o que significa planejar nossas ações)"
 end

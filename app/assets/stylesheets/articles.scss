@@ -1,3 +1,32 @@
-// Place all the styles related to the Articles controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.list-articles {
+  li {
+    margin-bottom: 35px;
+
+    .meta {
+      color: #aaa;
+      font-size: 90%;
+
+      span {
+        margin-left: 15px;
+
+        &:first-of-type {
+          margin-left: 0;
+        }
+      }
+    }
+
+    a.article-title {
+      font-size: 140%;
+      font-weight: bold;
+      padding: 5px 0;
+      display: block;
+    }
+
+    .article-desc {
+      color: #888;
+
+
+    }
+
+  }
+}

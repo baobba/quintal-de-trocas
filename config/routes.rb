@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
     devise_for :users, controllers: {registrations: 'registrations'}, path: 'usuario'
 
-    resources :articles
+    resources :articles, path: 'artigos'
 
     resources :exchanges, path: 'trocas'
     get 'minhas-trocas' => 'exchanges#my_exchanges', as: :my_exchanges
