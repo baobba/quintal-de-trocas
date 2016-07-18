@@ -18,7 +18,7 @@
 
 
 $(document).ready(function() {
-  
+
   $('#user_zipcode').mask('00000-000');
 
   var SPMaskBehavior = function (val) {
@@ -54,7 +54,21 @@ $(document).ready(function() {
     }
   });
 
-  
+  $(".btn-footer").on("click", function(ev) {
+    ev.preventDefault();
+    console.log($(this).attr("href"));
+
+    $.ajax({
+      url: $(this).attr("href"),
+      success: function(data){
+        console.log(data);
+        $("#footer_text .modal-content").html(data);
+      }
+
+    })
+  })
+
+
   $(document).on("change", "#user_zipcode", function(){
     console.log("kkk");
     $(".add_fields").show();

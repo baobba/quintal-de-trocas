@@ -54,5 +54,7 @@ Rails.application.routes.draw do
   get 'parceiros' => 'pages#partners', as: 'partners'
   get 'na-midia' => 'pages#media', as: 'media'
   get 'busca-por-cep' => 'pages#busca_por_cep'
+  get 'politica-de-privacidade' => 'pages#privacy', as: 'privacy'
+  get 'termos-e-condicoes' => 'pages#terms', as: 'terms'
 
 end

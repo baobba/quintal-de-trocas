@@ -29,9 +29,21 @@
       </div>
       <div class="col-sm-6 text-right">
         <%= image_tag "logo-quintal-de-trocas.svg", width: 140 %><br><br>
+
+        <%= link_to "Política de privacidade", privacy_url, "data-toggle" => "modal", "data-target" => "#footer_text", class: "btn-footer privacy" %> |
+
+        <%= link_to "Termos e condições de uso", terms_url, "data-toggle" => "modal", "data-target" => "#footer_text", class: "btn-footer terms" %><br><br>
+
         <small>© 2016 - Quintal de Trocas - Direitos reservados</small>
       </div>
     </div>
 
   </div>
 </footer>
+
+<div class="modal fade" id="footer_text" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    </div>
+  </div>
+</div>

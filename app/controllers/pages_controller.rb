@@ -22,6 +22,14 @@ class PagesController < ActionController::Base
   def faq
   end
 
+  def terms
+    render layout: false
+  end
+
+  def privacy
+    render layout: false
+  end
+
   def contact_us
     @message = Contact.new
   end
