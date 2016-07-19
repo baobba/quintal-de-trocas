@@ -237,8 +237,7 @@ class usuario extends Controller
 	    $toyStates = CmsToyState::getCombo();
 	    
 	    $formxUserData = $this->useful->getUpdateAccountForm($preArray->estado());
-	    //$formxNewToy = $this->useful->getNewToyForm($toyAges, $toyCategories, $toyBrands, $toyStates);
-	    $formxNewToy = $this->useful->getNewToyForm($toyAges, $toyCategories, $toyStates);
+	    $formxNewToy = $this->useful->getNewToyForm($toyAges, $toyCategories, $toyBrands, $toyStates);
 	    $user = $this->useful->getLoggedUser();
 	    
 	    switch (true) {
