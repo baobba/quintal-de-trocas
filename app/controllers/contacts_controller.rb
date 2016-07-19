@@ -1,7 +1,7 @@
 class ContactsController < ApplicationController
 
   def index
-    render: :file => "pages/contact_us"
+    render :file => "pages/contact_us"
   end
 
   def new
