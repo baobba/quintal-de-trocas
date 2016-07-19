@@ -57,7 +57,7 @@
 							<input type="text" placeholder="CEP" value="<?php echo trim($formxUserData->use_field('zip_code')->get_posted()); ?>" name="zip_code" />
 						</div>
 					</div>
-					<span class="forget"><a href="http://www.correios.com.br/servicos/cep/cep_loc_log.cfm" target="_blank">não sabe seu CEP?</a></span>
+					<span class="forget"><a href="http://www.buscacep.correios.com.br/sistemas/buscacep/" target="_blank">não sabe seu CEP?</a></span>
 				</div>
 				<div class="holder">
 					<div class="frame-2">
