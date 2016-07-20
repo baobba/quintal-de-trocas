@@ -4,12 +4,27 @@ pt-BR:
     labels:
       exchange:
         toy_to: "Brinquedo que você quer trocar"
+      user:
+        email: Email
+        password: Senha
+        name: Nome completo
+        birthday: Ano nasc.
+        gender: Sexo
+        phone: Telefone
+        zipcode: CEP
+        street: Rua
+        city: Cidade
+        state: Estado
+        username: Nome de usuário
+      user_children:
+        name: Nome completo
+        birthday: Ano nasc.
       toy:
-        title: "Título"
-        description: "Descrição"
-        tag_list: "Palavras chave"
-        toy_age_id: "Faixa etária"
-        toy_category_id: "Categoria"
+        title: Título
+        description: Descrição
+        tag_list: Palavras chave
+        toy_age_id: Faixa etária
+        toy_category_id: Categoria
       contact:
         name: Nome completo
         email: Email
@@ -17,6 +32,15 @@ pt-BR:
         state: Estado
         subject: Assunto
         message: Mensagem
+      place:
+        title: Titulo
+        office_hours: Horário de atendimento
+        phone: Telefone
+        phone_alt: Telefone alt.
+        zipcode: CEP
+        street: Rua
+        city: Cidade
+        state: Estado
   activerecord:
     errors:
       messages:

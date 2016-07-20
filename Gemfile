@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby "2.2.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -43,6 +43,7 @@ gem 'mini_magick'
 gem 'simple_form'
 gem 'ransack'
 gem 'kaminari'
+gem 'paranoia', '~> 2.0'
 gem 'nested_form_fields'
 gem 'devise-i18n'
 

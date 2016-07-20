@@ -33,7 +33,6 @@ end
 
 
 # create toys
-
 Toy.destroy_all
 (1..20).each_with_index do |a, index|
   a=Toy.create title: "Brinquedo #{index}", description: "...", toy_category_id: ToyCategory.all.map(&:id).sample, toy_age_id: ToyAge.all.map(&:id).sample || 0, user_id: User.all.map(&:id).sample
@@ -45,7 +44,7 @@ Place.destroy_all
 places_names = ["Casa do Brincar", "Areté", "Playtoy", "Casa das Ideias"]
 ceps = ["07243-080", "93145-174", "13025-070", "02178-010", "07195-120", "37400-000", "07790-190", "90220-040", "18044-645", "13347-180", "11680-000", "13560-460", "93330-100", "85568-000", "05112-010", "12246-001", "95280-000", "09271-510", "54310-420", "03211-000", "01034-010", "42807-180", "04321-002", "03042-001", "12414-270", "18087-157", "04557-000", "09090-710", "06765-130", "13481-149"]
 (1..20).each_with_index do |index|
-  Place.create title: places_names.sample, office_hours: "Seg. a Sex. das 9h as 18h", phone: "11-3032-2323", street: "Rua Ferreira de Araújo, 388", state: "SP", user: User.last, zipcode: ceps.sample
+  Place.create title: places_names.sample, office_hours: "Seg. a Sex. das 9h as 18h", phone: "11-3032-2323", street: "Rua Ferreira de Araújo, 388", state: "SP", user_id: User.all.map(&:id).sample, zipcode: ceps.sample
 end
 
 

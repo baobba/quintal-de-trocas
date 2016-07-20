@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160706140428) do
+ActiveRecord::Schema.define(version: 20160720175429) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -192,6 +192,9 @@ ActiveRecord::Schema.define(version: 20160706140428) do
     t.integer  "toy_category_id"
     t.integer  "toy_age_id"
     t.integer  "user_id"
+    t.string   "zipcode"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "image"
@@ -200,6 +203,14 @@ ActiveRecord::Schema.define(version: 20160706140428) do
   add_index "toys", ["toy_age_id"], name: "index_toys_on_toy_age_id"
   add_index "toys", ["toy_category_id"], name: "index_toys_on_toy_category_id"
   add_index "toys", ["user_id"], name: "index_toys_on_user_id"
+
+  create_table "user_children", force: :cascade do |t|
+    t.string  "name"
+    t.string  "birthday"
+    t.integer "user_id"
+  end
+
+  add_index "user_children", ["user_id"], name: "index_user_children_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -225,6 +236,7 @@ ActiveRecord::Schema.define(version: 20160706140428) do
     t.string   "zipcode"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
