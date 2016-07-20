@@ -6,10 +6,17 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :name, :email, presence: true
 
   has_many :places
   has_many :toys
   has_many :exchanges
+  has_many :user_children
+  accepts_nested_attributes_for :user_children, 
+    allow_destroy: true, 
+    reject_if: :all_blank
+
+  mount_uploader :avatar, UserUploader
 
   geocoded_by :zipcode
 

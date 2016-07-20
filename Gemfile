@@ -43,6 +43,8 @@ gem 'mini_magick'
 gem 'simple_form'
 gem 'ransack'
 gem 'kaminari'
+gem 'nested_form_fields'
+gem 'devise-i18n'
 
 group :production do
   gem 'pg'
