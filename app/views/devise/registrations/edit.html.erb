@@ -16,111 +16,105 @@
 </div>
 
 <br>
-<div class="row">
-  <div class="col-sm-3" style="display:none">
-    <p class="lead">Dados de acesso</p>
+<div style="display:none">
+  <p class="lead">Dados de acesso</p>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= devise_error_messages! %>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= devise_error_messages! %>
 
-      <div class="form-group">
-        <%= f.label :email %>
-        <%= f.email_field :email, autofocus: true, class: "form-control" %>
-      </div>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, class: "form-control" %>
+    </div>
 
-      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-      <% end %>
-
-      <div class="form-group">
-        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-        <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "Update" %>
-      </div>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
-  </div>
 
-  <div class="col-sm-6">
+    <div class="form-group">
+      <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+    </div>
 
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= devise_error_messages! %>
+    <div class="form-group">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+    </div>
 
-      <div class="form-group">
-        <%= f.label :name %>
-        <%= f.text_field :name, class: "form-control" %>
-      </div>
+    <div class="form-group">
+      <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+      <%= f.password_field :current_password, autocomplete: "off", class: "form-control" %>
+    </div>
 
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="form-group">
-            <%= f.label :phone %>
-            <%= f.text_field :phone, placeholder: "(DDD) 0000-0000", class: "form-control" %>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            <%= f.label :birthday %>
-            <%= f.text_field :birthday, class: "form-control" %>
-          </div>
-        </div>
+    <div class="actions">
+      <%= f.submit "Update" %>
+    </div>
+  <% end %>
+</div>
 
-        <div class="col-sm-5">
-          <div class="form-group">
-            <%= f.label :gender %><br>
-            <label class="radio-inline">
-              <%= f.radio_button :gender, "M"  %> Masc
-            </label>
-            <label class="radio-inline">
-              <%= f.radio_button :gender, "F" %> Fem
-            </label>
-          </div>
-        </div>
-      </div>
+<%= simple_form_for(resource, as: resource_name.to_s, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  
+  <%= devise_error_messages! %>
+
+  <div class="row">
+    <div class="col-sm-6">
 
       <div class="row">
-        <div class="col-sm-4">
-          <div class="form-group">
-            <%= f.label :zipcode %>
-            <%= f.text_field :zipcode, onblur: "codeAddress()", class: "form-control" %>
-            <span class="cep-feedback"></span>
+        <div class="col-sm-4 text-center">
+
+          <div class="profile" style="background-image:url('<%= @user.avatar.url(:thumb) %>')"></div>
+
+          <label class="btn btn-link btn-sm btn-file">
+            Selecionar foto <%= f.file_field :avatar, style: "display:none;" %>
+          </label>
+        </div>
+        <div class="col-sm-8">
+          <%= f.input :name %>
+
+          <div class="row">
+            <div class="col-sm-5">
+              <%= f.input :birthday, class: "form-control" %>
+            </div>
+            <div class="col-sm-7">
+              <div class="form-group">
+                <%= f.label :gender %><br>
+                <label class="radio-inline">
+                  <%= f.radio_button :gender, "M"  %> Masc
+                </label>
+                <label class="radio-inline">
+                  <%= f.radio_button :gender, "F" %> Fem
+                </label>
+              </div>
+            </div>
           </div>
+
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+
+        <div class="col-sm-6">
+          <%= f.input :zipcode %>
+          <span class="cep-feedback"></span>
         </div>
 
-        <div class="col-sm-7">
-
+        <div class="col-sm-6">
+          <%= f.input :phone, placeholder: "(DDD) 0000-0000" %>
         </div>
 
       </div>
-
 
       <div class="endereco">
 
         <div class="add_fields" style="display:block">
 
-          <div class="form-group">
-            <%= f.label :street %>
-            <%= f.text_field :street, class: "form-control" %>
-          </div>
+          <%= f.input :street %>
 
           <div class="row">
             <div class="col-sm-7">
-              <div class="form-group">
-                <%= f.label :city %>
-                <%= f.text_field :city, class: "form-control" %>
-              </div>
+              <%= f.input :city %>
             </div>
             <div class="col-sm-5">
               <div class="form-group">
@@ -191,37 +185,51 @@
           <%= f.text_field :longitude %>
         </div>
       </div>
+      
+      <br>
 
-    <div class="actions">
-      <%= f.submit class: "btn btn-success" %>
+      <div class="actions">
+        <%= f.submit class: "btn btn-lg btn-success" %>
+      </div>
+
     </div>
+    <div class="col-sm-5 col-sm-offset-1">
+      <p class="lead">Nome/nascimentos dos filhos</p>
+
+      <%= f.simple_fields_for :user_children do |ff| %>
+          
+        <div class="row">
+          <div class="col-sm-8">
+            <%= ff.input :name %>
+          </div>
+          <div class="col-sm-4">
+            <%= ff.input :birthday %>
+          </div>
+        </div>
+
+      <% end %>
+
+      <br>
+      <div class="text-center">
+        <small class="text-muted text-center">As informações sobre seus filhos será utilizada apenas para fins de recomendação, não serão divulgadas</small>
+      </div>
+      
+      <div class="hide">
+        <hr>
+        <%= f.input :latitude %>
+        <%= f.input :longitude %>
+      </div>
+
+    </div>
+  </div>
 
   <% end %>
 
+  <div class="hide">
+    <h3>Cancel my account</h3>
+
+    <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
   </div>
-  <div class="col-sm-5 col-sm-offset-1">
-    <p class="lead">Filhos</p>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= devise_error_messages! %>
-
-      <div class="form-group">
-        <%= f.label :latitude %>
-        <%= f.text_field :latitude, class: "form-control" %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :longitude %>
-        <%= f.text_field :longitude, class: "form-control" %>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="hide">
-  <h3>Cancel my account</h3>
-
-  <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-</div>
 
 </div>
 </div>

@@ -1,5 +1,28 @@
-<div class="page-header">
-  <h1><%= @user.name %></h1>
-</div>
+<div class="row">
+  <div class="col-sm-2">
+    foto
+  </div>
+  <div class="col-sm-7">
+    <div class="page-header">
+      <h1><%= @user.name %></h1>
+    </div>
 
-<p>...</p>
+    <table class="table">
+      <tr>
+        <td>Cadastrado em</td>
+        <td><%= @user.created_at.strftime("%d/%m/%Y") %></td>
+      </tr>
+      <tr>
+        <td>Idade</td>
+        <td><%= @user.birthday %></td>
+      </tr>
+      <tr>
+        <td>Acesso Mais Recente</td>
+        <td><%= @user.created_at.strftime("%d/%m/%Y") %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="col-sm-3">
+    ...
+  </div>
+</div>

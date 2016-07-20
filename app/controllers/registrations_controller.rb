@@ -13,6 +13,12 @@
 class RegistrationsController < Devise::RegistrationsController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  def edit
+    (1..(@user.user_children.count > 0 ? 1 : 2)).each do
+      @user.user_children.build
+    end
+  end
+
   def update
     # @user = User.find(current_user.id)
     if @user.update(user_params)
@@ -38,6 +44,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:name, :birthday, :gender, :phone, :username, :street, :city, :state, :zipcode, :latitude, :longitude)
+    params.require(:user).permit(:name, :avatar, :birthday, :gender, :phone, :username, :street, :city, :state, :zipcode, :latitude, :longitude, user_children_attributes: [:id, :name, :birthday])
   end
 end
