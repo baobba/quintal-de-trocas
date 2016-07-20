@@ -61,7 +61,7 @@ class PlacesController < ApplicationController
   def update
     respond_to do |format|
       if @place.update(place_params)
-        format.html { redirect_to @place, notice: 'Place was successfully updated.' }
+        format.html { redirect_to my_places_path, notice: 'Ponto de troca alterado com sucesso' }
         format.json { render :show, status: :ok, location: @place }
       else
         format.html { render :edit }

@@ -1,7 +1,8 @@
 <%= simple_form_for(@place) do |f| %>
+
   <% if @place.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@place.errors.count, "error") %> prohibited this place from being saved:</h2>
+    <div class="alert alert-danger">
+      <p class="lead"><%= pluralize(@place.errors.count, "error") %> erro(s) encontrado(s). Verifique abaixo:</p>
 
       <ul>
       <% @place.errors.full_messages.each do |message| %>
@@ -19,9 +20,10 @@
   <%= f.input :phone_alt %>
 
   <%= f.input :zipcode %>
+  <span class="cep-feedback"></span>
   <%= f.input :street %>
   <%= f.input :city %>
   <%= f.input :state %>
 
-  <%= f.submit %>
+  <%= f.button :submit, class: "btn btn-success btn-lg" %>
 <% end %>
