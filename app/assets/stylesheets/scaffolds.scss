@@ -10,6 +10,14 @@ header {
   margin-bottom: 25px;
 }
 
+a {
+  color: darken($primary-color, 20%);
+
+  &:hover {
+    color: darken($primary-color, 30%);
+  }
+}
+
 
 .nav-dashboard {
   padding-right: 20px;
@@ -18,27 +26,33 @@ header {
 .dashboard {
   border-radius: 0;
 
+  .name {
+    display: block;
+    font-size: 22px;
+  }
+
   a.list-group-item {
-    border-radius: 0;
-    border: 0;
-    background-color: #ddd;
-    border-top: 1px solid #fff;
-    text-align: right;
-    padding-left: 0;
-    margin: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 16px;
+    color: #666;
+
+    span {
+      // font-size: 20px;
+      margin-right: 5px;
+      min-width: 16px;
+    }
 
     &.active {
       font-weight: bold;
       color: #222;
       background: #fff;
-      background: -webkit-linear-gradient(left, #ddd , #fff);
-      background: -o-linear-gradient(right, #ddd, #fff);
-      background: -moz-linear-gradient(right, #ddd, #fff);
-      background: linear-gradient(to right, #ddd , #fff);
-
-      &:hover {
-        border-top: 1px solid #fff;
-      }
+      background: -webkit-linear-gradient(left, #ffe5c3 , #fff);
+      background: -o-linear-gradient(right, #ffe5c3, #fff);
+      background: -moz-linear-gradient(right, #ffe5c3, #fff);
+      background: linear-gradient(to right, #ffe5c3 , #fff);
+      border: 1px solid #ccc;
+      border-right: 0;
     }
   }
 }
@@ -73,7 +87,6 @@ header {
 
 .field_with_errors {
   padding: 2px;
-  background-color: red;
   display: table;
 }
 
@@ -225,8 +238,11 @@ ul.cards {
 }
 
 .sub-header {
-  // background-color: #f8ab43;
-  // padding: 30px 0;
+  background-color: #f8ab43;
+  padding: 30px 0;
+  width: 100%;
+  position: absolute;
+  left: 0;
 }
 
 .toy-detail-map {
@@ -273,24 +289,62 @@ ul.cards {
 }
 
 
+.profile-mini {
+  display: inline-block;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  background-size: cover;
+  float: left;
+  margin: -5px 5px 0 0;
+}
+.profile-thumb {
+  display: inline-block;
+  border: 2px solid $primary-color;
+  border-radius: 100%;
+  width: 80px;
+  height: 80px;
+  background-position: center;
+  background-size: cover;
+}
+.profile {
+  display: inline-block;
+  border: 2px solid $primary-color;
+  border-radius: 100%;
+  width: 100px;
+  height: 100px;
+  background-position: center;
+  background-size: cover;
+}
+
+
 
 
 footer {
-  background-color: #222;
   padding: 30px 0;
-  margin-top: 25px;
-  color: #666;
+  margin-top: 35px;
+  border-top: 10px solid #fcdc43;
+  color: #444;
 
   .lead {
-    font-size: 17px;
-    margin-bottom: 5px;
+    font-size: 19px;
+    margin-bottom: 10px;
+    color: darken($primary-color, 20%);
+  }
+
+  li {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    color: #ccc;
   }
 
   a {
-    color: #999;
+    color: #666;
 
     &:hover {
-      color: #fff;
+      color: darken($primary-color, 20%);
       text-decoration: none;
     }
   }
