@@ -8,8 +8,12 @@ Repositório do projeto Quintal de Trocas
 
 ### Inicializar
 ```
-1. bundle install
-2. rail server
+1. vagrant up
+2. vagrant ssh
+3. cd /vagrant
+4. bundle install
+5. rake db:migrate db:seed
+6. rail s -b 0
 ```
 
 ### Populando database
@@ -17,7 +21,3 @@ Repositório do projeto Quintal de Trocas
 1. rails db:migrate
 2. rails db:seed
 ```
-
-
-## TODO
-* Add Vagrantfile

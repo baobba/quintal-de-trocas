@@ -8,14 +8,14 @@ sudo apt-get update
 sudo /usr/sbin/update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 #install required packages
-sudo apt-get install -y build-essential git curl libxslt1-dev libxml2-dev libssl-dev libpq-dev
+sudo apt-get install -y build-essential git curl libxslt1-dev libxml2-dev imagemagick libssl-dev libpq-dev
 
 # install node.js and npm the expected way
 sudo apt-get install -y nodejs
 sudo apt-get install -y npm
 
 # RVM
-gpg --keyservpger hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 curl -sSL https://get.rvm.io | bash -s stable
 
 # RUBY
