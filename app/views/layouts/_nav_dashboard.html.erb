@@ -1,13 +1,12 @@
 <div class="nav-dashboard">
   <br>
-  <div class="text-muted" style="margin-bottom: 10px;">Minha conta</div>
   <div class="list-group dashboard">
-    <%= link_to "Alterar dados pessoais", edit_user_registration_path, class: (params[:controller] == "registrations" ? "list-group-item active" : "list-group-item") %>
+    <%= link_to "<span class='glyphicon glyphicon-user'></span> Alterar dados pessoais".html_safe, edit_user_registration_path, class: (params[:controller] == "registrations" ? "list-group-item active" : "list-group-item") %>
 
-    <%= link_to "Meus brinquedos", my_toys_path, class: (params[:controller] == "toys" ? "list-group-item active" : "list-group-item") %>
+    <%= link_to "<span class='glyphicon glyphicon-list'></span> Meus brinquedos".html_safe, my_toys_path, class: (params[:controller] == "toys" ? "list-group-item active" : "list-group-item") %>
 
-    <%= link_to "Minhas trocas", my_exchanges_path, class: (params[:controller] == "exchanges" ? "list-group-item active" : "list-group-item") %>
+    <%= link_to "<span class='glyphicon glyphicon-transfer'></span> Minhas trocas".html_safe, my_exchanges_path, class: (params[:controller] == "exchanges" ? "list-group-item active" : "list-group-item") %>
 
-    <%= link_to "Meus pontos de troca", my_places_path, class: (params[:controller] == "places" ? "list-group-item active" : "list-group-item") %>
+    <%= link_to "<span class='glyphicon glyphicon-flag'></span> Meus pontos de troca".html_safe, my_places_path, class: (params[:controller] == "places" ? "list-group-item active" : "list-group-item") %>
   </div>
 </div>
