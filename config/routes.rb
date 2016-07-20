@@ -15,7 +15,10 @@ Rails.application.routes.draw do
 
     resources :articles, path: 'artigos'
 
-    resources :exchanges, path: 'trocas'
+    resources :exchanges, path: 'trocas' do
+      post 'toggle_status', path: 'mudar_status'
+    end
+
     get 'minhas-trocas' => 'exchanges#my_exchanges', as: :my_exchanges
 
     resources :places, path: 'pontos'

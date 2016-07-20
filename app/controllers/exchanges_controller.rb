@@ -55,6 +55,15 @@ class ExchangesController < ApplicationController
     end
   end
 
+  def toggle_status
+    @exchange = Exchange.find(params[:exchange_id])
+    status = params[:status]
+
+    if @exchange.update_column(:status, status)
+      redirect_to exchange_path(@exchange), success: 'heyy'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_exchange

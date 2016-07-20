@@ -12,10 +12,9 @@
     <table class="table">
       <thead>
         <tr>
-          <th width="15%">Título</th>
-          <th width="40%"></th>
-          <th width="30%"></th>
-          <th width="15%"></th>
+          <th width="45%">Detalhes</th>
+          <th width="40%">Status</th>
+          <th width="15%" class="text-right">Data</th>
         </tr>
       </thead>
 
@@ -23,33 +22,51 @@
         <% @exchanges.each do |exchange| %>
           <tr>
             <td>
-              <%= exchange.created_at.strftime("%d/%m/%Y") %><br><br>
+              <% if exchange.user == current_user %>
+                <p class="lead">Solicitação de troca com <%= exchange.toy.user.name %></p>
+              <% else %>
+                <p class="lead"><%= exchange.user.name %> quer trocar com você</p>
+              <% end %>
 
+              <div>
+                <span class="text-muted">Brinquedo:</span> <%= link_to exchange.toy.title, exchange_path(exchange) if exchange.toy %>
+              </div>
+            </td>
+            <td>
+              <div class="well well-sm text-center">
+                <% if exchange.status.blank? %>
+                  <% if exchange.user == current_user %>
+                    <strong class="lead text-danger">
+                      Aguardando resposta de <%= exchange.toy.user.name %>
+                    </strong>
+                  <% else %>
+                    <strong class="lead text-danger">
+                      <span class="glyphicon glyphicon-warning-sign"></span> 
+                      <%= exchange.user.name %> está aguardando sua resposta
+                    </strong>
+
+                    <%= link_to "Aceitar", exchange_toggle_status_path(exchange, status: "sim"), class: "btn btn-sm btn-success", method: :post %>
+                    <%= link_to "Recusar", exchange_toggle_status_path(exchange, status: "nao"), class: "btn btn-sm btn-danger", method: :post %>
+                  <% end %>
+                <% else %>
+                  <strong class="lead text-<%= exchange.status == 'sim' ? 'success' : 'danger' %>">
+                    <span class="glyphicon glyphicon-ok"></span> Você <%= exchange.status == "sim" ? "aceitou" : "recusou" %> essa troca
+                  </strong>
+                  
+                  <%= link_to 'Ver detalhes', exchange %>
+                <% end %>
+              </div>
+            </td>
+            <td class="hide">
               <% if exchange.user == current_user %>
                 <span class="label label-danger"><span class="glyphicon glyphicon-arrow-right"></span> Troca solicitada</span>
               <% else %>
                 <span class="label label-success"><span class="glyphicon glyphicon-arrow-left"></span> Troca recebida</span>
               <% end %>
             </td>
-            <td>
-              <% if exchange.user == current_user %>
-                <p class="lead">Aguardando resposta de <%= exchange.toy.user.name %></p>
-              <% else %>
-                <p class="lead"><%= exchange.user.name %> quer trocar com você</p>
-                <a href="#" class="btn btn-default">Aceitar</a> -
-                <a href="#" class="btn btn-default">Recusar</a>
-              <% end %>
-
-              <div>
-                Brinquedo solicitado:<br><%= link_to exchange.toy.title, exchange_path(exchange) if exchange.toy %>
-              </div>
+            <td class="text-right">
+              <%= exchange.created_at.strftime("%d/%m/%Y") %>
             </td>
-            <td>
-              <div class="well">
-                ...
-              </div>
-            </td>
-            <td><%= link_to 'Ver detalhes', exchange %> - <%= link_to 'Destroy', exchange, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
       </tbody>
