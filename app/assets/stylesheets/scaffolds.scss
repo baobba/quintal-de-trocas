@@ -5,12 +5,54 @@ body {
 }
 
 header {
-  /*background-color: $primary-color;*/
+  border-bottom: 2px solid #f6f6f6;
   padding: 15px 0;
   margin-bottom: 25px;
 }
 
-<<<<<<< HEAD
+.navbar-quintal {
+  margin-bottom: 0;
+  min-height: 40px;
+
+  .navbar-header {
+    img {
+      width: 300px;
+      top: -10px;
+      margin-right: 30px;
+    }
+  }
+
+  .navbar-collapse {
+    margin-top: 20px;
+  }
+
+  .nav > li.social-icons {
+
+    padding-left: 20px;
+
+    > a {
+      // display: inline;
+      width: auto;
+      float: left;
+      padding-right: 10px;
+      padding-left: 10px;
+    }
+  }
+
+  .nav > li > a {
+    color: #6cad4a;
+    padding: 10px 15px;
+    border-radius: 50px;
+
+    &:hover {
+      background-color: #fff;
+      color: #dadd73;
+    }
+  }
+
+}
+
+
 a {
   color: darken($primary-color, 20%);
 
@@ -55,29 +97,6 @@ a {
       border: 1px solid #ccc;
       border-right: 0;
     }
-  }
-}
-
-.navbar-quintal {
-  margin-bottom: 0;
-  min-height: 40px;
-
-  img {
-    position: absolute !important;
-  }
-  .nav {
-    padding-left: 150px;
-  }
-  a {
-    // font-size: 115%;
-    color: darken($primary-color, 50%);
-  }
-  .nav > li > a {
-    padding: 10px 15px;
-    border-radius: 50px;
-  }
-  .nav > li > a:focus, .nav > li > a:hover {
-    background-color: rgba(0, 0, 0, 0.1)
   }
 }
 
@@ -272,7 +291,6 @@ ul.cards {
   margin-left: 30px;
 }
 
-<<<<<<< HEAD
 
 .profile-mini {
   display: inline-block;
@@ -332,83 +350,5 @@ footer {
       color: darken($primary-color, 20%);
       text-decoration: none;
     }
-  }
-}
-
-.navbar-quintal .nav > li > a {
-  color: #6cad4a;
-}
-
-.navbar-quintal .nav > li > a:hover {
-  background-color: #fff;
-  color: #dadd73;
-}
-
-.container-fluid {
-  padding: 0;
-}
-
-header .socials {
-  float: right;
-}
-
-header .socials ul {
-  float: left;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-header .socials li {
-  padding: 0 2px 0 9px;
-  float: left;
-}
-
-header .socials li a {
-  font-size: 20px;
-  line-height: 45px;
-}
-
-.navbar-quintal a {
-  color: #f8b44f;
-}
-
-@media (min-width: 768px) {
-  header {
-    padding: 15px 100px;
-  }
-
-  .container-fluid > .navbar-collapse, .container-fluid > .navbar-header, .container > .navbar-collapse, .container > .navbar-header {
-    margin-top: 20px;
-  }
-
-  .navbar-quintal {
-    min-height: 80px;
-  }
-}
-
-@media (max-width: 479px) {
-  .navbar-quintal .navbar-toggle .icon-bar {
-    background-color: rgba(248, 171, 67, 1);
-    height: 3px;
-    width: 30px;
-    margin-top: 6px;
-  }
-}
-
-@media all and (min-width: 1200px) {
-  .navbar-nav {
-    width: 90%;
-    text-align: center;
-    > li {
-      float: none;
-      display: inline-block;
-    }
-  }
-}
-
-@media not all and (min-width: 1200px) {
-  .navbar-collapse {
-    float: right !important;
   }
 }
