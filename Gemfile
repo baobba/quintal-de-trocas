@@ -46,6 +46,7 @@ gem 'kaminari'
 gem 'paranoia', '~> 2.0'
 gem 'nested_form_fields'
 gem 'devise-i18n'
+gem 'font-awesome-rails'
 
 group :production do
   gem 'pg'
