@@ -192,6 +192,9 @@ ActiveRecord::Schema.define(version: 20160706140428) do
     t.integer  "toy_category_id"
     t.integer  "toy_age_id"
     t.integer  "user_id"
+    t.string   "zipcode"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "image"

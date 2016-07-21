@@ -43,6 +43,7 @@ gem 'mini_magick'
 gem 'simple_form'
 gem 'ransack'
 gem 'kaminari'
+gem 'font-awesome-rails'
 
 group :production do
   gem 'pg'
