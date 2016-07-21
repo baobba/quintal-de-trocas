@@ -352,3 +352,12 @@ footer {
     }
   }
 }
+
+@media (max-width: 479px) {
+  .navbar-quintal .navbar-toggle .icon-bar {
+    background-color: rgba(248, 171, 67, 1);
+    height: 3px;
+    width: 30px;
+    margin-top: 6px;
+  }
+}
