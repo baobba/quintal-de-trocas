@@ -13,7 +13,15 @@
 
   <%= render '/layouts/header' %>
 
-  <div class="container">
+  <% if content_for?(:subheader) %>
+    <div class="sub-header">
+      <div class="container">
+        <%= yield :subheader %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="<%= 'container' if @bs_container.nil? || (@bs_container && @bs_container == true)  %>">
     
     <%= flash_messages %>
 
@@ -23,5 +31,6 @@
   <%= render '/layouts/footer' %>
 
   <%= javascript_include_tag 'application' %>
+  <%= yield :head %>
 </body>
 </html>
