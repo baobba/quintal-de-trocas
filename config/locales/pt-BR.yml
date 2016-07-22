@@ -18,7 +18,8 @@ pt-BR:
         username: Nome de usuário
       user_children:
         name: Nome completo
-        birthday: Ano nasc.
+        birthday: Ano nasc
+        gender: Sexo
       toy:
         title: Título
         description: Descrição
