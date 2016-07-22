@@ -51,7 +51,7 @@ Rails.application.routes.draw do
   get 'sobre-nos' => 'pages#about_us', as: 'about_us'
   get 'faq' => 'pages#faq', as: 'faq'
   get 'fale_conosco' => 'pages#contact_us', as: 'contact_us'
-  get 'apoio' => 'pages#support', as: 'support'
+  get 'apoie' => 'pages#support', as: 'support'
   get 'como-funciona' => 'pages#how_it_works', as: 'how_it_works'
   get 'depoimentos' => 'pages#testimonials', as: 'testimonials'
   get 'parceiros' => 'pages#partners', as: 'partners'

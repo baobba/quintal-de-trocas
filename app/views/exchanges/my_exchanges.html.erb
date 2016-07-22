@@ -22,6 +22,11 @@
         <% @exchanges.each do |exchange| %>
           <tr>
             <td>
+              <div class="profile-thumb" style="background-image:url('<%= default_img((exchange.user == current_user ? current_user : exchange.user)) %>');float:left;margin-right: 15px;"></div>
+
+              
+
+
               <% if exchange.user == current_user %>
                 <p class="lead">Solicitação de troca com <%= exchange.toy.user.name %></p>
               <% else %>
@@ -45,6 +50,7 @@
                       <%= exchange.user.name %> está aguardando sua resposta
                     </strong>
 
+                    <%= link_to "Responder", "", "data-toggle" => "modal", "data-target" => "#reply", class: "btn btn-link" %>
                     <%= link_to "Aceitar", exchange_toggle_status_path(exchange, status: "sim"), class: "btn btn-sm btn-success", method: :post %>
                     <%= link_to "Recusar", exchange_toggle_status_path(exchange, status: "nao"), class: "btn btn-sm btn-danger", method: :post %>
                   <% end %>
@@ -72,5 +78,45 @@
       </tbody>
     </table>
 
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body" style="background-color: #f6f6f6;">
+
+        <p class="lead text-center" style="margin: 15px 0 30px 0;">Escolha um dos brinquedos da lista ou troque por 1 crédito. 1 crédito vale um brinquedo dentro da plataforma.</p>
+
+        <div class="row">
+          <div class="col-sm-7">
+            <ul class="list-group user-toy-list" style="overflow: scroll;height: 200px;">
+              <li class="list-group-item">kkokokok</li>
+              <li class="list-group-item">kkokokok</li>
+              <li class="list-group-item">kkokokok</li>
+              <li class="list-group-item">kkokokok</li>
+              <li class="list-group-item">kkokokok</li>
+              <li class="list-group-item">kkokokok</li>
+            </ul>
+          </div>
+          <div class="col-sm-5 text-center">
+            <br>
+            <br>
+            <p class="lead">Prefiro trocar por<br>1 crédito</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <div class="text-center">
+          <%= link_to "Prosseguir &raquo;".html_safe, "#", class: "btn btn-lg btn-success" %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
