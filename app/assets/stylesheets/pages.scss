@@ -1,39 +1,56 @@
-.page-about_us {
+.pages-about_us {
+  p {
+    margin: 0 0 26px;
+  }
+
+  .form-content {
+    font: 13px/26px 'Lato', sans-serif;
+    color: #666;
+    font-size: 22px;
+    line-height: 35px;
+    font-weight: 300;
+    border: 1px dashed #ededed;
+    margin: 0 0 20px;
+    padding: 30px;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.pages-support {
   // ...
 }
 
-.page-support {
+.pages-how_it_works {
   // ...
 }
 
-.page-how_it_works {
+.pages-partners {
   // ...
 }
 
-.page-partners {
+.pages-testimonials {
   // ...
 }
 
-.page-testimonials {
+.pages-media {
   // ...
 }
 
-.page-media {
+.pages-faq {
   // ...
 }
 
-.page-faq {
+.pages-terms {
   // ...
 }
 
-.page-terms {
+.pages-privacy {
   // ...
 }
 
-.page-privacy {
-  // ...
-}
-
-.page-contact_us {
+.pages-contact_us {
   // ...
 }
