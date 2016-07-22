@@ -14,5 +14,17 @@ module ApplicationHelper
     end
     nil
   end
+
+  def default_img(user)
+    if !user.avatar?
+      if (user.gender == "M")
+        image_url "fallback/male.png"
+      else
+        image_url "fallback/female.png"
+      end
+    else
+      user.avatar_url
+    end
+  end
   
 end

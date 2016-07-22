@@ -62,7 +62,7 @@
       <div class="row">
         <div class="col-sm-4 text-center">
 
-          <div class="profile" style="background-image:url('<%= @user.avatar.url(:thumb) %>')"></div>
+          <div class="profile" style="background-image:url('<%= default_img(@user) %>')"></div>
 
           <label class="btn btn-link btn-sm btn-file">
             Selecionar foto <%= f.file_field :avatar, style: "display:none;" %>
@@ -174,7 +174,6 @@
           </div>
         </div>
 
-
         <div class="form-group">
           <%= f.label :latitude %>
           <%= f.text_field :latitude %>
@@ -193,31 +192,34 @@
       </div>
 
     </div>
-    <div class="col-sm-5 col-sm-offset-1">
+    <div class="col-sm-6">
+      <div style="padding-left: 20px;">
       <p class="lead">Nome/nascimentos dos filhos</p>
 
       <%= f.simple_fields_for :user_children do |ff| %>
           
         <div class="row">
-          <div class="col-sm-8">
+          <div class="col-sm-6">
             <%= ff.input :name %>
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <%= ff.input :birthday %>
+          </div>
+          <div class="col-sm-3">
+            <%= ff.input :gender, as: :select, collection: ["M", "F"], prompt: "Selecione" %>
           </div>
         </div>
 
       <% end %>
 
       <br>
-      <div class="text-center">
-        <small class="text-muted text-center">As informações sobre seus filhos será utilizada apenas para fins de recomendação, não serão divulgadas</small>
-      </div>
+      <div class="text-muted text-center">Não se preocupe, essa informação será confidencial</div>
       
       <div class="hide">
         <hr>
         <%= f.input :latitude %>
         <%= f.input :longitude %>
+      </div>
       </div>
 
     </div>

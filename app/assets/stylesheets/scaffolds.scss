@@ -8,6 +8,14 @@ header {
   border-bottom: 2px solid #f6f6f6;
   padding: 15px 0;
   margin-bottom: 25px;
+
+  &.no-margin {
+    margin-bottom: 0
+  }
+}
+
+html, body {
+  height: 100%;
 }
 
 .navbar-quintal {
@@ -31,7 +39,7 @@ header {
     padding-left: 20px;
 
     > a {
-      // display: inline;
+      font-size: 150%;
       width: auto;
       float: left;
       padding-right: 10px;
@@ -43,10 +51,11 @@ header {
     color: #6cad4a;
     padding: 10px 15px;
     border-radius: 50px;
+    font-size: 105%;
 
     &:hover {
-      background-color: #fff;
-      color: #dadd73;
+      background-color: #f9f9f9;
+      color: $primary-color;
     }
   }
 
@@ -243,9 +252,25 @@ ul.cards {
 .sub-header {
   background-color: #f8ab43;
   padding: 30px 0;
-  width: 100%;
-  position: absolute;
-  left: 0;
+  margin-bottom: 25px;
+
+  h1 {
+    margin: 0;
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 55px;
+    float: left;
+    margin-right: 40px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+    font-family: 'Monotype Corsiva','Comic Sans MS',cursive;
+  }
+
+  p {
+    color: #8D5B14;
+    font-size: 32px;
+    margin: 0;
+    margin-top: 10px;
+  }
 }
 
 .toy-detail-map {
@@ -318,6 +343,15 @@ ul.cards {
   border-radius: 100%;
   width: 100px;
   height: 100px;
+  background-position: center;
+  background-size: cover;
+}
+.profile-large {
+  display: inline-block;
+  border: 2px solid $primary-color;
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
   background-position: center;
   background-size: cover;
 }

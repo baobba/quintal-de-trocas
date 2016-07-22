@@ -130,6 +130,7 @@ GEM
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.1.0)
     erubis (2.7.0)
     execjs (2.7.0)
     font-awesome-rails (4.6.3.1)
@@ -183,6 +184,10 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.12.1)
+    nested_form_fields (0.7.8)
+      coffee-rails (>= 3.2.1)
+      jquery-rails
+      rails (>= 3.2.0)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
@@ -190,6 +195,8 @@ GEM
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
     orm_adapter (0.5.0)
+    paranoia (2.1.5)
+      activerecord (~> 4.0)
     pg (0.18.4)
     pg (0.18.4-x86-mingw32)
     pkg-config (1.1.7)
@@ -292,6 +299,7 @@ DEPENDENCIES
   carrierwave!
   coffee-rails (~> 4.1.0)
   devise
+  devise-i18n
   font-awesome-rails
   geocoder
   jbuilder (~> 2.0)
@@ -300,6 +308,8 @@ DEPENDENCIES
   letter_opener
   mailboxer
   mini_magick
+  nested_form_fields
+  paranoia (~> 2.0)
   pg
   rails (= 4.2.6)
   rails_12factor
@@ -312,6 +322,9 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
+
+RUBY VERSION
+   ruby 2.2.4p230
 
 BUNDLED WITH
    1.12.5
