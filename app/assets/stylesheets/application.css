@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require jquery-ui.min
+ *= require jquery.tagit
  *= require_self
  *= require font-awesome
  */

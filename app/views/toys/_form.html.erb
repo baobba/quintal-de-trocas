@@ -1,3 +1,7 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'jquery-ui', 'tag-it.min' %>
+<% end %>
+
 <%= simple_form_for(@toy, html: { multipart: true }) do |f| %>
   <% if @toy.errors.any? %>
     <div id="error_explanation">
@@ -12,7 +16,7 @@
   <% end %>
 
   <div class="row">
-    <div class="col-sm-5">
+    <div class="col-sm-6">
       
       <%= f.input :title %>
 
@@ -22,10 +26,9 @@
 
       <%= f.input :description, :input_html => { :rows => 5 } %>
 
-
     </div>
 
-    <div class="col-sm-7">
+    <div class="col-sm-6">
       
       <%= f.input :tag_list %>
 
