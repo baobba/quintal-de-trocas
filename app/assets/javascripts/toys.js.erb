@@ -10,6 +10,20 @@ $(document).ready(function() {
 	}
 
 
+  if ($('body.toys-edit').length) {
+    $("#toy_tag_list").tagit({
+      caseSensitive: false,
+      allowSpaces: true,
+      minLength: 2,
+      removeConfirmation: true,
+      autocomplete: {delay: 0},
+      tagLimit: 10,
+      onTagLimitExceeded: function(event, ui) {
+        alert("Você só pode cadastrar 10 palavras-chave.");
+      }
+    });
+  }
+
 	if ($('body.toys-show').length) {
 
 		// Asynchronously Load the map API
@@ -58,14 +72,36 @@ $(document).ready(function() {
 function initialize() {
 	var map;
 	var bounds = new google.maps.LatLngBounds();
-	var mapOptions = {
-			mapTypeId: 'roadmap'
-	};
+	
 	var markers;
+
+  var customMapTypeId = 'custom_style';
+  var customMapType = new google.maps.StyledMapType([
+      {
+        elementType: 'labels',
+        stylers: [{visibility: 'off'}]
+      },
+      {
+        featureType: 'water',
+        stylers: [{color: '#a2daf2'}]
+      }
+    ], {
+      name: 'Custom Style'
+  });
+
+  var mapOptions = {
+      mapTypeId: 'roadmap',
+      mapTypeControlOptions: {
+        mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
+      }
+  };
 
 	// Display a map on the page
 	map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-	map.setTilt(45);
+  map.setTilt(45);
+
+  map.mapTypes.set(customMapTypeId, customMapType);
+  map.setMapTypeId(customMapTypeId);
 
 	// Multiple Markers
 
@@ -113,9 +149,11 @@ function initialize() {
 				map.fitBounds(bounds);
 		}
 
+    
+
 		// Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
 		var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-				this.setZoom(14);
+				this.setZoom(12);
 				google.maps.event.removeListener(boundsListener);
 		});
 

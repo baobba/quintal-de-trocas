@@ -3,6 +3,8 @@ class ToysController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :index_near]
 
   def index
+    @bs_container = false
+    
     @q = Toy.includes(:toy_category, :toy_age).ransack(params[:q])
     @toys = @q.result(distinct: true).order("id DESC").page params[:page]
   end

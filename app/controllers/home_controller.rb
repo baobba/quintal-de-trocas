@@ -1,6 +1,8 @@
 class HomeController < ActionController::Base
   layout 'application'
   def index
+    @bs_container = false
+    
     @toys = Toy.all
 
     @toys = @toys.where(toy_category_id: params[:category]) unless params[:category].blank?

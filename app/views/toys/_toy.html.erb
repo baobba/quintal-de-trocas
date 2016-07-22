@@ -8,9 +8,9 @@
     <div class="content">
       <h2><%= link_to toy.title, toy %></h2>
 
-      <small>
-        Idade: <%= toy.toy_age.title if toy.toy_age %><br>
-        Categoria: <%= toy.toy_category.title if toy.toy_category %>
+      <small class="text-muted">
+        <i class="fa fa-child" aria-hidden="true"></i> <%= toy.toy_age.title if toy.toy_age %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <i class="fa fa-folder" aria-hidden="true"></i> <%= toy.toy_category.title if toy.toy_category %>
       </small>
 
     </div>

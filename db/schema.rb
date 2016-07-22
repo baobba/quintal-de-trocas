@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(version: 20160720175429) do
   create_table "user_children", force: :cascade do |t|
     t.string  "name"
     t.string  "birthday"
+    t.string  "gender"
     t.integer "user_id"
   end
 
