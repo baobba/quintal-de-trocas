@@ -36,7 +36,75 @@
 }
 
 .pages-media {
-  // ...
+  .container {
+    a {
+      text-decoration: none;
+    }
+
+    .carousel {
+      margin-bottom: 20px;
+
+      .carousel-inner img {
+        margin: auto;
+      }
+
+      .carousel-control {
+        width: 9%;
+        /*filter: alpha(opacity=50);
+        opacity: .5;*/
+      }
+    }
+
+    .box {
+      font: 13px/26px 'Lato', sans-serif;
+      width: 270px;
+      height: 250px;
+      border-radius: 5px;
+      border: 1px solid #cecece;
+      display: inline-block;
+      background: #fff;
+      margin: 0 9px 20px 0;
+
+      .img {
+        margin: 30px auto 5px auto;
+        width: 80px;
+        height: 80px;
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        border-radius: 5px;
+      }
+
+      h3, h4, h5 {
+        font-weight: normal;
+        color: #666;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+        line-height: 37px;
+      }
+
+      h3 {
+        font-size: 20px;
+      }
+
+      h4 {
+        font-size: 18px;
+      }
+
+      h5 {
+        font-size: 16px;
+      }
+    }
+
+    .box:hover {
+      content: none;
+      background-color: #b8cb78;
+      background-repeat: no-repeat;
+      background-position: center center;
+      cursor: pointer;
+    }
+  }
 }
 
 .pages-faq {
