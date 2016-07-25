@@ -55,7 +55,7 @@
   </div>
 
   <p class="lead">
-    Voce esta em: <%= request.location.city %>
+    Voce esta em: <%= request.location.city if request.location %>
   </p>
 
 </div>
