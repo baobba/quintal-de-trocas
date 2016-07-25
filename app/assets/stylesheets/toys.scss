@@ -1,3 +1,23 @@
+.hey {
+  position: relative;
+}
+.toy-list {
+  width: 65%;
+  padding-right: 2%;
+}
+.toy-map {
+  width: 35%;
+  position: absolute;
+  z-index: 1;
+  // overflow: hidden;
+  right: 0;
+  top: 0;
+}
+.sticky {
+  position: fixed;
+  height: 600px;
+  top: 0;
+}
 #map_wrapper {
   // position: fixed; 
   height: 600px;
@@ -29,7 +49,7 @@ div.toy-filter {
   padding-left: 30px;
 }
 
-.toys-edit {
+.toys-edit, .toys-new {
   .field {
     padding: 5px;
     border-radius: 3px;

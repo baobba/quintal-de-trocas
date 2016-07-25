@@ -15,6 +15,7 @@
 //= require nested_form_fields
 //= require bootstrap.min
 //= require jquery.mask.min
+//= require stickyfill.min
 //= require_tree .
 
 
@@ -80,6 +81,92 @@ $(document).ready(function() {
     console.log("formulario alterado....");
     codeAddress();
   });
+
+
+
+  var logged = false;
+
+  $(document).on("click", ".login-button", function(e) {
+    e.preventDefault();
+    $('#login').modal('show');
+  });
+
+
+  $("form#login-box").on('ajax:success', function(e, data6, status, xhr){
+    console.log("hiii");
+    console.log(e);
+    console.log(data6);
+    console.log(status);
+    console.log(xhr);
+
+    $('#login').modal('hide');
+    $('#myModal').modal('show');
+
+    logged = true;
+    if (logged) {
+      $('.go-private').removeClass('login-button');
+    }
+
+  }).on('ajax:error',function(e, xhr, status, error){
+    console.log("Failed");
+    console.log(status);
+    console.log(xhr);
+    logged = false;
+    $(".status").html(xhr.responseText);
+  });
+
+  $('#login_modal').submit(function(e) {
+    e.preventDefault();
+    var param = $(this).serialize();
+
+    $('#login').find('input[type=submit]').val("Aguarde...").attr('disabled','disabled');
+
+    $.ajax({
+      url: $(this).attr('action'),
+      data: param,
+      dataType: "json"
+    }).success(function(msg){
+
+      console.log("Modal Type: "+modalType);
+
+      logged = true;
+      console.log("agora esta logado");
+      $('.go-private').removeClass('login-button');
+
+      if (modalType !== undefined && modalType === "modal") {
+
+        $('#login').modal('hide');
+        $(ref).click();
+
+      } else if (modalType !== undefined && modalType !== "modal") {
+
+        $('#login').modal('hide');
+
+        $this.attr("data-toggle", "modal");
+        $this.click();
+
+      } else {
+      }
+      console.log("hi2");
+    });
+  });
+
+
+  if ($('body.toys-index').length) {
+    var $sidebar   = $("#map_wrapper"),
+        $window    = $(window),
+        offset     = $sidebar.offset(),
+        $footer    = $('footer').offset().top,
+        topPadding = 0;
+
+    $window.scroll(function() {
+      if ($window.scrollTop() > offset.top && $(window).height() + $(window).scrollTop() <= $footer) {
+        $sidebar.addClass("sticky");
+      } else {
+        $sidebar.removeClass("sticky");
+      }
+    });
+  }
 
 });
 

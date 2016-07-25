@@ -265,7 +265,7 @@ ul.cards {
     font-family: 'Monotype Corsiva','Comic Sans MS',cursive;
   }
 
-  p {
+  p.lead {
     color: #8D5B14;
     font-size: 32px;
     margin: 0;
@@ -360,6 +360,7 @@ ul.cards {
 
 
 footer {
+  clear: both;
   padding: 30px 0;
   margin-top: 35px;
   border-top: 10px solid #fcdc43;
@@ -386,6 +387,7 @@ footer {
     }
   }
 }
+
 
 @media (max-width: 479px) {
   .navbar-quintal .navbar-toggle .icon-bar {

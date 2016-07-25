@@ -32,6 +32,20 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def login_modal
+  end
+
+  def sign_in_and_redirect(resource_or_scope, resource=nil)
+    scope = Devise::Mapping.find_scope!(resource_or_scope)
+    resource ||= resource_or_scope
+    sign_in(scope, resource) unless warden.user(scope) == resource
+    return render :json => {:success => true}
+  end
+
+  def failure
+    return render :json => {:success => false, :errors => ["Login failed."]}
+  end
+
   protected
 
   def update_resource(resource, params)
@@ -44,6 +58,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:name, :avatar, :birthday, :gender, :phone, :username, :street, :city, :state, :zipcode, :latitude, :longitude, user_children_attributes: [:id, :name, :birthday])
+    params.require(:user).permit(:name, :avatar, :birthday, :gender, :phone, :username, :street, :city, :state, :zipcode, :latitude, :longitude, user_children_attributes: [:id, :name, :birthday, :gender])
   end
 end

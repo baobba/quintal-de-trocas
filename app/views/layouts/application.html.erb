@@ -28,9 +28,20 @@
     <%= yield %>
   </div>
 
+  <%= render '/layouts/login_modal' if !current_user %>
   <%= render '/layouts/footer' %>
 
   <%= javascript_include_tag 'application' %>
   <%= yield :head %>
+
+  <script>
+    $(function() {
+    <% if !current_user %>
+      $('.go-private').addClass('login-button');
+    <% else %>
+      logged = true
+    <% end %>
+  });
+  </script>
 </body>
 </html>
