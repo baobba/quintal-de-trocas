@@ -44,6 +44,7 @@ bower.json
 
 .vagrant
 public/uploads/
+db/import
 
 #RubyMine
 .idea/
