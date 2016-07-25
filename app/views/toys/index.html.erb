@@ -1,66 +1,67 @@
 
+<div class="hey">
+<div class="toy-list">
 
-<div class="row">
-  <div class="col-sm-8" style="overflow: hidden">
-
-    <div class="toy-filter">
-      <%= search_form_for(@q, class: "toy-filter") do |f| %>
-      <div class="row">
-        <div class="col-sm-4">
-          <label>Buscar pelo título</label>
-          <%= f.text_field :title_cont, :class=> "form-control" %>
-        </div>
-        <div class="col-sm-3">
-          <label>Faixa etária</label>
-          <%= f.select(:toy_age_id_eq, options_from_collection_for_select(ToyAge.all, "id", "title", (params[:q][:toy_age_id_eq] if !params[:q].blank?)), {include_blank: "Todas"}, :class=> "form-control" ) %>
-        </div>
-        <div class="col-sm-3">
-          <label>Categoria</label>
-          <%= f.select(:toy_category_id_eq, options_from_collection_for_select(ToyCategory.all, "id", "title", (params[:q][:toy_category_id_eq] if !params[:q].blank?)), {include_blank: "Todas"}, :class=> "form-control" ) %>
-        </div>
-        <div class="col-sm-2">
-          <br>
-          <%= f.submit "Fitrar", :class => "btn btn-default" %>
-        </div>
+  <div class="toy-filter">
+    <%= search_form_for(@q, class: "toy-filter") do |f| %>
+    <div class="row">
+      <div class="col-sm-4">
+        <label>Buscar pelo título</label>
+        <%= f.text_field :title_cont, :class=> "form-control" %>
       </div>
-      <% end %>
+      <div class="col-sm-3">
+        <label>Faixa etária</label>
+        <%= f.select(:toy_age_id_eq, options_from_collection_for_select(ToyAge.all, "id", "title", (params[:q][:toy_age_id_eq] if !params[:q].blank?)), {include_blank: "Todas"}, :class=> "form-control" ) %>
+      </div>
+      <div class="col-sm-3">
+        <label>Categoria</label>
+        <%= f.select(:toy_category_id_eq, options_from_collection_for_select(ToyCategory.all, "id", "title", (params[:q][:toy_category_id_eq] if !params[:q].blank?)), {include_blank: "Todas"}, :class=> "form-control" ) %>
+      </div>
+      <div class="col-sm-2">
+        <br>
+        <%= f.submit "Fitrar", :class => "btn btn-default" %>
+      </div>
     </div>
-
-    <div class="toy-content">
-
-    <div class="pull-right">
-      Ordenar por:
-      <%= sort_link @q, :created_at, 'mais recentes', default_order: :desc %> |
-      <%= sort_link @q, :title, 'ordem alfabética' %>
-    </div>
-
-    <div class="lead">
-      Mostrando <strong><%= Toy.default_per_page >= @toys.count ? @toys.count : Toy.default_per_page %></strong> de <%= @toys.total_count %> brinquedos
-    </div>
-
-    <ul class="cards list-unstyled">
-      <%= render @toys %>
-    </ul>
-
-    <div class="clearfix"></div>
-
-    <div class="text-center">
-      <%= link_to_next_page @toys, 'Veja mais', remote: true, id: "load_more_link", class: "btn btn-default btn-default" %>
-    </div>
-    </div>
+    <% end %>
   </div>
-  <div class="col-sm-4" style="">
 
-    <div id="map_wrapper">
-      <div id="map_canvas" class="mapping"></div>
-    </div>
+  <div class="toy-content">
 
-    <p class="lead">
-      Voce esta em: <%= request.location.city %>
-    </p>
+  <div class="pull-right">
+    Ordenar por:
+    <%= sort_link @q, :created_at, 'mais recentes', default_order: :desc %> |
+    <%= sort_link @q, :title, 'ordem alfabética' %>
+  </div>
 
+  <div class="lead">
+    Mostrando <strong><%= Toy.default_per_page >= @toys.count ? @toys.count : Toy.default_per_page %></strong> de <%= @toys.total_count %> brinquedos
+  </div>
+
+  <ul class="cards list-unstyled">
+    <%= render @toys %>
+  </ul>
+
+  <div class="clearfix"></div>
+
+  <div class="text-center">
+    <%= link_to_next_page @toys, 'Veja mais', remote: true, id: "load_more_link", class: "btn btn-default btn-default" %>
+  </div>
   </div>
 </div>
+<div class="toy-map">
+
+  <div id="map_wrapper">
+    <div id="map_canvas" class="mapping"></div>
+  </div>
+
+  <p class="lead">
+    Voce esta em: <%= request.location.city %>
+  </p>
+
+</div>
+</div>
+
+<div class="clearfix"></div>
 
 
 <div class="hide">

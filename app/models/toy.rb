@@ -16,19 +16,11 @@ class Toy < ActiveRecord::Base
   paginates_per 12
 
   geocoded_by :zipcode
-
-
-  before_validation :add_zipcode
-
-  def add_zipcode
-    self.zipcode = user.zipcode
-    self.latitude = user.latitude
-    self.longitude = user.longitude
-  end
+  after_validation :geocode
 
   def fet_image
     if toy_images.count > 0
-      toy_images.featured.first
+      toy_images.featured.first || toy_images.first
     else
       toy_images.new
     end

@@ -16,8 +16,10 @@ module ApplicationHelper
   end
 
   def default_img(user)
-    if !user.avatar?
-      if (user.gender == "M")
+    if !user || !user.avatar?
+      if !user
+        image_url "fallback/male.png"
+      elsif (user.gender == "M")
         image_url "fallback/male.png"
       else
         image_url "fallback/female.png"
@@ -25,6 +27,18 @@ module ApplicationHelper
     else
       user.avatar_url
     end
+  end
+
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
   end
   
 end

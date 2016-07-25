@@ -36,11 +36,13 @@
 
       <% @toy.toy_images.each.with_index do |toy_image,index| %>
       <%= f.fields_for :toy_images, toy_image do |p| %>
-        <div class="field" style="width:120px;float:left;margin-right: 10px;background-color: #eee;">
+        <div class="field" style="width:120px;float:left;margin-right: 10px;margin-bottom: 10px;background-color: #eee;">
 
+          <% if p.object.image? %>
           <div class="thumb">
             <%= image_tag p.object.image.url %>
           </div>
+          <% end %>
           
           <%= p.label :image, "Image #{index+1}" %><br>
           
