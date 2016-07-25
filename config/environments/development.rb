@@ -36,7 +36,8 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
-  config.action_mailer.default_url_options = { :host => "http://quintal.dev:3001" }
+  config.action_mailer.asset_host = 'http://localhost:3001'
+  config.action_mailer.default_url_options = { :host => "http://localhost:3001" }
   config.action_mailer.delivery_method = :letter_opener
 
   # Raises error for missing translations

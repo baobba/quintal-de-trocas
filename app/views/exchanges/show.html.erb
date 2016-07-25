@@ -1,51 +1,92 @@
+
+
 <div class="row">
   <div class="col-sm-3">
     <%= render '/layouts/nav_dashboard' %>
   </div>
   <div class="col-sm-9">
 
-  <h1></h1>
+    <h2>
+      <% if @exchange.user == current_user %>
+        Solicitação de troca com <%= @exchange.toy.user.name %>
+      <% else %>
+        <%= @exchange.user.name %> quer trocar com você
+      <% end %>
+    </h2>
 
-<p>
-  <strong>Toy from:</strong>
-  <%= @exchange.toy_from %>
-</p>
+    <div class="row exchange-header">
+      <div class="col-sm-6">
+        <div class="well well-sm">
+          <div class="text-muted">Status:</div>
 
-<p>
-  <strong>Toy to integer:</strong>
-  <%= @exchange.toy_to %>
-</p>
+          <% if @exchange.status.blank? %>
+            <% if @exchange.user == current_user %>
+              <strong class="text-danger">
+                Aguardando resposta de <%= @exchange.toy.user.name %>
+              </strong>
+            <% else %>
+              <strong class="text-danger">
+                <span class="glyphicon glyphicon-warning-sign"></span> 
+                <%= @exchange.user.name %> está aguardando sua resposta
+              </strong>
 
-<p>
-  <strong>Status:</strong>
-  <%= @exchange.status %>
-</p>
+              <%= link_to "Responder", "", "data-toggle" => "modal", "data-target" => "#reply", class: "btn btn-link" %>
+              <%= link_to "Aceitar", exchange_toggle_status_path(@exchange, status: "sim"), class: "btn btn-sm btn-success", method: :post %>
+              <%= link_to "Recusar", exchange_toggle_status_path(@exchange, status: "nao"), class: "btn btn-sm btn-danger", method: :post %>
+            <% end %>
+          <% else %>
+            <strong class="lead text-<%= @exchange.status == 'sim' ? 'success' : 'danger' %>">
+              <span class="glyphicon glyphicon-ok"></span> Você <%= @exchange.status == "sim" ? "aceitou" : "recusou" %> essa troca
+            </strong>
+            
+            <%= link_to 'Ver detalhes', @exchange %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="well well-sm">
+          <div class="text-muted"">Troca:</div>
 
-<div class="alert alert-info">
-  Escolha um dos brinquedos da lista de <strong>NOME</strong> ou troque por 1 crédito. 1 crédito vale um brinquedo dentro da plataforma.
-</div>
+          <div class="row">
+            <div class="col-sm-6 exchange-profile">
+              <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.user) %>');float: left;margin-right:10px;"></div> <%= @exchange.user.name %> <small>solicitou:</small>
+              <%= link_to @exchange.toy.title, exchange_path(@exchange) if @exchange.toy %>
+            </div>
+            <div class="col-sm-6 exchange-profile">
+              <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.toy.user) %>');float: left;margin-right:10px;"></div> <%= @exchange.toy.user.name %> <small>respondeu:</small>
+              <%= link_to @exchange.toy.title, exchange_path(@exchange) if @exchange.toy %>
+            </div>
+          </div>
 
-<hr>
+        </div>
+      </div>
+    </div>
 
-<p class="lead">Mensagens</p>
+    <p class="lead">Mensagens (<%= @messages.count %>)</p>
 
-<div class="well">
+    <% @messages.each do |msg| %>
+    <div class="message">
+      <div class="row">
+        <div class="col-sm-1">
+          <div class="profile-thumb" style="background-image:url('<%= default_img(msg.user) %>');float: left;margin-right:15px;width: 40px;height: 40px;"></div>
+        </div>
+        <div class="col-sm-11">
+          <small class="text-muted"><%= msg.created_at.strftime("%d/%m/%Y - %H:%M") if msg.created_at %></small><br>
+          <%= simple_format msg.message %>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <% end %>
 
-</div>
-
-<% @messages.each do |msg| %>
-	<strong><%= msg.subject %></strong><br>
-	<%= msg.messages.first.body %>
-	<hr>
-<% end %>
-
-
-</div>
-
-
-<input type="submit" name="">
-
-<%= link_to 'Edit', edit_exchange_path(@exchange) %> |
-
-</div>
+    <div class="row">
+      <div class="col-sm-1">
+        <div class="profile-thumb" style="background-image:url('<%= default_img(current_user) %>');width: 40px;height: 40px;"></div>
+      </div>
+      <div class="col-sm-11">
+        <%= render 'form_reply' %>
+      </div>
+    </div>
+    
+  </div>
 </div>

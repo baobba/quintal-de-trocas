@@ -1,3 +1,8 @@
+<% content_for :subheader do %>
+  <h1>Quero trocar</h1>
+  <p>...</p>
+<% end %>
+
 <div class="row">
 	<div class="col-sm-6">
 
@@ -27,17 +32,18 @@
 		...
 	</div>
 	<div class="col-sm-6">
-		<h1><%= @toy.title %></h1>
+		<h1 style="margin: 0 0 20px 0;"><%= @toy.title %></h1>
 
 		<div class="row">
 			<div class="col-sm-6">
-				<span class="glyphicon glyphicon-list"></span> Categoria</span>
-				<p class="lead"><%= @toy.toy_category.title %></p>
+				<div class="text-muted">Faixa etária</div>
+				<p class="lead"><i class="fa fa-child" aria-hidden="true"></i> <%= @toy.toy_age.title %></p>
 			</div>
-			<div class="col-sm-6">
-				<span class="glyphicon glyphicon-ban-circle"></span> Faixa etária</span>
-				<p class="lead"><%= @toy.toy_age.title %></p>
-			</div>
+
+      <div class="col-sm-6">
+        <div class="text-muted">Categoria</div>
+        <p class="lead"><i class="fa fa-folder" aria-hidden="true"></i> <%= @toy.toy_category.title %></p>
+      </div>
 		</div>
 
 
@@ -100,15 +106,15 @@ function codeAddress() {
 
 <hr>
 
-
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-	Trocar
-</button>
-
+<%# link_to "Trocar", "", "data-toggle" => "modal", "data-target" => "#myModal", class: "btn btn-primary btn-lg go-private" %>
+<%= link_to "Solicitar trocar", "", "data-toggle" => "modal", "data-target" => "#myModal", class: "btn btn-primary btn-lg go-private" %>
 
 <hr>
+<% if @toy.user %>
+  
 <div class="row">
 	<div class="col-sm-5">
+    <div class="profile-thumb" style="background-image:url('<%= default_img(@toy.user) %>');float: left;margin-right:15px;"></div>
 		<p><span class="glyphicon glyphicon-user"></span> Cadastrado por</p>
 		<%= link_to @toy.user.name, user_path(@toy.user) %>
 		<div class="text-muted">
@@ -120,13 +126,14 @@ function codeAddress() {
 		<div id="mapCanvas" class="toy-detail-map"></div>
 	</div>
 </div>
+<% end %>
 
 </div>
 	</div>
 </div>
 
 
-		<% if @toy.user.latitude %>
+		<% if @toy.user && @toy.user.latitude %>
 		<!-- script google maps ? -->
 <% end %>
 
@@ -135,7 +142,8 @@ function codeAddress() {
 
 <!-- Button trigger modal -->
 
-
+<% if @toy.user %>
+  
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
@@ -146,16 +154,29 @@ function codeAddress() {
 			</div>
 			<div class="modal-body">
 
-				<div class="alert alert-info">A pessoa receberá uma mensagem e solicitará um de seus brinquedos para a troca.</div>
+        <!-- <div class="alert alert-info">A pessoa receberá uma mensagem e solicitará um de seus brinquedos para a troca.</div> -->
+
+				<div class="alert alert-info">
+          A pessoa receberá essa mensagem e irá decidir se troca por 1 crédito ou algum brinquedo da sua lista.<br>
+          <small class="text-muted">1 crédito vale um brinquedo dentro da plataforma</small>
+        </div>
 
 				<%= form_for(@exchange) do |f| %>
 					<%= f.hidden_field :user_id, value: (current_user ? current_user.id : nil) %>
 					<%= f.hidden_field :toy_to %>
+					
+          <%= f.simple_fields_for :exchange_messages do |ff| %>
+            <%= ff.hidden_field :user_id, value: current_user.id %>
+            <%= ff.hidden_field :user_from, value: current_user.id %>
+            <%= ff.hidden_field :user_to, value: @toy.user.id %>
+
+            <div class="form-group">
+  						<%= ff.text_area :message, value: "Olá #{@toy.user.name},\nGostei bastante desse brinquedo e gostaria de saber se é possível trocarmos.", class: "form-control", rows: 4 %>
+  					</div>
+          <% end %>
+
 					<div class="form-group">
-						<%= f.text_area :message, value: "Olá #{@toy.user.name},\nGostei bastante desse brinquedo e gostaria de saber se é possível trocarmos.", class: "form-control", rows: 4 %>
-					</div>
-					<div class="form-group">
-						<%= f.submit "Enviar solicitação", class: "btn btn-success btn-lg" %>
+						<%= f.button raw("<i class='fa fa-paper-plane'></i> Enviar solicitação"), class: "btn btn-success btn-lg" %>
 					</div>
 				<% end %>
 
@@ -203,3 +224,5 @@ function codeAddress() {
 		</div>
 	</div>
 </div>
+<% end %>
+

@@ -11,12 +11,14 @@ Rails.application.routes.draw do
 
   scope(path_names: { new: 'novo', edit: 'alterar' }) do
 
-    devise_for :users, controllers: {registrations: 'registrations'}, path: 'usuario'
+    devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }, path: 'usuario'
 
     resources :articles, path: 'artigos'
 
     resources :exchanges, path: 'trocas' do
-      post 'toggle_status', path: 'mudar_status'
+      # post 'toggle_status', path: 'mudar_status'
+      get 'reply', path: 'mudar_status'
+      put 'reply_message', path: 'responder', on: :member
     end
 
     get 'minhas-trocas' => 'exchanges#my_exchanges', as: :my_exchanges

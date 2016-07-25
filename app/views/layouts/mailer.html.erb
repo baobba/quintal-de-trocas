@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>
+      * { color:#666666;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px; }
+      
+      .body { padding: 20px; }
+
+      a:link, a:visited { color: #888888; text-decoration:none; }
+      
+      .content { padding:10px 0; padding-bottom:25px; }
+      .content p { line-height:160%; clear: both; }
+      .content h2 { font-size: 20px; font-weight: normal; }
+      .content .lead { font-size:16px; }
+      .content table { margin:10px 0 30px 0; width: 100%; padding: 0; padding-top: 15px; border-top: 1px solid #eeeeee; }
+      .content table th { text-align: left; width: 20%; font-weight: normal; }
+      .content .no-padding { padding:10px; }
+      .content a:link, .content a:visited { color: #0077cc; text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+
+    <%= link_to (image_tag 'logo-horizontal.svg', width: 250), root_url %><br><br>
+    
+    <div class="content">
+      <%= yield %>
+      <br>
+    </div>
+
+    <small>Equipe do Quintal</small>
+  </body>
+</html>

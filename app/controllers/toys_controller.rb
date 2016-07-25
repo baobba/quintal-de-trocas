@@ -13,6 +13,12 @@ class ToysController < ApplicationController
     @toy_images = @toy.toy_images.all
     @exchange = @toy.exchanges.new
 
+    @exchange.exchange_messages.build(
+      user_from: current_user.id,
+      user_id: current_user.id,
+      user_to: @exchange.toy.user.id
+    ) if current_user
+
     respond_to do |format|
       format.html { }
       format.json { render json: @toy }
@@ -21,8 +27,8 @@ class ToysController < ApplicationController
 
   def index_near
     city = request.location.city
-    @toys = Toy.near('88110-690, Brasil', 20, :units => :km) || nil
-    @toys = @toys.map{|f| [f.title, f.latitude, f.longitude, "<div class='info_content'><h3>#{f.title}</h3><p>#{f.description[0..100]}</p></div>"]} if @toys
+    @toys = Toy.near('88110-690, Brasil', 200, :units => :km) || nil
+    @toys = @toys.map{|f| [f.title, f.latitude, f.longitude, "<div class='info_content'><p class='lead' style='margin: 5px 0 10px 0;font-size: 16px;line-height: 120%;'><a href='#{toy_url(f)}'>#{f.title}</a></p><div style='margin-left:15px;' class='pull-right'><img src='#{f.toy_images.first.image.url(:thumb) if f.toy_images.first}' class='img-thumbnail' width='80'></div><small class='text-muted'>#{f.description[0..100]} ...</small></div>"]} if @toys
     render :json => @toys
   end
 

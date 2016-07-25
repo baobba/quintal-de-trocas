@@ -1,0 +1,5 @@
+<h2>Olá <%= @user.name %>,</h2>
+
+<p><%= @exchange.user.name %> solicitou uma troca de brinquedo. Clique no link abaixo ver mais detalhes.</p>
+
+<p><%= link_to "Ver detalhes", exchange_url(@exchange.id) %></p>

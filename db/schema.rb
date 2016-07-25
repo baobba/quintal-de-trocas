@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720175429) do
+ActiveRecord::Schema.define(version: 20160725182233) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -56,6 +56,31 @@ ActiveRecord::Schema.define(version: 20160720175429) do
   end
 
   add_index "articles", ["user_id"], name: "index_articles_on_user_id"
+
+  create_table "credits", force: :cascade do |t|
+    t.integer  "user_id"
+    t.boolean  "is_available"
+    t.integer  "exchange_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "credits", ["exchange_id"], name: "index_credits_on_exchange_id"
+  add_index "credits", ["user_id"], name: "index_credits_on_user_id"
+
+  create_table "exchange_messages", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "exchange_id"
+    t.integer  "user_from"
+    t.integer  "user_to"
+    t.text     "message"
+    t.datetime "read_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "exchange_messages", ["exchange_id"], name: "index_exchange_messages_on_exchange_id"
+  add_index "exchange_messages", ["user_id"], name: "index_exchange_messages_on_user_id"
 
   create_table "exchanges", force: :cascade do |t|
     t.string   "status"
