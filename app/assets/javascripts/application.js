@@ -15,7 +15,6 @@
 //= require nested_form_fields
 //= require bootstrap.min
 //= require jquery.mask.min
-//= require stickyfill.min
 //= require_tree .
 
 
