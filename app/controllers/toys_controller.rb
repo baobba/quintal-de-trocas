@@ -16,8 +16,8 @@ class ToysController < ApplicationController
     @exchange.exchange_messages.build(
       user_from: current_user.id,
       user_id: current_user.id,
-      user_to: @exchange.toy.user.id
-    ) if current_user
+      user_to: @toy.user.id
+    ) if current_user && @toy.user
 
     respond_to do |format|
       format.html { }

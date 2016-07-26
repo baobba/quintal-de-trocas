@@ -13,12 +13,20 @@ class Exchange < ActiveRecord::Base
 
   acts_as_messageable
 
-  def from
+  def from_toy
     Toy.find_by_id(toy_from)
   end
 
-  def to
-    Toy.find_by_id(toy_to)
+  def to_toy
+    toy
+  end
+
+  def from_user
+    user
+  end
+
+  def to_user
+    Toy.find_by_id(toy_to).user
   end
 
 end

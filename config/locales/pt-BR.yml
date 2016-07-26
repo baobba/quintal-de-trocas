@@ -42,6 +42,8 @@ pt-BR:
         street: Rua
         city: Cidade
         state: Estado
+      exchange:
+        reason: Por qual motivo você não está aceitando essa troca?
   activerecord:
     errors:
       messages:

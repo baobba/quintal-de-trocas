@@ -46,18 +46,17 @@
                       <%= exchange.user.name %> está aguardando sua resposta
                     </strong>
 
-                    <%= link_to 'Ver detalhes', exchange, class: "btn btn-link" %>
 
                     <%# link_to "Responder", "", "data-toggle" => "modal", "data-target" => "#reply", class: "btn btn-link" %>
                     
                   <% end %>
                 <% else %>
-                  <strong class="lead text-<%= exchange.status == '3' ? 'danger' : 'success' %>">
-                    <span class="glyphicon glyphicon-ok"></span> Você <%= exchange.status == "3" ? "recusou" : "aceitou" %> essa troca
+                  <strong class="lead text-<%= exchange.status == 'canceled' ? 'danger' : 'success' %>">
+                    <span class="glyphicon glyphicon-ok"></span> <%= exchange.to_user == current_user ? "Você" : exchange.to_user.first_name %> <%= exchange.status == "canceled" ? "recusou" : "aceitou" %> essa troca
                   </strong>
                   
-                  <%= link_to 'Ver detalhes', exchange %>
                 <% end %>
+                <%= link_to 'Ver detalhes', exchange, class: "btn btn-link" %>
               </div>
             </td>
             <td class="hide">

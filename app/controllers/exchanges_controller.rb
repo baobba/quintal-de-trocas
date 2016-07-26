@@ -61,6 +61,7 @@ class ExchangesController < ApplicationController
   def update
     respond_to do |format|
       if @exchange.update(exchange_params)
+        # QuintalMailer.exchange_changed(@exchange, @exchange.toy.user).deliver_now if @exchange.status_changed?
         format.html { redirect_to @exchange, notice: 'Troca atualizada com sucesso' }
         format.json { render :show, status: :ok, location: @exchange }
       else
@@ -95,6 +96,6 @@ class ExchangesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exchange_params
-      params.require(:exchange).permit(:toy_from, :toy_to, :exchange_time, :exchange_date, :exchange_date, :message, :status, :user_id, :exchange_messages_attributes => [:id, :message, :user_to, :user_from, :exchange_id, :user_id])
+      params.require(:exchange).permit(:toy_from, :toy_to, :exchange_time, :exchange_date, :exchange_date, :message, :status, :user_id, :reason, :exchange_messages_attributes => [:id, :message, :user_to, :user_from, :exchange_id, :user_id])
     end
 end

@@ -44,8 +44,7 @@
 
       <div class="user-canceled" style="display: none;">
         <hr>
-        <p>Por qual motivo você está recusando essa troca?</p>
-        <%= f.input :message %>
+        <%= f.input :reason, as: :select, collection: ["Motivo 1", "Motivo 2"] %>
       </div>
 
     </div>
