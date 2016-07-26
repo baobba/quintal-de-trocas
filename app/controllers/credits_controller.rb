@@ -1,10 +1,10 @@
 class CreditsController < ApplicationController
   before_action :set_credit, only: [:show, :edit, :update, :destroy]
 
-  # GET /credits
-  # GET /credits.json
-  def index
-    @credits = Credit.all
+  # Dashboard
+
+  def my_credits
+    @credits = current_user.credits
   end
 
   # GET /credits/1

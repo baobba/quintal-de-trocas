@@ -50,7 +50,7 @@ $(document).ready(function() {
         }
 
       })
-    })
+    });
 
 
     $(document).on("change", "#place_zipcode", function(){
@@ -58,10 +58,30 @@ $(document).ready(function() {
       $(".add_fields").show();
     });
 
-
     $(".endereco").on("change", "input", function(){
       console.log("formulario alterado....");
       codeAddress();
+    });
+  }
+
+  if ($('body.exchanges').length) {
+
+    $("#reply").on("change", ".user-options input[type=radio]", function(){
+      var $tatus = $(this).filter(':checked').val();
+      console.log($tatus);
+
+      if ($tatus === "credit") {
+        $(".user-toy-list, .user-canceled").slideUp('fast');
+        $(".user-toy-list :input, .user-canceled").attr("disabled", true);
+      } else if($tatus === "exchange") {
+        $(".user-toy-list").slideDown('fast');
+        $(".user-toy-list :input").attr("disabled", false);
+        $(".user-canceled").slideUp('fast');
+      } else {
+        $(".user-canceled").slideDown('fast');
+        $(".user-toy-list").slideUp('fast');
+        $(".user-toy-list :input").attr("disabled", true);
+      }
     });
   }
 

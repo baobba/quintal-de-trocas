@@ -62,7 +62,7 @@ class ToysController < ApplicationController
           end
         end
 
-        format.html { redirect_to my_toys_path, notice: 'Toy was successfully created.' }
+        format.html { redirect_to my_toys_path, notice: 'Brinquedo cadastrado com sucesso' }
         format.json { render :show, status: :created, location: @toy }
       else
         format.html { render :new }
@@ -88,7 +88,7 @@ class ToysController < ApplicationController
   def destroy
     @toy.destroy
     respond_to do |format|
-      format.html { redirect_to toys_url, notice: 'Toy was successfully destroyed.' }
+      format.html { redirect_to toys_url, notice: 'O brinquedo foi removido com sucesso' }
       format.json { head :no_content }
     end
   end

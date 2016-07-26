@@ -1,5 +1,5 @@
 <div class="modal-dialog" role="document">
-
+  <%= simple_form_for @exchange do |f| %>
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -9,26 +9,51 @@
 
       <p class="lead text-center" style="margin: 15px 0 10px 0;">Escolha um dos brinquedos da lista ou troque por 1 crédito.</p><p class="text-center" style="margin-bottom:30px;">1 crédito vale um brinquedo dentro da plataforma.</p>
 
-      <div class="row">
-        <div class="col-sm-7">
-          <ul class="list-group user-toy-list" style="overflow: scroll;height: 200px;">
-          <% @exchange.toy.user.toys.each do |toy| %>
-            <li class="list-group-item"><%= link_to toy.title, toy %></li>
-          <% end %>
-          </ul>
+      <hr>
+
+      <div class="row user-options">
+        <div class="col-sm-4 text-center">
+          <%= f.radio_button :status, "exchange" %><br>
+          <strong>Escolher um brinquedo na lista de <%= @exchange.user.name %></strong>
         </div>
-        <div class="col-sm-5 text-center">
-          <br>
-          <br>
-          <p class="lead">Prefiro trocar por<br>1 crédito</p>
+        <div class="col-sm-4 text-center">
+          <%= f.radio_button :status, "credit" %><br>
+          <strong>Prefiro trocar por<br>1 crédito</strong>
         </div>
+        <div class="col-sm-4 text-center">
+          <%= f.radio_button :status, "canceled" %><br>
+          <strong class="text-danger">Recusar pedido</strong>
+        </div>
+      </div>
+
+      <div class="user-toy-list" style="display: none;">
+        <hr>
+        <p><%= @exchange.user.name %> possui <%= @exchange.user.toys.count %> brinquedos</p>
+        <ul class="list-inline user-toy-list" style="overflow: scroll;width: 100%;">
+        <% @exchange.user.toys.each do |toy| %>
+          <li class="text-center">
+            <div class="thumb">
+              <%= image_tag toy.fet_image.image.url(:thumb), width: 80 %>
+            </div>
+            <%= link_to toy.title, toy %><br>
+            <%= f.radio_button :toy_from, toy.id %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+
+      <div class="user-canceled" style="display: none;">
+        <hr>
+        <p>Por qual motivo você está recusando essa troca?</p>
+        <%= f.input :message %>
       </div>
 
     </div>
     <div class="modal-footer">
       <div class="text-center">
-        <%= link_to "Prosseguir &raquo;".html_safe, "#", class: "btn btn-lg btn-success" %>
+        <%= f.submit "Prosseguir &raquo;".html_safe, class: "btn btn-lg btn-success" %>
       </div>
     </div>
   </div>
+  <% end %>
 </div>

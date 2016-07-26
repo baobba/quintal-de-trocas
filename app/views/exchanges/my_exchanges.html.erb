@@ -48,14 +48,12 @@
 
                     <%= link_to 'Ver detalhes', exchange, class: "btn btn-link" %>
 
-                    <%= link_to 'Responder modal', exchange_reply_path(exchange), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#reply'}  %>
-
                     <%# link_to "Responder", "", "data-toggle" => "modal", "data-target" => "#reply", class: "btn btn-link" %>
                     
                   <% end %>
                 <% else %>
-                  <strong class="lead text-<%= exchange.status == 'sim' ? 'success' : 'danger' %>">
-                    <span class="glyphicon glyphicon-ok"></span> Você <%= exchange.status == "sim" ? "aceitou" : "recusou" %> essa troca
+                  <strong class="lead text-<%= exchange.status == '3' ? 'danger' : 'success' %>">
+                    <span class="glyphicon glyphicon-ok"></span> Você <%= exchange.status == "3" ? "recusou" : "aceitou" %> essa troca
                   </strong>
                   
                   <%= link_to 'Ver detalhes', exchange %>
@@ -78,8 +76,4 @@
     </table>
 
   </div>
-</div>
-
-<!-- Reply modal -->
-<div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 </div>

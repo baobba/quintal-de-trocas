@@ -15,6 +15,9 @@ Rails.application.routes.draw do
 
     resources :articles, path: 'artigos'
 
+    resources :credits, path: 'creditos'
+    get 'meus-creditos' => 'credits#my_credits', as: :my_credits
+
     resources :exchanges, path: 'trocas' do
       # post 'toggle_status', path: 'mudar_status'
       get 'reply', path: 'mudar_status'

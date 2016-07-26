@@ -18,6 +18,30 @@
       display: block;
     }
   }
+
+  #reply {
+    // ul.list-group:after {
+    //   clear: both;
+    //   display: block;
+    //   content: "";
+    // }
+
+    // .list-group-item {
+    //     float: left;
+    // }
+    li {
+      max-width: 100px;
+      margin: 0 20px;
+    }
+    .thumb {
+      margin-bottom: 10px;
+
+      img {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+  }
 }
 
 .exchange-header {

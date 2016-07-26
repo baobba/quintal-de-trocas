@@ -24,14 +24,14 @@ html, body {
 
   .navbar-header {
     img {
-      width: 300px;
+      width: 250px;
       top: -10px;
       margin-right: 30px;
     }
   }
 
   .navbar-collapse {
-    margin-top: 20px;
+    margin-top: 15px;
   }
 
   .nav > li.social-icons {
@@ -42,8 +42,8 @@ html, body {
       font-size: 150%;
       width: auto;
       float: left;
-      padding-right: 10px;
-      padding-left: 10px;
+      padding-right: 5px;
+      padding-left: 5px;
     }
   }
 
@@ -206,6 +206,8 @@ ul.cards {
     display: block;
     float: left;
     width: 46%;
+    min-height: 270px;
+    position: relative;
 
     &:nth-of-type(2n+2) {
       margin-right: 0;
@@ -229,22 +231,35 @@ ul.cards {
       padding: 10px;
     }
 
+    .btn-success {
+      bottom: 0;
+      position: absolute;
+    }
+
     .thumb {
       background: #eee url('no-image.png') no-repeat center center;
       background-size: 70%;
-      overflow: hidden;
       text-align: center;
       height: 130px;
+      white-space: nowrap;
 
       @media screen and (min-width: $break-small) {
-        height: 220px;
+        height: 180px;
+      }
+
+      .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
       }
     }
     img {
       width: auto;
       height: auto;
-      max-height: 130%;
+      max-height: 100%;
       max-width: 100%;
+      vertical-align: middle;
+      margin-left: -4px;
     }
   }
 }

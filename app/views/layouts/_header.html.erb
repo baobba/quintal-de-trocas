@@ -1,7 +1,6 @@
 <header class="<%= 'no-margin' if content_for?(:subheader) || (params[:controller] == "toys" && params[:action] == "index") %>">
-  <div class="container">
   <nav class="navbar navbar-quintal">
-    <div class="container-fluid">
+    <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
@@ -26,20 +25,23 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                 <div class="profile-mini" style="background-image:url('<%= default_img(current_user) %>')"></div>
-                <%= current_user.name.blank? ? current_user.email : current_user.name.split(" ").first %> <span class="caret"></span></a>
+                <%= current_user.name.blank? ? current_user.email : current_user.name.split(" ").first %> <span class="caret"></span>
+              </a>
 
-                <% #if current_user.is_admin? %>
-                <!-- <span class="label label-warning">Administrador</span> -->
-                <% #end %>
-                <ul class="dropdown-menu">
-                  <li><%= link_to "Admin", new_admin_user_session_path %></li>
-                  <li><%= link_to "Alterar dados pessoais", edit_user_registration_path %></li>
-                  <li><%= link_to "Meus brinquedos", my_toys_path %></li>
-                  <li><%= link_to "Minhas trocas", my_exchanges_path %></li>
-                  <li><%= link_to "Meus pontos de troca", my_places_path %></li>
-                  <li><%= link_to "Sair", destroy_user_session_path, :method => :delete %></li>
-                </ul>
-              </li>
+              <% #if current_user.is_admin? %>
+              <!-- <span class="label label-warning">Administrador</span> -->
+              <% #end %>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Admin", new_admin_user_session_path %></li>
+                <li><%= link_to "Alterar dados pessoais", edit_user_registration_path %></li>
+                <li><%= link_to "Meus brinquedos", my_toys_path %></li>
+                <li><%= link_to "Minhas trocas", my_exchanges_path %></li>
+                <li><%= link_to "Meus créditos", my_credits_path %></li>
+                <li><%= link_to "Meus pontos de troca", my_places_path %></li>
+                <li><%= link_to "Sair", destroy_user_session_path, :method => :delete %></li>
+              </ul>
+            </li>
+            <li><%= link_to "<span class='fa fa-gift'></span> #{current_user.credits.count}".html_safe, my_credits_path %></li>
           <% else %>
               <li><%= link_to "Login", new_user_session_path %></li>
           <% end %>
@@ -66,5 +68,4 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  </div>
 </header>

@@ -1,6 +1,7 @@
 <li>
   <a href="<%= url_for(toy) %>">
     <div class="thumb">
+      <span class="helper"></span>
       <% if toy.toy_images.count > 0 %>
         <%= image_tag toy.toy_images.first.image.url(:medium) %>
       <% end %>
@@ -14,8 +15,8 @@
       </small>
 
     </div>
-    <div class="text-center">
+    <!-- <div class="text-center">
       <a href="<%= url_for(toy) %>" class="btn btn-success btn-block">Quero trocar</a>
-    </div>
+    </div> -->
   </a>
 </li>

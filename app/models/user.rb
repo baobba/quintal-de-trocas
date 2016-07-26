@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :places
   has_many :toys
   has_many :exchanges
+  has_many :credits
   has_many :user_children
   accepts_nested_attributes_for :user_children, 
     allow_destroy: true, 
@@ -29,6 +30,10 @@ class User < ActiveRecord::Base
     return "netto16@gmail.com"
     #if false
     #return nil
+  end
+
+  def first_name
+    name.split(" ").first
   end
 
   def to_param
