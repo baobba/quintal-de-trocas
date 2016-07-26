@@ -28,14 +28,17 @@
 }
 
 .pages-partners {
-  // ...
+  .descricao {
+    text-align: center;
+    padding-bottom: 30px;
+  }
 }
 
 .pages-testimonials {
   // ...
 }
 
-.pages-media {
+.pages-media, .pages-partners {
   .container {
     a {
       text-decoration: none;
@@ -50,8 +53,6 @@
 
       .carousel-control {
         width: 9%;
-        /*filter: alpha(opacity=50);
-        opacity: .5;*/
       }
     }
 
@@ -59,7 +60,7 @@
       font: 13px/26px 'Lato', sans-serif;
       width: 270px;
       height: 250px;
-      border-radius: 5px;
+      border-radius: 7px;
       border: 1px solid #cecece;
       display: inline-block;
       background: #fff;
@@ -99,9 +100,8 @@
 
     .box:hover {
       content: none;
-      background-color: #b8cb78;
-      background-repeat: no-repeat;
-      background-position: center center;
+      border: 1px solid #f8ab43;
+      box-shadow: 0 0 0 3px #f8ab43;
       cursor: pointer;
     }
   }
