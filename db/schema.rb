@@ -50,9 +50,12 @@ ActiveRecord::Schema.define(version: 20160726105433) do
     t.string   "title"
     t.text     "body"
     t.string   "category"
+    t.datetime "published_at"
+    t.boolean  "active"
+    t.string   "cover"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   add_index "articles", ["user_id"], name: "index_articles_on_user_id"
@@ -83,16 +86,18 @@ ActiveRecord::Schema.define(version: 20160726105433) do
   add_index "exchange_messages", ["user_id"], name: "index_exchange_messages_on_user_id"
 
   create_table "exchanges", force: :cascade do |t|
-    t.string   "status"
     t.integer  "toy_from"
     t.integer  "toy_to"
-    t.time     "exchange_time"
-    t.date     "exchange_date"
     t.string   "exchange_type"
-    t.text     "message"
+    t.string   "exchange_deliver"
+    t.integer  "rating_from"
+    t.integer  "rating_to"
+    t.boolean  "finalized"
+    t.datetime "finalized_at"
+    t.boolean  "accepted"
     t.integer  "user_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "reason"
   end
 

@@ -44,6 +44,7 @@ pt-BR:
         state: Estado
       exchange:
         reason: Por qual motivo você não está aceitando essa troca?
+        exchange_deliver: Como gostaria de trocar/enviar o brinquedo?
   activerecord:
     errors:
       messages:

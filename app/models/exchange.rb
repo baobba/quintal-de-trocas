@@ -5,6 +5,7 @@ class Exchange < ActiveRecord::Base
   belongs_to :toy, :foreign_key => "toy_to"
   belongs_to :user
   has_many :exchange_messages
+  has_one :credit
   accepts_nested_attributes_for :exchange_messages, 
     allow_destroy: true, 
     reject_if: :all_blank
@@ -22,7 +23,7 @@ class Exchange < ActiveRecord::Base
   end
 
   def from_user
-    user
+    self.user
   end
 
   def to_user

@@ -13,15 +13,15 @@
 
       <div class="row user-options">
         <div class="col-sm-4 text-center">
-          <%= f.radio_button :status, "exchange" %><br>
+          <%= f.radio_button :exchange_type, "exchange" %><br>
           <strong>Escolher um brinquedo na lista de <%= @exchange.user.name %></strong>
         </div>
         <div class="col-sm-4 text-center">
-          <%= f.radio_button :status, "credit" %><br>
+          <%= f.radio_button :exchange_type, "credit" %><br>
           <strong>Prefiro trocar por<br>1 crédito</strong>
         </div>
         <div class="col-sm-4 text-center">
-          <%= f.radio_button :status, "canceled" %><br>
+          <%= f.radio_button :exchange_type, "canceled" %><br>
           <strong class="text-danger">Recusar pedido</strong>
         </div>
       </div>

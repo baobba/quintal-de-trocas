@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '30ccb324d9d69f9b8557c304aff2091dc89eb252a36810a24cb4e258292b503b840058eaac43612a7bb3e4ccf3449151da745965c829e76d01eb10a645575efa'
+  config.secret_key = '30ccb324d9d69f9b8557c304aff2091dc89eb252a36810a24cb4e258292b503b840058eaac43612a7bb3e4ccf3449151da745965c829e76d01eb10a645575efa'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -265,4 +265,7 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
+  # 
+  config.http_authenticatable_on_xhr = false
+  config.navigational_formats = ["*/*", :html, :json]
 end

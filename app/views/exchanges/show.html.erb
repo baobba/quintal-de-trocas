@@ -13,15 +13,15 @@
           <span class="bubble"></span>
           1. Enviar solicitação de troca
       </li>
-      <li class="<%= 'completed' if !@exchange.status.blank? %>">
+      <li class="<%= 'completed' if !@exchange.accepted.blank? %>">
           <span class="bubble"></span>
           2. Resposta de <%= @exchange.toy.user.first_name %> se aceita ou não a troca
       </li>
-      <li>
+      <li class="<%= 'completed' if !@exchange.finalized.nil? %>">
           <span class="bubble"></span>
           3. Combinar local e forma de entrega/troca
       </li>
-      <li>
+      <li class="<%= 'completed' if !@exchange.finalized.nil? %>">
           <span class="bubble"></span>
           4. Confirmar se troca foi efetuada
       </li>
@@ -36,11 +36,39 @@
     </h2>
 
     <div class="row exchange-header">
-      <div class="col-sm-6">
+      <div class="col-sm-4">
+        <div class="well well-sm">
+          <div class="text-muted"">Troca:</div>
+
+          <div class="row">
+            <div class="col-sm-6 exchange-profile">
+              <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.user) %>');float: left;margin-right:10px;"></div> <%= @exchange.from_user == current_user ? "Você" : @exchange.from_user.first_name %> <small>solicitou:</small>
+              <%= link_to @exchange.to_toy.title, toy_path(@exchange.to_toy) if @exchange.toy %>
+            </div>
+            <div class="col-sm-6 exchange-profile" style="<%= 'opacity: 0.4' if @exchange.accepted.blank? %>">
+              <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.toy.user) %>');float: left;margin-right:10px;"></div> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %> <small>respondeu:</small>
+
+              <% if !@exchange.accepted.blank? && @exchange.accepted %>
+                <% if @exchange.exchange_type == "credit" %>
+                  Troca por crédito
+                <% else %>
+                  <%= link_to @exchange.from_toy.title, toy_path(@exchange.from_toy) if @exchange.toy %>
+                <% end %>
+              <% elsif !@exchange.accepted.blank? && !@exchange.accepted %>
+                Recusou a troca
+              <% else %>
+                <div class="text-muted"><%= @exchange.from_toy ? @exchange.from_toy.title : "--" %></div>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-sm-4">
         <div class="well well-sm">
           <div class="text-muted">Status:</div>
 
-          <% if @exchange.status.blank? %>
+          <% if @exchange.accepted.blank? %>
             <% if @exchange.user == current_user %>
               <strong class="lead text-danger">
                 Aguardando resposta de <%= @exchange.toy.user.first_name %>
@@ -56,40 +84,39 @@
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Responder', exchange_reply_path(@exchange), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#reply', class: "btn btn-default"} %>
             <% end %>
           <% else %>
-            <strong class="lead text-<%= @exchange.status == 'canceled' ? 'danger' : 'success' %>">
-              <span class="glyphicon glyphicon-ok"></span> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %> <%= @exchange.status == "canceled" ? "recusou" : "aceitou" %> essa troca
+            <strong class="lead text-<%= @exchange.accepted ? 'success' : 'danger' %>">
+              <span class="glyphicon glyphicon-ok"></span> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %> <%= @exchange.accepted == "canceled" ? "recusou" : "aceitou" %> essa troca
             </strong>
 
-            <% if @exchange.status != "canceled" %><br>
+            <% if @exchange.accepted %><br>
               Tipo de troca: <%= @exchange.toy_from ? 'por outro brinquedo' : 'por crédito' %>
             <% end %>
           <% end %>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-4">
         <div class="well well-sm">
-          <div class="text-muted"">Troca:</div>
+          <div class="text-muted"">Troca foi efetuada?</div>
+            <%= simple_form_for @exchange, :html => { :class => 'form-inline' } do |f| %>
 
-          <div class="row">
-            <div class="col-sm-6 exchange-profile">
-              <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.user) %>');float: left;margin-right:10px;"></div> <%= @exchange.from_user == current_user ? "Você" : @exchange.from_user.first_name %> <small>solicitou:</small>
-              <%= link_to @exchange.to_toy.title, toy_path(@exchange.to_toy) if @exchange.toy %>
-            </div>
-            <div class="col-sm-6 exchange-profile" style="<%= 'opacity: 0.4' if @exchange.status.blank? %>">
-              <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.toy.user) %>');float: left;margin-right:10px;"></div> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %> <small>respondeu:</small>
-
-              <% if @exchange.status.blank? %>
-                <div class="text-muted">---</div>
-              <% elsif @exchange.from_toy %>
-                <%= link_to @exchange.from_toy.title, toy_path(@exchange.from_toy) if @exchange.toy %>
-              <% elsif @exchange.status == "credit" %>
-                Troca por crédito
-              <% else %>
-                Recusou a troca
+              <% if @exchange.exchange_type == "exchange" %>
+                <p>A troca já foi efetuada?</p>
+                <%= f.input :finalized, label: false, prompt: "Selecione", as: :select, collection: [["Sim", true], ["Nao", false]] %>
+                <%= f.submit "Ok", class: "btn btn-sm btn-default" %>
+                
+              <% elsif @exchange.exchange_type == "credit" && @exchange.user == current_user %>
+                <p>Você já recebeu o produto?</p>
+                <%= f.input :finalized, label: false, prompt: "Selecione", as: :select, collection: [["Sim", true], ["Nao", false]] %>
+                <%= f.submit "Ok", class: "btn btn-sm btn-default" %>
+              <% elsif @exchange.exchange_type == "credit" && @exchange.finalized.nil? %>
+                Aguardando a acusação de recebimento de <%= @exchange.from_user.first_name %> para liberação do crédito.
+              <% elsif @exchange.exchange_type == "credit" && @exchange.finalized %>
+                <div class="alert alert-success">credito liberado</div>
+              <% elsif @exchange.exchange_type == "credit" && !@exchange.finalized %>
+                <div class="alert alert-danger">credito negado</div>
               <% end %>
-            </div>
-          </div>
 
+            <% end %>
         </div>
       </div>
     </div>
@@ -99,11 +126,12 @@
     <% @messages.each do |msg| %>
     <div class="message">
       <div class="row">
-        <div class="col-sm-1">
+        <div class="col-sm-1 text-center">
           <div class="profile-thumb" style="background-image:url('<%= default_img(msg.user) %>');float: left;margin-right:15px;width: 40px;height: 40px;"></div>
         </div>
         <div class="col-sm-11">
           <small class="text-muted"><%= msg.created_at.strftime("%d/%m/%Y - %H:%M") if msg.created_at %></small><br>
+          <strong class="text-muted"><%= msg.user == current_user ? "Você" : msg.user.first_name %> respondeu:</strong>
           <%= simple_format msg.message %>
         </div>
       </div>
