@@ -56,6 +56,8 @@
 
   <p class="lead">
     Voce esta em: <%= request.location.city if request.location %>
+    <span class="user-location-lat"><%= request.location.latitude if request.location %></span>
+    <span class="user-location-lon"><%= request.location.longitude if request.location %></span>
   </p>
 
 </div>
