@@ -11,14 +11,18 @@
     <table class="table">
       <thead>
         <tr>
-          <th>--</th>
+          <th>Troca</th>
+          <th>Status</th>
+          <th class="text-right">Data</th>
         </tr>
       </thead>
 
       <tbody>
         <% @credits.each do |credit| %>
           <tr>
-            <td><%= link_to credit.created_at, credit %></td>
+            <td><%= link_to "Troca ##{credit.exchange.id}", exchange_path(credit.exchange) %></td>
+            <td><%= credit.is_available ? "Sim" : "Não" %></td>
+            <td class="text-right"><%= credit.created_at.strftime("%d/%m/%Y") %></td>
           </tr>
         <% end %>
       </tbody>
