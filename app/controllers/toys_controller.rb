@@ -56,6 +56,8 @@ class ToysController < ApplicationController
     respond_to do |format|
       if @toy.save
 
+        QuintalMailer.toy_added(@toy).deliver_now
+
         if params[:toy_images]
           params[:toy_images]['image'].each do |a|
             @toy_image = @toy.toy_images.create!(:image => a)

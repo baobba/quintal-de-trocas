@@ -10,4 +10,10 @@ class QuintalMailer < ApplicationMailer
     @user = user
     mail(to: @user.email, subject: 'Nova solicitação de troca recebida')
   end
+
+  def toy_added(toy)
+    @toy = toy
+    @user = @toy.user
+    mail(to: @user.email, subject: 'Seu produto foi recebido')
+  end
 end
