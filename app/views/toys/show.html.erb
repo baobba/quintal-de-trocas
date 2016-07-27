@@ -161,7 +161,7 @@ function codeAddress() {
           <small class="text-muted">1 crédito vale um brinquedo dentro da plataforma</small>
         </div>
 
-				<%= form_for(@exchange) do |f| %>
+				<%= simple_form_for(@exchange) do |f| %>
 					<%= f.hidden_field :user_id, value: (current_user ? current_user.id : nil) %>
 					<%= f.hidden_field :toy_to %>
 					
@@ -170,13 +170,22 @@ function codeAddress() {
             <%= ff.hidden_field :user_from, value: current_user.id %>
             <%= ff.hidden_field :user_to, value: @toy.user.id %>
 
+            <%= f.input :exchange_deliver, 
+              :collection => [['0', 'Ponto de troca'] ,['1', 'Correio']], 
+              :label_method => :last, 
+              :value_method => :first, 
+              :as => :radio_buttons %>
+
             <div class="form-group">
+              <label>Mensagem</label>
   						<%= ff.text_area :message, value: "Olá #{@toy.user.name},\nGostei bastante desse brinquedo e gostaria de saber se é possível trocarmos.", class: "form-control", rows: 4 %>
   					</div>
           <% end %>
 
 					<div class="form-group">
-						<%= f.button raw("<i class='fa fa-paper-plane'></i> Enviar solicitação"), class: "btn btn-success btn-lg" %>
+            <%= button_tag(type: 'submit', class: "btn btn-success btn-lg") do %>
+              <i class="fa fa-paper-plane"></i> Enviar solicitação
+            <% end %>
 					</div>
 				<% end %>
 

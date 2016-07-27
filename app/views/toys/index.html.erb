@@ -11,11 +11,11 @@
       </div>
       <div class="col-sm-3">
         <label>Faixa etária</label>
-        <%= f.select(:toy_age_id_eq, options_from_collection_for_select(ToyAge.all, "id", "title", (params[:q][:toy_age_id_eq] if !params[:q].blank?)), {include_blank: "Todas"}, :class=> "form-control" ) %>
+        <%= f.select(:toy_age_id_eq, options_from_collection_for_select(ToyAge.order("title ASC"), "id", "title", (params[:q][:toy_age_id_eq] if !params[:q].blank?)), {include_blank: "Todas"}, :class=> "form-control" ) %>
       </div>
       <div class="col-sm-3">
         <label>Categoria</label>
-        <%= f.select(:toy_category_id_eq, options_from_collection_for_select(ToyCategory.all, "id", "title", (params[:q][:toy_category_id_eq] if !params[:q].blank?)), {include_blank: "Todas"}, :class=> "form-control" ) %>
+        <%= f.select(:toy_category_id_eq, options_from_collection_for_select(ToyCategory.order("title ASC"), "id", "title", (params[:q][:toy_category_id_eq] if !params[:q].blank?)), {include_blank: "Todas"}, :class=> "form-control" ) %>
       </div>
       <div class="col-sm-2">
         <br>

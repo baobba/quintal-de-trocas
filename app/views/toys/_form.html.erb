@@ -20,17 +20,18 @@
       
       <%= f.input :title %>
 
-      <%= f.input :toy_age_id, collection: ToyAge.all, as: :select, prompt: "Select", rows: 5 %>
+      <%= f.input :toy_age_id, collection: ToyAge.order("title asc").all, as: :select, prompt: "Selecione", rows: 5 %>
 
-      <%= f.input :toy_category_id, collection: ToyCategory.all, as: :select, prompt: "Select", rows: 5 %>
+      <%= f.input :toy_category_id, collection: ToyCategory.order("title asc").all, as: :select, prompt: "Selecione", rows: 5 %>
 
       <%= f.input :description, :input_html => { :rows => 5 } %>
+      
+      <%= f.input :tag_list, hint: "Utilize vírgula para adicionar a palavra chave" %>
 
     </div>
 
     <div class="col-sm-6">
       
-      <%= f.input :tag_list %>
 
       <p class="lead">Imagens</p>
 
