@@ -1,15 +1,61 @@
-<div class="page-header">
-   <h1><%= @article.title %></h1>
+<% content_for :subheader do %>
+  <h1>Colunas e Novidades</h1>
+<% end %>
+
+<div class="row">
+  <div class="col-sm-8">
+    <div class="page-header">
+       <h1><%= @article.title %></h1>
+    </div>
+
+    <div class="meta">
+      <span class="glyphicon glyphicon-calendar"></span> <%= @article.created_at.strftime("%d/%m/%Y") %>
+      <span class="glyphicon glyphicon-tag"></span> <%= @article.category %>
+      <span class="glyphicon glyphicon-user"></span> <%= @article.user.name if @article.user %>
+    </div>
+
+    <%= simple_format @article.body %>
+  </div>
+  <div class="col-sm-4">
+    <br>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Últimas colunas</h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-unstyled">
+          <% @latest.each do |article| %>
+            <li>
+              <%= link_to image_tag(article.cover.url(:thumb), width: 60, class: "img-thumbnail pull-left", style: "margin-right: 10px;"), article %>
+              <%= link_to article.title, article %><br>
+              <small class="text-muted">
+                <span class="glyphicon glyphicon-calendar"></span> <%= article.created_at.strftime("%d/%m/%Y") %><br>
+                <span class="glyphicon glyphicon-tag"></span> <%= article.category %>
+              </small>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Colunas de <%= @article.category %></h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-unstyled">
+          <% @latest_category.each do |article| %>
+            <li>
+              <%= link_to image_tag(article.cover.url(:thumb), width: 60, class: "img-thumbnail pull-left", style: "margin-right: 10px;"), article %>
+              <%= link_to article.title, article %><br>
+              <small class="text-muted">
+                <span class="glyphicon glyphicon-calendar"></span> <%= article.created_at.strftime("%d/%m/%Y") %><br>
+              </small>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+  </div>
 </div>
-
-<div class="meta">
-  <%= @article.created_at %> | 
-  <%= @article.category %> | 
-  <%= @article.user.name %>
-  
-</div>
-
-<%= simple_format @article.body %>
-
-
-<%= link_to 'Back', articles_path %>

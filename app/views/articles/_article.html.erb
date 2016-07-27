@@ -1,9 +1,12 @@
 <li>
+  <%= image_tag article.cover.url(:medium), class: "img-thumbnail pull-left" %>
   <div class="meta">
     <span class="glyphicon glyphicon-calendar"></span> <%= article.created_at.strftime("%d/%m/%Y") %>
     <span class="glyphicon glyphicon-tag"></span> <%= article.category %>
-    <span class="glyphicon glyphicon-user"></span> <%= article.user.name %>
+    <span class="glyphicon glyphicon-user"></span> <%= article.user.name if article.user %>
   </div>
   <%= link_to article.title, article, class: "article-title" %>
-  <p class="article-desc"><%= truncate(article.body, length: 200, omission: " ...") %></p>
+  <p class="article-desc"><%= truncate(strip_tags(article.body), length: 200, omission: " ...") %></p>
+
+  <%= link_to "Leia mais", article, class: "btn btn-default" %>
 </li>
