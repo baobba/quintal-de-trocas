@@ -159,12 +159,20 @@ $(document).ready(function() {
         topPadding = 0;
 
     $window.scroll(function() {
-      if ($window.scrollTop() > offset.top && $(window).height() + $(window).scrollTop() <= $footer) {
-        $sidebar.addClass("sticky");
-      } else {
-        $sidebar.removeClass("sticky");
+      if ($window.scrollTop() > offset.top) {
+        $sidebar.css('position','fixed');
+        $sidebar.css('top','0');
+
+      } else if ($(window).scrollTop() <= 100) {
+        $sidebar.css('position','');
+        $sidebar.css('top','');
+      }
+
+      if ($sidebar.offset().top + $sidebar.height() > $("footer").offset().top) {
+        $sidebar.css('top',-($sidebar.offset().top + $sidebar.height() - $("footer").offset().top));
       }
     });
+
   }
 
 });
