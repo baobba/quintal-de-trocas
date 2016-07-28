@@ -23,7 +23,7 @@ class ExchangesController < ApplicationController
   def reply_message
 
     if @exchange.update(exchange_params)
-      QuintalMailer.send_exchange_message(@exchange, @exchange.toy.user).deliver_now
+      QuintalMailer.new_exchange_message(@exchange, @exchange.toy.user).deliver_now
       redirect_to exchange_path(@exchange), success: 'Mensagem enviada com sucesso'
     else
       render :show
@@ -51,7 +51,7 @@ class ExchangesController < ApplicationController
     # @exchange.send_message(@exchange.user, @exchange.message, "Bora trocar brinquedo?")
 
     if @exchange.save
-      QuintalMailer.send_exchange_message(@exchange, @exchange.toy.user).deliver_now
+      QuintalMailer.request_exchange(@exchange, @exchange.toy.user).deliver_now
       redirect_to exchange_path(@exchange), success: 'Pedido de troca realizado com sucesso'
     else
       render :new

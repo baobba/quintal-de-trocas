@@ -5,10 +5,16 @@ class QuintalMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Bem vindo')
   end
 
-  def send_exchange_message(exchange, user)
+  def request_exchange(exchange, user)
     @exchange = exchange
     @user = user
     mail(to: @user.email, subject: 'Nova solicitação de troca recebida')
+  end
+
+  def new_exchange_message(exchange, user)
+    @exchange = exchange
+    @user = user
+    mail(to: @user.email, subject: 'Você recebeu uma nova mensagem')
   end
 
   def toy_added(toy)

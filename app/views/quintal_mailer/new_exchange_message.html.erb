@@ -1,0 +1,5 @@
+<h2>Olá <%= @user.name %>,</h2>
+
+<p><%= @exchange.user.name %> enviou uma nova mensagem pra você. Clique no link abaixo para viualizá-lo.</p>
+
+<p><%= link_to "Ver detalhes", exchange_url(@exchange.id) %></p>
