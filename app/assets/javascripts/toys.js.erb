@@ -176,9 +176,9 @@ function initialize() {
     }
 
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      var pos = {
-        lat: $(".user-location-lat").text(),
-        lng: $(".user-location-lon").text()
+      pos = {
+        lat: parseFloat($(".user-location-lat").text()),
+        lng: parseFloat($(".user-location-lon").text())
       };
       infoWindow.setPosition(pos);
       // infoWindow.setContent(browserHasGeolocation ?
