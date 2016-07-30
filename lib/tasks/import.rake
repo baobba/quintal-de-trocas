@@ -8,7 +8,42 @@ def format_cep(cep)
   return cep
 end
 
+<<<<<<< Updated upstream
 def news_category(cat)
+=======
+def aws
+  credentials = Aws::Credentials.new(ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY'])
+  s3 = Aws::S3::Resource.new(
+    credentials: credentials,
+    region: 'us-east-1'
+  )
+end
+
+def s3_url(name)
+  "https://quintal-de-trocas.s3.amazonaws.com/#{name}"
+end
+
+def open_file(file)
+  s3 = aws
+  # puts s3.inspect
+  # puts file
+  puts s3.bucket('quintal-de-trocas').object(file)
+  puts s3.bucket('quintal-de-trocas').object(file).public_url
+  return open(s3.bucket('quintal-de-trocas').object(file).public_url)
+end
+
+def get_file(file)
+  s3 = aws
+  # puts s3.inspect
+  # puts file
+  puts s3.bucket('quintal-de-trocas').object(file)
+  puts s3.bucket('quintal-de-trocas').object(file).public_url
+  puts s3.bucket('quintal-de-trocas').object(file).exists?
+  return s3.bucket('quintal-de-trocas').object(file)
+end
+
+def convert_category_names(cat)
+>>>>>>> Stashed changes
   case cat
     when "3"
       "Transforme você mesmo"
@@ -36,6 +71,26 @@ def news_category(cat)
 end
 
 namespace :import do
+<<<<<<< Updated upstream
+=======
+  # desc "config"
+  # task :config => [:environment] do
+  #   credentials = Aws::Credentials.new(ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY'])
+  #   s3 = Aws::S3::Resource.new(
+  #     credentials: credentials,
+  #     region: 'us-west-1'
+  #   )
+  #   # puts s3
+  #   # object = s3.bucket('quintal-de-trocas').object('import/users.csv')
+  #   # puts object
+  #   # url = object.public_url
+  #   # puts url
+  # end
+  # 
+  desc 'All'
+  task all: [:users, :toys, :toy_images, :exchange, :exchange_messages, :news]
+
+>>>>>>> Stashed changes
   desc "Import users"
   task :users => [:environment] do
 
@@ -331,6 +386,7 @@ namespace :import do
 
       article = Article.new
       
+<<<<<<< Updated upstream
       # article.id = id == "NULL" ? nil : id
       article.user_id = cms_news_author_id == "NULL" ? nil : cms_news_author_id
       article.category = cms_news_category_id == "NULL" ? nil : news_category(cms_news_category_id)
@@ -350,6 +406,26 @@ namespace :import do
         rescue ActiveRecord::RecordInvalid => e
           puts "erro upload...."
           puts e
+=======
+        # article.id = id == "NULL" ? nil : id
+        article.user_id = User.find_by_id(cms_news_author_id) ? User.find_by_id(cms_news_author_id).id : nil
+        article.category = cms_news_category_id == "NULL" ? nil : convert_category_names(cms_news_category_id)
+        article.title = name == "NULL" ? nil : name
+        article.body = content == "NULL" ? nil : content
+        article.created_at = publicated_at == "NULL" ? nil : publicated_at
+        article.published_at = publicated_at == "NULL" ? nil : publicated_at
+        article.active = active == "NULL" ? nil : active
+
+        if s3_url("image/#{cover_image}") 
+          puts "tem imagem"
+          begin
+            article.remote_cover_url = cover_image == "NULL" || cover_image == "avatar.jpg" ? nil : get_file("image/#{cover_image}").public_url
+          rescue ActiveRecord::RecordInvalid => e
+            puts "erro upload...."
+            puts e
+          rescue
+          end
+>>>>>>> Stashed changes
         end
       end
 
