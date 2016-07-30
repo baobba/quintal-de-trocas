@@ -48,6 +48,8 @@ gem 'nested_form_fields'
 gem 'devise-i18n'
 gem 'font-awesome-rails'
 gem 'fog-aws'
+gem 'figaro'
+gem 'aws-sdk', '~> 2'
 
 group :production do
   gem 'pg'
