@@ -21,3 +21,17 @@ Repositório do projeto Quintal de Trocas
 1. rails db:migrate
 2. rails db:seed
 ```
+
+# TODO
+
+- Search toys when moving the map
+- Exchange places page layout
+  - Maps
+- Change 1 credit for 1 toy
+- How it works page layout
+- Finish contact us page
+- Fix ordering on tays home
+- Home will be the same as toy?
+- Setup host (DO/AWS)
+  - Setup capistrano
+  - Setup emails
