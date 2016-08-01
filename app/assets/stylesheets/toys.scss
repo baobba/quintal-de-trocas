@@ -2,8 +2,12 @@
   position: relative;
 }
 .toy-list {
-  width: 65%;
-  padding-right: 2%;
+
+  @media screen and (min-width: $screen-sm-min) {
+    width: 65%;
+    padding-right: 2%;
+  }
+
 }
 .toy-map {
   width: 35%;
@@ -12,6 +16,11 @@
   // overflow: hidden;
   right: 0;
   top: 0;
+  display: none;
+
+  @media screen and (min-width: $screen-sm-min) {
+    display: block;
+  }
 }
 
 #map_wrapper {
@@ -38,11 +47,24 @@ div.toy-filter {
     color: #8D5B14;
     font-size: 95%;
     font-weight: normal;
+    display: block;
+  }
+
+  input[name='within'] {
+    width: 60px;
+  }
+
+  .within, .city {
+    display: none;
+
+    @media screen and (min-width: $screen-sm-min) {
+      display: inline-block;
+    }
   }
 }
 
 .toy-content {
-  padding-left: 30px;
+  // padding-left: 30px;
 }
 
 .toys-edit, .toys-new {
