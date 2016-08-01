@@ -1,13 +1,12 @@
 <% content_for :subheader do %>
   <h1>Pontos de troca</h1>
-  <p>O Quintal de Trocas é 100% gratuito e crianças de TODAS AS REGIÕES DO BRASIL
-podem trocar utilizando o site.</p>
+  <p class="lead">O Quintal de Trocas é 100% gratuito</p>
 <% end %>
 
 <div class="row">
   <div class="col-sm-8">
 
-    <div class="well">
+    <div class="place-filter-box">
       <%= search_form_for(@q, class: "place-filter form-inline") do |f| %>
 
         <div class="form-group">
@@ -16,21 +15,26 @@ podem trocar utilizando o site.</p>
         </div>
 
         <div class="form-group">
+          <label>Cidade:</label>
+          <%= f.text_field :city_eq, :class=> "form-control", value: (params[:city_eq] || lookup_ip_location.city) %>
+        </div>
+
+        <div class="form-group">
           <label>Estado:</label>
-          <%= f.select(:state_eq, option_estados_for_select, { include_blank: "Selecione..." }, :class=> "form-control" ) %>
+          <%= f.select :state_eq, option_estados_for_select, { include_blank: "Selecione..." }, :class=> "form-control" %>
         </div>
       
         <div class="form-group">
-          <%= f.submit "Filtrar", :class => "btn btn-primary" %>
+          <label>&nbsp;</label>
+          <%= f.submit "Filtrar", :class => "btn btn-default" %>
         </div>
-<br>
-        <%= link_to 'Sugerir Ponto de Troca', new_place_path, class: "btn btn-default" %>
+
       <% end %>
       
     </div>
 
 
-    <ul class="cards list-unstyled">
+    <ul class="cards stack list-unstyled">
       <%= render @places %>
     </ul>
 
@@ -43,21 +47,51 @@ podem trocar utilizando o site.</p>
     
   </div>
   <div class="col-sm-4">
-    <div id="map" style="width: 100%;height:300px"></div>
 
-    <p class="lead">O que é um Ponto de Trocas?</p>
-    <p>É um estabelecimento parceiro do Quintal de Trocas que atua como uma referência física para os participantes do portal. O Ponto de Trocas compartilha dos mesmos valores do Quintal: sustentabilidade, consumo consciente e respeito a sociedade.</p>
+    <div class="xxx">
+      <p class="lead">Perguntas frequentes</p>
+    </div>
 
-    <hr>
-    <p class="lead">Como trocar</p>
- 
-    <ul>
-      <li>- Pelos Correios (que atendem todo o Brasil)</li>
-      <li>Pessoalmente, em qualquer lugar pré-combinado entre as partes *</li>
-      <li>Ou através dos Pontos de Trocas ....</li>
+    <div class="panel panel-default">
+      <div class="panel-body">
 
-      <small>(*) O Quintal sugere que a troca seja combinada num lugar movimentado (como museus, bibliotecas, etc.)</small>
-    </ul>
+        <div class="media">
+          <div class="media-left">
+            <%= image_tag "img-49.png", width: 70 %>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">Ponto de trocas</h4>
+            <p>Visitas à loja por público segmentado. A pessoa que irá trocar conhecerá um estabelecimento preocupado com a sustentabilidade.</p>
+            <p>Nota: Só empresas realmente preocupadas com a sustentabilidade poderão ser pontos de troca.</p>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="media">
+          <div class="media-left">
+            <%= image_tag "img-50.png", width: 70 %>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">Sociedade</h4>
+            <p>Possibilita que mais crianças troquem os seus brinquedos, livros e fantasias sem gasto algum! Além disso, ainda fazem novos amigos e ganham mais tempo para a brincadeira.</p>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="media">
+          <div class="media-left">
+            <%= image_tag "img-51.png", width: 70 %>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">Quintal de trocas</h4>
+            <p>Um ambiente seguro e agradável para as pessoas na hora da troca.</p>
+          </div>
+        </div>
+    
+      </div>
+    </div>
 
   </div>
 

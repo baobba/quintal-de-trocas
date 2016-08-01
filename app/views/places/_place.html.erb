@@ -1,17 +1,22 @@
 <li>
-  <a href="#">
-    <div class="content">
-      <h2><%= link_to place.title, place %></h2>
+  <div class="row">
+    <div class="col-sm-7">
+      <a href="#">
+        <div class="content">
+          <h2><%= link_to place.title, place %></h2>
 
+          <p><%= place.street %></p>
+        </div>
+        <span class="content_bottom">
+          <a class="show_login_popup" href="/collections"><span class="icon-heart"></span></a>
+        </span>
+      </a>
+    </div>
+    <div class="col-sm-5">
       <small>
         Horario: <%= place.office_hours %><br>
         Fone: <%= place.phone %>
       </small>
-
-      <p><%= place.description %></p>
     </div>
-    <span class="content_bottom">
-      <a class="show_login_popup" href="/collections"><span class="icon-heart"></span></a>
-    </span>
-  </a>
+  </div>
 </li>

@@ -7,8 +7,6 @@ class PlacesController < ApplicationController
   def index
     @q = Place.ransack(params[:q])
     @places = @q.result(distinct: true).order("id DESC").page params[:page]
-
-    
     # @places = @places.where(state: params[:state]) unless params[:state].blank?
 
     respond_to do |format|
