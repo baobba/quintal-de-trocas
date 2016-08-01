@@ -50,7 +50,6 @@ gem 'font-awesome-rails'
 gem 'fog-aws'
 gem 'figaro'
 gem 'aws-sdk', '~> 2'
-gem 'redis'
 
 group :production do
   gem 'pg'
@@ -63,6 +62,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'awesome_print'
+  gem 'redis'
 end
 
 group :development do
