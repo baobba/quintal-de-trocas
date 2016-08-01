@@ -8,9 +8,6 @@ def format_cep(cep)
   return cep
 end
 
-<<<<<<< Updated upstream
-def news_category(cat)
-=======
 def aws
   credentials = Aws::Credentials.new(ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY'])
   s3 = Aws::S3::Resource.new(
@@ -43,7 +40,6 @@ def get_file(file)
 end
 
 def convert_category_names(cat)
->>>>>>> Stashed changes
   case cat
     when "3"
       "Transforme você mesmo"
@@ -71,26 +67,10 @@ def convert_category_names(cat)
 end
 
 namespace :import do
-<<<<<<< Updated upstream
-=======
-  # desc "config"
-  # task :config => [:environment] do
-  #   credentials = Aws::Credentials.new(ENV['AWS_ACCESS_KEY'], ENV['AWS_SECRET_KEY'])
-  #   s3 = Aws::S3::Resource.new(
-  #     credentials: credentials,
-  #     region: 'us-west-1'
-  #   )
-  #   # puts s3
-  #   # object = s3.bucket('quintal-de-trocas').object('import/users.csv')
-  #   # puts object
-  #   # url = object.public_url
-  #   # puts url
-  # end
-  # 
   desc 'All'
-  task all: [:users, :toys, :toy_images, :exchange, :exchange_messages, :news]
+  task all: [:users, :toys, :toy_images, :exchange, :exchange_messages, :news] do
+  end
 
->>>>>>> Stashed changes
   desc "Import users"
   task :users => [:environment] do
 
@@ -129,14 +109,14 @@ namespace :import do
       
         user.id = id == "NULL" ? nil : id
         user.name = name == "NULL" ? nil : name
-        if File.exist? File.expand_path Rails.root.join('public', "uploads/uploads/image/#{avatar}")
-          begin
-            user.avatar = avatar == "NULL" || avatar == "avatar.jpg" ? nil : File.open(Rails.root.join('public', "uploads/uploads/image/#{avatar}"))
-          rescue ActiveRecord::RecordInvalid => e
-            puts "erro upload...."
-            puts e
-          end
-        end
+        # if File.exist? File.expand_path Rails.root.join('public', "uploads/uploads/image/#{avatar}")
+        #   begin
+        #     user.avatar = avatar == "NULL" || avatar == "avatar.jpg" ? nil : File.open(Rails.root.join('public', "uploads/uploads/image/#{avatar}"))
+        #   rescue ActiveRecord::RecordInvalid => e
+        #     puts "erro upload...."
+        #     puts e
+        #   end
+        # end
         user.birthday = birth_date == "NULL" ? nil : birth_date
         user.gender = gender == "NULL" ? nil : gender.upcase
         # user.cpf = cpf == "NULL" ? nil : cpf
@@ -232,6 +212,8 @@ namespace :import do
       toy.created_at = created_at == "NULL" ? nil : created_at
 
       toy.zipcode = toy.user ? toy.user.zipcode : User.limit(100).map(&:zipcode).uniq.compact.sample
+      toy.latitude = toy.user ? toy.user.latitude : nil
+      toy.longitude = toy.user ? toy.user.longitude : nil
       # toy.zipcode = User.limit(500).map(&:zipcode).uniq.compact.sample
       # toy.latitude = "65656"
       # toy.longitude = "65656"
@@ -258,7 +240,7 @@ namespace :import do
   desc "Import toy images"
   task :toy_images => [:environment] do
 
-    ToyImage.destroy_all
+    # ToyImage.destroy_all
     CSV.foreach("db/import/toy_image.csv") do |row|
 
       puts "..............................................."
@@ -272,9 +254,9 @@ namespace :import do
       # puts toy
 
       
-      if File.exist? File.expand_path Rails.root.join('public', "uploads/uploads/image/#{image}")
+      if s3_url("image/#{image}") 
         begin
-          toy.toy_images.create! featured: (name == "main" ? true : false), image: File.open(Rails.root.join('public', "uploads/uploads/image/#{image}")) if toy
+          toy.toy_images.create! featured: (name == "main" ? true : false), remote_image_url: get_file("image/#{image}").public_url if toy
         rescue ActiveRecord::RecordInvalid => e
           puts e
         end
@@ -383,30 +365,12 @@ namespace :import do
       # ordering = row[8]
       active = row[9]
       # show_footer = row[10]
-
-      article = Article.new
       
-<<<<<<< Updated upstream
-      # article.id = id == "NULL" ? nil : id
-      article.user_id = cms_news_author_id == "NULL" ? nil : cms_news_author_id
-      article.category = cms_news_category_id == "NULL" ? nil : news_category(cms_news_category_id)
-      article.title = name == "NULL" ? nil : name
-      article.body = content == "NULL" ? nil : content
-      article.created_at = publicated_at == "NULL" ? nil : publicated_at
-      article.published_at = publicated_at == "NULL" ? nil : publicated_at
-      article.active = active == "NULL" ? nil : active
+      article_ex = Article.find(id)
 
-      puts cover_image
-      puts File.exist? File.expand_path Rails.root.join('public', "uploads/uploads/image/#{cover_image}")
-
-      if File.exist? File.expand_path Rails.root.join('public', "uploads/uploads/image/#{cover_image}")
-        puts "tem imagem"
-        begin
-          article.cover = cover_image == "NULL" || cover_image == "avatar.jpg" ? nil : File.open(Rails.root.join('public', "uploads/uploads/image/#{cover_image}"))
-        rescue ActiveRecord::RecordInvalid => e
-          puts "erro upload...."
-          puts e
-=======
+      if !article_ex
+        article = Article.new
+      
         # article.id = id == "NULL" ? nil : id
         article.user_id = User.find_by_id(cms_news_author_id) ? User.find_by_id(cms_news_author_id).id : nil
         article.category = cms_news_category_id == "NULL" ? nil : convert_category_names(cms_news_category_id)
@@ -425,7 +389,6 @@ namespace :import do
             puts e
           rescue
           end
->>>>>>> Stashed changes
         end
       end
 
