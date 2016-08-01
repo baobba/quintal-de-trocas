@@ -3,25 +3,31 @@
 <div class="toy-list">
 
   <div class="toy-filter">
-    <%= search_form_for(@q, class: "toy-filter") do |f| %>
-    <div class="row">
-      <div class="col-sm-4">
+    <%= search_form_for(@q, class: "toy-filter form-inline") do |f| %>
+      <div class="form-group">
         <label>Buscar pelo título</label>
         <%= f.text_field :title_cont, :class=> "form-control" %>
       </div>
-      <div class="col-sm-3">
+      <div class="form-group within">
+        <label>Distância</label>
+        <%= text_field_tag :within, (50 || params[:within]), class: "form-control" %> km
+      </div>
+      <div class="form-group city">
+        <label>Cidade</label>
+        <%= text_field_tag :city, (params[:city] || lookup_ip_location.city), class: "form-control" %>
+      </div>
+      <div class="form-group">
         <label>Faixa etária</label>
         <%= f.select(:toy_age_id_eq, options_from_collection_for_select(ToyAge.order("title ASC"), "id", "title", (params[:q][:toy_age_id_eq] if !params[:q].blank?)), {include_blank: "Todas"}, :class=> "form-control" ) %>
       </div>
-      <div class="col-sm-3">
+      <div class="form-group">
         <label>Categoria</label>
         <%= f.select(:toy_category_id_eq, options_from_collection_for_select(ToyCategory.order("title ASC"), "id", "title", (params[:q][:toy_category_id_eq] if !params[:q].blank?)), {include_blank: "Todas"}, :class=> "form-control" ) %>
       </div>
-      <div class="col-sm-2">
+      <div class="form-group">
         <br>
         <%= f.submit "Fitrar", :class => "btn btn-default" %>
       </div>
-    </div>
     <% end %>
   </div>
 
@@ -32,14 +38,19 @@
     <%= sort_link @q, :created_at, 'mais recentes', default_order: :desc %> |
     <%= sort_link @q, :title, 'ordem alfabética' %>
   </div>
+  
+  <% if @toys %>
+    <div class="lead">
+      Mostrando <strong><%= Toy.default_per_page >= @toys.size ? @toys.size : Toy.default_per_page %></strong> de <%= @toys.total_count %> brinquedos
+    </div>
 
-  <div class="lead">
-    Mostrando <strong><%= Toy.default_per_page >= @toys.count ? @toys.count : Toy.default_per_page %></strong> de <%= @toys.total_count %> brinquedos
-  </div>
-
-  <ul class="cards list-unstyled">
-    <%= render @toys %>
-  </ul>
+    <ul class="cards list-unstyled">
+      <%= render @toys %>
+    </ul>
+  <% else %>
+    Nada pra mostrar
+  <% end %>
+  
 
   <div class="clearfix"></div>
 
@@ -54,10 +65,9 @@
     <div id="map_canvas" class="mapping"></div>
   </div>
 
-  <p class="lead">
-    Voce esta em: <%= request.location.city if request.location %>
-    <span class="user-location-lat"><%= request.location.latitude if request.location %></span>
-    <span class="user-location-lon"><%= request.location.longitude if request.location %></span>
+  <p class="lead hide">
+    <span class="user-location-lat"><%= lookup_ip_location.latitude if lookup_ip_location %></span>
+    <span class="user-location-lon"><%= lookup_ip_location.longitude if lookup_ip_location %></span>
   </p>
 
 </div>

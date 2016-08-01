@@ -4,8 +4,13 @@ class ToysController < ApplicationController
 
   def index
     @bs_container = false
-    
-    @q = Toy.includes(:toy_category, :toy_age).ransack(params[:q])
+
+    if params[:within].present? && params[:within].to_i > 0
+      @q = Toy.includes(:toy_category, :toy_age).near(lookup_ip_location.city, params[:within], :order => :distance).search(params[:q])
+    else
+      @q = Toy.includes(:toy_category, :toy_age).search(params[:q])
+    end
+
     @toys = @q.result(distinct: true).order("id DESC").page params[:page]
   end
 
@@ -27,13 +32,38 @@ class ToysController < ApplicationController
 
   def index_near
 
-    location = if request.location && !request.location.city.blank?
-      "#{request.location.city}, #{request.location.state}, #{request.location.country}"
+    location = if !params[:lat].blank? && !params[:lon].blank?
+      [params[:lat], params[:lon]].join(",")
+    elsif lookup_ip_location && !lookup_ip_location.city.blank?
+      "#{lookup_ip_location.city}, #{lookup_ip_location.state}, #{lookup_ip_location.country}"
     else
       "88110-690, Brasil"
     end
 
-    @toys = Toy.near(location, 50, :units => :km) || nil
+    zoom = if params[:zoom].blank?
+      50
+    else
+      case params[:zoom]
+        when "15"
+          10
+        when "14"
+          20
+        when "13"
+          30
+        when "12"
+          40
+        when "11"
+          50
+        when "10"
+          100
+        when "9"
+          200
+        else
+          50
+      end
+    end
+
+    @toys = Toy.near(location, zoom, :units => :km) || nil
     @toys = @toys.map{|f| [f.title, f.latitude, f.longitude, "<div class='info_content'><p class='lead' style='margin: 5px 0 10px 0;font-size: 16px;line-height: 120%;'><a href='#{toy_url(f)}'>#{f.title}</a></p><div style='margin-left:15px;' class='pull-right'><img src='#{f.toy_images.first.image.url(:thumb) if f.toy_images.first}' class='img-thumbnail' width='80'></div><small class='text-muted'>#{f.description[0..100]} ...</small></div>"]} if @toys
     render :json => @toys
   end

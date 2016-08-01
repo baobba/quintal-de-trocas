@@ -8,7 +8,15 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-
+  helper_method :lookup_ip_location
+  
+  def lookup_ip_location
+    if Rails.env.development?
+      Geocoder.search(request.remote_ip).first
+    else
+      request.location
+    end
+  end
   
 
   protected

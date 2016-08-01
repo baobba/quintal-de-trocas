@@ -68,9 +68,6 @@ $(document).ready(function() {
 
   }
 
-
-  
-
 });
 
 
@@ -95,10 +92,13 @@ function initialize() {
   });
 
   var mapOptions = {
-      mapTypeId: 'roadmap',
-      mapTypeControlOptions: {
-        mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
-      }
+    scrollwheel: false,
+    minZoom: 8,
+    maxZoom: 15,
+    mapTypeId: 'roadmap',
+    mapTypeControlOptions: {
+      mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
+    }
   };
 
   // Display a map on the page
@@ -108,27 +108,91 @@ function initialize() {
   map.mapTypes.set(customMapTypeId, customMapType);
   map.setMapTypeId(customMapTypeId);
 
-  // Multiple Markers
+  showPlaces();
 
-  // var markers = [];
-  $.getJSON("<%= Rails.application.routes.url_helpers.index_near_toys_path %>", function( data ) {
-    console.log(data);
-    markers = data;
-    // $.each( data, function( key, val ) {
-    //   markers.push([val]);
+  // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+  var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+    // this.setZoom(8);
+    google.maps.event.removeListener(boundsListener);
+    console.log("moved");
+  });
+
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found.');
+      map.setCenter(pos);
+    }, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+
+  var infoWindow = new google.maps.InfoWindow({maxWidth: 200});
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    pos = {
+      lat: parseFloat($(".user-location-lat").text()),
+      lng: parseFloat($(".user-location-lon").text())
+    };
+    infoWindow.setPosition(pos);
+    // infoWindow.setContent(browserHasGeolocation ?
+    //                     'Error: The Geolocation service failed.' :
+    //                     'Error: Your browser doesn\'t support geolocation.');
+  }
+
+  function getMoveData() {
+    currentLocation = map.getCenter()
+    newCurrLocation = currentLocation.toString();
+    newCurrLocation = newCurrLocation.replace('(', '');
+    newCurrLocation = newCurrLocation.replace(')', '');
+
+    latlngArray = new Array();
+    latlngArray = newCurrLocation.split(",")
+    for (a in latlngArray) {
+      latlngArray[a] = parseFloat(latlngArray[a]);
+    }
+    newLat = latlngArray[0]
+    newLng = latlngArray[1]
+    newZoom = map.getZoom();
+    // map.setCenter({
+    //     lat : newLat,
+    //     lng : newLng
     // });
+    
+    showPlaces("moved", { lat: newLat, lon: newLng, zoom: newZoom });
+  }
 
-    // Display multiple markers on a map
-    var infoWindow = new google.maps.InfoWindow({maxWidth: 200}), marker, i;
+  function showPlaces(is_moved, latlng){
+    // request = {
+    //   location: currentLocation,
+    //   radius: 500,
+    //   types: ['store']
+    // };
+    // 
+    $.getJSON("<%= Rails.application.routes.url_helpers.index_near_toys_path %>", latlng, function( data ) {
+      console.log(data);
+      markers = data;
+      
+      // Display multiple markers on a map
+      var infoWindow = new google.maps.InfoWindow({maxWidth: 200}), marker, i;
 
-    // Loop through our array of markers & place each one on the map
-    for( i = 0; i < markers.length; i++ ) {
+      // Loop through our array of markers & place each one on the map
+      for( i = 0; i < markers.length; i++ ) {
         var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
         bounds.extend(position);
+
         marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            title: markers[i][0]
+          position: position,
+          map: map,
+          title: markers[i][0]
         });
 
         // Allow each marker to have an info window
@@ -139,61 +203,23 @@ function initialize() {
             }
         })(marker, i));
 
-        google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
-          console.log(marker);
-          console.log(i);
+        // Allow each marker to have an info window
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.setContent(markers[i][markers[i].length-1]);
+                infoWindow.open(map, marker);
+            }
         })(marker, i));
 
         // Automatically center the map fitting all markers on the screen
-        map.fitBounds(bounds);
-    }
-
-    
-
-    // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
-    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
-        // this.setZoom(8);
-        google.maps.event.removeListener(boundsListener);
+        if (!is_moved){
+          map.fitBounds(bounds);
+        }
+      }
     });
 
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
+  }
 
-        infoWindow.setPosition(pos);
-        infoWindow.setContent('Location found.');
-        map.setCenter(pos);
-      }, function() {
-        handleLocationError(true, infoWindow, map.getCenter());
-      });
-    } else {
-      // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
-    }
-
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      pos = {
-        lat: parseFloat($(".user-location-lat").text()),
-        lng: parseFloat($(".user-location-lon").text())
-      };
-      infoWindow.setPosition(pos);
-      // infoWindow.setContent(browserHasGeolocation ?
-      //                     'Error: The Geolocation service failed.' :
-      //                     'Error: Your browser doesn\'t support geolocation.');
-    }
-
-    // console.log(markers);
-  });
-  //Toy.limit(5).each{|x| a << [x.title, x.user.latitude, x.user.longitude] }
-
-  // var markers = [
-  //   ['London Eye, London', 51.503454,-0.119562],
-  //   ['Palace of Westminster, London', 51.499633,-0.124755]
-  // ];
-
+  google.maps.event.addListener(map,'idle',getMoveData);
 
 }
