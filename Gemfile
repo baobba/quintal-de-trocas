@@ -50,6 +50,7 @@ gem 'font-awesome-rails'
 gem 'fog-aws'
 gem 'figaro'
 gem 'aws-sdk', '~> 2'
+gem 'redis'
 
 group :production do
   gem 'pg'
@@ -73,4 +74,3 @@ group :development do
 
   gem "letter_opener"
 end
-
