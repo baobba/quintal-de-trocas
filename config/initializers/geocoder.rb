@@ -1,7 +1,3 @@
-require 'redis'
-
-REDIS = Redis.connect(url: ENV['REDISTOGO_URL'])
-
 Geocoder.configure(
   # Geocoding options
   timeout: 2,                 # geocoding service timeout (secs)
@@ -24,11 +20,4 @@ Geocoder.configure(
   units: :km,                 # :km for kilometers or :mi for miles
   # distances: :linear          # :spherical or :linear
 
-  cache: REDIS
-  # always_raise: [
-  #   Geocoder::OverQueryLimitError,
-  #   Geocoder::RequestDenied,
-  #   Geocoder::InvalidRequest,
-  #   Geocoder::InvalidApiKey
-  # ]
 )
