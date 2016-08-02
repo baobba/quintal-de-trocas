@@ -1,6 +1,6 @@
 class ToysController < ApplicationController
-  before_action :set_toy, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show, :index_near]
+  before_action :set_toy, only: [:show, :edit, :update, :destroy, :exchange]
+  before_action :authenticate_user!, except: [:index, :show, :index_near, :exchange]
 
   def index
     @bs_container = false
@@ -16,13 +16,6 @@ class ToysController < ApplicationController
 
   def show
     @toy_images = @toy.toy_images.all
-    @exchange = @toy.exchanges.new
-
-    @exchange.exchange_messages.build(
-      user_from: current_user.id,
-      user_id: current_user.id,
-      user_to: @toy.user.id
-    ) if current_user && @toy.user
 
     respond_to do |format|
       format.html { }
@@ -66,6 +59,21 @@ class ToysController < ApplicationController
     @toys = Toy.near(location, zoom, :units => :km) || nil
     @toys = @toys.map{|f| [f.title, f.latitude, f.longitude, "<div class='info_content'><p class='lead' style='margin: 5px 0 10px 0;font-size: 16px;line-height: 120%;'><a href='#{toy_url(f)}'>#{f.title}</a></p><div style='margin-left:15px;' class='pull-right'><img src='#{f.toy_images.first.image.url(:thumb) if f.toy_images.first}' class='img-thumbnail' width='80'></div><small class='text-muted'>#{f.description[0..100]} ...</small></div>"]} if @toys
     render :json => @toys
+  end
+
+  def exchange
+    @exchange = @toy.exchanges.new
+
+    @exchange.exchange_messages.build(
+      user_from: current_user.id,
+      user_id: current_user.id,
+      user_to: @toy.user.id
+    ) if current_user && @toy.user
+
+    respond_to do |format|
+      format.html {render layout: false}
+      format.js
+    end
   end
 
 

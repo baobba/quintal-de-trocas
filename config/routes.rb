@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
     resources :toys, path: 'brinquedos' do
       get 'index_near', on: :collection
+      get 'exchange', on: :member
     end
 
     get 'meus-brinquedos' => 'toys#my_toys', as: :my_toys

@@ -83,27 +83,66 @@ $(document).ready(function() {
 
 
 
-  var logged = false;
+  var logged = false,
+      source;
 
   $(document).on("click", ".login-button", function(e) {
     e.preventDefault();
+    console.log("oi");
+
+    source = $(this);
     $('#login').modal('show');
   });
 
+  $(document).on("click", ".exchange-toy", function(e) {
+    e.preventDefault();
 
-  $("form#login-box").on('ajax:success', function(e, data6, status, xhr){
+    console.log(logged);
+
+    if (logged){
+
+      var modal = $('#exchange').modal();
+
+      modal.find('.modal-body')
+        .load($(this).attr('href'), function (responseText, textStatus) {
+          if ( textStatus === 'success' || textStatus === 'notmodified') {
+            modal.show();
+          }
+        });
+    }
+  });
+
+
+  $("form#login-box").on('ajax:success', function(e, data, status, xhr){
     console.log("hiii");
-    console.log(e);
-    console.log(data6);
-    console.log(status);
-    console.log(xhr);
+    // console.log(e);
+    // console.log(data);
+    // console.log(status);
+    // console.log(xhr);
+    
+    console.log("e agora?");
+    console.log(data.success);
+    console.log("source e: ", source);
+    console.log($("a[data-toggle='exchange']"));
+    console.log(source.attr("data-target"));
+    source.data('data-toggle', 'modal').data('remote', 'true');
 
-    $('#login').modal('hide');
-    $('#myModal').modal('show');
+    if (data.success) {
+      logged = true;
+      if (logged) {
+        $('.go-private').removeClass('login-button');
+      }
 
-    logged = true;
-    if (logged) {
-      $('.go-private').removeClass('login-button');
+      source.attr('data-toggle', 'modal')
+
+      $('#login').modal('hide')
+      $('#login').on('hidden.bs.modal', function(e) {
+        console.log("fechou modal");
+        source.click();
+      });
+
+    } else {
+      console.log('failure!');
     }
 
   }).on('ajax:error',function(e, xhr, status, error){
@@ -113,43 +152,6 @@ $(document).ready(function() {
     logged = false;
     $(".status").html(xhr.responseText);
   });
-
-  $('#login_modal').submit(function(e) {
-    e.preventDefault();
-    var param = $(this).serialize();
-
-    $('#login').find('input[type=submit]').val("Aguarde...").attr('disabled','disabled');
-
-    $.ajax({
-      url: $(this).attr('action'),
-      data: param,
-      dataType: "json"
-    }).success(function(msg){
-
-      console.log("Modal Type: "+modalType);
-
-      logged = true;
-      console.log("agora esta logado");
-      $('.go-private').removeClass('login-button');
-
-      if (modalType !== undefined && modalType === "modal") {
-
-        $('#login').modal('hide');
-        $(ref).click();
-
-      } else if (modalType !== undefined && modalType !== "modal") {
-
-        $('#login').modal('hide');
-
-        $this.attr("data-toggle", "modal");
-        $this.click();
-
-      } else {
-      }
-      console.log("hi2");
-    });
-  });
-
 
   if ($('body.toys-index').length) {
     var $sidebar   = $("#map_wrapper"),
