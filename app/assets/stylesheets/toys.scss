@@ -50,6 +50,14 @@ div.toy-filter {
     display: block;
   }
 
+  input[name='city'] {
+    width: 150px;
+  }
+  
+  input[name='within'] {
+    width: 60px;
+  }
+
   input[name='within'] {
     width: 60px;
   }

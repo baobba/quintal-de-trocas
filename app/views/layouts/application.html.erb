@@ -4,7 +4,7 @@
   <title>QuintalV2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:400,400italic,700'>
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 </head>
@@ -12,6 +12,7 @@
 <body class="<%= params[:controller] %> <%= params[:controller] %>-<%= params[:action] %>">
 
   <%= render '/layouts/header' %>
+  <%= render '/pages/intro' if current_page?(root_url) %>
 
   <% if content_for?(:subheader) %>
     <div class="sub-header">
