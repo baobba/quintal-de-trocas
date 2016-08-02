@@ -1,6 +1,39 @@
-<h1><%= @place.title %></h1>
-<p><%= @place.zipcode %></p>
-<p><%= @place.city %></p>
-<p><%= @place.state %></p>
+<% content_for :subheader do %>
+  <h1>Pontos de troca</h1>
+  <p class="lead">O Quintal de Trocas é 100% gratuito</p>
+<% end %>
 
-<%= link_to 'Edit', edit_place_path(@place) %> |
+<div class="row">
+  <div class="col-sm-8">
+
+    <h1><%= @place.title %></h1>
+    <p><%= @place.zipcode %></p>
+    <p><%= @place.city %></p>
+    <p><%= @place.state %></p>
+
+    <hr>
+
+    <p class="lead">Descrição</p>
+    <%= simple_format @place.description %>
+
+  </div>
+  <div class="col-sm-4">
+    <div class="panel panel-default list-related">
+      <div class="panel-heading">
+        <h3 class="panel-title">Outros Pontos de troca em <%= @place.state.upcase %></h3>
+      </div>
+      <div class="panel-body">
+        <ul class="list-unstyled">
+          <% @related.each do |place| %>
+            <li>
+              <%= link_to place.title, place %><br>
+              <small class="text-muted">
+                <span class="glyphicon glyphicon-map-marker"></span> <%= place.street %><br>
+              </small>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -15,13 +15,35 @@
         </div>
 
         <div class="form-group">
-          <label>Cidade:</label>
-          <%= f.text_field :city_eq, :class=> "form-control", value: (params[:city_eq] || lookup_ip_location.city) %>
-        </div>
-
-        <div class="form-group">
           <label>Estado:</label>
-          <%= f.select :state_eq, option_estados_for_select, { include_blank: "Selecione..." }, :class=> "form-control" %>
+          <%= f.select :state_eq, options_for_select([["Acre", "AC"],
+    ["Alagoas", "AL"],
+    ["Amapá", "AP"],
+    ["Amazonas", "AM"],
+    ["Bahia", "BA"],
+    ["Ceará", "CE"],
+    ["Distrito Federal", "DF"],
+    ["Espírito Santo", "ES"],
+    ["Goiás", "GO"],
+    ["Maranhão", "MA"],
+    ["Mato Grosso", "MT"],
+    ["Mato Grosso do Sul", "MS"],
+    ["Minas Gerais", "MG"],
+    ["Pará", "PA"],
+    ["Paraíba", "PB"],
+    ["Paraná", "PR"],
+    ["Pernambuco", "PE"],
+    ["Piauí", "PI"],
+    ["Rio de Janeiro", "RJ"],
+    ["Rio Grande do Norte", "RN"],
+    ["Rio Grande do Sul", "RS"],
+    ["Rondônia", "RO"],
+    ["Roraima", "RR"],
+    ["Santa Catarina", "SC"],
+    ["São Paulo", "SP"],
+    ["Sergipe", "SE"],
+    ["Tocantins", "TO"]
+  ], selected: (params[:state_eq] || lookup_ip_location.data["region_code"])), { include_blank: "Selecione...",  }, :class=> "form-control" %>
         </div>
       
         <div class="form-group">
@@ -48,8 +70,13 @@
   </div>
   <div class="col-sm-4">
 
-    <div class="xxx">
-      <p class="lead">Perguntas frequentes</p>
+    <div class="panel panel-default faq-box">
+      <div class="panel-body">
+        <p class="lead">Perguntas frequentes</p>
+        <a href="#" data-toggle="modal" data-target="#faq1"><span class="glyphicon glyphicon-question-sign"></span> O que é um Ponto de Trocas?</a>
+        <a href="#" data-toggle="modal" data-target="#faq2"><span class="glyphicon glyphicon-question-sign"></span> Ainda não tem Ponto de Trocas perto de você?</a>
+        <a href="#" data-toggle="modal" data-target="#faq3"><span class="glyphicon glyphicon-question-sign"></span> Quer ser um Ponto de Trocas?</a>
+      </div>
     </div>
 
     <div class="panel panel-default">
@@ -97,3 +124,69 @@
 
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="faq1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">O que é um Ponto de Trocas?</h4>
+      </div>
+      <div class="modal-body">
+        <p>É um estabelecimento parceiro do Quintal de Trocas que atua como uma referência física para os participantes do portal. O Ponto de Trocas compartilha dos mesmos valores do Quintal: sustentabilidade, consumo consciente e respeito a sociedade.</p>
+
+        <p>O Quintal de Trocas é 100% gratuito e crianças de todas as regiões do Brasil podem trocar utilizando o site.</p>
+
+        <p class="lead">Como?</p>
+        <ul>
+          <li>Pelos Correios (que atendem todo o Brasil)</li>
+          <li>Pessoalmente, em qualquer lugar pré-combinado entre as partes *</li>
+          <li>Ou através dos Pontos de Trocas ....</li>
+        </ul>
+
+        <small>(*) O Quintal sugere que a troca seja combinada num lugar movimentado (como museus, bibliotecas, etc.)</small>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="faq2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Ainda não tem Ponto de Trocas perto de você?</h4>
+      </div>
+      <div class="modal-body">
+        <p>Não se preocupe, você pode trocar normalmente combinando em algum lugar de sua preferência ou pelos correios. O Quintal de Trocas é para todo o Brasil e muitas pessoas já trocaram, mesmo não tendo um Ponto de Trocas por perto. De qualquer forma, estamos trabalhando intensamente para ampliar a lista e, a cada dia, mais e mais parceiros se juntam ao Quintal.</p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="faq3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Quer ser um Ponto de Trocas?</h4>
+      </div>
+      <div class="modal-body">
+        <p>Como a proposta do Quintal é criar uma aliança cada vez mais forte, foi desenvolvido um processo simples e específico para o cadastro e tratamento das empresas e instituições que também querem ser um Ponto de Trocas.</p>
+
+        <p>Basta preencher e enviar o formulário deste endereço: http://goo.gl/h1Y4Mi</p>
+
+        <p>Espalhados por diferentes cidades Brasil afora, estes pontos são verdadeiros alidados pela infância. É importante ressaltar que o Ponto de Trocas não precisa fazer nada além de se posicionar como um ponto de encontro para as crianças e responsáveis, simples assim!</p>
+
+        <p>Se você não é um Ponto de Trocas, mas conhece algum lugar bem bacana na sua cidade, mande um email para nós ou fale com o espaço da sua cidade sobre o Quintal.</p>
+
+        <p>Seja você um agente transformador:  contato@quintaldetrocas.com.br</p>
+
+      </div>
+    </div>
+  </div>
+</div>
