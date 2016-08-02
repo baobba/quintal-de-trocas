@@ -51,6 +51,8 @@ gem 'fog-aws'
 gem 'figaro'
 gem 'aws-sdk', '~> 2'
 
+gem 'puma'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
@@ -73,4 +75,10 @@ group :development do
   gem 'spring'
 
   gem "letter_opener"
+
+  gem 'capistrano', '~> 3.6'
+  gem 'capistrano3-puma'
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rvm'
 end
