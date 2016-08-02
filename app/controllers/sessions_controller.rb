@@ -1,6 +1,6 @@
 class SessionsController < Devise::SessionsController
   def create
-   resource = warden.authenticate!(:scope => resource_name, :recall => 'sessions#failure')
+    resource = warden.authenticate!(:scope => resource_name, :recall => 'sessions#failure')
     sign_in_and_redirect(resource_name, resource)
   end
 
@@ -8,10 +8,20 @@ class SessionsController < Devise::SessionsController
     scope = Devise::Mapping.find_scope!(resource_or_scope)
     resource ||= resource_or_scope
     sign_in(scope, resource) unless warden.user(scope) == resource
-    return render :json => {:success => true}
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: "Login efetuado com sucesso!" }
+      format.js { render :json => { :success => true } }
+    end
   end
 
   def failure
-    return render :json => {:success => false, :errors => ["Login failed."]}
+    respond_to do |format|
+      format.html {
+        redirect_to :back, notice: "E-mail ou senha inválidos."
+      }
+      format.js { render :json => { :success => false, :errors => ["E-mail ou senha inválidos."] } }
+    end
+
   end
 end

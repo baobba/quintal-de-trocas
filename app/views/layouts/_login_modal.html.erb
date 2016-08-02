@@ -9,7 +9,7 @@
       <div class="modal-body" style="padding-top: 30px;padding-bottom: 10px;">
         
         <%# form_tag( "", :id => 'login_modal') do %>
-        <%= form_for(resource, :as => resource_name, url: session_path(resource_name),:html => {:id => "login-box"}, :format => :json, :remote => true ) do |f| %>
+        <%= form_for(resource, :as => resource_name, url: session_path(resource_name),:html => {:id => "login-box"}, :format => :json, :remote => true, data: { type: :json }) do |f| %>
           
           <%= devise_error_messages! %>
           <span class="status"></span>

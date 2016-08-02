@@ -128,6 +128,8 @@ $(document).ready(function() {
     source.data('data-toggle', 'modal').data('remote', 'true');
 
     if (data.success) {
+      $(".status").html("");
+
       logged = true;
       if (logged) {
         $('.go-private').removeClass('login-button');
@@ -142,7 +144,7 @@ $(document).ready(function() {
       });
 
     } else {
-      console.log('failure!');
+      $(".status").html("<div class='alert alert-danger'>"+data.errors+"</div>");
     }
 
   }).on('ajax:error',function(e, xhr, status, error){
@@ -150,7 +152,7 @@ $(document).ready(function() {
     console.log(status);
     console.log(xhr);
     logged = false;
-    $(".status").html(xhr.responseText);
+    $(".status").html("<div class='alert alert-danger'>"+xhr.responseText+"</div>");
   });
 
   if ($('body.toys-index').length) {
