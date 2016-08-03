@@ -78,4 +78,20 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  config.action_mailer.raise_delivery_errors = true  
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+
+  config.action_mailer.default_url_options = { :host => "http://v2.quintaldetrocas.com.br" }
+
+  ActionMailer::Base.smtp_settings = {
+    :user_name => ENV["AWS_USERNAME"],
+    :password => ENV["AWS_PASSWORD"],
+    :domain => 'email.quintaldetrocas.com.br',
+    :address => 'email-smtp.us-west-2.amazonaws.com',
+    :port => 587,
+    :authentication => :login,
+    :enable_starttls_auto => true
+  }
+
 end
