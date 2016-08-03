@@ -109,14 +109,15 @@ namespace :import do
       
         user.id = id == "NULL" ? nil : id
         user.name = name == "NULL" ? nil : name
-        # if File.exist? File.expand_path Rails.root.join('public', "uploads/uploads/image/#{avatar}")
-        #   begin
-        #     user.avatar = avatar == "NULL" || avatar == "avatar.jpg" ? nil : File.open(Rails.root.join('public', "uploads/uploads/image/#{avatar}"))
-        #   rescue ActiveRecord::RecordInvalid => e
-        #     puts "erro upload...."
-        #     puts e
-        #   end
-        # end
+        if s3_url("image/#{avatar}")
+          begin
+            user.avatar = avatar == "NULL" || avatar == "avatar.jpg" ? nil : get_file("image/#{avatar}").public_url
+          rescue ActiveRecord::RecordInvalid => e
+            puts "erro upload...."
+            puts e
+          rescue
+          end
+        end
         user.birthday = birth_date == "NULL" ? nil : birth_date
         user.gender = gender == "NULL" ? nil : gender.upcase
         # user.cpf = cpf == "NULL" ? nil : cpf
@@ -240,7 +241,7 @@ namespace :import do
   desc "Import toy images"
   task :toy_images => [:environment] do
 
-    # ToyImage.destroy_all
+    ToyImage.destroy_all
     CSV.foreach("db/import/toy_image.csv") do |row|
 
       puts "..............................................."
@@ -253,13 +254,21 @@ namespace :import do
       toy = Toy.find_by_id(toy_id)
       # puts toy
 
-      
-      if s3_url("image/#{image}") 
-        begin
-          toy.toy_images.create! featured: (name == "main" ? true : false), remote_image_url: get_file("image/#{image}").public_url if toy
-        rescue ActiveRecord::RecordInvalid => e
-          puts e
+      toy_i = ToyImage.find_by_id(id)
+      if !toy_i
+        if toy && s3_url("image/#{image}")
+          begin
+            b=toy.toy_images.new
+            b.id = id
+            b.featured = (name == "main" ? true : false)
+            b.remote_image_url = get_file("image/#{image}").public_url
+            b.save
+          rescue ActiveRecord::RecordInvalid => e
+            puts e
+          end
         end
+      else
+        "ja possui imagem"
       end
 
     end
