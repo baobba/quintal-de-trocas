@@ -50,6 +50,7 @@ gem 'font-awesome-rails'
 gem 'fog-aws'
 gem 'figaro'
 gem 'aws-sdk', '~> 2'
+gem 'newrelic_rpm'
 
 gem 'puma'
 

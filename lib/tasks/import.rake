@@ -258,11 +258,10 @@ namespace :import do
       if !toy_i
         if toy && s3_url("image/#{image}")
           begin
-            b=toy.toy_images.new
-            b.id = id
-            b.featured = (name == "main" ? true : false)
-            b.remote_image_url = get_file("image/#{image}").public_url
-            b.save
+            toy.toy_images.create! id: id,
+              featured: (name == "main" ? true : false),
+              remote_image_url: get_file("image/#{image}").public_url
+            puts "salvou"
           rescue ActiveRecord::RecordInvalid => e
             puts e
           end
