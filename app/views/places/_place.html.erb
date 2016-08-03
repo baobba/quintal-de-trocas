@@ -1,21 +1,31 @@
 <li>
   <div class="row">
-    <div class="col-sm-7">
+    <div class="col-sm-6">
       <a href="#">
         <div class="content">
           <h2><%= link_to place.title, place %></h2>
 
           <p><%= place.street %></p>
+          <small>
+            <%= simple_format place.office_hours %>
+          </small>
         </div>
         <span class="content_bottom">
           <a class="show_login_popup" href="/collections"><span class="icon-heart"></span></a>
         </span>
       </a>
     </div>
-    <div class="col-sm-5">
+    <div class="col-sm-3">
+      <br>Fone:<br>
       <small>
-        Horario: <%= place.office_hours %><br>
-        Fone: <%= place.phone %>
+        <%= place.phone %>
+      </small>
+    </div>
+    <div class="col-sm-3">
+      <br>Local:<br>
+      <small>
+        <%= "#{strip_tags(place.neighborhood)}<br>".html_safe if !place.neighborhood.blank? %>
+        <%= place.city %> / <%= place.state %>
       </small>
     </div>
   </div>

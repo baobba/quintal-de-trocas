@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803125016) do
+ActiveRecord::Schema.define(version: 20160803132627) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -232,6 +232,9 @@ ActiveRecord::Schema.define(version: 20160803125016) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "image"
+    t.boolean  "is_active"
+    t.datetime "deleted_at"
+    t.string   "neighborhood"
   end
 
   add_index "toys", ["toy_age_id"], name: "index_toys_on_toy_age_id"
@@ -272,6 +275,7 @@ ActiveRecord::Schema.define(version: 20160803125016) do
     t.float    "latitude"
     t.float    "longitude"
     t.string   "avatar"
+    t.datetime "deleted_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

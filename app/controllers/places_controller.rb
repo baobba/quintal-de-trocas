@@ -6,25 +6,7 @@ class PlacesController < ApplicationController
   # GET /places.json
   def index
     @q = Place.ransack(params[:q])
-
-    @places = @q.result(distinct: true)
-
-    @places = if !params[:state_eq].blank?
-      @places.where(state: params[:state_eq])
-    elsif !lookup_ip_location.data["region_code"].blank?
-      @places.where(state: lookup_ip_location.data['region_code'])
-    end
-
-    @places = @places.order("id DESC").page params[:page]
-    # @places = @places.where(state: params[:state]) unless params[:state].blank?
-
-    respond_to do |format|
-      format.html { }
-      format.js { }
-      format.json {
-        render :json => Place.all.to_json
-      }
-    end
+    @places = @q.result(distinct: true).order("id DESC").page params[:page]
   end
 
   # GET /places/1
