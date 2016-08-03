@@ -1,5 +1,7 @@
 #encoding: utf-8 
 require 'csv'
+require 'action_view'
+include ActionView::Helpers::SanitizeHelper
 
 def format_cep(cep)
   if !cep.blank? && cep != "NULL" && cep.length > 5
@@ -165,12 +167,12 @@ namespace :import do
     Toy.destroy_all
 
     ToyAge.destroy_all
-    CSV.foreach("db/import/toy_age.csv") do |row|
+    CSV.foreach("public/system/import/toy_age.csv") do |row|
       ToyAge.create id: row[0], title: row[1]
     end
 
     ToyCategory.destroy_all
-    CSV.foreach("db/import/toy_category.csv") do |row|
+    CSV.foreach("public/system/import/toy_category.csv") do |row|
       ToyCategory.create id: row[0], title: row[1]
     end
 
@@ -242,7 +244,7 @@ namespace :import do
   task :toy_images => [:environment] do
 
     ToyImage.destroy_all
-    CSV.foreach("db/import/toy_image.csv") do |row|
+    CSV.foreach("public/system/import/toy_image.csv") do |row|
 
       puts "..............................................."
       id = row[0]
@@ -278,7 +280,7 @@ namespace :import do
   task :exchanges => [:environment] do
 
     Exchange.destroy_all
-    CSV.foreach("db/import/exchange.csv") do |row|
+    CSV.foreach("public/system/import/exchange.csv") do |row|
 
       puts "..............................................."
       id = row[0]
@@ -321,7 +323,7 @@ namespace :import do
   task :exchange_messages => [:environment] do
 
     ExchangeMessage.destroy_all
-    CSV.foreach("db/import/exchange_message.csv") do |row|
+    CSV.foreach("public/system/import/exchange_message.csv") do |row|
 
       # puts row
 
@@ -357,7 +359,7 @@ namespace :import do
   task :news => [:environment] do
 
     Article.destroy_all
-    CSV.foreach("db/import/news.csv") do |row|
+    CSV.foreach("public/system/import/news.csv") do |row|
 
       # puts row
 
@@ -405,6 +407,54 @@ namespace :import do
       puts article.errors.full_messages if !article.valid?
 
       if article.save
+      end
+
+    end
+    
+  end
+
+  desc "Import exchange point"
+  task :places => [:environment] do
+
+    Place.destroy_all
+    CSV.foreach("public/system/import/exchange_point.csv") do |row|
+
+      puts "..............................................."
+      id = row[0]
+      name = row[1]
+      address = row[2]
+      active = row[3]
+      ordering = row[4]
+      address_no = row[5]
+      zip_code = row[6]
+      complement = row[7]
+      state = row[8]
+      city = row[9]
+      neighborhood = row[10]
+      phone = row[11]
+      image = row[12]
+      offer = row[13]
+      description = row[14]
+
+      place = Place.new
+      
+      place.id = id == "NULL" ? nil : id
+      place.title = name == "NULL" ? nil : strip_tags(name)
+      place.street = address == "NULL" ? nil : address
+      place.is_active = active == "NULL" ? nil : active
+      # place.address_no = address_no == "NULL" ? nil : address_no
+      place.zipcode = zip_code == "NULL" ? nil : format_cep(zip_code)
+      place.neighborhood = complement == "NULL" ? nil : complement
+      place.state = state == "NULL" ? nil : state.upcase
+      place.city = city == "NULL" ? nil : city
+      place.office_hours = neighborhood == "NULL" ? nil : neighborhood
+      place.phone = phone == "NULL" ? nil : phone
+
+      puts id
+      puts place.inspect if !place.valid?
+      puts place.errors.full_messages if !place.valid?
+
+      if place.save
       end
 
     end
