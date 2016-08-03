@@ -11,7 +11,7 @@ class ToysController < ApplicationController
       @q = Toy.includes(:toy_category, :toy_age).search(params[:q])
     end
 
-    @toys = @q.result(distinct: true).order("id DESC").page params[:page]
+    @toys = @q.result(distinct: true).order(Rails.env.development? ? "id DESC" : "distance DESC").page params[:page]
   end
 
   def show
