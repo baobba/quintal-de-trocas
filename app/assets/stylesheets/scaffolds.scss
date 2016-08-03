@@ -6,7 +6,7 @@ header {
   border-bottom: 1px solid #eee;
   padding: 15px 0;
   margin-bottom: 25px;
-  background: #fff url('paper-bg.png') repeat;
+  background: #fff asset_url('paper-bg.png') repeat;
 
   &.no-margin {
     margin-bottom: 0
@@ -74,7 +74,7 @@ a {
 .home-destaque {
   display: block;
   min-height: 250px;
-  background: #fab46c url('home-destaque.jpg') no-repeat center center;
+  background: #fab46c asset_url('home-destaque.jpg') no-repeat center center;
   color: #ffffff;
   -webkit-background-size: 100% 100%;
   -moz-background-size: 100% 100%;
@@ -274,7 +274,7 @@ ul.cards {
     }
 
     .thumb {
-      background: #eee url('no-image.png') no-repeat center center;
+      background: #eee asset_url('no-image.png') no-repeat center center;
       background-size: 70%;
       text-align: center;
       height: 130px;
@@ -308,7 +308,7 @@ ul.cards {
 }
 
 .sub-header {
-  background: #f8ab43 url('bg-dots.png') repeat;
+  background: #f8ab43 asset_url('bg-dots.png') repeat;
   padding: 20px 0;
   margin-bottom: 25px;
   border-top: 1px solid #e58a2c;
@@ -442,7 +442,7 @@ footer {
   margin-top: 35px;
   border-top: 10px solid #fcdc43;
   color: #444;
-  background: #fff url('paper-bg.png') repeat;
+  background: #fff asset_url('paper-bg.png') repeat;
 
   .lead {
     font-size: 19px;
