@@ -5,7 +5,7 @@ set :repo_url, 'https://github.com/baobba/quintal-de-trocas'
 set :branch, :master
 set :deploy_to, '/home/deploy/quintal'
 set :pty, true
-set :linked_files, %w{config/database.yml config/application.yml}
+set :linked_files, %w{config/database.yml config/application.yml public/robots.txt}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
 set :keep_releases, 5
 set :rvm_type, :user
