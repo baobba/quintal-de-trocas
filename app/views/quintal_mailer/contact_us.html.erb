@@ -1,0 +1,14 @@
+<p>
+  Nome: <%= @message.name %><br>
+  Email: <%= @message.email %><br>
+  Local: <%= @message.city %> / <%= @message.state %>
+</p>
+
+<hr>
+
+<p>Assunto: <%= @message.subject %></p>
+
+<p>
+  Mensagem:<br>
+  <%= simple_format @message.message %>
+</p>

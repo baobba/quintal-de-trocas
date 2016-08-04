@@ -22,4 +22,9 @@ class QuintalMailer < ApplicationMailer
     @user = @toy.user
     mail(to: @user.email, subject: 'Seu produto foi recebido')
   end
+
+  def contact_us(message)
+    @message = message
+    mail(to: "contato@quintaldetrocas.com.br", subject: 'Novo contato pelo site')
+  end
 end

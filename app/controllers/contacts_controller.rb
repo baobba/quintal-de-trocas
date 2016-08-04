@@ -6,24 +6,25 @@ class ContactsController < ApplicationController
 
   def new
     @message = Contact.new
+    render :file => "pages/contact_us"
   end
 
   def create
-    @message = Contact.new(message_params)
+    @message = Contact.new(contact_params)
 
     if @message.valid?
-      # MessageMailer.new_message(@message).deliver
-      redirect_to contact_path, notice: "Your messages has been sent."
+      QuintalMailer.contact_us(@message).deliver_now
+      redirect_to contacts_path, notice: "Sua mensagem foi enviada com sucesso"
     else
-      flash[:alert] = "An error occurred while delivering this message."
-      render :new
+      flash[:error] = "Por favor, preencha os campos necessários."
+      render :file => "pages/contact_us"
     end
   end
 
 private
 
-  def message_params
-    params.require(:message).permit(:name, :email, :content)
+  def contact_params
+    params.require(:contact).permit(:name, :email, :city, :state, :subject, :message)
   end
 
 end

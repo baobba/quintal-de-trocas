@@ -26,6 +26,4 @@ Repositório do projeto Quintal de Trocas
 
 - Show place page layout
 - Change 1 credit for 1 toy
-- Finish contact us page
 - Fix ordering on tays home
-- Setup emails

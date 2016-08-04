@@ -6,13 +6,6 @@ class Contact
 
   attr_accessor :name, :email, :city, :state, :subject, :message
 
-  validates :name,
-    presence: true
-
-  validates :email,
-    presence: true
-
-  validates :message,
-    presence: true
+  validates :name, :email, :city, :message, presence: true
 
 end
