@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
   var logged, source;
-  logged = Boolean($("#check-login").text());
-
+  logged = $("#check-login").text() === "true" ? true : false;
+  
   /**
    * General Masks
    */
@@ -80,6 +80,7 @@ $(document).ready(function() {
     $('#login').modal('show');
   });
 
+
   $(document).on("click", ".exchange-toy", function(e) {
     e.preventDefault();
 
@@ -123,10 +124,13 @@ $(document).ready(function() {
 
       source.attr('data-toggle', 'modal')
 
-      $('#login').modal('hide')
+      $('#login').modal('hide');
       $('#login').on('hidden.bs.modal', function(e) {
         console.log("fechou modal");
-        source.click();
+        
+        if(logged) {
+          source.click();
+        }
       });
 
     } else {
