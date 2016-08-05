@@ -1,6 +1,71 @@
 $(document).ready(function() {
   
+  if ($('body.places-edit').length || $('body.places-new').length || $('body.places-update').length) {
 
+    $('#place_zipcode').mask('00000-000');
+
+    var SPMaskBehavior = function (val) {
+      return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+    },
+    spOptions = {
+      onKeyPress: function(val, e, field, options) {
+          field.mask(SPMaskBehavior.apply({}, arguments), options);
+        }
+    };
+
+    $('#place_phone').mask(SPMaskBehavior, spOptions);
+    $('#place_phone_alt').mask(SPMaskBehavior, spOptions);
+
+    $("#place_zipcode").on('keyup change', function() {
+      var cep = $(this).val();
+      if(cep.length >= 8) {
+        $(".cep-feedback").html("<i class='icon-spinner icon-spin'></i> Aguarde...");
+        $.getJSON("/busca-por-cep?cep=" + cep,
+          function(data) {
+            if(data.cep) {
+              $(".cep-feedback").html("<span class='glyphicon glyphicon-ok' style='color:green'></span>");
+              $("#place_street").val(data.tipo_logradouro + ' ' + data.logradouro);
+              $("#place_neighborhood").val(data.bairro);
+              $("#place_city").val(data.cidade);
+              $("#place_state").val(data.uf);
+            } else {
+              $(".cep-feedback").html("<span class='glyphicon glyphicon-warning-sign' style='color:red'></span> CEP não encontrado, por favor preencha-o manualmente.");
+              // $(".endereco").find('input:text').val('');
+            }
+          }
+        );
+      } else {
+        $(".cep-feedback").html("");
+      }
+    });
+
+    $(".btn-footer").on("click", function(ev) {
+      ev.preventDefault();
+      console.log($(this).attr("href"));
+
+      $.ajax({
+        url: $(this).attr("href"),
+        success: function(data){
+          console.log(data);
+          $("#footer_text .modal-content").html(data);
+        }
+
+      })
+    });
+
+
+    $(document).on("change", "#place_zipcode", function(){
+      console.log("kkk");
+      $(".add_fields").show();
+    });
+
+    $(".endereco").on("change", "input", function(){
+      console.log("formulario alterado....");
+      codeAddress();
+    });
+  }
+
+  
   if ($('body.places').length) {
 
     console.log("Place page...");

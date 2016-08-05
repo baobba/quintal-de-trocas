@@ -34,6 +34,7 @@ class PlacesController < ApplicationController
   # POST /places.json
   def create
     @place = current_user.places.new(place_params)
+    @place.is_active = false
 
     respond_to do |format|
       if @place.save
@@ -78,6 +79,6 @@ class PlacesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def place_params
-      params.require(:place).permit(:title, :office_hours, :phone, :phone_alt, :description, :zipcode, :street, :city, :state, :latitude, :longitude)
+      params.require(:place).permit(:title, :office_hours, :phone, :phone_alt, :description, :zipcode, :street, :complement, :neighborhood, :city, :state, :latitude, :longitude)
     end
 end

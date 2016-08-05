@@ -19,11 +19,7 @@
   <%= f.input :phone %>
   <%= f.input :phone_alt %>
 
-  <%= f.input :zipcode %>
-  <span class="cep-feedback"></span>
-  <%= f.input :street %>
-  <%= f.input :city %>
-  <%= f.input :state %>
+  <%= render :partial => '/devise/registrations/address', :locals => { :f => f } %>
 
   <%= f.button :submit, class: "btn btn-success btn-lg" %>
 <% end %>

@@ -2,7 +2,7 @@ class Place < ActiveRecord::Base
 
   belongs_to :user
 
-  validates :title, presence: true
+  validates :title, :office_hours, :phone, :zipcode, :street, :city, :state, presence: true
 
   geocoded_by :zipcode
   after_validation :geocode
