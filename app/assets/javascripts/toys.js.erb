@@ -34,7 +34,7 @@ $(document).ready(function() {
     script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=initialize";
     document.body.appendChild(script);
   }
-  
+
 
   if ($('body.toys-edit').length || $('body.toys-new').length) {
     
@@ -224,15 +224,7 @@ function initialize() {
         });
 
         // Allow each marker to have an info window
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-                infoWindow.setContent(markers[i][markers[i].length-1]);
-                infoWindow.open(map, marker);
-            }
-        })(marker, i));
-
-        // Allow each marker to have an info window
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
             return function() {
                 infoWindow.setContent(markers[i][markers[i].length-1]);
                 infoWindow.open(map, marker);
