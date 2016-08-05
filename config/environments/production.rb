@@ -82,8 +82,9 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
 
+  config.action_mailer.asset_host = "http://v2.quintaldetrocas.com.br"
   config.action_mailer.default_url_options = { :host => "http://v2.quintaldetrocas.com.br" }
-
+  
   ActionMailer::Base.smtp_settings = {
     :user_name => ENV["AWS_USERNAME"],
     :password => ENV["AWS_PASSWORD"],

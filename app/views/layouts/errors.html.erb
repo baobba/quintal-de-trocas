@@ -23,15 +23,16 @@
     <div class="row">
       <div class="col-md-12">
         <div class="text-center">
-          <%= link_to (image_tag 'logo-horizontal.svg', width: 400), root_path %>
+          <%= link_to (image_tag 'logo-quintal.svg', width: 250), root_path %>
         </div>
         <div class="error-template">
           <h1>Oops!</h1>
           <h2>Página não encontrada</h2>
 
           <div class="error-actions">
-            <a href="http://www.quintaldetrocas.com.br" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span> Voltar para página inicial </a>
-            <a href="http://www.quintaldetrocas.com.br/contato" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-envelope"></span> Entre em contato</a>
+            <%= link_to "<span class='glyphicon glyphicon-home'></span> Voltar para página inicial".html_safe, root_path, class: "btn btn-primary" %>
+
+            <%= link_to "<span class='glyphicon glyphicon-envelope'></span> Entre em contato".html_safe, contact_us_path, class: "btn btn-default" %>
           </div>
         </div>
       </div>
