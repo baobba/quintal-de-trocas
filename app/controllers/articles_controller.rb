@@ -1,7 +1,7 @@
 class ArticlesController < InheritedResources::Base
 
   def index
-    @articles = Article.all.page params[:page]
+    @articles = Article.order("id DESC").page params[:page]
   end
 
   def show
