@@ -13,9 +13,12 @@ pt-BR:
         phone: Telefone
         zipcode: CEP
         street: Rua
+        complement: Complemento
+        neighborhood: Bairro
         city: Cidade
         state: Estado
         username: Nome de usuário
+        avatar: Foto
       user_children:
         name: Nome completo
         birthday: Ano nasc
@@ -40,6 +43,8 @@ pt-BR:
         phone_alt: Telefone alt.
         zipcode: CEP
         street: Rua
+        complement: Complemento
+        neighborhood: Bairro
         city: Cidade
         state: Estado
       exchange:

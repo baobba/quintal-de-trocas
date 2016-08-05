@@ -1,0 +1,96 @@
+<div class="row">
+
+  <div class="col-sm-6">
+    <%= f.input :zipcode %>
+    <span class="cep-feedback"></span>
+  </div>
+
+</div>
+
+<div class="endereco">
+
+  <div class="add_fields" style="display:block">
+
+    <div class="row">
+      <div class="col-sm-7">
+        <%= f.input :street %>
+      </div>
+      <div class="col-sm-5">
+        <%= f.input :complement %>
+      </div>
+    </div>
+    
+    <%= f.input :neighborhood %>
+
+    <div class="row">
+      <div class="col-sm-7">
+        <%= f.input :city %>
+      </div>
+      <div class="col-sm-5">
+        <div class="form-group">
+          <%= f.label :state %>
+          <%= f.select :state, [["Acre", "AC"],
+            ["Alagoas", "AL"],
+            ["Amapá", "AP"],
+            ["Amazonas", "AM"],
+            ["Bahia", "BA"],
+            ["Ceará", "CE"],
+            ["Distrito Federal", "DF"],
+            ["Espírito Santo", "ES"],
+            ["Goiás", "GO"],
+            ["Maranhão", "MA"],
+            ["Mato Grosso", "MT"],
+            ["Mato Grosso do Sul", "MS"],
+            ["Minas Gerais", "MG"],
+            ["Pará", "PA"],
+            ["Paraíba", "PB"],
+            ["Paraná", "PR"],
+            ["Pernambuco", "PE"],
+            ["Piauí", "PI"],
+            ["Rio de Janeiro", "RJ"],
+            ["Rio Grande do Norte", "RN"],
+            ["Rio Grande do Sul", "RS"],
+            ["Rondônia", "RO"],
+            ["Roraima", "RR"],
+            ["Santa Catarina", "SC"],
+            ["São Paulo", "SP"],
+            ["Sergipe", "SE"],
+            ["Tocantins", "TO"]
+          ], {}, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="hide">
+
+  <div id="mapCanvas"></div>
+
+  <div id="infoPanel">
+    <b>Marker status:</b>
+    <div id="markerStatus"><i>Click and drag the marker.</i></div>
+    <b>Current position:</b>
+    <div id="info"></div>
+    <b>Closest matching address:</b>
+    <div id="address"></div>
+
+    <br>
+    <br>
+    <div id="panel">
+      <input id="city_country" type="textbox" value="Berlin, Germany">
+      <input type="button" value="Geocode" onclick="codeAddress()">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :latitude %>
+    <%= f.text_field :latitude %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :longitude %>
+    <%= f.text_field :longitude %>
+  </div>
+</div>

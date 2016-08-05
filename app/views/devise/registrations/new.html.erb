@@ -7,7 +7,7 @@
         <h4><%= t('.sign_up', :default => "Sign up") %></h4>
       </div>
       <div class="panel-body">
-        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f| %>
+        <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f| %>
           <div class="form-group">
             <%= f.label :email %>
             <%= f.email_field :email, autofocus: true, class: "form-control" %>
@@ -21,42 +21,45 @@
             <%= f.password_field :password_confirmation, class: "form-control" %>
           </div>
 
+          <hr>
 
+          <%= f.input :name %>
+
+          <div class="row">
+            <div class="col-sm-4">
+              <%= f.input :phone, placeholder: "(DDD) 0000-0000" %>
+            </div>
+            <div class="col-sm-3">
+              <%= f.input :birthday, class: "form-control" %>
+            </div>
+            <div class="col-sm-5">
+              <div class="form-group">
+                <%= f.label :gender %><br>
+                <label class="radio-inline">
+                  <%= f.radio_button :gender, "M"  %> Masc
+                </label>
+                <label class="radio-inline">
+                  <%= f.radio_button :gender, "F" %> Fem
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <%= f.input :avatar, as: :file %>
 
           <hr>
 
-      <div class="field">
-        <%= f.label :name %><br />
-        <%= f.text_field :name %>
-      </div>
+          <%= render :partial => '/devise/registrations/address', :locals => { :f => f } %>
+          
+          <br>
 
-      <div class="field">
-        <%= f.label :birthday %><br />
-        <%= f.text_field :birthday %>
-      </div>
+          <div class="actions">
+            <%= f.submit class: "btn btn-lg btn-success" %>
+          </div>
 
-      <div class="field">
-        <%= f.label :gender %><br />
-        <%= f.text_field :gender %>
-      </div>
-
-      <div class="field">
-        <%= f.label :phone %><br />
-        <%= f.text_field :phone %>
-      </div>
-
-      <div class="field">
-        <%= f.label :username %><br />
-        <%= f.text_field :username %>
-      </div>
-
-
-      
-          <%= f.submit t('.sign_up', :default => "Sign up"), class: "btn btn-primary" %>
         <% end %>
       </div>
     </div>
-    <%= render "devise/shared/links" %>
 
   </div>
 </div>
