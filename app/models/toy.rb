@@ -11,7 +11,7 @@ class Toy < ActiveRecord::Base
 
   accepts_nested_attributes_for :toy_images, :allow_destroy => true, :reject_if => proc { |attributes| attributes['image'].blank? }
 
-  validates :title, :description, :toy_category, :toy_age, presence: true
+  validates :title, :description, :toy_category_id, :toy_age_id, presence: true
 
   paginates_per 12
 
