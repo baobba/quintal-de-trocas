@@ -9,17 +9,21 @@
       </div>
       <div class="modal-body">
 
-        <!-- <div class="alert alert-info">A pessoa receberá uma mensagem e solicitará um de seus brinquedos para a troca.</div> -->
-
-        <div class="alert alert-info">
-          A pessoa receberá essa mensagem e irá decidir se troca por 1 crédito ou algum brinquedo da sua lista.<br>
-          <small class="text-muted">1 crédito vale um brinquedo dentro da plataforma</small>
-        </div>
-
         <%= simple_form_for(@exchange) do |f| %>
           <%= f.hidden_field :user_id, value: (current_user ? current_user.id : nil) %>
           <%= f.hidden_field :toy_to %>
           
+          <% if current_user.credits.count > 0 %>
+            <div class="well hide"><strong>Você possui <%= current_user.credits.count %> crédito(s).</strong><br><%= f.radio_button :exchange_type, "credit" %> Quero oferecer 1 crédito na troca por este brinquedo</div>
+          <% else %>
+            <!-- n possui credito -->
+          <% end %>
+
+          <div class="alert alert-info">
+            A pessoa receberá essa mensagem e irá decidir se aceita fazer a troca ou não.
+          </div>
+
+
           <%= f.simple_fields_for :exchange_messages do |ff| %>
             <%= ff.hidden_field :user_id, value: current_user.id %>
             <%= ff.hidden_field :user_from, value: current_user.id %>

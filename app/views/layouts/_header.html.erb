@@ -36,12 +36,12 @@
                 <li><%= link_to "Alterar dados pessoais", edit_user_registration_path %></li>
                 <li><%= link_to "Meus brinquedos", my_toys_path %></li>
                 <li><%= link_to "Minhas trocas", my_exchanges_path %></li>
-                <li><%= link_to "Meus créditos", my_credits_path %></li>
+                <li class="hide"><%= link_to "Meus créditos", my_credits_path %></li>
                 <li><%= link_to "Meus pontos de troca", my_places_path %></li>
                 <li><%= link_to "Sair", destroy_user_session_path, :method => :delete %></li>
               </ul>
             </li>
-            <li><%= link_to "<span class='fa fa-gift'></span> #{current_user.credits.count}".html_safe, my_credits_path %></li>
+            <li class="hide"><%= link_to "<span class='fa fa-gift'></span> #{current_user.credits.count}".html_safe, my_credits_path %></li>
           <% else %>
               <li><%= link_to "Login", new_user_session_path %></li>
           <% end %>

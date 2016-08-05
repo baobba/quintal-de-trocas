@@ -68,7 +68,7 @@ class ExchangesController < ApplicationController
         exchange_id: @exchange.id,
       ) if !@exchange.credit
     elsif !exchange_params[:finalized].nil?
-      @exchange.credit.destroy!
+      @exchange.credit.destroy! if @exchange.credit
     end
 
     respond_to do |format|

@@ -66,4 +66,9 @@ Rails.application.routes.draw do
   get 'politica-de-privacidade' => 'pages#privacy', as: 'privacy'
   get 'termos-e-condicoes' => 'pages#terms', as: 'terms'
 
+  get('/produtos/detalhe/:id', to: redirect do |params, request|
+    Rails.application.routes.url_helpers.toy_path(params[:id])
+  end)
+  # get '/produtos/detalhe/:id', to: redirect("/brinquedos/%{id}", status: 301)
+
 end

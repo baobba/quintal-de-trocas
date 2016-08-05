@@ -7,7 +7,7 @@
     </div>
     <div class="modal-body" style="background-color: #f6f6f6;">
 
-      <p class="lead text-center" style="margin: 15px 0 10px 0;">Escolha um dos brinquedos da lista ou troque por 1 crédito.</p><p class="text-center" style="margin-bottom:30px;">1 crédito vale um brinquedo dentro da plataforma.</p>
+      <p class="lead text-center" style="margin: 15px 0 10px 0;">Escolha um dos brinquedos da lista de <%= @exchange.user_from.first_name %>.</p>
 
       <hr>
 
@@ -15,10 +15,6 @@
         <div class="col-sm-4 text-center">
           <%= f.radio_button :exchange_type, "exchange" %><br>
           <strong>Escolher um brinquedo na lista de <%= @exchange.user.name %></strong>
-        </div>
-        <div class="col-sm-4 text-center">
-          <%= f.radio_button :exchange_type, "credit" %><br>
-          <strong>Prefiro trocar por<br>1 crédito</strong>
         </div>
         <div class="col-sm-4 text-center">
           <%= f.radio_button :exchange_type, "canceled" %><br>

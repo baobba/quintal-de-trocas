@@ -109,11 +109,11 @@
                 <%= f.input :finalized, label: false, prompt: "Selecione", as: :select, collection: [["Sim", true], ["Nao", false]] %>
                 <%= f.submit "Ok", class: "btn btn-sm btn-default" %>
               <% elsif @exchange.exchange_type == "credit" && @exchange.finalized.nil? %>
-                Aguardando a acusação de recebimento de <%= @exchange.from_user.first_name %> para liberação do crédito.
+                Aguardando a acusação de recebimento de <%= @exchange.from_user.first_name %>.
               <% elsif @exchange.exchange_type == "credit" && @exchange.finalized %>
-                <div class="alert alert-success">credito liberado</div>
+                <div class="alert alert-success">Troca finalizada</div>
               <% elsif @exchange.exchange_type == "credit" && !@exchange.finalized %>
-                <div class="alert alert-danger">credito negado</div>
+                <div class="alert alert-danger"><%= @exchange.from_user.first_name %> informou que ainda não recebeu.</div>
               <% end %>
 
             <% end %>
