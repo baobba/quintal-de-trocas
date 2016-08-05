@@ -26,4 +26,4 @@ Repositório do projeto Quintal de Trocas
 
 - Show place page layout
 - Change 1 credit for 1 toy
-- Fix ordering on tays home
+- Fix ordering on toys home
