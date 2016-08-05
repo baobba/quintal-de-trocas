@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>QuintalV2</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" crossorigin="anonymous">
+  <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+  <%= csrf_meta_tags %>
+  <style type="text/css">
+    .error-template {padding: 15px 15px 40px 15px;text-align: center;}
+    .error-actions {margin-top:35px;margin-bottom:15px;}
+    .error-actions .btn { margin-right:10px; }
+  </style>
+</head>
+
+<body class="errors">
+
+  <br>
+  <br>
+  <br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="text-center">
+          <%= link_to (image_tag 'logo-horizontal.svg', width: 400), root_path %>
+        </div>
+        <div class="error-template">
+          <h1>Oops!</h1>
+          <h2>Página não encontrada</h2>
+
+          <div class="error-actions">
+            <a href="http://www.quintaldetrocas.com.br" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span> Voltar para página inicial </a>
+            <a href="http://www.quintaldetrocas.com.br/contato" class="btn btn-default btn-lg"><span class="glyphicon glyphicon-envelope"></span> Entre em contato</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= javascript_include_tag 'application' %>
+  <%= render '/layouts/google_analytics' %>
+</body>
+</html>

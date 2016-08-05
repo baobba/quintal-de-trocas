@@ -70,5 +70,8 @@ Rails.application.routes.draw do
     Rails.application.routes.url_helpers.toy_path(params[:id])
   end)
   # get '/produtos/detalhe/:id', to: redirect("/brinquedos/%{id}", status: 301)
+  
+  match "/404", :to => "errors#not_found", :via => :all
+  match "/500", :to => "errors#internal_server_error", :via => :all
 
 end

@@ -15,4 +15,8 @@
     ga('set', 'dimension1', 'False');
   <% end %>
 
+  if($('body').hasClass('errors')) {
+    ga('send', 'event', 'error', '404', 'page: ' + document.location.pathname + document.location.search + ' ref: ' + document.referrer, undefined, {nonInteraction: true});
+  }
+
 </script>
