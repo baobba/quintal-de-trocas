@@ -40,7 +40,7 @@
   </div>
   
   <% if @toys %>
-    <div class="lead">
+    <div class="lead" style="margin-left: 20px;">
       Mostrando <strong><%= Toy.default_per_page >= @toys.size ? @toys.size : Toy.default_per_page %></strong> de <%= @toys.total_count %> brinquedos
     </div>
 

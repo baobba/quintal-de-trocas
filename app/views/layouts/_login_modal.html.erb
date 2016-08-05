@@ -35,8 +35,10 @@
         <% end %>
       </div>
       <div class="modal-footer">
-        <p><strong>Ainda não é cadastrado?</strong></p>
-        <p>Cadastre-se</p>
+        <div class="text-center">
+          <p><strong>Ainda não é cadastrado?</strong></p>
+          <%= link_to "Cadastre-se", new_registration_path(resource_name), class: "btn btn-sm btn-default" %>
+        </div>
       </div>
 
     </div>

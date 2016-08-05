@@ -1,12 +1,40 @@
 $(document).ready(function() {
 
-  if ($('body.toys-index').length) {
+  /**
+   * Keep map floating when scrolling 
+   */
 
-    // Asynchronously Load the map API
+  if ($('body.toys-index').length) {
+    var $sidebar   = $("#map_wrapper"),
+        $window    = $(window),
+        offset     = $sidebar.offset(),
+        $footer    = $('footer').offset().top,
+        topPadding = 0;
+
+    $window.scroll(function() {
+      if ($window.scrollTop() > offset.top) {
+        $sidebar.css('position','fixed');
+        $sidebar.css('top','0');
+
+      } else if ($(window).scrollTop() <= 100) {
+        $sidebar.css('position','');
+        $sidebar.css('top','');
+      }
+
+      if ($sidebar.offset().top + $sidebar.height() > $("footer").offset().top) {
+        $sidebar.css('top',-($sidebar.offset().top + $sidebar.height() - $("footer").offset().top));
+      }
+    });
+
+
+    /**
+     * Asynchronously Load the map API
+     */
     var script = document.createElement('script');
     script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=initialize";
     document.body.appendChild(script);
   }
+  
 
   if ($('body.toys-edit').length || $('body.toys-new').length) {
     
