@@ -1,17 +1,19 @@
 ActiveAdmin.register ExchangeMessage do
 
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-# permit_params :list, :of, :attributes, :on, :model
-#
-# or
-#
-# permit_params do
-#   permitted = [:permitted, :attributes]
-#   permitted << :other if params[:action] == 'create' && current_user.admin?
-#   permitted
-# end
+  menu parent: "Trocas", label: 'Mensagens'
 
+  index :title => "Mensagens de trocas" do
+
+    column :id
+    column :user_id
+    column :exchange_id
+    column :user_from
+    column :user_to
+    column :message
+    column :read_at
+    column :created_at
+
+    actions
+  end
 
 end

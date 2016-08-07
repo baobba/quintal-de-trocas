@@ -1,17 +1,8 @@
 ActiveAdmin.register Exchange do
 
-# See permitted parameters documentation:
-# https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-#
-  # permit_params :user_id
-#
-# or
-#
-  # permit_params do
-  #   permitted << :user_id
-  #   permitted
-  # end
-  index do
+  menu parent: 'Trocas', label: 'Trocas'
+
+  index :title => "Trocas" do
     column :id
     column :toy_from
     column :toy_to
@@ -22,8 +13,9 @@ ActiveAdmin.register Exchange do
     column :finalized_at
     column :accepted
     column :created_at
-    column :updated_at
     column :reason
+    
+    actions
   end
 
 end

@@ -76,7 +76,7 @@ namespace :import do
   desc "Import users"
   task :users => [:environment] do
 
-    file = "db/import/users.csv"
+    file = "public/system/import/users.csv"
 
     users_created = 0
     users_invalid = 0
@@ -157,6 +157,79 @@ namespace :import do
     puts " "
     puts "Usuarios criados: #{users_created}"
     puts "Usuarios invalidis: #{users_invalid}"
+
+  end
+
+  desc "Import users"
+  task :users_1 => [:environment] do
+
+    file = "public/system/import/users.csv"
+    CSV.foreach(file) do |row|
+
+      id = row[0]
+      address_no = row[9]
+      complement = row[10]
+      neighborhood = row[12]
+      newsletter = row[17]
+
+      user = User.find_by_id(id)
+
+      if user
+        user.id = id == "NULL" ? nil : id
+        user.street = address_no == "NULL" ? nil : [user.street, address_no].join(", ") if !user.street.blank? && !user.street.include?(",")
+        # user.address_no = address_no == "NULL" ? nil : address_no
+        user.complement = complement == "NULL" ? nil : complement
+        user.neighborhood = neighborhood == "NULL" ? nil : neighborhood
+
+        user.newsletter = newsletter == "NULL" ? nil : newsletter
+
+        puts id
+        puts user.street.to_s.include?(",")
+        puts user.street
+        puts user.errors.full_messages if !user.valid?
+        user.save if user.valid?
+
+        puts user.save
+      end
+
+      puts "------------------------------------------------------------------------"
+
+    end
+
+  end
+
+  desc "Import users"
+  task :users_1 => [:environment] do
+
+    file = "public/system/import/users.csv"
+    CSV.foreach(file) do |row|
+
+      id = row[0]
+      avatar = row[2]
+
+      user = User.find_by_id(id)
+      if user
+        if s3_url("image/#{avatar}")
+          begin
+            user.remote_avatar_url = avatar == "NULL" || avatar == "avatar.jpg" ? nil : get_file("image/#{avatar}").public_url
+          rescue ActiveRecord::RecordInvalid => e
+            puts "erro upload...."
+            puts e
+          rescue
+          end
+        end
+
+        puts id
+        puts user.errors.full_messages if !user.valid?
+        user.save if user.valid?
+
+        if user.save
+        end
+      end
+
+      puts "------------------------------------------------------------------------"
+
+    end
 
   end
 
@@ -381,7 +454,7 @@ namespace :import do
       if !article_ex
         article = Article.new
       
-        # article.id = id == "NULL" ? nil : id
+        article.id = id == "NULL" ? nil : id
         article.user_id = User.find_by_id(cms_news_author_id) ? User.find_by_id(cms_news_author_id).id : nil
         article.category = cms_news_category_id == "NULL" ? nil : convert_category_names(cms_news_category_id)
         article.title = name == "NULL" ? nil : name
