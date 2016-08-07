@@ -4,7 +4,7 @@ ActiveAdmin.register ExchangeMessage do
 
   index :title => "Mensagens de trocas" do
 
-    column :id
+    id_column
     column :user_id
     column :exchange_id
     column :user_from

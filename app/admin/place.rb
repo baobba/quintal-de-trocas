@@ -3,6 +3,7 @@ ActiveAdmin.register Place do
   menu label: 'Pontos de troca'
 
   index :title => "Pontos de troca" do
+    id_column
     column :title
     column :office_hours
     column :phone

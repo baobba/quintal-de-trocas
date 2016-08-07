@@ -199,7 +199,7 @@ namespace :import do
   end
 
   desc "Import users"
-  task :users_1 => [:environment] do
+  task :users_2 => [:environment] do
 
     file = "public/system/import/users.csv"
     CSV.foreach(file) do |row|

@@ -3,7 +3,7 @@ ActiveAdmin.register Exchange do
   menu parent: 'Trocas', label: 'Trocas'
 
   index :title => "Trocas" do
-    column :id
+    id_column
     column :toy_from
     column :toy_to
     column :user_id

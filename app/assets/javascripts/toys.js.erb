@@ -209,11 +209,10 @@ function initialize() {
       console.log(data);
       markers = data;
       
-      // Display multiple markers on a map
-      var infoWindow = new google.maps.InfoWindow({maxWidth: 200}), marker, i;
-
       // Loop through our array of markers & place each one on the map
       for( i = 0; i < markers.length; i++ ) {
+
+
         var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
         bounds.extend(position);
 
@@ -223,13 +222,61 @@ function initialize() {
           title: markers[i][0]
         });
 
+        var infowindow = new google.maps.InfoWindow({maxWidth: 200});
+        var content = markers[i][markers[i].length-1];
+        var ibTimeout;
+
         // Allow each marker to have an info window
-        google.maps.event.addListener(marker, 'mouseover', (function(marker, i) {
-            return function() {
-                infoWindow.setContent(markers[i][markers[i].length-1]);
-                infoWindow.open(map, marker);
-            }
-        })(marker, i));
+        google.maps.event.addListener(marker, 'mouseover', (function(marker, content, infowindow){
+          return function() {
+            // if (infowindow) {
+            //   infowindow.close();
+            // }
+
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+          }
+        })(marker, content, infowindow));
+
+        // google.maps.event.addListener(marker, 'mouseout', (function(marker, content, infowindow){ 
+        //   return function() {
+        //     ibTimeout = setTimeout(function(){
+        //       console.log("this");
+        //       console.log(infowindow);
+                
+        //       infowindow.close();
+        //     }, 1500);
+
+        //     // setTimeout(function(){
+        //     //   infowindow.close();
+        //     // }, 200);
+        //   };
+        // })(marker, content, infowindow));
+
+        google.maps.event.addListener(infowindow, 'domready', function(e){
+
+          console.log("load");
+          console.log("e", e);
+          // console.log(content);
+          // console.log(marker);
+          console.log(infowindow);
+          // infowindow.setContent(content);
+            
+            
+          // $('.gm-style-iw').on('mouseenter', function(e){
+          //   console.log("mouseenter");
+
+          //   clearTimeout(ibTimeout);
+          // });
+
+          // $('.gm-style-iw').on('mouseleave', function(e){
+          //   console.log("mouseleave");
+          //   // infowindow.setContent(content);
+          //   console.log(infowindow);
+          //   clearTimeout(ibTimeout);
+          //   // infowindow.close();
+          // });
+        });
 
         // Automatically center the map fitting all markers on the screen
         if (!is_moved){
@@ -240,6 +287,16 @@ function initialize() {
 
   }
 
-  google.maps.event.addListener(map,'idle',getMoveData);
+  google.maps.event.addListener(map,'dragend',getMoveData);
+  // google.maps.event.addListener(map,'zoom_changed',getMoveData);
+
+  // $(document).on('mousenter', '.info_content', function(e) {
+  //   console.log("mousenter");
+  // })
+  // $(document).on('mouseleave', '.info_content', function(e) {
+  //   console.log("mouseleave");
+  // });
+
+  
 
 }

@@ -3,7 +3,7 @@ ActiveAdmin.register User do
   menu label: 'Usuários'
 
   index :title => "Usuários" do
-    column :id
+    id_column
     column :name
     column :email
     # column :encrypted_password

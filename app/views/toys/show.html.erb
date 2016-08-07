@@ -117,7 +117,9 @@ function codeAddress() {
 		<p><span class="glyphicon glyphicon-user"></span> Cadastrado por</p>
 		<%= link_to @toy.user.name, user_path(@toy.user) %>
 		<div class="text-muted">
-			<%= @toy.user.street %><br>
+			<% if !@toy.user.neighborhood.blank? %>
+        <%= @toy.user.neighborhood %><br>
+      <% end %>
 			<%= @toy.user.city %> / <%= @toy.user.state %>
 		</div>
 	</div>

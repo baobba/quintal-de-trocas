@@ -15,8 +15,15 @@ permit_params :title, :description, :toy_category_id, :toy_category_id, :user_id
   menu parent: 'Brinquedos', label: 'Lista de brinquedos'
 
   index do
+    id_column
     column :title
-    column :descrition
+    column :toy_category_id
+    column :toy_age_id
+    column :user_id
+    column :zipcode
+    column :created_at
+    # column :image
+    column :is_active
 
     actions
   end
