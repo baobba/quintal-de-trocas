@@ -14,7 +14,7 @@ class ContactsController < ApplicationController
 
     if @message.valid?
       QuintalMailer.contact_us(@message).deliver_now
-      redirect_to contacts_path, notice: "Sua mensagem foi enviada com sucesso"
+      redirect_to contact_us_path, notice: "Sua mensagem foi enviada com sucesso"
     else
       flash[:error] = "Por favor, preencha os campos necessários."
       render :file => "pages/contact_us"
