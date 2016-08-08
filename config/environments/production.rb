@@ -82,14 +82,14 @@ Rails.application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
 
-  config.action_mailer.asset_host = "http://v2.quintaldetrocas.com.br"
-  config.action_mailer.default_url_options = { :host => "http://v2.quintaldetrocas.com.br" }
+  config.action_mailer.asset_host = "http://www.quintaldetrocas.com.br"
+  config.action_mailer.default_url_options = { :host => "http://www.quintaldetrocas.com.br" }
   
   ActionMailer::Base.smtp_settings = {
-    :user_name => ENV["AWS_USERNAME"],
-    :password => ENV["AWS_PASSWORD"],
-    :domain => 'email.quintaldetrocas.com.br',
-    :address => 'email-smtp.us-west-2.amazonaws.com',
+    :user_name => ENV["MAIL_USERNAME"],
+    :password => ENV["MAIL_PASSWORD"],
+    :address => ENV["MAIL_ADDRESS"],
+    :domain => ENV["MAIL_DOMAIN"],
     :port => 587,
     :authentication => :login,
     :enable_starttls_auto => true

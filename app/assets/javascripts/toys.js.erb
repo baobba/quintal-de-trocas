@@ -128,6 +128,7 @@ function initialize() {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, customMapTypeId]
     }
   };
+  var gmTime = false;
 
   // Display a map on the page
   map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
@@ -199,19 +200,13 @@ function initialize() {
   }
 
   function showPlaces(is_moved, latlng){
-    // request = {
-    //   location: currentLocation,
-    //   radius: 500,
-    //   types: ['store']
-    // };
-    // 
+
     $.getJSON("<%= Rails.application.routes.url_helpers.index_near_toys_path %>", latlng, function( data ) {
       console.log(data);
       markers = data;
       
       // Loop through our array of markers & place each one on the map
       for( i = 0; i < markers.length; i++ ) {
-
 
         var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
         bounds.extend(position);
@@ -222,61 +217,32 @@ function initialize() {
           title: markers[i][0]
         });
 
-        var infowindow = new google.maps.InfoWindow({maxWidth: 200});
         var content = markers[i][markers[i].length-1];
         var ibTimeout;
 
         // Allow each marker to have an info window
-        google.maps.event.addListener(marker, 'mouseover', (function(marker, content, infowindow){
+        google.maps.event.addListener(marker, 'mouseover', (function(marker, content, infoWindow){
           return function() {
-            // if (infowindow) {
-            //   infowindow.close();
-            // }
+            console.log("marker mouseover");
 
-            infowindow.setContent(content);
-            infowindow.open(map, marker);
+            if(typeof ibTimeout !== "undefined"){
+              clearTimeout(ibTimeout);
+            }
+
+            infoWindow.setContent(content);
+            infoWindow.open(map, marker);
           }
-        })(marker, content, infowindow));
+        })(marker, content, infoWindow));
 
-        // google.maps.event.addListener(marker, 'mouseout', (function(marker, content, infowindow){ 
-        //   return function() {
-        //     ibTimeout = setTimeout(function(){
-        //       console.log("this");
-        //       console.log(infowindow);
-                
-        //       infowindow.close();
-        //     }, 1500);
-
-        //     // setTimeout(function(){
-        //     //   infowindow.close();
-        //     // }, 200);
-        //   };
-        // })(marker, content, infowindow));
-
-        google.maps.event.addListener(infowindow, 'domready', function(e){
-
-          console.log("load");
-          console.log("e", e);
-          // console.log(content);
-          // console.log(marker);
-          console.log(infowindow);
-          // infowindow.setContent(content);
-            
-            
-          // $('.gm-style-iw').on('mouseenter', function(e){
-          //   console.log("mouseenter");
-
-          //   clearTimeout(ibTimeout);
-          // });
-
-          // $('.gm-style-iw').on('mouseleave', function(e){
-          //   console.log("mouseleave");
-          //   // infowindow.setContent(content);
-          //   console.log(infowindow);
-          //   clearTimeout(ibTimeout);
-          //   // infowindow.close();
-          // });
-        });
+        google.maps.event.addListener(marker, 'mouseout', (function(marker, infoWindow){ 
+          return function() {
+            ibTimeout = setTimeout(function(){
+              if (gmTime === false){
+                infoWindow.close();
+              }
+            }, 500);
+          };
+        })(marker, infoWindow));
 
         // Automatically center the map fitting all markers on the screen
         if (!is_moved){
@@ -287,16 +253,26 @@ function initialize() {
 
   }
 
+  google.maps.event.addListener(infoWindow, 'domready', function(e){
+
+    $('.info_content').on('mouseenter', function(e){
+      gmTime = true;
+
+      if(typeof ibTimeout !== "undefined"){
+        clearTimeout(ibTimeout);
+      }
+
+    }).on('mouseleave', function(e){
+      gmTime = false;
+
+      if(typeof ibTimeout !== "undefined"){
+        clearTimeout(ibTimeout);
+      }
+
+      infoWindow.close();
+    });
+  });
+
   google.maps.event.addListener(map,'dragend',getMoveData);
-  // google.maps.event.addListener(map,'zoom_changed',getMoveData);
-
-  // $(document).on('mousenter', '.info_content', function(e) {
-  //   console.log("mousenter");
-  // })
-  // $(document).on('mouseleave', '.info_content', function(e) {
-  //   console.log("mouseleave");
-  // });
-
-  
 
 }
