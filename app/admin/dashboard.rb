@@ -15,7 +15,7 @@ ActiveAdmin.register_page "Dashboard" do
     columns do
       column do
         panel "Últimos briquedos adicionados" do
-          Toy.all.map do |toy|
+          Toy.order("id desc").limit(20).map do |toy|
             li link_to(toy.title, toy_path(toy))
             li "<strong>Faixa etária:</strong> #{toy.toy_age.title}&nbsp;&nbsp;".html_safe
             li "<strong>Categoria:</strong> #{toy.toy_category.title}&nbsp;&nbsp;".html_safe
@@ -24,7 +24,7 @@ ActiveAdmin.register_page "Dashboard" do
       end
       column do
         panel "Últimos usuários adicionados" do
-          User.all.map do |user|
+          User.order("id desc").limit(20).map do |user|
             li user.email
           end
         end

@@ -16,14 +16,14 @@ permit_params :title, :description, :toy_category_id, :toy_category_id, :user_id
 
   index do
     id_column
-    column :title
-    column :toy_category_id
-    column :toy_age_id
-    column :user_id
-    column :zipcode
-    column :created_at
-    # column :image
-    column :is_active
+    column "Título", :title
+    column "Categoria", :toy_category_id
+    column "Faixa etária", :toy_age_id
+    column "Usuário", :user_id
+    column "CEP", :zipcode
+    column "Data cadastro", :created_at
+    # column "xx", :image
+    column "Ativo?", :is_active
 
     actions
   end
