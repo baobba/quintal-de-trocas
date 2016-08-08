@@ -1,11 +1,12 @@
 class Toy < ActiveRecord::Base
 
   acts_as_taggable
+  acts_as_paranoid
 
   belongs_to :toy_category
   belongs_to :toy_age
   belongs_to :user
-  has_many :toy_images
+  has_many :toy_images, dependent: :destroy
 
   has_many :exchanges, :foreign_key => "toy_to"
 
