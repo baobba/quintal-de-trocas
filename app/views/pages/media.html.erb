@@ -18,19 +18,19 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <%= link_to (image_tag 'slider1.png'), root_path %>
+        <%= link_to (image_tag 'media/slider1.png'), root_path %>
       </div>
       <div class="item">
-        <%= link_to (image_tag 'slider2.png'), root_path %>
+        <%= link_to (image_tag 'media/slider2.png'), root_path %>
       </div>
       <div class="item">
-        <%= link_to (image_tag 'slider3.png'), root_path %>
+        <%= link_to (image_tag 'media/slider3.png'), root_path %>
       </div>
       <div class="item">
-        <%= link_to (image_tag 'slider4.png'), root_path %>
+        <%= link_to (image_tag 'media/slider4.png'), root_path %>
       </div>
       <div class="item">
-        <%= link_to (image_tag 'slider5.png'), root_path %>
+        <%= link_to (image_tag 'media/slider5.png'), root_path %>
       </div>
     </div>
 
@@ -44,10 +44,13 @@
       <span class="sr-only">Próximo</span>
     </a>
   </div>
+  
+  <br>
+
   <div class="conteudo">
     <div class="box">
       <a href="http://g1.globo.com/economia/pegn/videos/t/edicoes/v/economia-compartilhada-e-novidade-no-setor-de-tecnologia/5009546/" title="Pequenas Empresas" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/pegn.png); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/pegn.png" %>); "></div>
         <h3>Pequenas Empresas</h3>
         <h4>Internet</h4>
         <h5>08/05/2016</h5>
@@ -55,7 +58,7 @@
     </div>
     <div class="box">
       <a href="https://www.youtube.com/watch?v=IN4oUDhRgA8" title="Imagina Coletivo" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/imagina.png); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/imagina.png" %>); "></div>
         <h3>Imagina Coletivo</h3>
         <h4>Internet</h4>
         <h5>19/04/2016</h5>
@@ -63,7 +66,7 @@
     </div>
     <div class="box">
       <a href="http://projetodraft.com/como-nasceu-um-dos-maiores-portais-de-negociacao-de-brinquedos-do-brasil-o-quintal-de-trocas/#sthash.gYTjlJNB.dpuf" title="DRAFT" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/draft.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/draft.jpg" %>); "></div>
         <h3>DRAFT</h3>
         <h4>Internet</h4>
         <h5>25/03/2016</h5>
@@ -71,7 +74,7 @@
     </div>
     <div class="box">
       <a href="http://m.folha.uol.com.br/folhinha/2016/01/1729555-criancas-que-nao-se-conhecem-trocam-brinquedos-com-a-ajuda-de-site.shtml" title="Folhinha - Folha de São Paulo" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1399688129.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1399688129.jpg" %>); "></div>
         <h3>Folhinha - Folha de São ...</h3>
         <h4>Internet</h4>
         <h5>15/01/2016</h5>
@@ -79,7 +82,7 @@
     </div>
     <div class="box">
       <a href="http://www.hypeness.com.br/2016/01/projeto-aposta-na-troca-de-brinquedos-para-combater-consumismo-entre-criancas/" title="Hypeness" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/hypeness.png); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/hypeness.png" %>); "></div>
         <h3>Hypeness</h3>
         <h4>Internet</h4>
         <h5>13/01/2016</h5>
@@ -87,7 +90,7 @@
     </div>
     <div class="box">
       <a href="https://queminova.catracalivre.com.br/influencia/plataforma-estimula-consumo-consciente-entre-criancas/" title="QI Quem Inova" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/quem_inova.png); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/quem_inova.png" %>); "></div>
         <h3>QI Quem Inova</h3>
         <h4>Internet</h4>
         <h5>13/01/2016</h5>
@@ -95,7 +98,7 @@
     </div>
     <div class="box">
       <a href="https://pegcar.com/blog/9-startups-promissoras-da-economia-compartilhada/" title="Blog Pegcar" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/pegcar.png); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/pegcar.png" %>); "></div>
         <h3>Blog Pegcar</h3>
         <h4>Internet</h4>
         <h5>11/11/2015</h5>
@@ -103,7 +106,7 @@
     </div>
     <div class="box">
       <a href="https://www.youtube.com/watch?v=llAC0CiWIE4" title="Jornal da Cultura - TV Cultura" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/jornal_cultura.png); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/jornal_cultura.png" %>); "></div>
         <h3>Jornal da Cultura - TV Cu...</h3>
         <h4>Internet</h4>
         <h5>17/10/2015</h5>
@@ -111,7 +114,7 @@
     </div>
     <div class="box">
       <a href="https://www.youtube.com/watch?v=2pzqq0blgPw" title="Ressoar - Rede Record" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/programa_ressoar.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/programa_ressoar.jpg" %>); "></div>
         <h3>
           Ressoar - Rede Record </h3>
         <h4>
@@ -122,7 +125,7 @@
     </div>
     <div class="box">
       <a href="https://www.youtube.com/watch?v=s7wu-NGSLN0" title="Como Será - Rede Globo" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/programa_comosera.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/programa_comosera.jpg" %>); "></div>
         <h3>
           Como Será - Rede Globo </h3>
         <h4>
@@ -133,7 +136,7 @@
     </div>
     <div class="box">
       <a href="http://www.akatu.org.br/Temas/Consumo-Consciente/Posts/Site-permite-troca-de-brinquedos-gratuitament" title="Instituto Akatu" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1405491773.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1405491773.jpg" %>); "></div>
         <h3>
           Instituto Akatu </h3>
         <h4>
@@ -144,7 +147,7 @@
     </div>
     <div class="box">
       <a href="http://www.formaes.com.br/vida-de-mae-2/site-gratuito-troca-de-brinquedos/" title="For Maes" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1405054175.png); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1405054175.png" %>); "></div>
         <h3>
           For Maes </h3>
         <h4>
@@ -155,7 +158,7 @@
     </div>
     <div class="box">
       <a href="http://ecoredesocial.com.br/2014/06/quintal-de-trocas-promove-a-sustentabilidade-da-infancia/" title="Eco Rede Social" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1405053289.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1405053289.jpg" %>); "></div>
         <h3>
           Eco Rede Social </h3>
         <h4>
@@ -166,7 +169,7 @@
     </div>
     <div class="box">
       <a href="http://minutocrianca.com/troca-de-brinquedos-uma-experiencia-transformadora/" title="Minuto Criança" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1405054814.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1405054814.jpg" %>); "></div>
         <h3>
           Minuto Criança </h3>
         <h4>
@@ -177,7 +180,7 @@
     </div>
     <div class="box">
       <a href="http://www.macetesdemae.com/2014/06/site-para-troca-de-brinquedos-gratuito.html" title="Macetes de Mãe" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1405054030.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1405054030.jpg" %>); "></div>
         <h3>
           Macetes de Mãe </h3>
         <h4>
@@ -188,7 +191,7 @@
     </div>
     <div class="box">
       <a href="http://www.casadobrincar.com.br/site/quintal-de-trocas/" title="Casa do Brincar" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1405053819.png); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1405053819.png" %>); "></div>
         <h3>
           Casa do Brincar </h3>
         <h4>
@@ -199,7 +202,7 @@
     </div>
     <div class="box">
       <a href="http://revistacrescer.globo.com/Familia/Vida-mais-verde/noticia/2014/05/que-tal-trocar-brinquedos-com-outras-criancas-pela-internet.html" title="Revista Crescer" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1405053415.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1405053415.jpg" %>); "></div>
         <h3>
           Revista Crescer </h3>
         <h4>
@@ -210,7 +213,7 @@
     </div>
     <div class="box">
       <a href="http://www.carolcelico.com/troca-troca-2/" title="Site da Carol Celico" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1405054367.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1405054367.jpg" %>); "></div>
         <h3>
           Site da Carol Celico </h3>
         <h4>
@@ -221,7 +224,7 @@
     </div>
     <div class="box">
       <a href="http://criandocriancas.blogspot.com.br/2014/05/site-promove-experiencia-de-trocas-de.html" title="Criando Crianças" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1405054534.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1405054534.jpg" %>); "></div>
         <h3>
           Criando Crianças </h3>
         <h4>
@@ -232,7 +235,7 @@
     </div>
     <div class="box">
       <a href="http://www.maevaidosa.com/2014/06/por-que-comprar-se-voce-pode-trocar.html" title="Mãe Vaidosa" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1405054938.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1405054938.jpg" %>); "></div>
         <h3>
           Mãe Vaidosa </h3>
         <h4>
@@ -243,7 +246,7 @@
     </div>
     <div class="box">
       <a href="http://goo.gl/AWN2Jg" title="Folha de São Paulo " target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1399688129.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1399688129.jpg" %>); "></div>
         <h3>
           Folha de São Paulo </h3>
         <h4>
@@ -254,7 +257,7 @@
     </div>
     <div class="box">
       <a href="http://goo.gl/3WVDNO" title="1º Fórum Prioridade Absoluta, Criança em Primeiro Lugar, no jornal O POVO, em Fortaleza-CE" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1399690847.gif); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1399690847.gif" %>); "></div>
         <h3>
           1º Fórum Prioridade Abs... </h3>
         <h4>
@@ -265,7 +268,7 @@
     </div>
     <div class="box">
       <a href="http://www.consumocolaborativo.cc/quintal-de-trocas-consumo-consciente-e-sustentavel-entre-criancas/" title="Consumo Colaborativo " target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1405053663.png); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1405053663.png" %>); "></div>
         <h3>
           Consumo Colaborativo </h3>
         <h4>
@@ -276,7 +279,7 @@
     </div>
     <div class="box">
       <a href="http://br.mulher.yahoo.com/blogs/mae-salto-alto/em-vez-comprar-trocar-133247508.html" title="Mães de Salto Alto por Patricia Maldonado" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1395200624.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1395200624.jpg" %>); "></div>
         <h3>
           Mães de Salto Alto por P... </h3>
         <h4>
@@ -287,7 +290,7 @@
     </div>
     <div class="box">
       <a href="http://www.napracinha.com.br/2014/03/quintal-de-trocas-trocando-brinquedos.html" title="Na Pracinha" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1395201276.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1395201276.jpg" %>); "></div>
         <h3>
           Na Pracinha </h3>
         <h4>
@@ -298,7 +301,7 @@
     </div>
     <div class="box">
       <a href="http://www.roteirokids.com.br/nos-indicamos/quintal-de-trocas/" title="Roteiro Kids" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1394635620.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1394635620.jpg" %>); "></div>
         <h3>
           Roteiro Kids </h3>
         <h4>
@@ -309,7 +312,7 @@
     </div>
     <div class="box">
       <a href="http://www.universojatoba.com.br/site-promove-a-troca-de-brinquedos-infantis/" title="Universo Jatobá - Rosana Jatobá" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1394772604.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1394772604.jpg" %>); "></div>
         <h3>
           Universo Jatobá - Rosana... </h3>
         <h4>
@@ -320,7 +323,7 @@
     </div>
     <div class="box">
       <a href="http://www.roteirobaby.com.br/2014/03/sitedetrocas.html" title="Roteiro Baby" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1394636109.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1394636109.jpg" %>); "></div>
         <h3>
           Roteiro Baby </h3>
         <h4>
@@ -331,7 +334,7 @@
     </div>
     <div class="box">
       <a href="http://noo.com.br/quintal-legal/" title="NOO MAG" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1393468486.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1393468486.jpg" %>); "></div>
         <h3>
           NOO MAG </h3>
         <h4>
@@ -342,7 +345,7 @@
     </div>
     <div class="box">
       <a href="http://maternar.blogfolha.uol.com.br/2014/02/25/pais-fazem-troca-de-brinquedos-pela-internet/" title="Maternar - Folha de São Paulo" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1394150457.jpeg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1394150457.jpeg" %>); "></div>
         <h3>
           Maternar - Folha de São ... </h3>
         <h4>
@@ -353,7 +356,7 @@
     </div>
     <div class="box">
       <a href="https://catraquinha.catracalivre.com.br/geral/economizar/indicacao/compartilhe-brinquedos-e-outros-itens-infantis-no-quintal-de-trocas/" title="Catraca Livre" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1394150853.png); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1394150853.png" %>); "></div>
         <h3>
           Catraca Livre </h3>
         <h4>
@@ -364,7 +367,7 @@
     </div>
     <div class="box">
       <a href="http://www.genergia.com.br/noticia.php?id=268" title="Genergia" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1394151997.png); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1394151997.png" %>); "></div>
         <h3>
           Genergia </h3>
         <h4>
@@ -375,7 +378,7 @@
     </div>
     <div class="box">
       <a href="http://ciclovivo.com.br/noticia/site-estimula-trocas-de-brinquedos-e-outros-itens-infantis" title="Ciclo Vivo" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1394150696.png); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1394150696.png" %>); "></div>
         <h3>
           Ciclo Vivo </h3>
         <h4>
@@ -386,7 +389,7 @@
     </div>
     <div class="box">
       <a href="http://envolverde.com.br/rse/criancas-e-consumo-consciente/" title="Envolverde" target="_blank">
-        <div class="img" style="background-image: url(http://quintaldetrocas.com.br/uploads/image/1394151355.jpg); "></div>
+        <div class="img" style="background-image: url(<%= image_url "media/1394151355.jpg" %>); "></div>
         <h3>
           Envolverde </h3>
         <h4>
