@@ -65,13 +65,24 @@ Rails.application.routes.draw do
   get 'busca-por-cep' => 'pages#busca_por_cep'
   get 'politica-de-privacidade' => 'pages#privacy', as: 'privacy'
   get 'termos-e-condicoes' => 'pages#terms', as: 'terms'
-
-  get('/produtos/detalhe/:id', to: redirect do |params, request|
-    Rails.application.routes.url_helpers.toy_path(params[:id])
-  end)
-  # get '/produtos/detalhe/:id', to: redirect("/brinquedos/%{id}", status: 301)
   
   match "/404", :to => "errors#not_found", :via => :all
   match "/500", :to => "errors#internal_server_error", :via => :all
+
+
+  # 301 redirects
+  
+  get('/produtos/detalhe/:id', to: redirect do |params, request|
+    Rails.application.routes.url_helpers.toy_path(params[:id])
+  end)
+
+  get('/colunas_novidades/detalhe/:id', to: redirect do |params, request|
+    Rails.application.routes.url_helpers.article_path(params[:id])
+  end)
+  # get '/produtos/detalhe/:id', to: redirect("/brinquedos/%{id}", status: 301)
+  
+  get '/como_funciona', to: redirect("/como-funciona", status: 301)
+  get '/pontos_de_trocas', to: redirect("/pontos", status: 301)
+  get '/produtos/listar', to: redirect("/brinquedos", status: 301)
 
 end
