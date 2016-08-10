@@ -1,5 +1,6 @@
 ActiveAdmin.register Exchange do
 
+  config.sort_order = 'created_at_desc'
   menu parent: 'Trocas', label: 'Trocas'
 
   index :title => "Trocas" do

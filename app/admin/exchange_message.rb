@@ -1,5 +1,6 @@
 ActiveAdmin.register ExchangeMessage do
 
+  config.sort_order = 'created_at_desc'
   menu parent: "Trocas", label: 'Mensagens'
 
   index :title => "Mensagens de trocas" do

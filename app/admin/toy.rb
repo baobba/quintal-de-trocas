@@ -3,6 +3,7 @@ ActiveAdmin.register Toy do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
+config.sort_order = 'created_at_desc'
 permit_params :title, :description, :toy_category_id, :toy_category_id, :user_id, :image
 #
 # or

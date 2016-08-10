@@ -1,5 +1,6 @@
 ActiveAdmin.register Place do
 
+  config.sort_order = 'created_at_desc'
   menu label: 'Pontos de troca'
 
   index :title => "Pontos de troca" do

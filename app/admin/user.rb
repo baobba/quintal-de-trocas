@@ -1,5 +1,6 @@
 ActiveAdmin.register User do
 
+  config.sort_order = 'created_at_desc'
   menu label: 'Usuários'
 
   index :title => "Usuários" do
