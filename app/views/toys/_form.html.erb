@@ -3,6 +3,9 @@
 <% end %>
 
 <%= simple_form_for(@toy, html: { multipart: true }) do |f| %>
+  
+  <%= f.hidden_field :zipcode %>
+
   <% if @toy.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@toy.errors.count, "error") %> prohibited this toy from being saved:</h2>

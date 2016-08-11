@@ -80,17 +80,19 @@ class ToysController < ApplicationController
   # Dashboard
 
   def my_toys
-    @toys = current_user.toys
+    @toys = current_user.toys.order("id DESC")
   end
 
   def new
     @toy = current_user.toys.new
+    @toy.zipcode = current_user.zipcode if !current_user.zipcode.blank?
     (1..5).each do |a|
       @toy.toy_images.build
     end
   end
 
   def edit
+    @toy.zipcode = current_user.zipcode if !current_user.zipcode.blank?
     @toy_image = @toy.toy_images.build
   end
 
