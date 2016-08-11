@@ -41,7 +41,7 @@
                 <li><%= link_to "Sair", destroy_user_session_path, :method => :delete %></li>
               </ul>
             </li>
-            <li><%= link_to "<span class='fa fa-gift'></span> #{current_user.credits.available.count}".html_safe, my_credits_path %></li>
+            <li><%= link_to "<span class='fa fa-heart-o'></span> #{current_user.credits.available.count}".html_safe, my_credits_path %></li>
           <% else %>
               <li><%= link_to "Login", new_user_session_path %></li>
           <% end %>

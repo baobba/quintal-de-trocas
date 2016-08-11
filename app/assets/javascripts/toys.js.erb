@@ -294,7 +294,7 @@ function initialize() {
 
       console.log("newMarkers", newMarkers);
       var options = {
-        imagePath: 'assets/map/m',
+        imagePath: "<%= asset_path('map/m1.png') %>",
       };
       var markerCluster = new MarkerClusterer(map, newMarkers, options);
       minClusterZoom = 14;
