@@ -4,30 +4,88 @@
 <% end %>
 
 <article class="content">
-  <div class="form-content">
-    <div class="cols">
-      <p>Foi em uma Feira de Trocas em uma praça que a atriz Carol Guedes teve a ideia de abrir o Quintal de
-        Trocas.</p>
-      <p>Ela achou tão incrível ver sua filha Maria Beatriz de dois anos aprender tantos valores brincando, que quis
-        espalhar essa experiência para o mundo todo.</p>
-      <p><strong><i>“Na troca, a criança não pensa no preço do brinquedo, ela pensa apenas no valor daquela
-        brincadeira!”</i></strong></p>
-      <p>Foi com este pensamento que Carol reuniu uma equipe formada por psicólogos, jornalistas, artistas, artesãos,
-        entre outros e criou o “Quintal de Trocas”.</p>
-      <p>
-        <strong><i>“Queria criar um site para mostrar para os outros pais e crianças que um único brinquedo pode virar
-          milhares, um barquinho pode virar uma boneca...a boneca uma bola...a bola um livro...o livro uma
-          fantasia...a fantasia um carrinho, enfim, a brincadeira nunca termina!”</i></strong>. afirma a atriz e
-        agora empresária.</p>
-      <p>O “Quintal de Trocas” é também um espaço que reúne e promove a troca de informações, como artigos, notícias,
-        links interessantes, eventos, etc., um local para a troca de experiências e colaboração.</p>
-      <p>A equipe do “Quintal de Trocas” acredita que as crianças podem aprender conceitos importantes durante a
-        brincadeira que o site promove. Nestas trocas, as crianças aprendem a negociar, a ceder para conquistar, a
-        desapegar-se e também a compartilhar. Não queremos que a brincadeira termine nunca e poder proporcionar isso
-        aos nossos filhos, ensinando-os de forma natural o valor da sustentabilidade, não tem preço. Além disso, ainda
-        respeitamos o planeta, ajudamos a diminuir o desperdício, a energia e a matéria prima!</p>
-      <p>Participe desse movimento com a gente e plante no Quintal você também!</p>
-      <%= link_to (image_tag 'fotos.jpg'), root_path %>
+  <div class="row">
+    <div class="col-sm-5">
+      <p class="lead" style="font-size: 30px;">QUEM SOMOS</p>
+
+      <div class="person">
+        <%= image_tag "team/carol.jpg", class: "thumbnail pull-left", style: "margin-right: 20px" %>
+        <p class="lead">Carolina Guedes</p>
+        <p>Mãe da Maria Beatriz de 5 anos, tem sua vida totalmente voltada para movimentos de transição. Tem duas startups EMPRESAS LIVRES, é moradora de Casa Compartilhada, tem carro, bike, guarda roupa compartilhado e  é adepta do consumo consciente. Idealizadora do Quintal de Trocas e cocriadora do Transicionistas, movimento focado em lançar novas questões para o sistema atual. É empreendedora desde criança, quando aos 10 anos ja vendia pulseiras feitas por uma maquininha de brinquedo, presente da vó e aos 14 montou um brechó na garagem de casa.</p>
+      </div>
+
+      <hr>
+
+      <div class="person">
+        <%= image_tag "team/gustavo.jpg", class: "thumbnail pull-left", style: "margin-right: 20px" %>
+        <p class="lead">Gustavo Tanaka</p>
+        <p>Administrador de empresas por formação, empreendedor por natureza e escritor por vocação.</p>
+        <p>Idealizador do Movimento Empresa Livre, Cocriador da Baobba e do Quintal de Trocas. Por ironia da vida, trabalhou 5 anos no mercado de brinquedos e hoje tenta queimar seu carma estimulando o consumo consciente.</p>
+      </div>
+
+      <hr>
+
+      <div class="person">
+        <%= image_tag "team/netto.jpg", class: "thumbnail pull-left", style: "margin-right: 20px" %>
+        <p class="lead">Osny Santos Netto</p>
+        <p>Desenvolvedor web e designer de interfaces. Atua há mais de 10 anos na área, com experiência em projetos para pequenas e grandes empresas, mas tem se dedicado mais em projetos open-source recentemente.</p>
+        <p>Apaixonado por tecnologia e iniciativas que ajudam a tornar a sociedade um lugar melhor para se viver.</p>
+      </div>
+
+      <hr>
+
+      <div class="person">
+        <%= image_tag "team/raniere.jpg", class: "thumbnail pull-left", style: "margin-right: 20px" %>
+        <p class="lead">Raniere</p>
+        <p>Pai, marido, desenvolvedor, entusiasta tecnológico e mestre Jedi nas horas vagas.</p>
+        <p>Trabalhou por mais de 20 anos pequenas, médias e grandes empresas do ramo tecnológico, até deixar o lado sombrio da Força e encontrar a luz.</p>
+        <p>Largou tudo e agora tem a missão de viabilizar tecnologicamente iniciativas voltadas a levar a humanidade um passo adiante no processo de evolução.</p>
+      </div>
+
+      <hr>
+
+      <div class="person">
+        <%= image_tag "team/jose.jpg", class: "thumbnail pull-left", style: "margin-right: 20px" %>
+        <p class="lead">José Carlos Cashana</p>
+        <p>Viabilizador de negócios na Make it Happen. Após 10 anos trabalhando em multinacionais de consultoria em gestão empresarial fez sua transição para uma carreira de propósito.</p>
+        <p>Sua missão é ajudar pessoas e empresas à alcançarem sua independência financeira e colaborarem com um mundo mais humano, sustentável e divertido.</p>
+      </div>
+
+    </div>
+    <div class="col-sm-7">
+      <div class="form-content">
+        <p>“Era uma vez uma guerreira chamada Ana Carolina, que havia dado a luz a uma pequena questionadora do mundo chamada Maria.</p> 
+        <p>Toda vez que Maria olhava maravilhada o mundo, a guerreira mãe re-conhecia o fantástico mundo em que vivia através dos olhinhos dela...</p>
+        <p>Carolina começou a perceber que os "porquês" de Maria davam voz aos porquês que também existiam no coração dela.</p> 
+        <p>Carolina e Maria antes da sua jornada juntas, ainda quando eram estrelas brilhantes no céu, fizeram o mesmo pacto: Cuidar da Mãe Terra!</p> 
+        <p>E sempre buscar respostas que cuidassem delas, do outro e de sua grande Mãe, também conhecido como, Planeta.</p> 
+        <p>Elas já sabiam que naquele momento tinha chegada a hora de pegar o arco, mirar a flecha e ir à luta.... e escolheram fazer isso brincando.</p>
+        <p>Maria perguntava:</p>
+        <ul>
+          <li>Mãe, por que criamos um mundo onde "Ter" é mais importante que "Ser"?</li>
+          <li>Mãe, por que tantos plásticos nos oceanos?</li>
+          <li>Mãe, o brinquedo que é meu, é de todos? Mas como? Se os recursos saíram do mesmo e nosso planeta?</li>
+          <li>Mãe, porque muitos adultos falam para as crianças fazerem coisas que ele mesmos tem como desafio fazer?</li>
+        </ul>
+        <p>Carolina entendia Maria e também ficava inquieta com todas essas questões! Sua pequena questionadora tinha toda a razão, nada disso fazia sentido.</p>
+        <p>Foi então que criaram juntas o <strong>Quintal de Trocas</strong>, um espaço destinado a trocas: trocas de “coisas” por “coisas”, “coisas” por dinheiro e até mesmo por experiências (conteúdo compartilhado). Você escolhe como vai brincar!</p> 
+        <p>O mais legal do Quintal era que elas poderiam fazer tudo isso brincando. E esse é um dos lemas do Quintal: que ADULTOS E CRIANÇAS SE DIVIRTAM!!</p>
+        <p>A palavra brincar na sua etimologia significa criar vínculo e é exatamente essa a grande missão dessas guerreiras.</p>
+        <p>Foram 2 anos de muita luta, contando com a ajuda de amigos que acreditavam nos olhos brilhantes dessas duas moças… e que elas serão eternamente gratas nessa tão linda jornada. Elas receberam água, mantimentos, abraços, afago, palavras de amor e de apoio.</p>
+        <p>Até que em janeiro de 2016, Maria e Carolina enquanto remavam sem parar sua canoa....avistaram sua tribo e com os pés plantados em chão de terra boa, resolveram se unir a essa tribo montando uma EMPRESA LIVRE.</p>
+        <p>Lá na Empresa Livre, temos como princípios básicos:</p>
+        <ul>
+          <li>Ser</li> 
+          <li>Brincar</li>
+          <li>Rir</li>
+        </ul>
+        <p>Cuidado consigo, com o outro e com o planeta</p>
+
+        <p>Ser exemplo para inspirar outras empresas a serem também livres. Um lugar onde acreditamos na horizontalidade e na importância de cada um de nós. Entendemos como seres humanos que todos têm sua luz, sua estrela e merecem usufruir de toda a abundância do mundo, já que também somos natureza.</p> 
+        <p>Nos unimos porque juntos somos mais fortes, porque somos complementares e porque entendemos que o sonhar um novo caminho só é possível se olharmos pro AGORA e dermos as mãos.</p>
+         
+      </div>
     </div>
   </div>
+  
 </article>
