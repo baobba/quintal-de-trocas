@@ -7,7 +7,7 @@
 
     <%= link_to "<span class='glyphicon glyphicon-transfer'></span> Minhas trocas".html_safe, my_exchanges_path, class: (params[:controller] == "exchanges" ? "list-group-item active" : "list-group-item") %>
 
-    <%= link_to "<span class='fa fa-gift'></span> Meus créditos".html_safe, my_credits_path, class: (params[:controller] == "credits" ? "list-group-item active hide" : "list-group-item hide") %>
+    <%= link_to "<span class='fa fa-gift'></span> Meus créditos".html_safe, my_credits_path, class: (params[:controller] == "credits" ? "list-group-item active" : "list-group-item") %>
 
     <%= link_to "<span class='fa fa-map-marker'></span> Meus pontos de troca".html_safe, my_places_path, class: (params[:controller] == "places" ? "list-group-item active" : "list-group-item") %>
   </div>

@@ -4,7 +4,7 @@ class CreditsController < ApplicationController
   # Dashboard
 
   def my_credits
-    @credits = current_user.credits
+    @credits = current_user.credits.order("id DESC")
   end
 
   # GET /credits/1

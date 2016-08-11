@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160805112820) do
+ActiveRecord::Schema.define(version: 20160810211357) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -62,10 +62,10 @@ ActiveRecord::Schema.define(version: 20160805112820) do
 
   create_table "credits", force: :cascade do |t|
     t.integer  "user_id"
-    t.boolean  "is_available"
+    t.datetime "expired_at"
     t.integer  "exchange_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "credits", ["exchange_id"], name: "index_credits_on_exchange_id"
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20160805112820) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "reason"
+    t.boolean  "credit_offer"
   end
 
   add_index "exchanges", ["user_id"], name: "index_exchanges_on_user_id"

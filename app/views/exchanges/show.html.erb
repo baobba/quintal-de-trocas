@@ -1,5 +1,4 @@
 
-
 <div class="row">
   <div class="col-sm-3">
     <%= render '/layouts/nav_dashboard' %>
@@ -13,7 +12,7 @@
           <span class="bubble"></span>
           1. Enviar solicitação de troca
       </li>
-      <li class="<%= 'completed' if !@exchange.accepted.blank? %>">
+      <li class="<%= 'completed' if !@exchange.accepted.nil? %>">
           <span class="bubble"></span>
           2. Resposta de <%= @exchange.toy.user.first_name %> se aceita ou não a troca
       </li>
@@ -45,16 +44,16 @@
               <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.user) %>');float: left;margin-right:10px;"></div> <%= @exchange.from_user == current_user ? "Você" : @exchange.from_user.first_name %> <small>solicitou:</small>
               <%= link_to @exchange.to_toy.title, toy_path(@exchange.to_toy) if @exchange.toy %>
             </div>
-            <div class="col-sm-6 exchange-profile" style="<%= 'opacity: 0.4' if @exchange.accepted.blank? %>">
+            <div class="col-sm-6 exchange-profile" style="<%= 'opacity: 0.4' if @exchange.accepted.nil? %>">
               <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.toy.user) %>');float: left;margin-right:10px;"></div> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %> <small>respondeu:</small>
 
-              <% if !@exchange.accepted.blank? && @exchange.accepted %>
+              <% if !@exchange.accepted.nil? && @exchange.accepted %>
                 <% if @exchange.exchange_type == "credit" %>
                   Troca por crédito
-                <% else %>
+                <% elsif @exchange.exchange_type == "exchange" %>
                   <%= link_to @exchange.from_toy.title, toy_path(@exchange.from_toy) if @exchange.toy %>
                 <% end %>
-              <% elsif !@exchange.accepted.blank? && !@exchange.accepted %>
+              <% elsif !@exchange.accepted.nil? && !@exchange.accepted %>
                 Recusou a troca
               <% else %>
                 <div class="text-muted"><%= @exchange.from_toy ? @exchange.from_toy.title : "--" %></div>
@@ -68,7 +67,7 @@
         <div class="well well-sm">
           <div class="text-muted">Status:</div>
 
-          <% if @exchange.accepted.blank? %>
+          <% if @exchange.accepted.nil? %>
             <% if @exchange.user == current_user %>
               <strong class="lead text-danger">
                 Aguardando resposta de <%= @exchange.toy.user.first_name %>
@@ -81,11 +80,12 @@
 
               <br>
 
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Responder', exchange_reply_path(@exchange), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#reply', class: "btn btn-default"} %>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <%= link_to 'Responder', exchange_reply_path(@exchange, type: (@exchange.credit_offer ? "credit" : "nil")), {:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#reply', class: "btn btn-default"} %>
             <% end %>
           <% else %>
             <strong class="lead text-<%= @exchange.accepted ? 'success' : 'danger' %>">
-              <span class="glyphicon glyphicon-ok"></span> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %> <%= @exchange.accepted == "canceled" ? "recusou" : "aceitou" %> essa troca
+              <span class="glyphicon glyphicon-ok"></span> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %> <%= @exchange.accepted == false ? "recusou" : "aceitou" %> essa troca
             </strong>
 
             <% if @exchange.accepted %><br>
@@ -99,19 +99,19 @@
           <div class="text-muted"">Troca foi efetuada?</div>
             <%= simple_form_for @exchange, :html => { :class => 'form-inline' } do |f| %>
 
-              <% if @exchange.exchange_type == "exchange" %>
+              <% if @exchange.exchange_type == "exchange" && !@exchange.accepted.blank? %>
                 <p>A troca já foi efetuada?</p>
                 <%= f.input :finalized, label: false, prompt: "Selecione", as: :select, collection: [["Sim", true], ["Nao", false]] %>
                 <%= f.submit "Ok", class: "btn btn-sm btn-default" %>
                 
-              <% elsif @exchange.exchange_type == "credit" && @exchange.user == current_user %>
+              <% elsif (@exchange.exchange_type == "credit" || @exchange.exchange_type.blank?) && @exchange.user == current_user && !@exchange.accepted.blank? %>
                 <p>Você já recebeu o produto?</p>
                 <%= f.input :finalized, label: false, prompt: "Selecione", as: :select, collection: [["Sim", true], ["Nao", false]] %>
                 <%= f.submit "Ok", class: "btn btn-sm btn-default" %>
               <% elsif @exchange.exchange_type == "credit" && @exchange.finalized.nil? %>
-                Aguardando a acusação de recebimento de <%= @exchange.from_user.first_name %>.
+                Aguardando a acusação de recebimento de <%= @exchange.from_user.first_name %> para liberação do crédito.
               <% elsif @exchange.exchange_type == "credit" && @exchange.finalized %>
-                <div class="alert alert-success">Troca finalizada</div>
+                <div class="alert alert-success">Crédito liberado</div>
               <% elsif @exchange.exchange_type == "credit" && !@exchange.finalized %>
                 <div class="alert alert-danger"><%= @exchange.from_user.first_name %> informou que ainda não recebeu.</div>
               <% end %>

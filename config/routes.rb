@@ -81,6 +81,7 @@ Rails.application.routes.draw do
   end)
   # get '/produtos/detalhe/:id', to: redirect("/brinquedos/%{id}", status: 301)
   
+  get '/na_midia', to: redirect("/na-midia", status: 301)
   get '/como_funciona', to: redirect("/como-funciona", status: 301)
   get '/pontos_de_trocas', to: redirect("/pontos", status: 301)
   get '/produtos/listar', to: redirect("/brinquedos", status: 301)

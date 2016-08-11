@@ -60,13 +60,19 @@ class ExchangesController < ApplicationController
 
   def update
 
-    @exchange.accepted = @exchange.reason.blank? ? true : false
+    if exchange_params[:accepted].nil?
+      @exchange.accepted = @exchange.reason.blank? ? true : false
+    end
 
     if !exchange_params[:finalized].nil? && exchange_params[:finalized] == 'true'
       @exchange.to_user.credits.create(
-        is_available: true,
         exchange_id: @exchange.id,
       ) if !@exchange.credit
+
+      if @exchange.from_user.credits_avail && @exchange.from_user.credits_avail.count>0
+        @exchange.from_user.credits_avail.first.update_column(:expired_at, Time.now)
+      end
+
     elsif !exchange_params[:finalized].nil?
       @exchange.credit.destroy! if @exchange.credit
     end
@@ -108,6 +114,6 @@ class ExchangesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exchange_params
-      params.require(:exchange).permit(:toy_from, :toy_to, :finalized, :finalized_at, :exchange_type, :exchange_deliver, :rating_from, :rating_to, :accepted, :user_id, :reason, :exchange_messages_attributes => [:id, :message, :user_to, :user_from, :exchange_id, :user_id])
+      params.require(:exchange).permit(:toy_from, :toy_to, :finalized, :finalized_at, :exchange_type, :exchange_deliver, :rating_from, :rating_to, :accepted, :user_id, :reason, :credit_offer, :exchange_messages_attributes => [:id, :message, :user_to, :user_from, :exchange_id, :user_id])
     end
 end

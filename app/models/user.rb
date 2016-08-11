@@ -13,7 +13,12 @@ class User < ActiveRecord::Base
   has_many :toys
   has_many :exchanges
   has_many :credits
+  has_many :credits_avail, -> (object){ where(expired_at: nil)},
+         :class_name => 'Credit'
+
+  
   has_many :user_children
+
   accepts_nested_attributes_for :user_children, 
     allow_destroy: true, 
     reject_if: :all_blank

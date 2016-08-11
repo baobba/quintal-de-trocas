@@ -7,20 +7,42 @@
     </div>
     <div class="modal-body" style="background-color: #f6f6f6;">
 
-      <p class="lead text-center" style="margin: 15px 0 10px 0;">Escolha um dos brinquedos da lista de <%= @exchange.user_from.first_name %>.</p>
+      <% if !params[:type].blank? && params[:type] == "credit" %>
+        <p class="lead text-center" style="margin: 15px 0 10px 0;"><%= @exchange.from_user.first_name %> está oferecendo 1 crédito em troca do brinquedo</p><p class="text-center" style="margin-bottom:30px;">1 crédito vale um brinquedo dentro da plataforma.</p>
 
-      <hr>
+        <hr>
+        <div class="text-center">
+          <p class="lead">Você aceita a troca?</p>
 
-      <div class="row user-options">
-        <div class="col-sm-4 text-center">
-          <%= f.radio_button :exchange_type, "exchange" %><br>
-          <strong>Escolher um brinquedo na lista de <%= @exchange.user.name %></strong>
+          <span class="text-success" style="font-size: 20px;">
+            <label for="exchange_accepted_true"><%= f.radio_button :accepted, "1" %> Sim</label>&nbsp;&nbsp;&nbsp;
+          </span>
+          <span class="text-danger" style="font-size: 20px;">
+            <label for="exchange_accepted_false"><%= f.radio_button :accepted, "0" %> Não</label>
+          </span>
+
         </div>
-        <div class="col-sm-4 text-center">
-          <%= f.radio_button :exchange_type, "canceled" %><br>
-          <strong class="text-danger">Recusar pedido</strong>
+
+      <% else %>
+        <p class="lead text-center" style="margin: 15px 0 10px 0;">Escolha um dos brinquedos da lista ou troque por 1 crédito.</p><p class="text-center" style="margin-bottom:30px;">1 crédito vale um brinquedo dentro da plataforma.</p>
+
+        <hr>
+
+        <div class="row user-options">
+          <div class="col-sm-4 text-center">
+            <%= f.radio_button :exchange_type, "exchange" %><br>
+            <strong>Escolher um brinquedo na lista de <%= @exchange.user.name %></strong>
+          </div>
+          <div class="col-sm-4 text-center">
+            <%= f.radio_button :exchange_type, "credit" %><br>
+            <strong>Prefiro trocar por<br>1 crédito</strong>
+          </div>
+          <div class="col-sm-4 text-center">
+            <%= f.radio_button :exchange_type, "canceled" %><br>
+            <strong class="text-danger">Recusar pedido</strong>
+          </div>
         </div>
-      </div>
+      <% end %>
 
       <div class="user-toy-list" style="display: none;">
         <hr>
