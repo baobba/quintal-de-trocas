@@ -15,4 +15,5 @@
 //= require nested_form_fields
 //= require bootstrap.min
 //= require jquery.mask.min
+//= require markerclusterer
 //= require_tree .
