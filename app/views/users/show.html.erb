@@ -11,12 +11,12 @@
 
     <table class="table">
       <tr>
-        <td width="25%">Cadastrado em</td>
+        <td width="25%">Membro desde</td>
         <td width="75%"><%= @user.created_at.strftime("%d/%m/%Y") %></td>
       </tr>
       <tr>
         <td>Acesso mais recente</td>
-        <td><%= @user.created_at.strftime("%d/%m/%Y") %></td>
+        <td><%= @user.last_sign_in_at.strftime("%d/%m/%Y") %></td>
       </tr>
       <% if !@user.neighborhood.blank? %>
       <tr>
