@@ -29,7 +29,7 @@
 
       <%= f.input :description, :input_html => { :rows => 5 } %>
       
-      <%= f.input :tag_list, hint: "Utilize vírgula para adicionar a palavra chave" %>
+      <%= f.input :tag_list, input_html: { value: @toy.tag_list.to_s }, hint: "Utilize vírgula para adicionar a palavra chave" %>
 
     </div>
 
@@ -40,7 +40,7 @@
 
       <% @toy.toy_images.each.with_index do |toy_image,index| %>
       <%= f.fields_for :toy_images, toy_image do |p| %>
-        <div class="field" style="width:120px;float:left;margin-right: 10px;margin-bottom: 10px;background-color: #eee;">
+        <div class="text-center field">
 
           <% if p.object.image? %>
           <div class="thumb">
@@ -58,10 +58,13 @@
             <%= p.check_box :featured %> Destaque
           </div>
         </div>
+        <% if index == 1 %>
+          <div class="clearfix"></div>
+        <% end %>
       <% end %>
       <% end %>
+    </div>
   </div>
-</div>
 
   <%= f.button :submit, class: "btn btn-success btn-lg" %>
 <% end %>
