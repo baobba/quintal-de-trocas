@@ -33,6 +33,7 @@
               <% #end %>
               <ul class="dropdown-menu">
                 <li class="hide"><%= link_to "Admin", new_admin_user_session_path %></li>
+                <li><%= link_to "Meu perfil", user_path(current_user) %></li>
                 <li><%= link_to "Alterar dados pessoais", edit_user_registration_path %></li>
                 <li><%= link_to "Meus brinquedos", my_toys_path %></li>
                 <li><%= link_to "Minhas trocas", my_exchanges_path %></li>

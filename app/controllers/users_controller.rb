@@ -25,6 +25,10 @@ class UsersController < ApplicationController
     @users = @users.paginate(:page => params[:page])
   end
 
+  def show
+    @toys = @user.toys
+  end
+
   def edit
   end
 
