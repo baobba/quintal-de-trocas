@@ -136,7 +136,7 @@ class ToysController < ApplicationController
   def destroy
     @toy.destroy
     respond_to do |format|
-      format.html { redirect_to toys_url, notice: 'O brinquedo foi removido com sucesso' }
+      format.html { redirect_to my_toys_path, notice: 'O brinquedo foi removido com sucesso' }
       format.json { head :no_content }
     end
   end
