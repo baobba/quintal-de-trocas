@@ -20,7 +20,7 @@ pt-BR:
         username: Nome de usuário
         avatar: Foto
       user_children:
-        name: Nome completo
+        name: Nome
         birthday: Ano nasc
         gender: Sexo
       toy:
