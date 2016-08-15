@@ -8,7 +8,7 @@ pt-BR:
         email: Email
         password: Senha
         name: Nome completo
-        birthday: Ano nasc.
+        birthday: Data nasc.
         gender: Sexo
         phone: Telefone
         zipcode: CEP
@@ -21,7 +21,7 @@ pt-BR:
         avatar: Foto
       user_children:
         name: Nome
-        birthday: Ano nasc
+        birthday: Data nasc.
         gender: Sexo
       toy:
         title: Título

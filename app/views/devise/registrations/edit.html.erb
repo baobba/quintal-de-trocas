@@ -72,14 +72,14 @@
           <%= f.input :name %>
 
           <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-6">
               <%= f.input :birthday, class: "form-control" %>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-6">
               <div class="form-group">
                 <%= f.label :gender %><br>
                 <label class="radio-inline">
-                  <%= f.radio_button :gender, "M"  %> Masc
+                  <%= f.radio_button :gender, "M"  %> Mas
                 </label>
                 <label class="radio-inline">
                   <%= f.radio_button :gender, "F" %> Fem
@@ -111,10 +111,10 @@
       <%= f.simple_fields_for :user_children do |ff| %>
           
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-5">
             <%= ff.input :name %>
           </div>
-          <div class="col-sm-3">
+          <div class="col-sm-4">
             <%= ff.input :birthday %>
           </div>
           <div class="col-sm-3">
@@ -125,7 +125,8 @@
       <% end %>
 
       <br>
-      <div class="text-muted text-center">Não se preocupe, essa informação será confidencial</div>
+      <div class="text-muted text-center">Fique tranquilo, essa informação é confidencial.<br>
+      Queremos essa informação para oferecer os brinquedos mais adequados à idade da criança</div>
       
       <div class="hide">
         <hr>

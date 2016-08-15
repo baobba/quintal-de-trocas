@@ -14,10 +14,12 @@
         <td width="25%">Membro desde</td>
         <td width="75%"><%= @user.created_at.strftime("%d/%m/%Y") %></td>
       </tr>
+      <% if !@user.last_sign_in_at.blank? %>
       <tr>
         <td>Acesso mais recente</td>
         <td><%= @user.last_sign_in_at.strftime("%d/%m/%Y") %></td>
       </tr>
+      <% end %>
       <% if !@user.neighborhood.blank? %>
       <tr>
         <td>Bairro</td>

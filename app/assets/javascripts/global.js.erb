@@ -8,6 +8,10 @@ $(document).ready(function() {
    */
 
   $('#user_zipcode').mask('00000-000');
+  $('#user_birthday').mask('00/00/0000');
+  $('#user_user_children_attributes_0_birthday').mask('00/00/0000');
+  $('#user_user_children_attributes_1_birthday').mask('00/00/0000');
+  $('#user_user_children_attributes_2_birthday').mask('00/00/0000');
 
   var SPMaskBehavior = function (val) {
     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
