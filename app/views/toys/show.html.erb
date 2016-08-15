@@ -18,7 +18,7 @@
 
 			<div class="content">
 				<% @toy_images.each_with_index do |p, index| %>
-					<%= image_tag p.image.url(:large), style: (@toy.fet_image ? "display:block" : "display:none"), class: "img-#{index}" %>
+					<%= image_tag p.image.url(:large), style: (p.featured? ? "display:block" : "display:none"), class: "img-#{index}" %>
 				<% end %>
 			</div>
 
