@@ -10,7 +10,7 @@ class Toy < ActiveRecord::Base
 
   has_many :exchanges, :foreign_key => "toy_to"
 
-  accepts_nested_attributes_for :toy_images, :allow_destroy => true, :reject_if => proc { |attributes| attributes['image'].blank? }
+  accepts_nested_attributes_for :toy_images, :allow_destroy => true, reject_if: :all_blank
 
   validates :title, :description, :toy_category_id, :toy_age_id, presence: true
 
@@ -18,6 +18,13 @@ class Toy < ActiveRecord::Base
 
   geocoded_by :zipcode
   after_validation :geocode
+  after_save :set_featured_image
+
+  def set_featured_image
+    if self.toy_images.count > 0
+      self.toy_images.first.featured = true if self.toy_images.map(&:featured).include? false
+    end
+  end
 
   def fet_image
     if toy_images.count > 0
