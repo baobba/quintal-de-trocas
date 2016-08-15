@@ -6,7 +6,7 @@ class ToysController < ApplicationController
     @bs_container = false
 
     if params[:within].present? && params[:within].to_i > 0
-      @q = Toy.includes(:toy_category, :toy_age).near(lookup_ip_location.city, params[:within], :order => 'distance').search(params[:q])
+      @q = Toy.includes(:toy_category, :toy_age).near((params[:city_eq] || lookup_ip_location.city), params[:within], :order => 'distance').search(params[:q])
       @toys = @q.result(distinct: true).page params[:page]
     else
       @q = Toy.includes(:toy_category, :toy_age).search(params[:q])

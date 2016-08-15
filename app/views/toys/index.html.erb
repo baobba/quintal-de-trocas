@@ -10,11 +10,11 @@
       </div>
       <div class="form-group within">
         <label>Distância</label>
-        <%= text_field_tag :within, (50 || params[:within]), class: "form-control" %> km
+        <%= text_field_tag :within, (params[:within] || 50), class: "form-control" %> km
       </div>
       <div class="form-group city">
         <label>Cidade</label>
-        <%= text_field_tag :city, (params[:city] || lookup_ip_location.city), class: "form-control" %>
+        <%= text_field_tag :city_eq, (params[:city_eq] || (lookup_ip_location ? lookup_ip_location.city : nil)), class: "form-control" %>
       </div>
       <div class="form-group">
         <label>Faixa etária</label>
@@ -55,7 +55,7 @@
   <div class="clearfix"></div>
 
   <div class="text-center">
-    <%= link_to_next_page @toys, 'Veja mais', remote: true, id: "load_more_link", class: "btn btn-default btn-default" %>
+    <%= link_to_next_page @toys, 'Veja mais', params: params, remote: true, id: "load_more_link", class: "btn btn-default btn-default" %>
   </div>
   </div>
 </div>

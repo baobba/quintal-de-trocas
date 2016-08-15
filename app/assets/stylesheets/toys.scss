@@ -17,6 +17,8 @@
   right: 0;
   top: 0;
   display: none;
+  height: 100%;
+  height: 100vh;
 
   @media screen and (min-width: $screen-sm-min) {
     display: block;
@@ -25,9 +27,10 @@
 
 #map_wrapper {
   // position: fixed; 
-  height: 600px;
+  height: 100%;
   width: 100%;
-  max-height: 600px;
+  max-height: 100%;
+  height: 100vh;
 }
 
 #map_canvas {
@@ -35,6 +38,7 @@
   height: 100%;
   margin: 0;
   padding: 0;
+  height: 100vh;
 }
 
 div.toy-filter {
@@ -50,7 +54,7 @@ div.toy-filter {
     display: block;
   }
 
-  input[name='city'] {
+  input[name='city_eq'] {
     width: 150px;
   }
   

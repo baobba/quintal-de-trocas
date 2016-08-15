@@ -9,7 +9,7 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body class="<%= params[:controller] %> <%= params[:controller] %>-<%= params[:action] %>">
+<body class="<%= params[:controller] %> <%= params[:controller] %>-<%= params[:action] %> <%= 'home' if current_page?(root_url) %>">
 
   <%= render '/layouts/header' %>
   <%= render '/pages/intro' if current_page?(root_url) %>
