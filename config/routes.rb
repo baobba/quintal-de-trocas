@@ -85,5 +85,6 @@ Rails.application.routes.draw do
   get '/como_funciona', to: redirect("/como-funciona", status: 301)
   get '/pontos_de_trocas', to: redirect("/pontos", status: 301)
   get '/produtos/listar', to: redirect("/brinquedos", status: 301)
+  get '/quem_somos', to: redirect("/sobre-nos", status: 301)
 
 end
