@@ -21,8 +21,8 @@ class Toy < ActiveRecord::Base
   after_save :set_featured_image
 
   def set_featured_image
-    if self.toy_images.count > 0
-      self.toy_images.first.featured = true if self.toy_images.map(&:featured).include? false
+    if self.toy_images.where("image IS NOT NULL").count > 0
+      self.toy_images.where("image IS NOT NULL").first.update_column(:featured, true) if !self.toy_images.where("image IS NOT NULL").map(&:featured).include? true
     end
   end
 

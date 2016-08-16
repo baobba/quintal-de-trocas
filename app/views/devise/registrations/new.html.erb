@@ -29,10 +29,10 @@
             <div class="col-sm-4">
               <%= f.input :phone, placeholder: "(DDD) 0000-0000" %>
             </div>
-            <div class="col-sm-3">
-              <%= f.input :birthday, class: "form-control" %>
+            <div class="col-sm-4">
+              <%= f.input :birthday, as: :string, :input_html => { :value => (!f.object.birthday.blank? && f.object.birthday.to_s.length > 6 ? localize(f.object.birthday) : f.object.birthday) }, class: "form-control" %>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-4">
               <div class="form-group">
                 <%= f.label :gender %><br>
                 <label class="radio-inline">
