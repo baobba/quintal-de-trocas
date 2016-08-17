@@ -19,12 +19,12 @@
 
       <tbody>
         <% @exchanges.each do |exchange| %>
-          <tr>
+          <tr class="<%= 'danger' if exchange.toy.deleted? %>">
             <td>
               <div class="profile-thumb" style="background-image:url('<%= default_img((exchange.user == current_user ? current_user : exchange.user)) %>');float:left;margin-right: 15px;"></div>
 
               <% if exchange.user == current_user %>
-                <p class="lead">Solicitação de troca com <%= exchange.toy.user.name %></p>
+                <p class="lead">Solicitação de troca com <%= exchange.toy.user ? exchange.toy.user.name : "" %></p>
               <% else %>
                 <p class="lead"><%= exchange.user.name %> quer trocar com você</p>
               <% end %>
@@ -32,13 +32,17 @@
               <div>
                 <span class="text-muted">Brinquedo:</span> <%= link_to exchange.toy.title, exchange_path(exchange) if exchange.toy %>
               </div>
+
+              <% if exchange.toy.deleted? %>
+                <br><strong class="text-danger">O brinquedo para troca foi removido pelo usuário</strong>
+              <% end %>
             </td>
             <td>
               <div class="well well-sm text-center">
                 <% if exchange.accepted.nil? %>
                   <% if exchange.user == current_user %>
                     <strong class="lead text-danger">
-                      Aguardando resposta de <%= exchange.toy.user.name %>
+                      Aguardando resposta de <%= exchange.toy.user.name if exchange.toy.user %>
                     </strong>
                   <% else %>
                     <strong class="lead text-danger">

@@ -5,6 +5,12 @@
   </div>
   <div class="col-sm-9">
 
+    <% if @exchange.toy.deleted? %>
+      <br>
+      <div class="alert alert-danger">
+        <h4>O brinquedo para troca foi removido pelo usuário</h4>
+      </div>
+    <% end %>
     <br>
 
     <ul class="progress-indicator">
