@@ -57,7 +57,9 @@
                 <% if @exchange.exchange_type == "credit" %>
                   Troca por crédito
                 <% elsif @exchange.exchange_type == "exchange" %>
-                  <%= link_to @exchange.from_toy.title, toy_path(@exchange.from_toy) if @exchange.toy %>
+                  <% if @exchange.from_toy %>
+                    <%= link_to @exchange.from_toy.title, toy_path(@exchange.from_toy) if @exchange.toy %>
+                  <% end %>
                 <% end %>
               <% elsif !@exchange.accepted.nil? && !@exchange.accepted %>
                 Recusou a troca
