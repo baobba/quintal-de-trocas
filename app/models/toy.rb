@@ -10,7 +10,7 @@ class Toy < ActiveRecord::Base
 
   has_many :exchanges, :foreign_key => "toy_to"
 
-  accepts_nested_attributes_for :toy_images, :allow_destroy => true, reject_if: :all_blank
+  accepts_nested_attributes_for :toy_images, :allow_destroy => true, reject_if: :image_rejectable?
 
   validates :title, :description, :toy_category_id, :toy_age_id, presence: true
 
@@ -32,6 +32,10 @@ class Toy < ActiveRecord::Base
     else
       toy_images.new
     end
+  end
+
+  def image_rejectable?(att)
+    att['image'].blank? && new_record?
   end
 
   def to_param

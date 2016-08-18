@@ -49,10 +49,7 @@
           <% end %>
           
           <%= p.label :image, "Image #{index+1}" %><br>
-          
-          <label class="btn btn-default btn-sm btn-file">
-            Selecionar imagem <%= p.file_field :image, style: "display:none;" %>
-          </label>
+          <%= p.file_field :image %>
 
           <div class="featured">
             <%= p.check_box :featured %> Destaque
