@@ -97,7 +97,7 @@
             </strong>
 
             <% if @exchange.accepted %><br>
-              Tipo de troca: <%= @exchange.toy_from ? 'por outro brinquedo' : 'por crédito' %>
+              Tipo de troca: <%= @exchange.exchange_type == "credit" ? 'por crédito' : 'por outro brinquedo' %>
             <% end %>
           <% end %>
         </div>

@@ -22,8 +22,11 @@ class ExchangesController < ApplicationController
 
   def reply_message
 
+    @user_from = User.find_by_id(exchange_params[:exchange_messages_attributes].first[1][:user_from])
+    @user_to = User.find_by_id(exchange_params[:exchange_messages_attributes].first[1][:user_to])
+
     if @exchange.update(exchange_params)
-      QuintalMailer.new_exchange_message(@exchange, @exchange.toy.user).deliver_now
+      QuintalMailer.new_exchange_message(@exchange, @user_from, @user_to).deliver_now
       redirect_to exchange_path(@exchange), success: 'Mensagem enviada com sucesso'
     else
       render :show
@@ -48,10 +51,8 @@ class ExchangesController < ApplicationController
     @exchange.exchange_messages.last.user_from = current_user.id
     @exchange.exchange_messages.last.user_to = @exchange.toy.user.id
 
-    # @exchange.send_message(@exchange.user, @exchange.message, "Bora trocar brinquedo?")
-
     if @exchange.save
-      QuintalMailer.request_exchange(@exchange, @exchange.toy.user).deliver_now
+      QuintalMailer.request_exchange(@exchange, @exchange.user_from).deliver_now
       redirect_to exchange_path(@exchange), success: 'Pedido de troca realizado com sucesso'
     else
       render :new
@@ -76,10 +77,16 @@ class ExchangesController < ApplicationController
     elsif !exchange_params[:finalized].nil?
       @exchange.credit.destroy! if @exchange.credit
     end
+    
+    @exchange.assign_attributes(exchange_params)
+
+    if @exchange.exchange_type_changed? && @exchange.exchange_type != "canceled"
+      QuintalMailer.exchange_changed(@exchange, @exchange.user, current_user).deliver_now
+    end
 
     respond_to do |format|
-      if @exchange.update(exchange_params)
-        # QuintalMailer.exchange_changed(@exchange, @exchange.toy.user).deliver_now if @exchange.status_changed?
+
+      if @exchange.save!
         format.html { redirect_to @exchange, notice: 'Troca atualizada com sucesso' }
         format.json { render :show, status: :ok, location: @exchange }
       else

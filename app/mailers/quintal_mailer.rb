@@ -11,10 +11,21 @@ class QuintalMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Nova solicitação de troca recebida')
   end
 
-  def new_exchange_message(exchange, user)
+  def new_exchange_message(exchange, user_from, user_to)
+    @exchange = exchange
+    @user_from = user_from
+    @user_to = user_to
+    
+    mail(to: @user_to.email, subject: 'Você recebeu uma nova mensagem')
+  end
+
+  def exchange_changed(exchange, user, current_user)
     @exchange = exchange
     @user = user
-    mail(to: @user.email, subject: 'Você recebeu uma nova mensagem')
+    @current_user = current_user
+    @status = exchange.exchange_type != "canceled" ? "aceitou" : "não aceitou"
+
+    mail(to: @user.email, subject: "#{@current_user.first_name} #{@status} sua solicitação")
   end
 
   def toy_added(toy)
