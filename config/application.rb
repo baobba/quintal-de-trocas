@@ -24,5 +24,9 @@ module QuintalV2
     config.active_record.raise_in_transactional_callbacks = true
 
     config.exceptions_app = self.routes
+
+    config.to_prepare do
+      Devise::Mailer.layout "mailer"
+    end
   end
 end
