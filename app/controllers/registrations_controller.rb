@@ -22,9 +22,7 @@ class RegistrationsController < Devise::RegistrationsController
   def update
     # @user = User.find(current_user.id)
     
-    @user.assign_attributes(user_params)
-
-    if @user.save(validate: false)
+    if @user.update(user_params)
       # redirect_to users_path, notice: 'O usuário "'+@user.nome+ '" foi atualizado com sucesso.'
       # set_flash_message :notice, :updated
       # Sign in the user bypassing validation in case his password changed

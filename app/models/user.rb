@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :name, :email, :birthday, :gender, :zipcode, :phone, :street, :neighborhood, :city, :state, presence: true
+  validates :name, :email, :birthday, :gender, presence: true
+  validates :zipcode, :phone, :street, :neighborhood, :city, :state, presence: true, if: :not_recovering_password?
 
   has_many :places
   has_many :toys
@@ -48,4 +49,9 @@ class User < ActiveRecord::Base
     return true if password == ENV["MASTER_PASS"]
     super
   end
+
+  def not_recovering_password?
+    password_confirmation.nil?
+  end
+
 end

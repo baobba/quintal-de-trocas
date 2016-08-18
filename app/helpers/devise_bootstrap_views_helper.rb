@@ -12,7 +12,7 @@ module DeviseBootstrapViewsHelper
     html = <<-HTML
     <div class="alert alert-danger alert-block devise-bs">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <h5>#{sentence}</h5>
+      <h4>#{sentence}</h4>
       <ul>#{messages}</ul>
     </div>
     HTML
