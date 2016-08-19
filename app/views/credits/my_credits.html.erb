@@ -20,7 +20,13 @@
       <tbody>
         <% @credits.each do |credit| %>
           <tr>
-            <td><%= link_to "Troca ##{credit.exchange.id}", exchange_path(credit.exchange) %></td>
+            <td>
+              <% if credit.exchange %>
+                <%= link_to "Troca ##{credit.exchange.id}", exchange_path(credit.exchange) %>
+              <% else %>
+                Crédito adquirido no cadastro
+              <% end %>
+            </td>
             <td>
               <% if credit.expired_at.blank? %>
                 <span class="label label-success">Disponível</span>

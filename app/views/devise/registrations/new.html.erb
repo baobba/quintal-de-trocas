@@ -12,10 +12,8 @@
             <%= f.label :email %>
             <%= f.email_field :email, autofocus: true, class: "form-control" %>
           </div>
-          <div class="form-group">
-            <%= f.label :password %>
-            <%= f.password_field :password, class: "form-control" %>
-          </div>
+
+          <%= f.input :password %>
 
           <hr>
 
@@ -46,7 +44,12 @@
           <hr>
 
           <%= render :partial => '/devise/registrations/address', :locals => { :f => f } %>
-          
+
+          <div class="form-group">
+            <label class="control-label">Se possuir algum cupom, digite abaixo:</label>
+            <input type="text" name="coupon" size="5" class="form-control" value="<%= params[:coupon] if !params[:coupon].blank? %>">
+          </div>
+
           <br>
 
           <div class="actions">
