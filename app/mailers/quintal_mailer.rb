@@ -9,7 +9,7 @@ class QuintalMailer < ApplicationMailer
     @exchange = exchange
     @user_from = exchange.from_user
     @user_to = exchange.to_user
-    mail(to: @user_to, subject: 'Nova solicitação de troca recebida')
+    mail(to: @user_to.email, subject: 'Nova solicitação de troca recebida')
   end
 
   def new_exchange_message(exchange, user_from, user_to)
