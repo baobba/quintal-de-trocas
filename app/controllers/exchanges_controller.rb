@@ -52,7 +52,7 @@ class ExchangesController < ApplicationController
     @exchange.exchange_messages.last.user_to = @exchange.toy.user.id
 
     if @exchange.save
-      QuintalMailer.request_exchange(@exchange, @exchange.user_from).deliver_now
+      QuintalMailer.request_exchange(@exchange).deliver_now
       redirect_to exchange_path(@exchange), success: 'Pedido de troca realizado com sucesso'
     else
       render :new
