@@ -8,6 +8,8 @@
       <h1>Meus créditos</h1>
     </div>
 
+    <% if @credits.count > 0 %>
+      
     <table class="table">
       <thead>
         <tr>
@@ -40,6 +42,9 @@
         <% end %>
       </tbody>
     </table>
+    <% else %>
+      <div class="alert alert-danger">Você não possui nenhum crédito ainda.</div>
+    <% end %>
 
   </div>
 </div>
