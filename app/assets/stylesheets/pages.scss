@@ -20,17 +20,21 @@
 }
 
 .pages-support {
-  color: #444;
-  font-size: 17px;
-  font-weight: 300;
 
-  p {
-    margin: 20px 0;
-  }
+  .page-content {
+    color: #444;
+    font-size: 17px;
+    font-weight: 300;
 
-  .title {
-    font-weight: bold;
+    p {
+      margin: 20px 0;
+    }
+
+    .title {
+      font-weight: bold;
+    }
   }
+  
 }
 
 .pages-how_it_works {
