@@ -47,7 +47,14 @@
 
           <div class="row">
             <div class="col-sm-6 exchange-profile">
-              <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.user) %>');float: left;margin-right:10px;"></div> <%= @exchange.from_user == current_user ? "Você" : @exchange.from_user.first_name %> <small>solicitou:</small>
+              <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.user) %>');float: left;margin-right:10px;"></div> 
+
+              <% if @exchange.from_user == current_user %>
+                Você
+              <% else %>
+               <%= link_to @exchange.from_user.first_name, user_path(@exchange.from_user) %>
+              <% end %>
+               <small>solicitou:</small>
               <%= link_to @exchange.to_toy.title, toy_path(@exchange.to_toy) if @exchange.toy %>
             </div>
             <div class="col-sm-6 exchange-profile" style="<%= 'opacity: 0.4' if @exchange.accepted.nil? %>">
