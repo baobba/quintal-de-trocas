@@ -61,10 +61,6 @@ class ExchangesController < ApplicationController
 
   def update
 
-    if exchange_params[:accepted].nil?
-      @exchange.accepted = @exchange.reason.blank? ? true : false
-    end
-
     if !exchange_params[:finalized].nil? && exchange_params[:finalized] == 'true'
       @exchange.to_user.credits.create(
         exchange_id: @exchange.id,
@@ -80,8 +76,11 @@ class ExchangesController < ApplicationController
     
     @exchange.assign_attributes(exchange_params)
 
-    if @exchange.exchange_type_changed? && @exchange.exchange_type != "canceled"
+    if @exchange.exchange_type_changed?
+
       QuintalMailer.exchange_changed(@exchange, @exchange.user, current_user).deliver_now
+      @exchange.accepted = @exchange.exchange_type == "canceled" ? false : true
+      
     end
 
     respond_to do |format|

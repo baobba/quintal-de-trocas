@@ -102,6 +102,9 @@
             <strong class="lead text-<%= @exchange.accepted ? 'success' : 'danger' %>">
               <span class="glyphicon glyphicon-ok"></span> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %> <%= @exchange.accepted == false ? "recusou" : "aceitou" %> essa troca
             </strong>
+            <% if @exchange.accepted == false %>
+              <br>Motivo: <%= @exchange.reason %>
+            <% end %>
 
             <% if @exchange.accepted %><br>
               Tipo de troca: <%= @exchange.exchange_type == "credit" ? 'por crédito' : 'por outro brinquedo' %>

@@ -2,7 +2,11 @@
 
 <p><%= @current_user.first_name %> <%= @status %> sua solicitação de troca pelo brinquedo <strong><%= @exchange.toy.title %></strong>.</p>
 
-<p>Agora é hora de combinar como e quando será feita a troca.<br>
-Clique no link abaixo para enviar uma mensagem para <%= @current_user.first_name %>.</p>
+<% if @status == "aceitou" %>
+  <p>Agora é hora de combinar como e quando será feita a troca.<br>
+  Clique no link abaixo para enviar uma mensagem para <%= @current_user.first_name %>.</p>
+<% else %>
+  <p>Motivo: <%= @exchange.reason %></p>
+<% end %>
 
 <p><%= link_to "Enviar mensagem para #{@current_user.first_name}".html_safe, exchange_url(@exchange.id) %></p>
