@@ -37,7 +37,7 @@ class QuintalMailer < ApplicationMailer
 
   def contact_us(message)
     @message = message
-    mail(to: "carol@quintaldetrocas.com.br", cc: "netto16@gmail.com", subject: 'Novo contato pelo site')
+    mail(to: "carolguedes.atriz@gmail.com", cc: "netto16@gmail.com", subject: 'Novo contato pelo site')
   end
 
   # 
