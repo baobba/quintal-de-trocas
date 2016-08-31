@@ -30,7 +30,7 @@
               <% end %>
 
               <div>
-                <span class="text-muted">Brinquedo:</span> <%= link_to exchange.toy.title, exchange_path(exchange) if exchange.toy %>
+                <span class="text-muted">Brinquedo:</span> <%= link_to exchange.toy.title, toy_path(exchange.toy) if exchange.toy %>
               </div>
 
               <% if exchange.toy.deleted? %>

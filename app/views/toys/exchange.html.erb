@@ -13,10 +13,10 @@
           <%= f.hidden_field :user_id, value: (current_user ? current_user.id : nil) %>
           <%= f.hidden_field :toy_to %>
 
-          <% if current_user.credits.count > 0 %>
+          <% if current_user.credits.available.count > 0 %>
             <div class="well text-center">
             <div class="row">
-              <p class="lead">Você possui <span class="badge"><%= current_user.credits.count %></span> crédito(s).</p>
+              <p class="lead">Você possui <span class="badge"><%= current_user.credits.available.count %></span> crédito(s).</p>
               <div class="col-sm-5 col-sm-offset-1">
                 <%= f.radio_button :credit_offer, "1" %><br>
                 Quero oferecer 1 crédito na troca por este brinquedo
