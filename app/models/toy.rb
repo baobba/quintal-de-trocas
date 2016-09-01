@@ -14,7 +14,7 @@ class Toy < ActiveRecord::Base
 
   validates :title, :description, :toy_category_id, :toy_age_id, presence: true
 
-  paginates_per 12
+  paginates_per 30
 
   geocoded_by :zipcode
   after_validation :geocode

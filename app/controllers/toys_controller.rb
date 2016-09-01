@@ -5,12 +5,64 @@ class ToysController < ApplicationController
   def index
     @bs_container = false
 
-    if params[:within].present? && params[:within].to_i > 0
-      @q = Toy.includes(:toy_category, :toy_age, :toy_images).near((params[:city_eq] || lookup_ip_location.city), params[:within], :order => 'distance').search(params[:q])
-      @toys = @q.result(distinct: true).page params[:page]
+    @q = Toy.includes(:toy_category, :toy_age, :toy_images)
+
+    location = if !params[:lat].blank? && !params[:lon].blank?
+      [params[:lat], params[:lon]].join(",")
+    elsif !params[:city_eq].blank?
+      params[:city_eq]
+    elsif current_user && !current_user.city.blank?
+      [current_user.city, current_user.state].join(",")
+    elsif lookup_ip_location && !lookup_ip_location.city.blank?
+      "#{lookup_ip_location.city}, #{lookup_ip_location.state}, #{lookup_ip_location.country}"
     else
-      @q = Toy.includes(:toy_category, :toy_age, :toy_images).search(params[:q])
-      @toys = @q.result(distinct: true).order("created_at DESC").page params[:page]
+      "88110-690, Brasil"
+    end
+
+    zoom = if params[:zoom].blank?
+      params[:within] || 50
+    else
+      case params[:zoom]
+        when "15"
+          10
+        when "14"
+          20
+        when "13"
+          30
+        when "12"
+          40
+        when "11"
+          50
+        when "10"
+          100
+        when "9"
+          200
+        else
+          50
+      end
+    end
+
+    @q = @q.near(location, zoom, :units => :km).search(params[:q])
+
+    respond_to do |format|
+      format.html {
+        if params[:within].present? && params[:within].to_i > 0
+          @toys = @q.result(distinct: true).page params[:page]
+        else
+          @toys = @q.result(distinct: true).order("created_at DESC").page params[:page]
+        end
+      }
+
+      format.json {
+        if params[:q]
+          @toys = @q.result(distinct: true).order("created_at DESC")
+        else
+          @toys = @q.result(distinct: true).order("created_at DESC").page params[:page]
+        end
+
+        @toys = @toys.map{|f| [f.id, f.title, f.latitude, f.longitude, "<div class='info_content'><p class='lead' style='margin: 5px 0 10px 0;font-size: 16px;line-height: 120%;'><a href='#{toy_url(f)}'>#{f.title}</a></p><div style='margin-left:15px;' class='pull-right'><img src='#{f.toy_images.first.image.url(:thumb) if f.toy_images.first}' class='img-thumbnail' width='80'></div><small class='text-muted'>#{f.description[0..100]} ...</small></div>"]}
+        render json: @toys
+      }
     end
 
   end
@@ -25,6 +77,12 @@ class ToysController < ApplicationController
   end
 
   def index_near
+
+    if params[:within].present? && params[:within].to_i > 0
+      @q = Toy.where("latitude IS NOT NULL AND LENGTH(latitude) < 15").includes(:toy_category, :toy_age, :toy_images).near((params[:city_eq] || lookup_ip_location.city), params[:within], :order => 'distance').search(params)
+    else
+      @q = Toy.where("latitude IS NOT NULL AND LENGTH(latitude) < 15").includes(:toy_category, :toy_age, :toy_images).search(params)
+    end
 
     location = if !params[:lat].blank? && !params[:lon].blank?
       [params[:lat], params[:lon]].join(",")
@@ -57,9 +115,10 @@ class ToysController < ApplicationController
       end
     end
 
-    @toys = Toy.includes(:toy_images).near(location, zoom, :units => :km) || nil
-    @toys = @toys.map{|f| [f.id, f.title, f.latitude, f.longitude, "<div class='info_content'><p class='lead' style='margin: 5px 0 10px 0;font-size: 16px;line-height: 120%;'><a href='#{toy_url(f)}'>#{f.title}</a></p><div style='margin-left:15px;' class='pull-right'><img src='#{f.toy_images.first.image.url(:thumb) if f.toy_images.first}' class='img-thumbnail' width='80'></div><small class='text-muted'>#{f.description[0..100]} ...</small></div>"]} if @toys
+    @toys = @q.result(distinct: true).map{|f| [f.id, f.title, f.latitude, f.longitude, "<div class='info_content'><p class='lead' style='margin: 5px 0 10px 0;font-size: 16px;line-height: 120%;'><a href='#{toy_url(f)}'>#{f.title}</a></p><div style='margin-left:15px;' class='pull-right'><img src='#{f.toy_images.first.image.url(:thumb) if f.toy_images.first}' class='img-thumbnail' width='80'></div><small class='text-muted'>#{f.description[0..100]} ...</small></div>"]} if @q
+
     render :json => @toys
+
   end
 
   def exchange

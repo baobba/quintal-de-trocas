@@ -8,7 +8,7 @@ $(document).ready(function() {
     var $sidebar   = $("#map_wrapper"),
         $window    = $(window),
         offset     = $sidebar.offset(),
-        $footer    = $('footer').offset().top,
+        $footer    = $('.banner').offset().top,
         topPadding = 0;
 
     $window.scroll(function() {
@@ -20,8 +20,8 @@ $(document).ready(function() {
         $sidebar.css('top','');
       }
 
-      if ($sidebar.offset().top + $sidebar.height() > $("footer").offset().top) {
-        $sidebar.css('top',-($sidebar.offset().top + $sidebar.height() - $("footer").offset().top));
+      if ($sidebar.offset().top + $sidebar.height() > $footer) {
+        $sidebar.css('top',-($sidebar.offset().top + $sidebar.height() - $footer));
       }
     });
 
@@ -30,7 +30,7 @@ $(document).ready(function() {
      * Asynchronously Load the map API
      */
     var script = document.createElement('script');
-    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=initialize";
+    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&libraries=places&language=pt-BR&callback=initialize";
     document.body.appendChild(script);
   }
 
@@ -135,7 +135,7 @@ function initialize() {
   var bounds = new google.maps.LatLngBounds();
   
   var markers;
-    var markersIds = [];
+  var markersIds = [];
 
   var customMapTypeId = 'custom_style';
   var customMapType = new google.maps.StyledMapType([
@@ -146,6 +146,14 @@ function initialize() {
     ], {
       name: 'Custom Style'
   });
+
+  var ac_options = {
+    types: ['(cities)'],
+    language: "pt-BR",
+    componentRestrictions: {country: "br"}
+   };
+  var input = document.getElementById('city_eq');
+  var autocomplete = new google.maps.places.Autocomplete(input, ac_options);
 
   var mapOptions = {
     scrollwheel: false,
@@ -248,7 +256,7 @@ function initialize() {
 
   function showPlaces(is_moved, latlng){
 
-    $.getJSON("<%= Rails.application.routes.url_helpers.index_near_toys_path %>", latlng, function( data ) {
+    $.getJSON(window.location.href, latlng, function( data ) {
       var newMarkers = [];
 
       markers = data;
@@ -264,7 +272,8 @@ function initialize() {
           marker = new google.maps.Marker({
             position: position,
             map: map,
-            title: markers[i][1]
+            title: markers[i][1],
+            icon: '<%= asset_path("map-marker.png") %>'
           });
           newMarkers.push(marker);
           markersIds.push(markers[i][0]);
