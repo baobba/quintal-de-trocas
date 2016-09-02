@@ -17,7 +17,7 @@
         </div>
         <div class="form-group city">
           <label>Região</label>
-          <%= text_field_tag :city_eq, (params[:city_eq] || (current_user && current_user.city ? current_user.city : nil) || (lookup_ip_location ? lookup_ip_location.city : nil)), class: "form-control" %>
+          <%= text_field_tag :city_eq, (params[:city_eq] || (current_user && current_user.city && current_user.state ? "#{current_user.city} - #{current_user.state}" : nil) || (lookup_ip_location ? lookup_ip_location.city : nil)), class: "form-control" %>
         </div>
         <div class="form-group">
           <br>

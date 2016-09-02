@@ -53,12 +53,12 @@ class ToysController < ApplicationController
         end
       }
 
+      format.js {
+        @toys = @q.result(distinct: true).order("created_at DESC").page params[:page]
+      }
+      
       format.json {
-        if params[:q]
-          @toys = @q.result(distinct: true).order("created_at DESC")
-        else
-          @toys = @q.result(distinct: true).order("created_at DESC").page params[:page]
-        end
+        @toys = @q.result(distinct: true).order("created_at DESC")
 
         @toys = @toys.map{|f| [f.id, f.title, f.latitude, f.longitude, "<div class='info_content'><p class='lead' style='margin: 5px 0 10px 0;font-size: 16px;line-height: 120%;'><a href='#{toy_url(f)}'>#{f.title}</a></p><div style='margin-left:15px;' class='pull-right'><img src='#{f.toy_images.first.image.url(:thumb) if f.toy_images.first}' class='img-thumbnail' width='80'></div><small class='text-muted'>#{f.description[0..100]} ...</small></div>"]}
         render json: @toys
