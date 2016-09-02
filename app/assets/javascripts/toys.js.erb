@@ -12,6 +12,10 @@ $(document).ready(function() {
         topPadding = 0;
 
     $window.scroll(function() {
+
+      offset = $sidebar.offset();
+      $footer = $('.banner').offset().top;
+        
       if ($window.scrollTop() > offset.top) {
         $sidebar.css('position','fixed');
         $sidebar.css('top','0');
