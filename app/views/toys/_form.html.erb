@@ -42,12 +42,12 @@
       <%= f.fields_for :toy_images, toy_image do |p| %>
         <div class="text-center field">
 
-          <div class="current-upload">
+          <div class="current-upload" style="display: none">
             <% if p.object.image? %>
               <% content_for :head do %>
               <script type="text/javascript">
                 $(document).ready(function() {
-                  $("div[id='image-cropper-<%=index+1%>']").cropit('imageSrc', 'http://placekitten.com/g/1280/800');
+                  $("div[id='image-cropper-<%=index+1%>']").cropit('imageSrc', '<%= p.object.image.url %>');
                 });
               </script>
               <% end %>
