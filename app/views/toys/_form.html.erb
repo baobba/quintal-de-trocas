@@ -38,7 +38,7 @@
 
       <p class="lead">Imagens</p>
 
-      <% @toy.toy_images.each.with_index do |toy_image,index| %>
+      <% @toy.toy_images.order("id ASC").each.with_index do |toy_image,index| %>
       <%= f.fields_for :toy_images, toy_image do |p| %>
         <div class="text-center field">
 
@@ -51,9 +51,6 @@
                 });
               </script>
               <% end %>
-            <div class="thumb">
-              <%= image_tag p.object.image.url %>
-            </div>
             <% end %>
           </div>
 
@@ -80,8 +77,6 @@
           </div>
 
           <div class="btn btn-default btn-sm select-image-btn">Selecionar imagem</div>
-
-          <%= p.label :image, "Image #{index+1}" %><br>
 
           <div class="featured">
             <%= p.check_box :featured %> Destaque
