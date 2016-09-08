@@ -16,4 +16,5 @@
 //= require bootstrap.min
 //= require jquery.mask.min
 //= require markerclusterer
+//= require jquery.cropit
 //= require_tree .

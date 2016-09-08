@@ -42,14 +42,46 @@
       <%= f.fields_for :toy_images, toy_image do |p| %>
         <div class="text-center field">
 
-          <% if p.object.image? %>
-          <div class="thumb">
-            <%= image_tag p.object.image.url %>
+          <div class="current-upload">
+            <% if p.object.image? %>
+              <% content_for :head do %>
+              <script type="text/javascript">
+                $(document).ready(function() {
+                  $("div[id='image-cropper-<%=index+1%>']").cropit('imageSrc', 'http://placekitten.com/g/1280/800');
+                });
+              </script>
+              <% end %>
+            <div class="thumb">
+              <%= image_tag p.object.image.url %>
+            </div>
+            <% end %>
           </div>
-          <% end %>
-          
+
+          <div class="new-upload">
+            <div id="image-cropper-<%= index+1 %>">
+              <div class="cropit-preview"></div>
+              
+              <div class="controls-wrapper">
+                <div class="rotation-btns">
+                  <span class="icon glyphicon glyphicon-repeat rotate-ccw-btn"></span>
+                  <span class="icon glyphicon glyphicon-repeat rotate-cw-btn"></span>
+                </div>
+                <div class="slider-wrapper">
+                  <!-- <span class="icon glyphicon glyphicon-picture"></span> -->
+                  <input type="range" class="cropit-image-zoom-input custom" min="0" max="1" step="0.01">
+                  <!-- <span class="icon glyphicon glyphicon-picture"></span> -->
+                </div>
+              </div>
+              
+              <!-- The actual file input will be hidden -->
+              <%= p.file_field :image, class: "cropit-image-input" %>
+              <%= p.hidden_field :image, class: "cropit-image-input-data", value: "" %>
+            </div>
+          </div>
+
+          <div class="btn btn-default btn-sm select-image-btn">Selecionar imagem</div>
+
           <%= p.label :image, "Image #{index+1}" %><br>
-          <%= p.file_field :image %>
 
           <div class="featured">
             <%= p.check_box :featured %> Destaque

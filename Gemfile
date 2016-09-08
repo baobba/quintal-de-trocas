@@ -51,6 +51,7 @@ gem 'fog-aws'
 gem 'figaro'
 gem 'aws-sdk', '~> 2'
 gem 'newrelic_rpm'
+gem 'carrierwave-base64'
 
 gem 'puma'
 
