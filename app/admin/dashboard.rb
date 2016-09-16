@@ -51,6 +51,7 @@ ActiveAdmin.register_page "Dashboard" do
             column "Title",        :title
             column "Faixa etária", :toy_age_id
             column "Categoria",    :toy_category_id
+            column "Data",         :created_at
           end
         end
       end
@@ -61,6 +62,7 @@ ActiveAdmin.register_page "Dashboard" do
             column "Email",  :email
             column "Cidade", :city
             column "Estado", :state
+            column "Data",   :created_at
           end
         end
       end

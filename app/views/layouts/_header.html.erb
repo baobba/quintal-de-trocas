@@ -55,7 +55,7 @@
                 <li><%= link_to "Sair", destroy_user_session_path, :method => :delete %></li>
               </ul>
             </li>
-            <li><%= link_to "<span class='fa fa-heart-o'></span> #{current_user.credits.available.count}".html_safe, my_credits_path %></li>
+            <li><%= link_to "#{image_tag 'quintalecas-icon.png', width: 18} #{current_user.credits.available.count}".html_safe, my_credits_path %></li>
           <% else %>
               <li><%= link_to "Login / Cadastre-se", new_user_session_path %></li>
           <% end %>
@@ -85,7 +85,7 @@
   <div class="h-line top"></div>
 </header>
 
-<% if current_user && !current_user.valid? %>
+<% if current_user && !User.find(current_user.id).valid? %>
   <% if params[:controller] == "toys" && params[:action] == "index" %>
   <% else %>
     <div class="container">
