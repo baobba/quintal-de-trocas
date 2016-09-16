@@ -30,7 +30,14 @@
           <% if user_signed_in? %>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                <div class="profile-mini" style="background-image:url('<%= default_img(current_user) %>')"></div>
+                <div class="profile-mini" style="background-image:url('<%= default_img(current_user) %>');position:relative;">
+                  <% if current_user.exchanges_received.waiting.count>0 %>
+                    <span class="icon-notification">
+                      <%= current_user.exchanges_received.waiting.count %>
+                    </span>
+                  <% end %>
+                </div>
+                
                 <%= current_user.name.blank? ? current_user.email : current_user.name.split(" ").first %> <span class="caret"></span>
               </a>
 
@@ -42,7 +49,7 @@
                 <li><%= link_to "Meu perfil", user_path(current_user) %></li>
                 <li><%= link_to "Alterar dados pessoais", edit_user_registration_path %></li>
                 <li><%= link_to "Meus brinquedos", my_toys_path %></li>
-                <li><%= link_to "Minhas trocas", my_exchanges_path %></li>
+                <li><%= link_to "Minhas trocas (#{current_user.exchanges_received.waiting.count})", my_exchanges_path %></li>
                 <li><%= link_to "Meus créditos", my_credits_path %></li>
                 <li><%= link_to "Meus pontos de troca", my_places_path %></li>
                 <li><%= link_to "Sair", destroy_user_session_path, :method => :delete %></li>
@@ -77,3 +84,12 @@
   </nav>
   <div class="h-line top"></div>
 </header>
+
+<% if current_user && !current_user.valid? %>
+  <% if params[:controller] == "toys" && params[:action] == "index" %>
+  <% else %>
+    <div class="container">
+      <div class="alert alert-danger">Olá, seu cadastrado não está completo. <%= link_to "Complete seu cadastro", edit_user_registration_path, class: "btn btn-default btn-sm" %> para poder aproveitar todos benefícios do Quintal :)</div>
+    </div>
+  <% end %>
+<% end %>

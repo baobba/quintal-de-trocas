@@ -1,76 +1,92 @@
-<div class="modal-dialog" role="document">
-  <%= simple_form_for @exchange do |f| %>
-  <div class="modal-content">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title" id="myModalLabel">Responder solicitação</h4>
-    </div>
-    <div class="modal-body" style="background-color: #f6f6f6;">
+<div id="reply" class="exchange-reply">
 
-      <% if !params[:type].blank? && params[:type] == "credit" %>
-        <p class="lead text-center" style="margin: 15px 0 10px 0;"><%= @exchange.from_user.first_name %> está oferecendo 1 crédito em troca do brinquedo</p><p class="text-center" style="margin-bottom:30px;">1 crédito vale um brinquedo dentro da plataforma.</p>
-
-        <hr>
-        <div class="text-center">
-          <p class="lead">Você aceita a troca?</p>
-
-          <span class="text-success" style="font-size: 20px;">
-            <label for="exchange_accepted_true"><%= f.radio_button :accepted, "1" %> Sim</label>&nbsp;&nbsp;&nbsp;
-          </span>
-          <span class="text-danger" style="font-size: 20px;">
-            <label for="exchange_accepted_false"><%= f.radio_button :accepted, "0" %> Não</label>
-          </span>
-
+  <div class="request-info">
+    <div class="row">
+      <div class="col-sm-4">
+        <p class="lead">Informações do solicitante</p>
+        <div class="profile-thumb" style="background-image:url('<%= default_img(@exchange.from_user) %>');float: left;margin-right:15px;"></div>
+        <%= link_to @exchange.from_user.name, user_path(@exchange.from_user) %>
+        <div class="text-muted">
+          <small>
+          <% if !@exchange.from_user.neighborhood.blank? %>
+            <%= @exchange.from_user.neighborhood %><br>
+          <% end %>
+          <%= @exchange.from_user.city %> / <%= @exchange.from_user.state %>
+          </small><br>
+          <a href="https://www.google.com/maps/place/<%= @exchange.from_user.full_address %>?hl=en-US" target="_blank" class="btn-link">Ver no mapa</a>
         </div>
-
-      <% else %>
-        <p class="lead text-center" style="margin: 15px 0 10px 0;">Escolha um dos brinquedos da lista ou troque por 1 crédito.</p><p class="text-center" style="margin-bottom:30px;">1 crédito vale um brinquedo dentro da plataforma.</p>
-
-        <hr>
-
-        <div class="row user-options">
-          <div class="col-sm-4 text-center">
-            <%= f.radio_button :exchange_type, "exchange" %><br>
-            <strong>Escolher um brinquedo na lista de <%= @exchange.user.name %></strong>
-          </div>
-          <div class="col-sm-4 text-center">
-            <%= f.radio_button :exchange_type, "credit" %><br>
-            <strong>Prefiro trocar por<br>1 crédito</strong>
-          </div>
-          <div class="col-sm-4 text-center">
-            <%= f.radio_button :exchange_type, "canceled" %><br>
-            <strong class="text-danger">Recusar pedido</strong>
-          </div>
-        </div>
-      <% end %>
-
-      <div class="user-toy-list" style="display: none;">
-        <hr>
-        <p><%= @exchange.user.name %> possui <%= @exchange.user.toys.count %> brinquedos</p>
-        <ul class="list-inline user-toy-list" style="overflow: scroll;width: 100%;">
-        <% @exchange.user.toys.each do |toy| %>
-          <li class="text-center">
-            <div class="thumb">
-              <%= image_tag toy.fet_image.image.url(:thumb), width: 80 %>
-            </div>
-            <%= link_to toy.title, toy %><br>
-            <%= f.radio_button :toy_from, toy.id %>
-          </li>
-        <% end %>
-        </ul>
       </div>
-
-      <div class="user-canceled" style="display: none;">
-        <hr>
-        <%= f.input :reason, as: :text %>
-      </div>
-
-    </div>
-    <div class="modal-footer">
-      <div class="text-center">
-        <%= f.submit "Prosseguir &raquo;".html_safe, class: "btn btn-lg btn-success" %>
+      <div class="col-sm-4">
+        <p class="lead">Brinquedo solicitado</p>
+        <%= image_tag @exchange.to_toy.fet_image.image.url(:thumb), width: 70, class: "pull-left" %>
+        <%= link_to @exchange.to_toy.title, toy_path(@exchange.to_toy) if @exchange.toy %>
       </div>
     </div>
   </div>
-  <% end %>
+  
+  <hr>
+
+  <div class="reply-choose">
+
+    <p class="lead main">Veja os brinquedos que você pode escolher nessa troca</p>
+    <p class="lead">Você também pode optar por trocar por 1 crédito (que poderá ser trocado por outro brinquedo, de outra pessoa)</p>
+
+    <%= simple_form_for @exchange do |f| %>
+    
+      <div class="panel with-nav-tabs panel-success">
+        <div class="panel-heading">
+          <ul class="nav nav-tabs">
+            <li class="active">
+              <a href="#tab1default" data-toggle="tab">
+                <%= f.radio_button :exchange_type, "exchange" %>
+                <strong>Trocar por um brinquedo da lista de <%= @exchange.from_user.name %></strong>
+              </a>
+            </li>
+            <li>
+              <a href="#tab2default" data-toggle="tab">
+                <%= f.radio_button :exchange_type, "credit" %>
+                <strong>Trocar por 1 crédito<br><small>1 crédito vale um brinquedo</small></strong>
+              </a>
+            </li>
+            <li>
+              <a href="#tab3default" data-toggle="tab">
+                <%= f.radio_button :exchange_type, "canceled" %>
+                <strong class="text-danger">Recusar pedido<br><i class="fa fa-frown-o" aria-hidden="true"></i></strong>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="panel-body">
+          <div class="tab-content">
+
+            <div class="tab-pane fade in active" id="tab1default">
+              <div class="row show-options">
+                <div class="user-toy-list">
+                  <p class="text-muted"><%= @exchange.user.name %> possui <%= @exchange.user.toys.count %> brinquedos. Caso não tenha interesse nesses brinquedos, você poderá trocar por 1 crédito.</p><br>
+                  <% if @exchange.user.toys.count>0 %>
+                    <ul class="cards list-unstyled cards-small">
+                      <%= render :partial => "toys/toy_small", :collection => @exchange.user.toys, :as => :toy, :locals => {:f => f} %>
+                    </ul>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="tab2default">
+              <p class="lead text-muted text-center">Dessa forma você ganhará <strong>1 crédito</strong> que você poderá trocar por outro brinquedo no Quintal de Trocas, é uma opção em casos que você não tem interesse no brinquedo da outra pessoa.</p>
+            </div>
+            <div class="tab-pane fade" id="tab3default">
+              <div class="user-canceled">
+                <%= f.input :reason, as: :text %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <%= f.submit "Finalizar e combinar a troca &raquo;".html_safe, class: "btn btn-lg btn-success" %>
+      </div>
+    <% end %>
+  </div>
 </div>

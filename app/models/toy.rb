@@ -9,6 +9,7 @@ class Toy < ActiveRecord::Base
   has_many :toy_images, dependent: :destroy
 
   has_many :exchanges, :foreign_key => "toy_to"
+  has_many :credit
 
   accepts_nested_attributes_for :toy_images, :allow_destroy => true, reject_if: :image_rejectable?
 
@@ -19,6 +20,12 @@ class Toy < ActiveRecord::Base
   geocoded_by :zipcode
   after_validation :geocode
   after_save :set_featured_image
+  after_create :add_credit_and_notification_date
+
+  def add_credit_and_notification_date
+    update_attribute(:next_notification_at, Date.today + 2.months)
+    self.user.credits.create(toy: self)
+  end
 
   def set_featured_image
     if self.toy_images.where("image IS NOT NULL").count > 0

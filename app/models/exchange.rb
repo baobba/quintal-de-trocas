@@ -10,6 +10,7 @@ class Exchange < ActiveRecord::Base
     allow_destroy: true, 
     reject_if: :all_blank
 
+  scope :waiting, -> { where(accepted: nil) }
   default_scope { order("created_at DESC") }
 
   acts_as_messageable
@@ -28,6 +29,10 @@ class Exchange < ActiveRecord::Base
 
   def to_user
     Toy.with_deleted.find_by_id(toy_to).user
+  end
+
+  def toy
+    Toy.unscoped { super }
   end
 
 end

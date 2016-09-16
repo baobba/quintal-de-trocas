@@ -36,7 +36,14 @@ class ExchangesController < ApplicationController
   # Dashboard
 
   def my_exchanges
-    @exchanges = Exchange.where(["toy_from IN (?) OR toy_to IN (?) OR user_id = ?", current_user.toys.map(&:id), current_user.toys.map(&:id), current_user.id])
+
+    @exchanges_total = Exchange.where(["toy_from IN (?) OR toy_to IN (?) OR user_id = ?", current_user.toys.map(&:id), current_user.toys.map(&:id), current_user.id])
+
+    @exchanges = @exchanges_total
+    @exchanges = @exchanges_total.where(user_id: current_user.id) if !params[:type].blank? && params[:type] == "sent"
+    @exchanges = @exchanges_total.where(user_to: current_user.id) if !params[:type].blank? && params[:type] == "received"
+
+    @exchanges = @exchanges.page params[:page]
   end
 
   def new
@@ -65,6 +72,8 @@ class ExchangesController < ApplicationController
       @exchange.to_user.credits.create(
         exchange_id: @exchange.id,
       ) if !@exchange.credit
+
+      # QuintalMailer.toy_arrived(@exchange, @exchange.user, current_user).deliver_now
 
       if @exchange.from_user.credits_avail && @exchange.from_user.credits_avail.count>0
         @exchange.from_user.credits_avail.first.update_column(:expired_at, Time.now)

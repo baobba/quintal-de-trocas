@@ -45,4 +45,10 @@ class QuintalMailer < ApplicationMailer
     @user = user
     mail(to: user.email, subject: 'Novidades... novo site, logotipo e geolocalização')
   end
+
+  def toy_reminder(toy)
+    @toy = toy
+    @user = toy.user
+    mail(to: @user.email, subject: 'Seu produto vai expirar em 7 dias, ative-o novamente.')
+  end
 end

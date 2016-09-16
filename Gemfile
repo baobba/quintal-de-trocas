@@ -52,6 +52,7 @@ gem 'figaro'
 gem 'aws-sdk', '~> 2'
 gem 'newrelic_rpm'
 gem 'carrierwave-base64'
+gem 'whenever', :require => false
 
 gem 'puma'
 

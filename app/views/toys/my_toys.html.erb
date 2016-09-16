@@ -16,8 +16,8 @@
     <tr>
       <th width="10%">Foto</th>
       <th width="2%"></th>
-      <th width="40%">Título</th>
-      <th width="10%">Data</th>
+      <th width="35%">Título</th>
+      <th width="15%">Data de cadastro</th>
       <th colspan="2" width="20%"></th>
     </tr>
   </thead>
@@ -38,7 +38,17 @@
             <br>Faixa etária: <%= toy.toy_age.title %>
           </small>
         </td>
-        <td><%= toy.created_at.strftime("%d/%m/%Y") %></td>
+        <td>
+          <%= toy.created_at.strftime("%d/%m/%Y") %>
+          <div style="margin-top: 10px;font-size: 12px">
+            <% if !toy.expired_at.blank? %>
+              <span class="text-danger">Expira em <%= distance_of_time_in_words_to_now(toy.next_notification_at) %></span>
+              <div>
+                <%= link_to "Renovar", activate_toy_path(toy.id), class: "btn btn-xs btn-default" %>
+              </div>
+            <% end %>
+          </div>
+        </td>
 
         <td class="text-right">
           <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Alterar".html_safe, edit_toy_path(toy), :class => 'btn btn-sm btn-link' %>&nbsp;&nbsp;

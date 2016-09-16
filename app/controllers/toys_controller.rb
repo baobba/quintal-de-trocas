@@ -1,6 +1,9 @@
 class ToysController < ApplicationController
-  before_action :set_toy, only: [:show, :edit, :update, :destroy, :exchange]
-  before_action :authenticate_user!, except: [:index, :show, :index_near, :exchange]
+  before_action :set_toy, only: [:show, :edit, :update, :destroy, :exchange, :activate]
+  before_action :authenticate_user!, except: [:index, :show, :index_near, :exchange, :activate]
+
+  class NotOwner < StandardError
+  end
 
   def index
     @bs_container = false
@@ -56,7 +59,7 @@ class ToysController < ApplicationController
       format.js {
         @toys = @q.result(distinct: true).order("created_at DESC").page params[:page]
       }
-      
+
       format.json {
         @toys = @q.result(distinct: true).order("created_at DESC")
 
@@ -122,7 +125,7 @@ class ToysController < ApplicationController
   end
 
   def exchange
-    @exchange = @toy.exchanges.new
+    @exchange = @toy.exchanges.new(toy_to: @toy.user.id)
 
     @exchange.exchange_messages.build(
       user_from: current_user.id,
@@ -134,6 +137,23 @@ class ToysController < ApplicationController
       format.html {render layout: false}
       format.js
     end
+  end
+
+  rescue_from NotOwner, :with => :not_activated
+
+  def not_activated(exception)
+    flash[:error] = "Você não é responsável por esse brinquedo."
+    redirect_to root_path
+  end
+
+  def activate
+    raise NotOwner unless current_user.id == @toy.user_id
+    
+    @toy.update_column(:next_notification_at, Date.today + 2.months)
+    @toy.update_column(:expired_at, nil)
+    flash[:success] = "Seu brinquedo foi renovado por mais 2 meses."
+
+    redirect_to my_toys_path
   end
 
 

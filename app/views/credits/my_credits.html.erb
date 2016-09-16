@@ -24,9 +24,12 @@
           <tr>
             <td>
               <% if credit.exchange %>
-                <%= link_to "Troca ##{credit.exchange.id}", exchange_path(credit.exchange) %>
+                Crédito adquirido pela <%= link_to "troca ##{credit.exchange.id}", exchange_path(credit.exchange) %>
+              <% elsif credit.toy %>
+                Crédito adquirido pelo cadastro:<br>
+                <%= credit.toy.title %>
               <% else %>
-                Crédito adquirido no cadastro
+                Crédito adquirido em promoção
               <% end %>
             </td>
             <td>

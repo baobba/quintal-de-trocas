@@ -40,6 +40,10 @@
       <% end %>
     </h2>
 
+    <% if current_user.id == @exchange.user_to && @exchange.accepted.nil? %>
+      <%= render 'reply' %>
+    <% else %>
+
     <div class="row exchange-header">
       <div class="col-sm-4">
         <div class="well well-sm">
@@ -118,8 +122,25 @@
             <%= simple_form_for @exchange, :html => { :class => 'form-inline' } do |f| %>
 
               <% if @exchange.exchange_type == "exchange" && !@exchange.accepted.blank? %>
-                <p>A troca já foi efetuada?</p>
-                <%= f.input :finalized, label: false, prompt: "Selecione", as: :select, collection: [["Sim", true], ["Nao", false]] %>
+                
+
+
+                <% if @exchange.from_user == current_user %>
+                  <div><%= @exchange.from_user.first_name %> já recebeu o produto?<br>
+                  <%= f.input :finalized, label: false, prompt: "Selecione", as: :select, collection: [["Sim", true], ["Nao", false]] %></div>
+                <% else %>
+                  <div><%= @exchange.from_user.first_name %> ainda não respondeu</div>
+                <% end %>
+
+                <% if @exchange.to_user == current_user %>
+                  <div><%= @exchange.to_user.first_name %> já recebeu o produto?<br>
+                  <%= f.input :finalized, label: false, prompt: "Selecione", as: :select, collection: [["Sim", true], ["Nao", false]] %></div>
+                <% else %>
+                  <div><%= @exchange.to_user.first_name %> ainda não respondeu</div>
+                <% end %>
+
+
+
                 <%= f.submit "Ok", class: "btn btn-sm btn-default" %>
                 
               <% elsif (@exchange.exchange_type == "credit" || @exchange.exchange_type.blank?) && @exchange.user == current_user && !@exchange.accepted.blank? %>
@@ -138,6 +159,13 @@
         </div>
       </div>
     </div>
+
+    <% if @exchange.accepted %>
+      <div class="alert alert-success">
+      <h4 style="font-weight: bold"><span class="glyphicon glyphicon-ok"></span> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %> <%= @exchange.accepted == false ? "recusou" : "aceitou" %> essa troca</h4>
+      <p class="lead text-muted">Envie uma mensagem combinando como e onde será enviado ou entregue o brinquedo</p>
+      </div>
+    <% end %>
 
     <p class="lead">Mensagens (<%= @messages.count %>)</p>
 
@@ -165,10 +193,12 @@
         <%= render 'form_reply' %>
       </div>
     </div>
+
+    <% end %>
     
   </div>
 </div>
 
 <!-- Reply modal -->
-<div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="reply_old" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 </div>

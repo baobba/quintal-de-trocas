@@ -276,3 +276,103 @@ $mobile-size: 400px !default;
     }
   }
 }
+
+
+.exchange-reply {
+
+  .request-info {
+    background-color: #f6f6f6;
+    padding: 15px;
+    border-radius: 4px;
+    margin: 25px 0;
+
+    .lead {
+      font-size: 14px;
+      text-transform: uppercase;
+      color: #999;
+      margin: 5px 0 10px 0;
+      font-weight: bold;
+    }
+  }
+
+  .user-options div {
+    // min-height: 50px;
+  }
+  .show-options {
+    padding: 20px;
+  }
+  .hightlight {
+    background-color: #eee;
+  }
+  .lead {
+    color: #888;
+  }
+  .main {
+    font-size: 30px;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+
+  .panel.with-nav-tabs .panel-heading{
+      padding: 10px 15px 0 15px;
+  }
+  .panel.with-nav-tabs .nav-tabs{
+    border-bottom: none;
+  }
+  .panel.with-nav-tabs .nav-justified{
+    margin-bottom: -1px;
+  }
+  /********************************************************************/
+  /*** PANEL DEFAULT ***/
+  .with-nav-tabs.panel-success .nav-tabs > li {
+    max-width: 200px;
+    input {
+      float: left;
+    }
+    strong {
+      display: block;
+      margin-left: 20px;
+    }
+  }
+
+  .with-nav-tabs.panel-success .nav-tabs > li > a,
+  .with-nav-tabs.panel-success .nav-tabs > li > a:hover,
+  .with-nav-tabs.panel-success .nav-tabs > li > a:focus {
+      color: #777;
+      min-height: 85px;
+  }
+  .with-nav-tabs.panel-success .nav-tabs > .open > a,
+  .with-nav-tabs.panel-success .nav-tabs > .open > a:hover,
+  .with-nav-tabs.panel-success .nav-tabs > .open > a:focus,
+  .with-nav-tabs.panel-success .nav-tabs > li > a:hover,
+  .with-nav-tabs.panel-success .nav-tabs > li > a:focus {
+      color: #777;
+    background-color: #ddd;
+    border-color: transparent;
+  }
+  .with-nav-tabs.panel-success .nav-tabs > li.active > a,
+  .with-nav-tabs.panel-success .nav-tabs > li.active > a:hover,
+  .with-nav-tabs.panel-success .nav-tabs > li.active > a:focus {
+    color: #555;
+    background-color: #fff;
+    border-color: #ddd;
+    border-bottom-color: transparent;
+  }
+  .with-nav-tabs.panel-success .nav-tabs > li > a:hover {
+    background-color: #fff !important;
+    background-color: rgba(255,255,255,0.5) !important;
+  }
+  .with-nav-tabs.panel-success .nav-tabs > li.active > a:hover {
+    background-color: #fff !important;
+  }
+}
+
+
+.btn span.glyphicon {         
+  opacity: 0;       
+}
+.btn.active span.glyphicon {        
+  opacity: 1;       
+}

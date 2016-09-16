@@ -32,6 +32,19 @@ html, body {
     margin-top: 10px;
   }
 
+  .icon-notification {
+    background-color: #c00;
+    border-radius: 3px;
+    padding: 2px 3px;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    color: #fff;
+    font-size: 0.7em;
+    line-height: 100%;
+    text-align: center;
+  }
+
   .nav > li.social-icons {
 
     padding-left: 20px;
@@ -322,6 +335,7 @@ ul.cards {
         vertical-align: middle;
       }
     }
+
     img {
       width: auto;
       height: auto;
@@ -331,6 +345,21 @@ ul.cards {
       margin-left: -4px;
     }
   }
+
+  &.cards-small {
+    margin-bottom: 0;
+    padding-bottom: 0;
+
+    li {
+      max-width: 17%;
+      min-height: 195px;
+
+      .thumb {
+        height: 100px;
+      }
+    }
+  }
+
   &.stack li {
     display: block;
     width: 100%;

@@ -2,23 +2,30 @@ $(document).ready(function() {
 
   if ($('body.exchanges').length) {
 
-    $("#reply").on("change", ".user-options input[type=radio]", function(){
-      var $tatus = $(this).filter(':checked').val();
-      console.log($tatus);
-
-      if ($tatus === "credit") {
-        $(".user-toy-list, .user-canceled").slideUp('fast');
-        $(".user-toy-list :input, .user-canceled").attr("disabled", true);
-      } else if($tatus === "exchange") {
-        $(".user-toy-list").slideDown('fast');
-        $(".user-toy-list :input").attr("disabled", false);
-        $(".user-canceled").slideUp('fast');
-      } else {
-        $(".user-canceled").slideDown('fast');
-        $(".user-toy-list").slideUp('fast');
-        $(".user-toy-list :input").attr("disabled", true);
-      }
+    $("#reply").on("click", ".with-nav-tabs a", function(){
+      // var $tatus = $(this).filter(':checked').val();
+      $(this).find("input").prop("checked", true);
     });
+    // $("#reply").on("change", ".user-options input[type=radio]", function(){
+    //   var $tatus = $(this).filter(':checked').val();
+    //   console.log($tatus);
+
+    //   var parentContainer = $(this).closest("div");
+    //   parentContainer.addClass("hightlight").siblings().removeClass("hightlight");
+
+    //   if ($tatus === "credit") {
+    //     $(".user-toy-list, .user-canceled").slideUp('fast');
+    //     $(".user-toy-list :input, .user-canceled").attr("disabled", true);
+    //   } else if($tatus === "exchange") {
+    //     $(".user-toy-list").slideDown('fast');
+    //     $(".user-toy-list :input").attr("disabled", false);
+    //     $(".user-canceled").slideUp('fast');
+    //   } else {
+    //     $(".user-canceled").slideDown('fast');
+    //     $(".user-toy-list").slideUp('fast');
+    //     $(".user-toy-list :input").attr("disabled", true);
+    //   }
+    // });
   }
 
 });
