@@ -39,143 +39,49 @@
 
 .pages-how_it_works {
 
-  /* Características Fontes */
-
-  $base-font-family: "Lato", sans-serif;
-  $base-font-size:20px;
-
-  /* Cores Padrão */
-
-  $color-step1:#b8bb2f;
-  $color-step2:#69b2ed;
-  $color-step3:#ff8000;
-  $color-step4:#de79ff;
-  $color-step5:#8484ff;
-  $color-green-quintal:#6cad4a;
-
-  /* Bordas */
-
-  @mixin add-border($size, $color, $position){
-  	@if $position == 'all' {
-  		border:$size solid $color;
-  	} @else if $position == 'top'{
-  		border-top:$size solid $color;
-  	} @else if $position == 'bottom'{
-  		border-bottom:$size solid $color;
-  	} @else if $position == 'right'{
-  		border-right:$size solid $color;
-  	} @else if $position == 'left'{
-  		border-left:$size solid $color;
-  	} @else if $position == 'top-bottom'{
-  		border-top:$size solid $color;
-  		border-bottom:$size solid $color;
-  	} @else if $position == 'right-left'{
-  		border-left:$size solid $color;
-  		border-right:$size solid $color;
-  	}
-  }
-
-  @mixin add-background($color) {
-    background:$color;
-  }
+  .step {
+    border-bottom: 1px solid #ddd;
+    padding: 70px 0;
+    position: relative;
 
 
-  /* Blocos */
+    .text {
+      max-width: 60%;
+    }
 
-  .block-primary-video{
-    h2{
-      padding: 15px 5px 10px 10px;
-      @include add-background($color-green-quintal);
-      color:white;
-      margin: 0;
+    &.right .text {
+      max-width: 100%;
+      margin-left: 40%;
+    }
+
+    img {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
+
+    &.right img {
+      left: 0;
+    }
+
+    .lead {
+      font-size: 18px;
+    }
+
+    .number {
+      font-size: 100px;
+      border: 1px solid #eee;
+      min-width: 130px;
+      height: 130px;
+      padding: 10px;
+      text-align: center;
+      border-radius: 100px;
+      display: inline-block;
+      float: left;
+      margin: 0 40px 50px 0;
+      color: #777;
     }
   }
-
-  /* Centralização */
-
-  .section-video{
-    text-align: center;
-  }
-  .row-centered{
-    display:inline-block;
-    text-align: center;
-    max-width: 670px;
-    float: none;
-    margin-right: auto;
-  }
-
-  /* Imagens e Bordas */
-
-  .col-md-3{
-    img{
-      float: right;
-    }
-    .img-border1{
-      @include add-border(5px, $color-step1, all);
-    }
-    .img-border2{
-      @include add-border(5px, $color-step2, all);
-    }
-    .img-border3{
-      @include add-border(5px, $color-step3, all);
-    }
-    .img-border4{
-      @include add-border(5px, $color-step4, all);
-    }
-    .img-border5{
-      @include add-border(5px, $color-step5, all);
-    }
-  }
-
-  .first-step {
-    @include add-border(5px, $color-step1, bottom);
-    color:$color-step1;
-  }
-
-  .second-step{
-    @include add-border(5px, $color-step2, bottom);
-    color:$color-step2;
-  }
-
-  .third-step{
-    @include add-border(5px, $color-step3, bottom);
-    color:$color-step3;
-  }
-
-  .fourth-step{
-    @include add-border(5px, $color-step4, bottom);
-    color:$color-step4;
-  }
-
-  .fifth-step{
-    @include add-border(5px, $color-step5, bottom);
-    color:$color-step5;
-  }
-
-  /* Fontes */
-
-  .col-md-9{
-    p{
-    font-size: $base-font-size;
-    }
-    strong{
-      font-size: $base-font-size;
-    }
-    ul{
-      li{
-        font-size: $base-font-size;
-      }
-    }
-  }
-
-
-
-   /* Listas */
-   .list-pad {
-     li {
-       padding-left: 10px;
-     }
-   }
 }
 
 .pages-partners {

@@ -86,8 +86,10 @@ div.toy-filter {
   }
 
   input[type='submit'] {
-    background-color: darken($primary-color, 10%);
+    background-color: $orange;
     color: #fff;
+    text-transform: uppercase;
+    font-size: 1em;
 
     &:active {
       background-color: darken($primary-color, 20%);

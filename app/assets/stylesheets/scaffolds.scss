@@ -263,9 +263,9 @@ ul.cards {
     }
   }
   li {
-    box-shadow: 0 1px 3px #AAA;
+    border: 1px solid #ddd;
     background: #FFF;
-    border-radius: 3px;
+    border-radius: 2px;
     -webkit-transition: box-shadow .3s ease-in-out;
     // margin-bottom: 40px;
     // margin-right: 8%;
@@ -369,29 +369,23 @@ ul.cards {
 }
 
 .sub-header {
-  background: #f8ab43 asset_url('bg-dots.png') repeat;
-  padding: 20px 0;
-  margin-bottom: 25px;
+  padding: 40px 0 50px 0;
+  text-align: center;
+  text-transform: uppercase;
 
   h1 {
     margin: 0;
-    text-transform: uppercase;
-    color: #fff;
-    font-size: 60px;
-    float: left;
-    margin-right: 40px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
-    font-family: 'Amatic SC', 'Comic Sans MS', cursive;
-    font-weight: bold;
+    color: $green;
+    font-size: 40px;
+    font-weight: 300;
   }
 
   p.lead {
-    color: #8D5B14;
-    font-size: 32px;
+    color: #999;
+    font-size: 20px;
     margin: 0;
     margin-top: 10px;
     font-style: italic;
-    opacity: 0.8;
   }
 }
 
