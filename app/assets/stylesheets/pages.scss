@@ -70,7 +70,7 @@
 
     .number {
       font-size: 100px;
-      border: 1px solid #eee;
+      border: 1px solid #B8E986;
       min-width: 130px;
       height: 130px;
       padding: 10px;
@@ -78,8 +78,8 @@
       border-radius: 100px;
       display: inline-block;
       float: left;
-      margin: 0 40px 50px 0;
-      color: #777;
+      margin: 0 40px 80px 0;
+      color: $green;
     }
   }
 }
