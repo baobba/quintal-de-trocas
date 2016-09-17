@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160814214941) do
+ActiveRecord::Schema.define(version: 20160917105317) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -64,11 +64,14 @@ ActiveRecord::Schema.define(version: 20160814214941) do
     t.integer  "user_id"
     t.datetime "expired_at"
     t.integer  "exchange_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "toy_id"
+    t.integer  "used_in_exchange_id"
   end
 
   add_index "credits", ["exchange_id"], name: "index_credits_on_exchange_id"
+  add_index "credits", ["toy_id"], name: "index_credits_on_toy_id"
   add_index "credits", ["user_id"], name: "index_credits_on_user_id"
 
   create_table "exchange_messages", force: :cascade do |t|
@@ -100,6 +103,7 @@ ActiveRecord::Schema.define(version: 20160814214941) do
     t.datetime "updated_at",       null: false
     t.string   "reason"
     t.boolean  "credit_offer"
+    t.integer  "user_to"
   end
 
   add_index "exchanges", ["user_id"], name: "index_exchanges_on_user_id"
@@ -230,12 +234,14 @@ ActiveRecord::Schema.define(version: 20160814214941) do
     t.string   "zipcode"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.string   "image"
     t.boolean  "is_active"
     t.datetime "deleted_at"
     t.string   "neighborhood"
+    t.date     "next_notification_at"
+    t.datetime "expired_at"
   end
 
   add_index "toys", ["toy_age_id"], name: "index_toys_on_toy_age_id"
