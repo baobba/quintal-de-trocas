@@ -10,7 +10,7 @@
 
     <ul class="nav nav-tabs" role="tablist">
       <li role="presentation" class="<%= 'active' if params[:type].blank? %>">
-        <%= link_to "Todas", my_exchanges_path %>
+        <%= link_to "Todas (#{@exchanges_total.count})", my_exchanges_path %>
       </li>
       <li role="presentation" class="<%= 'active' if !params[:type].blank? && params[:type]== "sent" %>">
         <%= link_to "Trocas solicitadas (#{@exchanges_total.where(user_id: current_user.id).count})", my_exchanges_path(type: "sent") %>
