@@ -2,6 +2,8 @@ $(document).ready(function() {
 
   if ($('body.exchanges').length) {
 
+    $("#exchange_exchange_type_exchange").prop("checked", true);
+
     $("#reply").on("click", ".with-nav-tabs a", function(){
       // var $tatus = $(this).filter(':checked').val();
       $(this).find("input").prop("checked", true);
