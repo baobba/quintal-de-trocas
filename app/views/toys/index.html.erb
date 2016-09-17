@@ -39,14 +39,15 @@
   </div>
 
   <div class="toy-content">
-
-  <div class="pull-right">
-    Ordenar por:
-    <%= sort_link @q, :created_at, 'mais recentes', default_order: :desc %> |
-    <%= sort_link @q, :title, 'ordem alfabética' %>
-  </div>
   
-  <% if @toys %>
+  <% if @toys.total_count > 0 %>
+
+    <div class="pull-right">
+      Ordenar por:
+      <%= sort_link @q, :created_at, 'mais recentes', default_order: :desc %> |
+      <%= sort_link @q, :title, 'ordem alfabética' %>
+    </div>
+
     <div class="lead" style="margin-left: 20px;">
       Mostrando <strong><%= Toy.default_per_page >= @toys.size ? @toys.size : Toy.default_per_page %></strong> de <%= @toys.total_count %> brinquedos
     </div>
@@ -55,7 +56,11 @@
       <%= render @toys %>
     </ul>
   <% else %>
-    Nada pra mostrar
+    <div class="alert alert-danger text-center">
+      <h4>Nenhum brinquedo encontrado</h4>
+      <p class="lead">Tente outro termo ou modifique a distância de busca ou<br>
+      <strong><%= link_to "veja todos os brinquedos", toys_path(tipo: "todos") %></strong>
+    </div>
   <% end %>
   
 

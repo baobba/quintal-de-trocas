@@ -45,7 +45,8 @@ class ToysController < ApplicationController
       end
     end
 
-    @q = @q.near(location, zoom, :units => :km).search(params[:q])
+    @q = @q.near(location, zoom, :units => :km) if params[:tipo].blank?
+    @q = @q.search(params[:q])
 
     respond_to do |format|
       format.html {
@@ -62,6 +63,7 @@ class ToysController < ApplicationController
 
       format.json {
         @toys = @q.result(distinct: true).order("created_at DESC")
+        @toys = @toys.page params[:page] if !params[:tipo].blank?
 
         @toys = @toys.map{|f| [f.id, f.title, f.latitude, f.longitude, "<div class='info_content'><p class='lead' style='margin: 5px 0 10px 0;font-size: 16px;line-height: 120%;'><a href='#{toy_url(f)}'>#{f.title}</a></p><div style='margin-left:15px;' class='pull-right'><img src='#{f.toy_images.first.image.url(:thumb) if f.toy_images.first}' class='img-thumbnail' width='80'></div><small class='text-muted'>#{f.description[0..100]} ...</small></div>"]}
         render json: @toys
@@ -151,6 +153,9 @@ class ToysController < ApplicationController
     
     @toy.update_column(:next_notification_at, Date.today + 2.months)
     @toy.update_column(:expired_at, nil)
+
+    @toy.credits.create(user_id: @toy.user.id) if @toy.credits.available.count == 0
+
     flash[:success] = "Seu brinquedo foi renovado por mais 2 meses."
 
     redirect_to my_toys_path

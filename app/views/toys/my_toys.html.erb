@@ -44,7 +44,7 @@
             <% if !toy.expired_at.blank? %>
               <span class="text-danger">Expira em <%= distance_of_time_in_words_to_now(toy.next_notification_at) %></span>
               <div>
-                <%= link_to "Renovar", activate_toy_path(toy.id), class: "btn btn-xs btn-default" %>
+                <%= link_to "Renovar por mais 2 meses", activate_toy_path(toy.id), class: "btn btn-xs btn-default" %>
               </div>
             <% end %>
           </div>
