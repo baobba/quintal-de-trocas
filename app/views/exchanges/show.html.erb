@@ -122,31 +122,43 @@
             <%= simple_form_for @exchange, :html => { :class => 'form-inline' } do |f| %>
 
               <% if @exchange.exchange_type == "exchange" && !@exchange.accepted.blank? %>
-                
 
-
-                <% if @exchange.from_user == current_user %>
-                  <div><%= @exchange.from_user.first_name %> já recebeu o produto?<br>
-                  <%= f.input :finalized, label: false, prompt: "Selecione", as: :select, collection: [["Sim", true], ["Nao", false]] %></div>
+                <% if @exchange.from_user.id == current_user.id %>
+                  <div>
+                    Você já recebeu o produto?<br>
+                    <%= f.input :user_from_received, label: false, prompt: "Selecione", as: :select, collection: [["Sim", Time.now], ["Nao", nil]] %>
+                    <%= f.submit "Ok", class: "btn btn-sm btn-default" %>
+                  </div>
                 <% else %>
-                  <div><%= @exchange.from_user.first_name %> ainda não respondeu</div>
+                  <% if @exchange.from_user && !@exchange.user_from_received.blank? %>
+                    <%= @exchange.from_user.first_name %> informou que recebeu o brinquedo
+                  <% else %>
+                    <div class="text-danger"><%= @exchange.from_user.first_name %> ainda não respondeu</div>
+                  <% end %>
                 <% end %>
 
-                <% if @exchange.to_user == current_user %>
-                  <div><%= @exchange.to_user.first_name %> já recebeu o produto?<br>
-                  <%= f.input :finalized, label: false, prompt: "Selecione", as: :select, collection: [["Sim", true], ["Nao", false]] %></div>
+                <hr>
+
+                <% if @exchange.to_user.id == current_user.id %>
+                  <div>
+                    Você já recebeu o produto?<br>
+                    <%= f.input :user_to_received, label: false, prompt: "Selecione", as: :select, collection: [["Sim", Time.now], ["Nao", nil]] %>
+                    <%= f.submit "Ok", class: "btn btn-sm btn-default" %>
+                  </div>
                 <% else %>
-                  <div><%= @exchange.to_user.first_name %> ainda não respondeu</div>
+                  <% if @exchange.to_user && !@exchange.user_to_received.blank? %>
+                    <%= @exchange.from_user.first_name %> informou que recebeu o brinquedo
+                  <% else %>
+                    <div class="text-danger"><%= @exchange.to_user.first_name %> ainda não respondeu</div>
+                  <% end %>
                 <% end %>
 
-
-
-                <%= f.submit "Ok", class: "btn btn-sm btn-default" %>
-                
               <% elsif (@exchange.exchange_type == "credit" || @exchange.exchange_type.blank?) && @exchange.user == current_user && !@exchange.accepted.blank? %>
+                
                 <p>Você já recebeu o produto?</p>
                 <%= f.input :finalized, label: false, prompt: "Selecione", as: :select, collection: [["Sim", true], ["Nao", false]] %>
                 <%= f.submit "Ok", class: "btn btn-sm btn-default" %>
+                
               <% elsif @exchange.exchange_type == "credit" && @exchange.finalized.nil? %>
                 Aguardando a acusação de recebimento de <%= @exchange.from_user.first_name %> para liberação do crédito.
               <% elsif @exchange.exchange_type == "credit" && @exchange.finalized %>

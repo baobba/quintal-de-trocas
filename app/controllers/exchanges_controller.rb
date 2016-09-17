@@ -70,7 +70,13 @@ class ExchangesController < ApplicationController
 
     @exchange.assign_attributes(exchange_params)
 
-    if @exchange.finalized_changed? && @exchange.finalized == true
+    if !@exchange.user_from_received.blank? || !@exchange.user_to_received.blank?
+      QuintalMailer.toy_arrived(@exchange, current_user).deliver_now
+    end
+
+    if !@exchange.user_from_received.blank? && !@exchange.user_to_received.blank?
+      @exchange.finalized = true
+      @exchange.finalized_at = Time.now
 
       # Se a troca for por credito, adiciona um credito para o usuario
       if @exchange.exchange_type == "credit"
@@ -78,13 +84,7 @@ class ExchangesController < ApplicationController
           exchange_id: @exchange.id,
         ) if @exchange.credits.available.count == 0
       end
-
-      # Se a troca for por brinquedo, apenas muda o status
-
-      # QuintalMailer.toy_arrived(@exchange, @exchange.user, current_user).deliver_now
-
     end
-
 
     if @exchange.exchange_type_changed?
 
@@ -133,6 +133,6 @@ class ExchangesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exchange_params
-      params.require(:exchange).permit(:toy_from, :toy_to, :finalized, :finalized_at, :exchange_type, :exchange_deliver, :rating_from, :rating_to, :accepted, :user_id, :user_to, :reason, :credit_offer, :exchange_messages_attributes => [:id, :message, :user_to, :user_from, :exchange_id, :user_id])
+      params.require(:exchange).permit(:toy_from, :toy_to, :finalized, :finalized_at, :exchange_type, :exchange_deliver, :rating_from, :rating_to, :accepted, :user_id, :user_to, :user_to_received, :user_from_received, :reason, :credit_offer, :exchange_messages_attributes => [:id, :message, :user_to, :user_from, :exchange_id, :user_id])
     end
 end

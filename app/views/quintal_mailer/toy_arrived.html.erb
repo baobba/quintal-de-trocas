@@ -1,0 +1,10 @@
+<h2>Olá <%= @user_to.first_name %>,</h2>
+
+<p><%= @user_from.first_name %> informou que já recebeu o brinquedo.</p>
+
+<% if @exchange.user_from_received.blank? || @exchange.user_to_received.blank? %>
+  <p>Agora falta você informar se recebeu ou não, cliquei no link abaixo pra informar:</p>
+  <%= link_to "Quero informá-lo sobre recebimento do brinquedo", exchange_url(@exchange.id) %>
+<% else %>
+
+<% end %>

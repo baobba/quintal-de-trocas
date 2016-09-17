@@ -51,4 +51,12 @@ class QuintalMailer < ApplicationMailer
     @user = toy.user
     mail(to: @user.email, subject: 'Seu produto vai expirar em 7 dias, ative-o novamente.')
   end
+
+  def toy_arrived(exchange, user)
+    @exchange = exchange
+    @user_from = user
+    @user_to = User.find_by_id([exchange.user_id, exchange.user_to].reject{ |e| e == user.id }.first)
+
+    mail(to: @user_to.email, subject: 'Recebi meu brinquedo')
+  end
 end
