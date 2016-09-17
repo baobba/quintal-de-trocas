@@ -745,3 +745,23 @@ footer {
   font-style: italic;
   font-size: 14px;
 }
+
+.credits {
+  .label {
+    font-size: 90%;
+    margin-bottom: 5px;
+  }
+
+  .credits-count {
+    .lead {
+      margin-top: 20px;
+      color: #666;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 3em;
+      color: #444;
+    }
+  }
+}

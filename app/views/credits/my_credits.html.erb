@@ -8,14 +8,34 @@
       <h1>Meus créditos</h1>
     </div>
 
+    <div class="well credits-count">
+      <div class="row">
+        <div class="col-sm-3">
+          <p class="lead">Total de créditos:</p>
+        </div>
+        <div class="col-sm-2">
+          <h3><%= @cred_avail %></h3>
+          <span class="text-muted">disponíveis</span>
+        </div>
+        <div class="col-sm-2">
+          <h3><%= @cred_expir %></h3>
+          <span class="text-muted">expirados</span>
+        </div>
+        <div class="col-sm-2">
+          <h3><%= @cred_used %></h3>
+          <span class="text-muted">utilizados</span>
+        </div>
+      </div>
+    </div>
+
     <% if @credits.count > 0 %>
       
     <table class="table">
       <thead>
         <tr>
-          <th width="33%">Troca</th>
-          <th width="33%">Status</th>
-          <th width="33%" class="text-right">Adicionado em</th>
+          <th width="40%">Troca</th>
+          <th width="40%">Status</th>
+          <th width="30%" class="text-right">Adicionado em</th>
         </tr>
       </thead>
 
@@ -24,21 +44,25 @@
           <tr>
             <td>
               <% if credit.exchange %>
-                Crédito adquirido pela <%= link_to "troca ##{credit.exchange.id}", exchange_path(credit.exchange) %>
+                Crédito adquirido pela <%= link_to "troca ##{credit.exchange.id}", exchange_path(credit.exchange.id) %>
               <% elsif credit.toy %>
                 Crédito adquirido pelo cadastro:<br>
-                <%= credit.toy.title %>
+                <%= link_to credit.toy.title, toy_path(credit.toy) %>
               <% else %>
                 Crédito adquirido em promoção
               <% end %>
             </td>
             <td>
-              <% if credit.expired_at.blank? %>
+              <% if credit.available? %>
                 <span class="label label-success">Disponível</span>
-              <% else %>
+              <% elsif !credit.used_in_exchange_id.blank? %>
+                <span class="label label-default">
+                  Utilizado em <%= credit.updated_at.strftime('%d/%m/%Y %H:%M') %>
+                </span><br> na <%= link_to "troca ##{credit.used_in_exchange_id}", exchange_path(credit.used_in_exchange_id) %>
+              <% elsif credit.expired_at %>
                 <span class="label label-danger">
-                  Utilizado em <%= credit.expired_at.strftime('%d/%m/%Y %H:%M') %>
-              <% end%>
+                  Exirado em <%= credit.expired_at.strftime('%d/%m/%Y %H:%M') %>
+              <% end %>
             </td>
             <td class="text-right"><%= credit.created_at.strftime("%d/%m/%Y %H:%M") %></td>
           </tr>
@@ -46,7 +70,11 @@
       </tbody>
     </table>
     <% else %>
-      <div class="alert alert-danger">Você não possui nenhum crédito ainda.</div>
+      <div class="alert alert-danger text-center">
+        <h4>Você não possui nenhum crédito ainda.</h4>
+        <p class="lead">Para ganhar um crédito, você precisa cadastrar um brinquedo deixando-o disponível para troca.</p>
+        <%= link_to "Cadastrar brinquedo", new_toy_path, class: "btn btn-success btn-lg" %>
+      </div>
     <% end %>
 
   </div>

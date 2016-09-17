@@ -5,6 +5,10 @@ class CreditsController < ApplicationController
 
   def my_credits
     @credits = current_user.credits.order("id DESC")
+
+    @cred_avail = @credits.available.count
+    @cred_expir = @credits.where("expired_at IS NOT NULL AND used_in_exchange_id IS NULL").count
+    @cred_used = @credits.where("used_in_exchange_id IS NOT NULL").count
   end
 
   # GET /credits/1

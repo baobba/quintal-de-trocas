@@ -68,27 +68,31 @@ class ExchangesController < ApplicationController
 
   def update
 
-    if !exchange_params[:finalized].nil? && exchange_params[:finalized] == 'true'
-      @exchange.to_user.credits.create(
-        exchange_id: @exchange.id,
-      ) if !@exchange.credit
+    @exchange.assign_attributes(exchange_params)
+
+    if @exchange.finalized_changed? && @exchange.finalized == true
+
+      # Se a troca for por credito, adiciona um credito para o usuario
+      if @exchange.exchange_type == "credit"
+        @exchange.to_user.credits.create(
+          exchange_id: @exchange.id,
+        ) if @exchange.credits.available.count == 0
+      end
+
+      # Se a troca for por brinquedo, apenas muda o status
 
       # QuintalMailer.toy_arrived(@exchange, @exchange.user, current_user).deliver_now
 
-      if @exchange.from_user.credits_avail && @exchange.from_user.credits_avail.count>0
-        @exchange.from_user.credits_avail.first.update_column(:expired_at, Time.now)
-      end
-
-    elsif !exchange_params[:finalized].nil?
-      @exchange.credit.destroy! if @exchange.credit
     end
-    
-    @exchange.assign_attributes(exchange_params)
+
 
     if @exchange.exchange_type_changed?
 
       QuintalMailer.exchange_changed(@exchange, @exchange.user, current_user).deliver_now
       @exchange.accepted = @exchange.exchange_type == "canceled" ? false : true
+      if @exchange.exchange_type == "credit" && @exchange.user && @exchange.user.credits.available.count>0
+        @exchange.user.credits.available.last.update_attributes(used_in_exchange_id: @exchange.id)
+      end
       
     end
 
@@ -129,6 +133,6 @@ class ExchangesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exchange_params
-      params.require(:exchange).permit(:toy_from, :toy_to, :finalized, :finalized_at, :exchange_type, :exchange_deliver, :rating_from, :rating_to, :accepted, :user_id, :reason, :credit_offer, :exchange_messages_attributes => [:id, :message, :user_to, :user_from, :exchange_id, :user_id])
+      params.require(:exchange).permit(:toy_from, :toy_to, :finalized, :finalized_at, :exchange_type, :exchange_deliver, :rating_from, :rating_to, :accepted, :user_id, :user_to, :reason, :credit_offer, :exchange_messages_attributes => [:id, :message, :user_to, :user_from, :exchange_id, :user_id])
     end
 end

@@ -14,11 +14,11 @@
             <%= simple_form_for(@exchange) do |f| %>
               <%= f.hidden_field :user_id, value: (current_user ? current_user.id : nil) %>
               <%= f.hidden_field :toy_to %>
-              <%= f.hidden_field :user_to %>
+              <%= f.hidden_field :user_to, value: @toy.user_id %>
 
-              <div class="alert alert-info">
-                A pessoa receberá essa mensagem e irá decidir se troca por 1 crédito ou algum brinquedo da sua lista.<br>
-                <small class="text-muted">1 crédito vale um brinquedo dentro da plataforma</small>
+              <div class="alert alert-info text-center">
+                <p>A pessoa receberá essa mensagem e irá decidir se troca por 1 crédito seu ou algum brinquedo da sua lista.</p><br>
+                <h4>Dúvidas? <%= link_to "Veja como funciona", how_it_works_path, target: "_blank" %></h4>
               </div>
 
               <%= f.simple_fields_for :exchange_messages do |ff| %>

@@ -66,14 +66,15 @@
                   <p class="text-muted"><%= @exchange.user.name %> possui <%= @exchange.user.toys.count %> brinquedos. Caso não tenha interesse nesses brinquedos, você poderá trocar por 1 crédito.</p><br>
                   <% if @exchange.user.toys.count>0 %>
                     <ul class="cards list-unstyled cards-small">
-                      <%= render :partial => "toys/toy_small", :collection => @exchange.user.toys, :as => :toy, :locals => {:f => f} %>
+                      <%= render :partial => "toys/toy_small", :collection => @exchange.user.toys.order("id DESC"), :as => :toy, :locals => {:f => f} %>
                     </ul>
                   <% end %>
                 </div>
               </div>
             </div>
             <div class="tab-pane fade" id="tab2default">
-              <p class="lead text-muted text-center">Dessa forma você ganhará <strong>1 crédito</strong> que você poderá trocar por outro brinquedo no Quintal de Trocas, é uma opção em casos que você não tem interesse no brinquedo da outra pessoa.</p>
+              <br>
+              <p class="lead text-muted text-center">Dessa forma você ganhará <strong>1 crédito</strong> que você poderá trocar por outro brinquedo no Quintal de Trocas, é uma opção em casos em que você não tem interesse no brinquedo da outra pessoa.</p>
             </div>
             <div class="tab-pane fade" id="tab3default">
               <div class="user-canceled">
