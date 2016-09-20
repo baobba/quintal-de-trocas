@@ -181,7 +181,7 @@
 
     <p class="lead">Mensagens (<%= @messages.count %>)</p>
 
-    <% @messages.each do |msg| %>
+    <% @messages.order("created_at ASC").each do |msg| %>
     <div class="message">
       <div class="row">
         <div class="col-sm-1 text-center">
