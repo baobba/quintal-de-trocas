@@ -49,45 +49,6 @@
             </div>
           <% end %>
 
-          <div class="hide">
-            <%= simple_form_for(@exchange) do |f| %>
-              <%= f.input :toy_from, as: :hidden %>
-              <%= f.input :toy_to, as: :select, collection: (current_user && current_user.toys ? current_user.toys : []), prompt: "Selecione" %>
-              <%= f.input :exchange_type, as: :radio_buttons, collection: [['Pontos de troca', 'Pontos de troca'] ,['Correio', 'Correio']], item_wrapper_class: 'inline' %>
-              <%= f.submit "Trocar", class: "btn btn-primary" %>
-            <% end %>
-          </div>
-
-          <div class="row toy-exchange" style="display:none">
-            <div class="col-sm-6 text-center">
-              <div class="toy-from">
-                <div class="title">Quero trocar esse briquedo</div>
-                <div class="inner">
-                  <%= select_tag :toy, options_for_select((current_user && current_user.toys ? current_user.toys.collect{ |u| [u.title, u.id] } : [])), class: "form-control", include_blank: "Selecione" %>
-
-                  <div class="toy">
-                    <div class="thumb">
-                      <%= image_tag "no-image", width: 50 %>
-                    </div>
-                    selecione...
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 text-center">
-              <div class="toy-to">
-                <div class="title">por esse</div>
-                <div class="inner">
-                  <div class="toy">
-                    <div class="thumb">
-                      <%= image_tag @toy.fet_image.image.url(:thumb) %>
-                    </div>
-                    <%= @toy.title %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
