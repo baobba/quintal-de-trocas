@@ -50,7 +50,6 @@ pt-BR:
       exchange:
         reason: Por qual motivo você não está aceitando essa troca?
         exchange_deliver: Como gostaria de trocar/enviar o brinquedo?
-        # message: Mensagem
   activerecord:
     errors:
       messages:
