@@ -90,6 +90,7 @@ div.toy-filter {
     color: #fff;
     text-transform: uppercase;
     font-size: 1em;
+    border: 0;
 
     &:active {
       background-color: darken($primary-color, 20%);

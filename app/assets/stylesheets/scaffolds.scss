@@ -55,7 +55,11 @@ html, body {
       float: left;
       padding-right: 5px;
       padding-left: 5px;
-      color: #f8ab43;
+      color: $orange;
+
+      &:hover {
+        color: darken($orange, 20%);
+      }
     }
   }
 
@@ -82,19 +86,20 @@ html, body {
 
 
 a {
-  color: darken($primary-color, 20%);
+  color: $primary-color;
 
   &:hover {
-    color: darken($primary-color, 30%);
+    color: darken($primary-color, 20%);
   }
 }
 
 .btn-quintal {
   background-color: $primary-color;
   color: #fff;
+  text-transform: uppercase;
 
   &:hover, &:active, &:focus {
-    background-color: darken($primary-color, 20%);
+    background-color: darken($primary-color, 10%);
     color: #fff;
   }
 }
@@ -509,6 +514,10 @@ div#login {
   color: #fff;
   margin-top: 35px;
 
+  .btn {
+    border: 0;
+  }
+
   h3 {
     font-size: 35px;
     margin-bottom: 25px;
@@ -538,6 +547,10 @@ div#login {
   padding: 30px;
   padding-bottom: 0;
 
+  .btn {
+    border: 0;
+  }
+
   .home & {
     padding-bottom: 30px;
   }
@@ -562,7 +575,7 @@ div#login {
     }
 
     &:hover {
-      opacity: 0.8;
+      opacity: 0.6;
     }
   }
 }
@@ -600,7 +613,7 @@ footer {
     color: #666;
 
     &:hover {
-      color: darken($primary-color, 20%);
+      color: $green;
       text-decoration: none;
     }
   }
@@ -763,5 +776,17 @@ footer {
       font-size: 3em;
       color: #444;
     }
+  }
+}
+
+/* Override BT */
+.btn-success {
+  text-transform: uppercase;
+  background-color: $green;
+  border: 0;
+  padding: 13px 20px;
+
+  &:hover {
+    background-color: lighten($green, 10%)
   }
 }

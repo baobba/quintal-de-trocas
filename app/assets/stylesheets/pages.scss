@@ -158,8 +158,8 @@
 
     .box:hover {
       content: none;
-      border: 1px solid #f8ab43;
-      box-shadow: 0 0 0 3px #f8ab43;
+      border: 1px solid $lightGreen;
+      box-shadow: 0 0 0 3px $lightGreen;
       cursor: pointer;
     }
   }
