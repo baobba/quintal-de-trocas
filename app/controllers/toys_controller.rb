@@ -22,30 +22,9 @@ class ToysController < ApplicationController
       "88110-690, Brasil"
     end
 
-    zoom = params[:within] || 1000
-    
-    respond_to do |format|
-      format.all {
-
-        @q = @q.near(location, zoom, :units => :km, :order => 'distance') if params[:tipo].blank?
-        @q = @q.search(params[:q])
-
-        # if params[:within].present? && params[:within].to_i > 0
-          @toys = @q.result(distinct: true).order("distance").page params[:page]
-        # else
-          # @toys = @q.result(distinct: true).page params[:page]
-        # end
-      }
-
-      # format.js {
-      #   @q = @q.near(location, zoom, :units => :km, :order => 'distance') if params[:tipo].blank?
-      #   @q = @q.search(params[:q])
-      #   @toys = @q.result(distinct: true).order("created_at DESC").page params[:page]
-      # }
-
-      format.json {
-        zoom = if params[:zoom].blank?
-          params[:within] || 50
+    if request.format.json?
+      zoom = if params[:zoom].blank?
+          params[:q].blank? ? 50 : params[:within] || 50
         else
           case params[:zoom]
             when "15"
@@ -66,9 +45,24 @@ class ToysController < ApplicationController
               50
           end
         end
+    else
+      zoom = params[:within] || 1000
+    end
 
-        @q = @q.near(location, zoom, :units => :km, :order => 'distance') if params[:tipo].blank?
-        @q = @q.search(params[:q])
+    @q = @q.near(location, zoom, :units => :km, :order => 'distance') if params[:tipo].blank?
+    @q = @q.search(params[:q])
+
+    respond_to do |format|
+
+      format.all {
+        @toys = @q.result(distinct: true).order("distance").page params[:page]
+      }
+
+      format.js {
+        @toys = @q.result(distinct: true).order("distance").page params[:page]
+      }
+
+      format.json {
 
         @toys = @q.result(distinct: true).order("created_at DESC")
         @toys = @toys.page params[:page] if !params[:tipo].blank?
@@ -89,50 +83,6 @@ class ToysController < ApplicationController
     end
   end
 
-  def index_near
-
-    if params[:within].present? && params[:within].to_i > 0
-      @q = Toy.where("latitude IS NOT NULL AND LENGTH(latitude) < 15").includes(:toy_category, :toy_age, :toy_images).near((params[:city_eq] || lookup_ip_location.city), params[:within], :order => 'distance').search(params)
-    else
-      @q = Toy.where("latitude IS NOT NULL AND LENGTH(latitude) < 15").includes(:toy_category, :toy_age, :toy_images).search(params)
-    end
-
-    location = if !params[:lat].blank? && !params[:lon].blank?
-      [params[:lat], params[:lon]].join(",")
-    elsif lookup_ip_location && !lookup_ip_location.city.blank?
-      "#{lookup_ip_location.city}, #{lookup_ip_location.state}, #{lookup_ip_location.country}"
-    else
-      "88110-690, Brasil"
-    end
-
-    zoom = if params[:zoom].blank?
-      50
-    else
-      case params[:zoom]
-        when "15"
-          10
-        when "14"
-          20
-        when "13"
-          30
-        when "12"
-          40
-        when "11"
-          50
-        when "10"
-          100
-        when "9"
-          200
-        else
-          50
-      end
-    end
-
-    @toys = @q.result(distinct: true).map{|f| [f.id, f.title, f.latitude, f.longitude, "<div class='info_content'><p class='lead' style='margin: 5px 0 10px 0;font-size: 16px;line-height: 120%;'><a href='#{toy_url(f)}'>#{f.title}</a></p><div style='margin-left:15px;' class='pull-right'><img src='#{f.toy_images.first.image.url(:thumb) if f.toy_images.first}' class='img-thumbnail' width='80'></div><small class='text-muted'>#{f.description[0..100]} ...</small></div>"]} if @q
-
-    render :json => @toys
-
-  end
 
   def exchange
     @exchange = @toy.exchanges.new(toy_to: @toy.user.id)
