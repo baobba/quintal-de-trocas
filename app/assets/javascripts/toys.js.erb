@@ -303,7 +303,7 @@ function initialize() {
 
   function showPlaces(is_moved, latlng){
 
-    $.getJSON(window.location.href, latlng, function( data ) {
+    $.getJSON(window.location.href+"?type='map'", latlng, function( data ) {
       var newMarkers = [];
 
       markers = data;
