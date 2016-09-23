@@ -22,46 +22,54 @@ class ToysController < ApplicationController
       "88110-690, Brasil"
     end
 
-    zoom = if params[:zoom].blank?
-      params[:within] || 50
-    else
-      case params[:zoom]
-        when "15"
-          10
-        when "14"
-          20
-        when "13"
-          30
-        when "12"
-          40
-        when "11"
-          50
-        when "10"
-          100
-        when "9"
-          200
-        else
-          50
-      end
-    end
-
-    @q = @q.near(location, zoom, :units => :km) if params[:tipo].blank?
-    @q = @q.search(params[:q])
-
+    zoom = params[:within] || 1000
+    
     respond_to do |format|
-      format.html {
-        if params[:within].present? && params[:within].to_i > 0
-          @toys = @q.result(distinct: true).page params[:page]
-        else
-          @toys = @q.result(distinct: true).order("created_at DESC").page params[:page]
-        end
+      format.all {
+
+        @q = @q.near(location, zoom, :units => :km, :order => 'distance') if params[:tipo].blank?
+        @q = @q.search(params[:q])
+
+        # if params[:within].present? && params[:within].to_i > 0
+          @toys = @q.result(distinct: true).order("distance").page params[:page]
+        # else
+          # @toys = @q.result(distinct: true).page params[:page]
+        # end
       }
 
-      format.js {
-        @toys = @q.result(distinct: true).order("created_at DESC").page params[:page]
-      }
+      # format.js {
+      #   @q = @q.near(location, zoom, :units => :km, :order => 'distance') if params[:tipo].blank?
+      #   @q = @q.search(params[:q])
+      #   @toys = @q.result(distinct: true).order("created_at DESC").page params[:page]
+      # }
 
       format.json {
+        zoom = if params[:zoom].blank?
+          params[:within] || 50
+        else
+          case params[:zoom]
+            when "15"
+              10
+            when "14"
+              20
+            when "13"
+              30
+            when "12"
+              40
+            when "11"
+              50
+            when "10"
+              100
+            when "9"
+              200
+            else
+              50
+          end
+        end
+
+        @q = @q.near(location, zoom, :units => :km, :order => 'distance') if params[:tipo].blank?
+        @q = @q.search(params[:q])
+
         @toys = @q.result(distinct: true).order("created_at DESC")
         @toys = @toys.page params[:page] if !params[:tipo].blank?
 
