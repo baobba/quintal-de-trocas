@@ -27,7 +27,7 @@ class Toy < ActiveRecord::Base
 
   def set_notification_date
     update_attribute(:next_notification_at, Date.today + 2.months)
-    self.user.credits.create(toy: self)
+    self.user.credits.create(toy: self) if self.user
   end
 
   def add_credit

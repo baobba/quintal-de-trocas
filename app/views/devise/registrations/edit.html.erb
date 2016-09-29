@@ -106,28 +106,27 @@
     </div>
     <div class="col-sm-6">
       <div style="padding-left: 20px;">
-      <p class="lead">Nome/nascimentos dos filhos</p>
+      <p class="lead">Nome/nascimento dos filhos</p>
 
       <%= f.simple_fields_for :user_children do |ff| %>
           
         <div class="row">
-          <div class="col-sm-5">
+          <div class="col-sm-4">
             <%= ff.input :name %>
           </div>
           <div class="col-sm-4">
             <%= ff.input :birthday, as: :string, :input_html => { :value => (!ff.object.birthday.blank? && ff.object.birthday.to_s.length > 6 ? localize(ff.object.birthday) : ff.object.birthday) } %>
           </div>
-          <div class="col-sm-3">
-            <%= ff.input :gender, as: :select, collection: ["M", "F"], prompt: "Selecione" %>
+          <div class="col-sm-4">
+            <%= ff.input :gender, as: :select, collection: [["Masculino", "M"], ["Feminino", "F"]], prompt: "Selecione" %>
           </div>
         </div>
 
       <% end %>
 
       <br>
-      <div class="text-muted text-center">Fique tranquilo, essa informação é confidencial.<br>
-      Queremos essa informação para oferecer os brinquedos mais adequados à idade da criança</div>
-      
+      <div class="text-muted text-center">Fique tranquilo, porque essa informação é confidencial.<br>
+        Ela nos permite oferecer os brinquedos mais adequados à idade dos seus filhos.</div>
       <div class="hide">
         <hr>
         <%= f.input :latitude %>
