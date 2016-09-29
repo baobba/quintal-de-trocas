@@ -40,7 +40,7 @@
               <% if exchange.user == current_user %>
                 <p class="lead">Solicitação de troca com <%= exchange.toy.user ? exchange.toy.user.name : "" %></p>
               <% else %>
-                <p class="lead"><%= exchange.user.name %> quer trocar com você</p>
+                <p class="lead"><%= exchange.user.name if exchange.user %> quer trocar com você</p>
               <% end %>
 
               <div>

@@ -1,0 +1,32 @@
+<div class="alert alert-warning donation-bar">
+  <p style="padding-bottom: 10px;">Não cobramos nada para viabilizar a troca, mas você pode nos ajudar a manter e melhorar o site através de uma doação:</p>
+
+  <div class="buttons">
+    <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post" onsubmit="PagSeguroLightbox(this); return false;" style="display:inline">
+      <input type="hidden" name="code" value="794FDCF92F2FED2994BF4FBE32A513B9" />
+      <input type="hidden" name="iot" value="button" />
+      <button type="submit" class="btn btn-default" />
+        <i class="fa fa-smile-o" aria-hidden="true"></i> Doar <strong><small>R$</small>7,19</strong>
+      </button>
+    </form>
+
+    <form action="https://pagseguro.uol.com.br/checkout/v2/payment.html" method="post" onsubmit="PagSeguroLightbox(this); return false;" style="display:inline">
+      <input type="hidden" name="code" value="43C30652CFCFED3CC4FD5FBE221D9FAE" />
+      <input type="hidden" name="iot" value="button" />
+      <button type="submit" class="btn btn-default" />
+        <i class="fa fa-heart-o" aria-hidden="true"></i> Doar <strong><small>R$</small>20,00</strong>
+      </button>
+      </form>
+
+    <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" style="display:inline">
+      <input type="hidden" name="currency" value="BRL" />
+      <input type="hidden" name="receiverEmail" value="contato@quintaldetrocas.com.br" />
+      <input type="hidden" name="iot" value="button" />
+      <button type="submit" class="btn btn-default" />
+        Doar outro valor
+      </button>
+    </form>
+  </div>
+
+  <%= link_to "<i class='fa fa-question-circle'></i> Entenda nossos gastos".html_safe, support_path %>
+</div>
