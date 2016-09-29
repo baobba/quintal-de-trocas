@@ -4,7 +4,7 @@
 <% end %>
 
 <div class="row">
-  <div class="col-sm-8">
+  <div class="col-sm-7">
     <br>
     <p class="lead">Você já parou para pensar onde investe seu dinheiro?</p>
 
@@ -52,22 +52,29 @@
     <p>Um forte abraço e gratidão</p>
 
   </div>
-  <div class="col-sm-4 text-center">
-    <%= image_tag "support.png" %>
-    <p class="lead">Quer ser nosso apoiador?</p>
-    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-      <input type="hidden" name="cmd" value="_donations">
-      <input type="hidden" name="business" value="carolguedes.atriz@gmail.com">
-      <input type="hidden" name="lc" value="BR">
-      <input type="hidden" name="item_name" value="Quintal de Trocas">
-      <input type="hidden" name="no_note" value="0">
-      <input type="hidden" name="currency_code" value="BRL">
-      <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
-      
-      <button type="submit" class="btn-quintal" style="border-radius: 5px; border: 0; padding: 22px; font-size: 18px; font-weight: bold; color: #fff; margin: 0 auto; width: 250px; display: block; cursor: pointer;">Quero contribuir.</button>
+  <div class="col-sm-5 text-center">
+    <div class="support-padding">
+      <%= image_tag "support.png" %>
+      <p class="lead">Quer ser nosso apoiador?</p>
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_donations">
+        <input type="hidden" name="business" value="carolguedes.atriz@gmail.com">
+        <input type="hidden" name="lc" value="BR">
+        <input type="hidden" name="item_name" value="Quintal de Trocas">
+        <input type="hidden" name="no_note" value="0">
+        <input type="hidden" name="currency_code" value="BRL">
+        <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+        
+        <button type="submit" class="btn-quintal" style="border-radius: 5px; border: 0; padding: 22px; font-size: 18px; font-weight: bold; color: #fff; margin: 0 auto; width: 250px; display: block; cursor: pointer;">Quero contribuir.</button>
 
-      <img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
-    </form>
+        <img alt="" border="0" src="https://www.paypalobjects.com/pt_BR/i/scr/pixel.gif" width="1" height="1">
+      </form>
 
+      <hr><br>
+
+      <p class="lead">Nós do Quintal, acreditamos na transparência e por isso queremos compartilhar com vocês apoiadores nossos gastos mensais e onde será empregado cada real da sua contribuição.</p>
+
+      <%= image_tag "gastos-quintal" %>
+    </div>
   </div>
 </div>

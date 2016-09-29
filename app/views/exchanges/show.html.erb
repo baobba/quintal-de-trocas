@@ -13,6 +13,8 @@
     <% end %>
     <br>
 
+
+
     <ul class="progress-indicator">
       <li class="completed">
           <span class="bubble"></span>
@@ -177,6 +179,8 @@
       <h4 style="font-weight: bold"><span class="glyphicon glyphicon-ok"></span> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %> <%= @exchange.accepted == false ? "recusou" : "aceitou" %> essa troca</h4>
       <p class="lead text-muted">Envie uma mensagem combinando como e onde será enviado ou entregue o brinquedo</p>
       </div>
+      <br>
+      <%= render 'exchanges/donation_bar' %>
     <% end %>
 
     <p class="lead">Mensagens (<%= @messages.count %>)</p>
@@ -210,6 +214,7 @@
     
   </div>
 </div>
+    <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.lightbox.js"></script>
 
 <!-- Reply modal -->
 <div class="modal fade" id="reply_old" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
