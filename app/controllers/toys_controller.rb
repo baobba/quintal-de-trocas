@@ -24,7 +24,7 @@ class ToysController < ApplicationController
 
     if request.format.json?
       zoom = if params[:zoom].blank?
-          params[:q].blank? ? 5 : params[:within] || 5
+          params[:q].blank? ? 15 : params[:within] || 15
         else
           case params[:zoom]
             when "15"
