@@ -59,6 +59,7 @@ $(document).ready(function() {
 
         if (image_64) {
           div1.val(image_64);
+          console.log("Vaii....");
         }
       });
 
@@ -109,8 +110,11 @@ $(document).ready(function() {
     script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBzgRvMidyz6Ss0JfNX1F-caivPmDYT6i8&callback=codeAddress";
     document.body.appendChild(script);
 
+    console.log("Toy page...");
 
     $(".toy-exchange").on("change", "select", function(e){
+      console.log("changed");
+      console.log($(this).val());
       $this = $(this);
 
       $.ajax({
@@ -120,6 +124,9 @@ $(document).ready(function() {
       })
       .success(function(e) {
 
+        console.log("success");
+        console.log(e);
+        console.log($(this));
         $this.parent().find(".toy").html(e.title);
       });
 
@@ -127,6 +134,8 @@ $(document).ready(function() {
 
     $(".toy-filter").change(function(event) {
       event.preventDefault();
+
+      console.log("form alterado");
 
       $(this).submit();
     });
@@ -205,14 +214,9 @@ function initialize() {
     zoomControlOptions: {
         position: google.maps.ControlPosition.LEFT_TOP
     },
-    mapTypeControl: false,
-    zoom: 14
+    mapTypeControl: false
   };
   var gmTime = false;
-
-  var infoWindow = new google.maps.InfoWindow({maxWidth: 200});
-  var newPosi = {};
-  var newMarkers = [];
 
   // Display a map on the page
   map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
@@ -221,6 +225,7 @@ function initialize() {
   map.mapTypes.set(customMapTypeId, customMapType);
   map.setMapTypeId(customMapTypeId);
 
+  showPlaces();
 
   // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
   var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
@@ -229,36 +234,17 @@ function initialize() {
     console.log("moved");
   });
 
-
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
-      
     navigator.geolocation.getCurrentPosition(function(position) {
-      var userCurrentPos = {
+      var pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
 
-      newPosi = {
-        lat: position.coords.latitude,
-        lon: position.coords.longitude
-      }
-
-        
-      var currentLocationMarker = new google.maps.Marker({
-        position: userCurrentPos,
-        map: map,
-        icon: '<%= asset_path("icon-current-location.png") %>'
-      });
-
-      newMarkers.push(currentLocationMarker);
-
-      infoWindow.setPosition(userCurrentPos);
-      // infoWindow.setContent('Location found.');
-      map.setCenter(userCurrentPos);
-
-      bounds.extend(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found.');
+      map.setCenter(pos);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -267,24 +253,19 @@ function initialize() {
     handleLocationError(false, infoWindow, map.getCenter());
   }
 
+  var infoWindow = new google.maps.InfoWindow({maxWidth: 200});
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     pos = {
       lat: parseFloat($(".user-location-lat").text()),
       lng: parseFloat($(".user-location-lon").text())
     };
     infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
+    // infoWindow.setContent(browserHasGeolocation ?
+    //                     'Error: The Geolocation service failed.' :
+    //                     'Error: Your browser doesn\'t support geolocation.');
   }
 
   var oms = new OverlappingMarkerSpiderfier(map, {markersWontMove: true, markersWontHide: true, keepSpiderfied: true});
-
-  if(navigator.geolocation){
-    showPlaces(newPosi);
-  } else {
-    showPlaces();
-  }
 
   function getMoveData() {
     currentLocation = map.getCenter()
@@ -326,6 +307,7 @@ function initialize() {
     latlng.tipo = "map";
 
     $.getJSON(window.location.href, latlng, function( data ) {
+      var newMarkers = [];
 
       markers = data;
       
@@ -343,7 +325,6 @@ function initialize() {
             title: markers[i][1],
             icon: '<%= asset_path("map-marker.png") %>'
           });
-
           newMarkers.push(marker);
           markersIds.push(markers[i][0]);
         }
@@ -352,12 +333,37 @@ function initialize() {
         var ibTimeout;
         oms.addMarker(marker);
 
+        // Allow each marker to have an info window
+        google.maps.event.addListener(marker, 'mouseover', (function(marker, content, infoWindow){
+          return function() {
+            console.log("marker mouseover");
+
+            if(typeof ibTimeout !== "undefined"){
+              clearTimeout(ibTimeout);
+            }
+
+            infoWindow.setContent(content);
+            infoWindow.open(map, marker);
+          }
+        })(marker, content, infoWindow));
+
+        google.maps.event.addListener(marker, 'mouseout', (function(marker, infoWindow){ 
+          return function() {
+            ibTimeout = setTimeout(function(){
+              if (gmTime === false){
+                infoWindow.close();
+              }
+            }, 500);
+          };
+        })(marker, infoWindow));
+
         // Automatically center the map fitting all markers on the screen
         if (!is_moved){
           map.fitBounds(bounds);
         }
       }
 
+      console.log("newMarkers", newMarkers);
       var options = {
         imagePath: "<%= asset_path('map/m1.png') %>",
       };
