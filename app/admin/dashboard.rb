@@ -12,6 +12,28 @@ ActiveAdmin.register_page "Dashboard" do
 
     columns do
       column do
+        panel "Usuários nos últimos 7 dias" do
+          User.where('created_at > ?', Date.today-1.week).count
+        end
+      end
+      column do
+        panel "Brinquedos nos últimos 7 dias" do
+          Toy.where('created_at > ?', Date.today-1.week).count
+        end
+      end
+      column do
+        panel "Trocas iniciadas nos últimos 7 dias" do
+          Exchange.where('created_at > ?', Date.today-1.week).count
+        end
+      end
+      column do
+        panel "Trocas aceitas nos últimos 7 dias" do
+          Exchange.where(accepted: true).where('created_at > ?', Date.today-1.week).count
+        end
+      end
+    end
+    columns do
+      column do
         panel "Qtdade usuários" do
           User.count
         end
