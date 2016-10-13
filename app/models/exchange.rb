@@ -1,6 +1,7 @@
 class Exchange < ActiveRecord::Base
 
   acts_as_taggable
+  acts_as_paranoid
 
   belongs_to :toy, -> { with_deleted }, :foreign_key => "toy_to"
   belongs_to :user, -> { with_deleted }
