@@ -70,7 +70,7 @@
                   <% end %>
                 <% else %>
                   <strong class="lead text-<%= exchange.accepted == false ? 'danger' : 'success' %>">
-                    <span class="glyphicon glyphicon-ok"></span> <%= exchange.to_user == current_user ? "Você" : exchange.to_user.first_name %> <%= exchange.accepted == false ? "recusou" : "aceitou" %> essa troca
+                    <span class="glyphicon glyphicon-ok"></span> <%= exchange.to_user == current_user ? "Você" : (exchange.to_user.first_name || "") %> <%= exchange.accepted == false ? "recusou" : "aceitou" %> essa troca
                   </strong>
                   
                 <% end %>
