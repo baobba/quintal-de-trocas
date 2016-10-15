@@ -10,6 +10,7 @@ class Toy < ActiveRecord::Base
 
   has_many :exchanges, :foreign_key => "toy_to"
   has_many :credits
+  has_many :orders
 
   scope :actives, -> { where(is_active: true) }
 

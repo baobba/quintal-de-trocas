@@ -1,0 +1,441 @@
+<% content_for(:head) do %>
+  <!-- For produtction -->
+  <!-- <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script> -->
+
+  <!-- For sandbox -->
+  <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+
+
+  <script type="text/javascript">
+
+  $(document).ready(function() {
+    
+    $(document).on('change', 'input[name="cpf_radio"]', function(event) {
+      event.preventDefault();
+
+      if($(this).val() == "CPF") {
+        $(".cpf-cnpj-box").find("label").html("CPF: *");
+        $(".help-block-cpf").show();
+        $(".help-block-cnpj").hide();
+        $("input[name='cpf']").mask('999.999.999-99');
+      } else {
+        $(".cpf-cnpj-box").find("label").html("CNPJ: *");
+        $(".help-block-cnpj").show();
+        $(".help-block-cpf").hide();
+        $("input[name='cpf']").mask('99.999.999/9999-99');
+      }
+
+      console.log($(this).val());
+    });
+  });
+
+  $("input[name='cpf']").mask('999.999.999-99');
+
+  function converteMoedaFloat(valor){
+      
+      if(valor === ""){
+         valor =  0;
+      }else{
+         valor = valor.replace(".","");
+         valor = valor.replace(",",".");
+         valor = parseFloat(valor);
+      }
+      return valor;
+
+   }
+   
+   /*   @brief Converte um valor em formato float para uma string em formato moeda
+      @param valor(float) - o valor float
+      @return valor(string) - o valor em moeda
+   */
+   function converteFloatMoeda(valor){
+      var inteiro = null, decimal = null, c = null, j = null;
+      var aux = new Array();
+      valor = ""+valor;
+      c = valor.indexOf(".",0);
+      //encontrou o ponto na string
+      if(c > 0){
+         //separa as partes em inteiro e decimal
+         inteiro = valor.substring(0,c);
+         decimal = valor.substring(c+1,valor.length);
+      }else{
+         inteiro = valor;
+      }
+      
+      //pega a parte inteiro de 3 em 3 partes
+      for (j = inteiro.length, c = 0; j > 0; j-=3, c++){
+         aux[c]=inteiro.substring(j-3,j);
+      }
+      
+      //percorre a string acrescentando os pontos
+      inteiro = "";
+      for(c = aux.length-1; c >= 0; c--){
+         inteiro += aux[c]+'.';
+      }
+      //retirando o ultimo ponto e finalizando a parte inteiro
+      
+      inteiro = inteiro.substring(0,inteiro.length-1);
+      
+      decimal = parseInt(decimal);
+      if(isNaN(decimal)){
+         decimal = "00";
+      }else{
+         decimal = ""+decimal;
+         if(decimal.length === 1){
+            decimal = decimal+"0";
+         }
+      }
+      
+      
+      valor = "R$ "+inteiro+","+decimal;
+      
+      
+      return valor;
+
+   }
+
+
+
+
+
+  $(document).ready(function() {
+
+    $("input:radio[name='paymentMethod']").change(function() {   
+      console.log("mudou...");
+      console.log($("input:radio[name='paymentMethod']:checked").val());
+
+      if ($("input:radio[name='paymentMethod']:checked").val() == "boleto"){
+        $("#creditcard_name").removeAttr('required');
+        $("#card_number").removeAttr('required');
+        $("#card_cvv").removeAttr('required');
+      }
+
+      $('.general-fields').show();
+      $('.' + $("input:radio[name='paymentMethod']:checked").val() ).slideDown().siblings().slideUp();
+    });
+
+    console.log('Id sessao: <%= @session_id %>');
+    PagSeguroDirectPayment.setSessionId('<%= @session_id %>');
+
+
+    // Get payment methods
+    PagSeguroDirectPayment.getPaymentMethods({
+      success: function(response) {
+        console.log(response);
+        console.log(response.paymentMethods);
+      },
+      error: function(response) {
+        console.log(response);
+      },
+      complete: function(response) {
+        console.log('Meios de pagamento...');
+      }
+    });
+
+
+    PagSeguroDirectPayment.getInstallments({
+      amount: '29.90',
+      brand: 'visa',
+      // maxInstallmentNoInterest: 3,
+      success: function(response) {
+        // console.log(response);
+        // console.log(response.installments);
+        console.log(response.installments.visa);
+        // console.log(response.installments.visa[1]);
+
+        installments = response.installments.visa;
+        for (var i=0;i<installments.length;i++){
+          if(installments[i].interestFree == true) {
+            juros = " (sem juros)";
+          } else {
+            juros = "";
+          }
+          if(i<3){
+            $('<option/>').val(installments[i].quantity+'-'+installments[i].installmentAmount).html(installments[i].quantity+'x de '+ converteFloatMoeda(installments[i].installmentAmount)+juros).appendTo('#installments');
+          }
+        }
+
+        $("#installment_quantity").val(response.installments.visa[1].quantity);
+        $("#installment_value").val(response.installments.visa[1].installmentAmount);
+
+        //opções de parcelamento disponível
+      },
+      error: function(response) {
+            console.log(response);
+      //tratamento do erro
+      },
+      complete: function(response) {
+        console.log('parcelamentos...');
+      }
+    });
+
+
+  
+  
+
+    // PagSeguroDirectPayment.createCardToken(param);
+    // console.log(PagSeguroDirectPayment.createCardToken(param));
+    
+    // if($("#bandeira").val() != '') {
+      // param.brand = 'visa';
+    // }
+
+
+
+    $(".credit_card, input[name='paymentMethod']").change(function(e) {
+      console.log( "formulario mudou..." );
+
+      // Set params to get credit card token
+      param = {
+        cardNumber: $("#card_number").val(),
+        cvv: $("#card_cvv").val(),
+        expirationMonth: $("#card_expiry_month").val(),
+        expirationYear: $("#card_expiry_year").val(),
+        success: function(response) {
+          console.log("success...");
+          console.log(response);
+          //token gerado, esse deve ser usado na chamada da API do Checkout Transparente
+          console.log('Credit card token: '+response.card.token);
+
+          $(".token").val(response.card.token)
+
+        },
+        error: function(response) {
+          console.log("erro");
+        }
+      }
+
+      var get_hash = PagSeguroDirectPayment.getSenderHash();
+      console.log('sender hash: '+get_hash);
+      $(".sender_hash").val(get_hash);
+
+      console.log("param: ", param);
+      console.log("Get credit card token...");
+      PagSeguroDirectPayment.createCardToken(param);
+
+
+      PagSeguroDirectPayment.getBrand({
+        cardBin: $("#card_number").val(),
+
+        success: function(response) {
+          console.log('success');
+          console.log(response);
+
+          if (response.brand.name == "visa"){
+            $("#card_number").addClass("visa-icon").removeClass('mastercard-icon');
+          } else if (response.brand.name == "mastercard") {
+            $("#card_number").addClass("mastercard-icon").removeClass('visa-icon');
+          }
+
+        },
+        error: function(response) {
+        },
+        complete: function(response) {
+          console.log('brands...');
+        }
+      });
+
+    });
+
+
+
+  });
+  </script>
+<% end %>
+
+<h1 class="text-center">Comprar brinquedo: <small><%= @toy.title %></small>?</h1>
+
+<%= simple_form_for(@order, html: { multipart: true, class: "form-horizontal", :id => 'formu', :name => 'formu' }) do |f| %>
+
+
+<div class="row">
+  <div class="col-sm-6">
+    
+
+<div class="promote">
+
+
+
+<input type="hidden" name="installment_quantity" id="installment_quantity" value="5">
+<input type="hidden" name="installment_value" id="installment_value" value="125.22">
+      
+<input type="hidden" name="sender_hash" class="sender_hash">
+<input type="hidden" name="token" class="token">
+
+<input type="hidden" name="tipo" class="tipo" value="BRL">
+<input type="hidden" name="id" class="id" value="<%= @toy.id || "xxx" %>">
+<input type="hidden" name="preco" class="preco" value="29.90">
+<br>
+<br>
+
+
+<div class="form-group">
+  <label for="card_number" class="col-sm-3 control-label"></label>
+  <div class="col-sm-9">
+    <label for="order_payment_method_credit_card">
+      <input type="radio" value="credit_card" name="paymentMethod" id="order_payment_method_credit_card" required="required" checked="checked">
+      Cartão de crédito
+    </label>
+
+    &nbsp;&nbsp;&nbsp;
+
+    <label for="order_payment_method_boleto">
+      <input type="radio" value="boleto" name="paymentMethod" id="order_payment_method_boleto" required="required">
+      Boleto
+    </label>
+  </div>
+</div>
+
+
+
+<div class="forms-pagamento">
+  <div>
+  
+  <div class="form-boleto boleto" style="display:none;">
+    <div class="form-group">
+      <label for="card_number" class="col-sm-3 control-label"></label>
+      <div class="col-sm-9">
+        <strong>Preencha seus dados pessoais para que possamos gerar o boleto.</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-cartao credit_card">
+
+    <div class="form-group">
+      <label for="card_number" class="col-sm-3 control-label">Nº do cartão *</label>
+      <div class="col-sm-9">
+        <input type="text" name="card_number" id="card_number" class="form-control"><span class="brand"></span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="card_number" class="col-sm-3 control-label">Código de segurança *</label>
+      <div class="col-sm-9">
+        <input type="text" name="card_cvv" id="card_cvv" class="form-control" style="width:90px;display:inline;">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Validade *</strong> <select name="card_expiry_month" id="card_expiry_month" required="required" class="form-control" style="display:inline;width:60px;"><option value="01">01</option>
+        <option value="02">02</option>
+        <option value="03">03</option>
+        <option value="04">04</option>
+        <option value="05">05</option>
+        <option value="06">06</option>
+        <option value="07">07</option>
+        <option value="08">08</option>
+        <option value="09">09</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option></select> / 
+      
+        <select name="card_expiry_year" id="card_expiry_year" required="required" class="form-control" style="display:inline;width:70px;"><option value="2015">2015</option>
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023">2023</option>
+        <option value="2024">2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+        <option value="2029">2029</option>
+        <option value="2030">2030</option>
+        </select>
+
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="card_number" class="col-sm-3 control-label">Parcelamento *</label>
+      <div class="col-sm-9">
+        <select name="installments" id="installments" class="form-control"></select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="creditcard_name" class="col-sm-3 control-label">Nome (escrito no cartão) *</label>
+      <div class="col-sm-9">
+        <input type="text" name="creditcard_name" id="creditcard_name" class="form-control" required="required">
+      </div>
+    </div>
+
+  </div>
+  </div>
+
+  <div class="general-fields">
+    
+    <%= f.fields_for :user, @order.user do |user| %>
+      <%= user.input :phone %>
+      <%= user.input :zipcode %>
+      <%= user.input :street %>
+      <%= user.input :neighborhood %>
+      <%= user.input :city %>
+      <%= user.input :state %>
+      <%= user.select :state, [["Acre", "AC"],
+            ["Alagoas", "AL"],
+            ["Amapá", "AP"],
+            ["Amazonas", "AM"],
+            ["Bahia", "BA"],
+            ["Ceará", "CE"],
+            ["Distrito Federal", "DF"],
+            ["Espírito Santo", "ES"],
+            ["Goiás", "GO"],
+            ["Maranhão", "MA"],
+            ["Mato Grosso", "MT"],
+            ["Mato Grosso do Sul", "MS"],
+            ["Minas Gerais", "MG"],
+            ["Pará", "PA"],
+            ["Paraíba", "PB"],
+            ["Paraná", "PR"],
+            ["Pernambuco", "PE"],
+            ["Piauí", "PI"],
+            ["Rio de Janeiro", "RJ"],
+            ["Rio Grande do Norte", "RN"],
+            ["Rio Grande do Sul", "RS"],
+            ["Rondônia", "RO"],
+            ["Roraima", "RR"],
+            ["Santa Catarina", "SC"],
+            ["São Paulo", "SP"],
+            ["Sergipe", "SE"],
+            ["Tocantins", "TO"]
+          ], {}, class: "form-control" %>
+    <% end %>
+    
+    <div class="form-group">
+      <label class="col-sm-3 control-label" for="cpf">
+      </label>
+
+      <div class="col-sm-9">
+        <%= radio_button_tag :cpf_radio, "CPF" %> CPF&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= radio_button_tag :cpf_radio, "CNPJ" %> CNPJ
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<br>
+<div class="form-group">
+  <div class="col-sm-5">
+    <%= button_tag "Finalizar pedido", data: { disable_with: 'Aguarde...' }, :class => "btn btn-success btn-buy" %>
+  </div>
+  <div class="col-sm-5">
+    <div class="logo-pagseguro">Sua transação será processada com <%= image_tag "logo-pagseguro.png" %></div>
+  </div>
+</div>
+
+
+<% end %>
+</div>
+
+  </div>
+  <div class="col-sm-offset-4">
+    toy details
+  </div>
+</div>
+    

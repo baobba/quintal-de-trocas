@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :exchanges_received, :class_name => 'Exchange', :foreign_key => "user_to"
   has_many :credits
   has_many :credits_avail, -> (object){ where(expired_at: nil)}, :class_name => 'Credit'
+  has_many :orders
 
   has_many :user_children
 

@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-sm-3">
+    <%= render '/layouts/nav_dashboard' %>
+  </div>
+  <div class="col-sm-9">
+
+    <div class="page-header">
+      <h1>Histórico de compras</h1>
+    </div>
+
+    <% if @orders.count > 0 %>
+      
+    <table class="table">
+      <tr>
+        <th width="45%">Título</th>
+        <th width="25%">Status</th>
+        <th width="10%">Valor</th>
+        <th width="20%" class="text-right">Data da compra</th>
+      </tr>
+
+    <% @orders.each do |order| %>
+      <%# @transaction = PagSeguro::Query.new(order.code.gsub("-", "")).transaction if order.code && !order.code.empty? %>
+      <tr>
+        <td><%= link_to order.title, order_path(order) %>
+        <br><small class="text-muted">Código: <%= order.code %></small></td>
+        <td><%= order.status if order.status %></td>
+        <td>R$ <%= order.price.gsub(".",",") %></td>
+        <td class="text-right"><%= order.created_at.strftime("%d/%m/%Y - %Hh%M") %></td>
+      </tr>
+    <% end %>
+    </table>
+
+    <% else %>
+      <div class="alert alert-danger">
+        <h4 class="alert-heading">Opss!</h4>
+        Nenhuma compra realizada até o momento.
+      </div>
+    <% end %>
+
+  </div>
+</div>

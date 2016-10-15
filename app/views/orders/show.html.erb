@@ -1,0 +1,79 @@
+<div class="row">
+  <div class="col-sm-3">
+    <%= render '/layouts/nav_dashboard' %>
+  </div>
+  <div class="col-sm-9">
+
+    <div class="page-header">
+      <h1>Status do pedido: <strong><%= @order.status %> (<%= @response.status.id %>)</strong></h1>
+    </div>
+
+    <p id="notice"><%= notice %></p>
+
+    <div class="well">
+      <br>
+      <div class="container-fluid">
+        <div class="row">
+
+          <% if @response.payment_method.type_id == "1" %>
+            <div class="col-sm-4">
+              <strong>Forma de pagamento:</strong><br>
+              <p class="lead">Cartão de crédito</p>
+            </div>
+            <div class="col-sm-4">
+              <strong>Parcelamento:</strong><br>
+              <p class="lead"><%= @response.installments %>x </p>
+            </div>
+          <% elsif @response.payment_method.type_id == "2" %>
+
+            <div class="col-sm-3">
+              <strong>Forma de pagamento:</strong><br>
+
+              <p class="lead">Boleto</p>
+              <a href="<%= @response.payment_link %>" class="btn btn-success" target="_blank">Imprimir boleto</a>
+            </div>
+            <div class="col-sm-6 col-sm-offset-1">
+              <h4>Atenção</h4>
+              <p class="text-muted">O prazo para compensação de um boleto é de até 3 dias úteis após o pagamento.</p>
+            </div>
+          <% end %>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <br>
+    <br>
+
+    <strong>Pedido #<%= @order.id %></strong><br>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th width="50%">Item</th>
+          <th width="25%">Valor</th>
+          <th width="25%">Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @order.title %></td>
+          <td>R$ <%= @order.price.gsub(".",",") %></td>
+          <td><%= @order.created_at.strftime("%d/%m/%Y - %Hh%M") %></td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    <br>
+    <br>
+
+    <%= link_to "Voltar", my_orders_path %>
+
+    <%= debug @response %>
+  </div>
+</div>
+

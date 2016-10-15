@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     resources :credits, path: 'creditos'
     get 'meus-creditos' => 'credits#my_credits', as: :my_credits
 
+    resources :orders, path: 'compras'
+    get 'minhas-compras' => 'orders#my_orders', as: :my_orders
+
     resources :exchanges, path: 'trocas' do
       # post 'toggle_status', path: 'mudar_status'
       get 'reply', path: 'mudar_status'
@@ -57,6 +60,10 @@ Rails.application.routes.draw do
 
   resources :contacts, only: [:new, :create]
   post 'contact', to: 'messages#create'
+
+  get 'brinquedos/:id/comprar' => 'orders#buy', as: 'buy'
+  post 'brinquedos/:id/comprar' => 'orders#buy'
+  post 'notify' => 'orders#notify'
 
   get 'sobre-nos' => 'pages#about_us', as: 'about_us'
   get 'faq' => 'pages#faq', as: 'faq'

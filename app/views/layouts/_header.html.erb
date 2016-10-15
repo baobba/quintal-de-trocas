@@ -50,6 +50,7 @@
                 <li><%= link_to "Meus brinquedos", my_toys_path %></li>
                 <li><%= link_to "Minhas trocas (#{current_user.exchanges_received.waiting.count})", my_exchanges_path %></li>
                 <li><%= link_to "Meus créditos", my_credits_path %></li>
+                <li><%= link_to "Minhas compras", my_orders_path %></li>
                 <li><%= link_to "Sair", destroy_user_session_path, :method => :delete %></li>
               </ul>
             </li>

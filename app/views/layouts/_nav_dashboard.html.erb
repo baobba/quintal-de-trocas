@@ -9,5 +9,7 @@
 
     <%= link_to "#{image_tag 'quintalecas-icon.png', width: 20} Meus créditos".html_safe, my_credits_path, class: (params[:controller] == "credits" ? "list-group-item active" : "list-group-item") %>
 
+    <%= link_to "<i class='fa fa-shopping-cart'></i> Minhas compras".html_safe, my_orders_path, class: (params[:controller] == "orders" ? "list-group-item active" : "list-group-item") %>
+
   </div>
 </div>

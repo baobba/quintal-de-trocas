@@ -165,6 +165,19 @@ ActiveRecord::Schema.define(version: 20161123103005) do
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id"
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
 
+  create_table "orders", force: :cascade do |t|
+    t.string   "code"
+    t.string   "title"
+    t.string   "price"
+    t.string   "status"
+    t.integer  "user_id"
+    t.integer  "toy_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
+
   create_table "places", force: :cascade do |t|
     t.string   "title"
     t.text     "description"

@@ -11,8 +11,8 @@
       </small>
 
     </div>
-    <!-- <div class="text-center">
-      <a href="<%= url_for(toy) %>" class="btn btn-success btn-block">Quero trocar</a>
-    </div> -->
+    <div class="text-center">
+      <%= link_to "Comprar", new_order_path(product: toy.id), class: "btn btn-primary btn-block" %>
+    </div>
   </a>
 </li>

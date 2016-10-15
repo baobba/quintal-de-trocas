@@ -785,6 +785,17 @@ footer {
   }
 }
 
+#card_number {
+  &.visa-icon {
+    background: transparent url('https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/42x20/visa.png') no-repeat right center;
+  }
+  
+  &.mastercard-icon {
+    background: transparent url('https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/42x20/mastercard.png') no-repeat right center;
+  }
+}
+
+
 /* Override BT */
 .btn-success {
   text-transform: uppercase;
