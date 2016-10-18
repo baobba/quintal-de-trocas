@@ -192,8 +192,8 @@
           <div class="profile-thumb" style="background-image:url('<%= default_img(msg.user) %>');float: left;margin-right:15px;width: 40px;height: 40px;"></div>
         </div>
         <div class="col-sm-11">
+          <strong class="text-muted"><%= msg.user.first_name %></strong><br>
           <small class="text-muted"><%= msg.created_at.strftime("%d/%m/%Y - %H:%M") if msg.created_at %></small><br>
-          <strong class="text-muted"><%= msg.user == current_user ? "Você" : msg.user.first_name %> respondeu:</strong>
           <%= simple_format msg.message %>
         </div>
       </div>
