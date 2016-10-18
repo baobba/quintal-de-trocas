@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
 
+  devise_for :admin_users, {class_name: 'User'}.merge(ActiveAdmin::Devise.config)
   ActiveAdmin.routes(self)
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
 
   # You can have the root of your site routed with "root"
   root 'toys#index'
@@ -13,6 +12,8 @@ Rails.application.routes.draw do
 
     devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }, path: 'usuario'
 
+    resources :users, path: 'usuarios'
+    
     resources :articles, path: 'artigos'
 
     resources :credits, path: 'creditos'
@@ -40,8 +41,6 @@ Rails.application.routes.draw do
     resources :toy_ages, path: 'faixa-etaria'
     resources :toy_categories, path: 'categorias'
     resources :toy_images, path: 'imagens'
-
-    resources :users, path: 'usuarios'
 
     resources :conversations, only: [:index, :show, :new, :create] do
       member do
