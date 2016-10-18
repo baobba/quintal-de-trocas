@@ -37,9 +37,14 @@ ActiveAdmin.register User do
     actions
   end
 
-  filter :encrypted_password
-  # filter :current_sign_in_at
-  # filter :sign_in_count
-  # filter :created_at
+  filter :name
+  filter :email
+  filter :city
+  filter :state
+  filter :zipcode
+  filter :street
+  filter :neighborhood
+  filter :newsletter
+  filter :admin
 
 end

@@ -24,7 +24,6 @@ ActiveAdmin.register Exchange do
       end
     end
     column "Troca efetuada?", :finalized
-    column "Data troca efetuada", :finalized_at
     column "Troca aceita?", :accepted
     column "Troca solicitada em", :created_at
     column "Troca recusada?", :reason do |exc|
