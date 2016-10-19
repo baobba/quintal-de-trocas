@@ -2,7 +2,7 @@
 namespace :quintal do
   desc "Envia lembrete para usuários perguntando se o brinquedo ainda está disponível"
   task :send_toys_reminder => [:environment] do
-    Toy.where(next_notification_at: Date.today).each do |toy|
+    Toy.joins(:user).where(next_notification_at: Date.today).each do |toy|
       puts "Toy: #{toy.title}"
 
       if !toy.next_notification_at.blank? && toy.expired_at.blank?
@@ -15,7 +15,7 @@ namespace :quintal do
       elsif !toy.next_notification_at.blank?
 
         # Expira credito do usuario
-        toy.credits.available.first.update_column(:expired_at, Time.now) if toy.credits && toy.credits.available
+        toy.credits.available.first.update_column(:expired_at, Time.now) if toy.credits && toy.credits.available && toy.credits.available.first
 
         toy.update_column(:expired_at, Time.now)
         toy.update_column(:deleted_at, Time.now)
