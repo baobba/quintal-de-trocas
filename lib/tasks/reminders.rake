@@ -8,7 +8,7 @@ namespace :quintal do
       if !toy.next_notification_at.blank? && toy.expired_at.blank?
 
         QuintalMailer.toy_reminder(toy).deliver
-        toy.update_column(:next_notification_at, Date.today + 1.week)
+        toy.update_column(:next_notification_at, Date.today + 2.days)
         toy.update_column(:expired_at, Time.now)
         puts "#{toy.user.email}, foi notificado por e-mail sobre brinquedo."
 

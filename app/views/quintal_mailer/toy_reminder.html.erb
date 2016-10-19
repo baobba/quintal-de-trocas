@@ -1,7 +1,7 @@
 <h2>Olá <%= @user.name %>,</h2>
 
-<p>Seu brinquedo <strong><%= @toy.title %></strong> está cadastrado a <strong>2 meses</strong> no Quintal de Trocas, e ainda não foi trocado.</p>
+<p>Seu brinquedo <strong><%= @toy.title %></strong> está cadastrado a alguns meses no Quintal de Trocas, e ainda não foi trocado.</p>
 
-<p>Ele será desativado automaticamente dentro de <strong>7 dias</strong>, porém, se você tiver ainda o brinquedo e deseja deixar disponível no site, clique no link abaixo para evitar que seja desativado.</p>
+<p>Ele será desativado automaticamente dentro de <strong>2 dias</strong>, porém, se você tiver ainda o brinquedo e deseja deixar disponível no site, clique no link abaixo para evitar que seja desativado.</p>
 
 <p><stronng><%= link_to "O brinquedo '#{@toy.title}' ainda está disponível para troca", activate_toy_url(@toy.id) %></strong></p>
