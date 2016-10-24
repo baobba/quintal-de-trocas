@@ -9,7 +9,7 @@ ActiveAdmin.register Exchange do
       link_to exc.user.name, edit_admin_user_path(exc.user.id)
     end
     column "Destinatário", :toy_to do |exc|
-      link_to exc.to_user.name, edit_admin_user_path(exc.to_toy.id)
+      link_to exc.to_user.name, edit_admin_user_path(exc.to_user.id)
     end
     column "Brinquedo solicitado", :toy_to do |exc|
       link_to exc.to_toy.title, toy_path(exc.to_toy)
