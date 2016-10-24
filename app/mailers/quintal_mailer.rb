@@ -49,7 +49,7 @@ class QuintalMailer < ApplicationMailer
   def toy_reminder(toy)
     @toy = toy
     @user = toy.user
-    mail(to: @user.email, subject: 'Seu brinquedo vai expirar em 2 dias, ative-o novamente.')
+    mail(to: @user.email, subject: 'Seu brinquedo está prestes a expirar')
   end
 
   def toy_arrived(exchange, user)
