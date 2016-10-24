@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
     devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }, path: 'usuario'
 
-    resources :users, path: 'usuarios'
+    resources :users, path: 'usuarios' do
+      get :netto, on: :collection
+    end
     
     resources :articles, path: 'artigos'
 
@@ -86,5 +88,7 @@ Rails.application.routes.draw do
   get '/pontos_de_trocas', to: redirect("/pontos", status: 301)
   get '/produtos/listar', to: redirect("/brinquedos", status: 301)
   get '/quem_somos', to: redirect("/sobre-nos", status: 301)
+
+  match '/get_mailgun_data' => 'home#get_mailgun_data', :via => :all
 
 end
