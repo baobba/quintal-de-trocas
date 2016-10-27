@@ -7,6 +7,8 @@
   <%= favicon_link_tag 'favicon.png', type: 'image/png' %>
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
+
+  <%= render '/layouts/customer_support' %>
 </head>
 
 <body class="<%= params[:controller] %> <%= params[:controller] %>-<%= params[:action] %> <%= 'home' if current_page?(root_url) %>">
