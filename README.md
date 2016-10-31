@@ -22,8 +22,8 @@ Repositório do projeto Quintal de Trocas
 2. rails db:seed
 ```
 
-# TODO
+# Contribua
 
-- Show place page layout
-- Change 1 credit for 1 toy
-- Fix ordering on toys home
+- Faça um fork do projeto;
+- Faça sua alterações em um branch separado;
+- Faça um Pull Request.
