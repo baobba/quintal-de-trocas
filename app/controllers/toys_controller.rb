@@ -111,6 +111,7 @@ class ToysController < ApplicationController
     
     @toy.update_column(:next_notification_at, Date.today + 2.months)
     @toy.update_column(:expired_at, nil)
+    @toy.update_column(:activate_qty, @toy.activate_qty + 1)
 
     @toy.credits.create(user_id: @toy.user.id) if @toy.credits.available.count == 0
 
