@@ -4,6 +4,7 @@ namespace :quintal do
   task :send_toys_reminder => [:environment] do
 
     email_list = []
+    emails_count = 0
 
     Toy.joins(:user).where(next_notification_at: Date.today).each do |toy|
       puts "Toy: #{toy.title}"
@@ -16,6 +17,10 @@ namespace :quintal do
           toy.update_column(:expired_at, Time.now)
           puts "#{toy.user.email}, foi notificado por e-mail sobre brinquedo."
           email_list.push(toy.user.email)
+          emails_count = emails_count+1
+
+          # Sleep 1 hour before continue sending emails, prevent spam detection
+          sleep(1.hour) if emails_count == 150
         end
 
       elsif !toy.next_notification_at.blank?
