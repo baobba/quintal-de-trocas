@@ -1,5 +1,23 @@
 <h2>Olá <%= @user_to.first_name %>,</h2>
 
-<p><%= @user_from.name %> solicitou uma troca de brinquedo. Clique no link abaixo ver mais detalhes e responder se aceita a troca ou não.</p>
+<p><strong><%= @user_from.name %></strong> solicitou uma troca de brinquedo. Veja mais detalhes no link abaixo e responda se aceita a troca ou não.</p>
 
-<p><%= link_to "Ver detalhes", exchange_url(@exchange.id) %></p>
+<p>Brinquedo solicitado:</p>
+
+<div class="toy-detail">
+  <%= image_tag @exchange.to_toy.fet_image.image.url(:thumb), width: 90, class: "pull-left" %>
+  <%= link_to @exchange.to_toy.title, toy_path(@exchange.to_toy) if @exchange.toy %>
+  <p>
+    <% if @exchange.toy.toy_age %>
+      Faixa etária: <%= @exchange.toy.toy_age.title %><br>
+    <% end %>
+    <% if @exchange.toy.toy_category %>
+      Categoria: <%= @exchange.toy.toy_category.title %>
+    <% end %>
+  </p>
+
+  <div class="call-to-action">&raquo; <%= link_to "Ver detalhes e responder", exchange_url(@exchange.id) %></div>
+</div>
+
+
+<p class="small">Caso você não tenha interesse no brinquedo, você poderá trocar por 1 crédito (que poderá ser trocado por outro brinquedo que você se interessar).</p>
