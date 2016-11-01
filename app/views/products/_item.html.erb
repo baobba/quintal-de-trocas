@@ -1,0 +1,17 @@
+<li>
+  <a href="<%= url_for(item) %>">
+    <div class="thumb" style="background-image: url('<%= item.fet_image.image.url(:medium) %>')">
+    </div>
+    <div class="content">
+      <h2><%= link_to item.title, item %></h2>
+
+      <% if item.price %>
+        <p class="lead">R$ <%= item.price %></p>
+      <% end %>
+
+    </div>
+    <div class="text-center">
+      <%= link_to "Comprar", new_order_path(product: item.id), class: "btn btn-primary btn-block" %>
+    </div>
+  </a>
+</li>

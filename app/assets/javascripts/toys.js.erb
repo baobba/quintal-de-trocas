@@ -41,6 +41,8 @@ $(document).ready(function() {
 
   if ($('body.toys-edit').length || $('body.toys-new').length) {
 
+    $('#item_price').mask("#.##0,00", {reverse: true});
+
     $("div[id^='image-cropper-']").cropit({
       maxZoom: 0.5
     });

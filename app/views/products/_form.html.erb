@@ -2,16 +2,16 @@
   <%= javascript_include_tag 'jquery-ui', 'tag-it.min' %>
 <% end %>
 
-<%= simple_form_for(@toy, html: { multipart: true }) do |f| %>
+<%= simple_form_for(@item, html: { multipart: true }) do |f| %>
   
   <%= f.hidden_field :zipcode %>
 
-  <% if @toy.errors.any? %>
+  <% if @item.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@toy.errors.count, "error") %> prohibited this toy from being saved:</h2>
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
       <ul>
-      <% @toy.errors.full_messages.each do |message| %>
+      <% @item.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -23,27 +23,23 @@
       
       <%= f.input :title %>
 
-      <%= f.input :toy_age_id, collection: ToyAge.order("title asc").all, as: :select, prompt: "Selecione", rows: 5 %>
+      <%= f.input :item_age_id, collection: ItemAge.order("title asc").all, as: :select, prompt: "Selecione", rows: 5 %>
 
-      <%= f.input :toy_category_id, collection: ToyCategory.order("title asc").all, as: :select, prompt: "Selecione", rows: 5 %>
+      <%= f.input :item_category_id, collection: ItemCategory.order("title asc").all, as: :select, prompt: "Selecione", rows: 5 %>
 
       <%= f.input :description, :input_html => { :rows => 5 } %>
       
-      <%= f.input :tag_list, input_html: { value: @toy.tag_list.to_s }, hint: "Utilize vírgula para adicionar a palavra chave" %>
+      <%= f.input :tag_list, input_html: { value: @item.tag_list.to_s }, hint: "Utilize vírgula para adicionar a palavra chave" %>
 
     </div>
 
     <div class="col-sm-6">
-
-      <% if current_user.admin? %>
-        <%= f.input :price, as: :string %>
-      <% end %>
       
 
       <p class="lead">Imagens</p>
 
-      <% @toy.toy_images.each_with_index do |toy_image,index| %>
-      <%= f.fields_for :toy_images, toy_image do |p| %>
+      <% @item.item_images.each_with_index do |item_image,index| %>
+      <%= f.fields_for :item_images, item_image do |p| %>
         <div class="text-center field">
 
           <div class="current-upload" style="display: none">

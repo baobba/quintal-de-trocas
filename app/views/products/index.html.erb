@@ -1,0 +1,110 @@
+<div class="item-filter">
+  <div class="container">
+    <%= search_form_for(@q, class: "item-filter form-inline") do |f| %>
+      <div class="main">
+        <div class="form-group">
+          <label>Buscar pelo título</label>
+          <%= f.text_field :title_cont, :class=> "form-control", placeholder: "Digite aqui..." %>
+        </div>
+        <div class="form-group city">
+          <label>Região</label>
+          <%= text_field_tag :city_eq, (params[:city_eq] || (current_user && current_user.city && current_user.state ? "#{current_user.city} - #{current_user.state}" : nil) || (lookup_ip_location ? lookup_ip_location.city : nil)), class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <label>Faixa etária</label>
+          <%= f.select(:item_age_id_eq, options_from_collection_for_select(ItemAge.order("title ASC"), "id", "title", (params[:q][:item_age_id_eq] if !params[:q].blank?)), {include_blank: "Todas"}, :class=> "form-control" ) %>
+        </div>
+        <div class="form-group">
+          <label>Categoria</label>
+          <%= f.select(:item_category_id_eq, options_from_collection_for_select(ItemCategory.order("title ASC"), "id", "title", (params[:q][:item_category_id_eq] if !params[:q].blank?)), {include_blank: "Todas"}, :class=> "form-control" ) %>
+        </div>
+        <div class="form-group">
+          <br>
+          <%= f.submit "Filtrar", :class => "btn btn-default" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="item-content">
+
+  <% if @items.total_count > 0 %>
+
+    <div class="pull-right">
+      Ordenar por:
+      <%= sort_link @q, :created_at, 'mais recentes', default_order: :desc %> |
+      <%= sort_link @q, :distance, 'mais próximos', default_order: :desc %>
+    </div>
+
+    <div class="lead" style="margin-left: 20px;">
+      Mostrando <strong><%= Item.default_per_page >= @items.size ? @items.size : item.default_per_page %></strong> de <%= @items.total_count %> brinquedos
+    </div>
+
+    <ul class="cards list-unstyled">
+      <%= render partial: 'products/item', collection: @items %>
+    </ul>
+  <% else %>
+    <div class="alert alert-danger text-center">
+      <h4>Nenhum brinquedo encontrado</h4>
+      <p class="lead">Tente outro termo ou modifique a distância de busca ou<br>
+      <strong><%= link_to "veja todos os brinquedos", items_path(tipo: "todos") %></strong>
+    </div>
+  <% end %>
+  
+
+  <div class="clearfix"></div>
+
+  <div class="text-center">
+    <%= link_to_next_page @items, 'Veja mais', params: params, remote: true, id: "load_more_link", class: "btn btn-lg btn-quintal" %>
+  </div>
+  </div>
+
+
+<div class="hide">
+  <p class="lead">Refine sua busca</p>
+
+  <%= search_form_for(@q, class: "item-filter") do |f| %>
+
+    <div class="form-group">
+      <label>Buscar por:</label>
+      <%= f.text_field :title_cont, :class=> "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <label>Faixa etária:</label>
+      <% ItemAge.all.each do |cat| %>
+
+        <div class="checkbox" style="margin:0;"><label style="font-size: 11px;min-height:15px;">
+          <%# f.check_box :item_age_id_in, {}, cat.id, true, false %>
+          <%= check_box_tag('q[item_age_id_in][]', cat.id, params[:q] && params[:q][:item_age_id_in] && params[:q][:item_age_id_in].include?(cat.id.to_s) ? params[:q][:item_age_id_in] : nil ) %>
+          <%= cat.title %>
+        </label></div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <label>Categoria:</label>
+      <% ItemCategory.all.each do |cat| %>
+
+        <div class="checkbox" style="margin:0;"><label style="font-size: 11px;min-height:15px;">
+          <%= check_box_tag('q[item_category_id_in][]', cat.id, params[:q] && params[:q][:item_category_id_in] && params[:q][:item_category_id_in].include?(cat.id.to_s) ? params[:q][:item_category_id_in] : nil ) %>
+          <%= cat.title %>
+        </label></div>
+      <% end %>
+      <%# f.select(:item_category_id_eq, options_from_collection_for_select(ItemCategory.all, "id", "title", (params[:q][:item_category_id_eq] if !params[:q].blank?)), {include_blank: "Selecione..."}, :class=> "form-control" ) %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "Fitrar", :class => "btn btn-primary" %>
+    </div>
+
+    <br>
+    <br>
+    <%= link_to 'Cadastrar brinquedo', new_item_path, class: "btn btn-default" %>
+  <% end %>
+</div>
+
+</div>

@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-sm-3">
+    <%= render '/layouts/nav_dashboard' %>
+  </div>
+  <div class="col-sm-9">
+
+<div class="page-header">
+  <h1>
+    Meus brinquedos
+    <%= link_to '<span class="glyphicon glyphicon-plus"></span> Cadastrar brinquedo'.html_safe, new_item_path, class: "btn btn-success btn-new pull-right" %>
+  </h1>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th width="10%">Foto</th>
+      <th width="2%"></th>
+      <th width="35%">Título</th>
+      <th width="15%">Data de cadastro</th>
+      <th colspan="2" width="20%"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <td>
+          <div class="product-image">
+            <%= link_to image_tag(item.fet_image.image.url(:thumb), style: "max-width: 100%;"), item %>
+          </div>
+        </td>
+        <td></td>
+        <td>
+          <%= link_to item.title, item %>
+          <small>
+            <br>Categoria: <%= item.item_category.title %>
+            <br>Faixa etária: <%= item.item_age.title %>
+          </small>
+        </td>
+        <td>
+          <%= item.created_at.strftime("%d/%m/%Y") %>
+          <div style="margin-top: 10px;font-size: 12px">
+            <% if !item.expired_at.blank? %>
+              <span class="text-danger">Expira em <%= distance_of_time_in_words_to_now(item.next_notification_at) %></span>
+              <div>
+                <%= link_to "Renovar por mais 2 meses", activate_item_path(item.id), class: "btn btn-xs btn-default" %>
+              </div>
+            <% end %>
+          </div>
+        </td>
+
+        <td class="text-right">
+          <%= link_to "<span class='glyphicon glyphicon-pencil'></span> Alterar".html_safe, edit_item_path(item), :class => 'btn btn-sm btn-link' %>&nbsp;&nbsp;
+
+          <%= link_to "<span class='glyphicon glyphicon-trash'></span> Excluir".html_safe, item, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir?' }, class: "delete btn btn-sm btn-link" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>
+</div>

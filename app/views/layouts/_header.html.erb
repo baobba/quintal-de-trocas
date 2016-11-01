@@ -1,4 +1,4 @@
-<header class="<%= 'no-margin' if content_for?(:subheader) || (params[:controller] == "toys" && params[:action] == "index") || current_page?(root_url) %>">
+<header class="<%= 'no-margin' if content_for?(:subheader) || (params[:controller] == "items" && params[:action] == "index") || (params[:controller] == "products" && params[:action] == "index") || current_page?(root_url) %>">
   <nav class="navbar navbar-quintal">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -23,7 +23,8 @@
               <li><%= link_to 'Na Mídia', media_path %></li>
             </ul>
           </li>
-          <li><%= link_to 'Quero Trocar', toys_path %></li>
+          <li><%= link_to 'Trocar', items_path %></li>
+          <li><%= link_to 'Comprar', products_path %></li>
           <li><%= link_to "Como funciona", how_it_works_path %></li>
           <li><%= link_to 'Apoie', support_path %></li>
 

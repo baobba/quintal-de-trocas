@@ -1,0 +1,146 @@
+<% content_for :subheader do %>
+  <h1>Quero trocar</h1>
+<% end %>
+
+<div class="row">
+	<div class="col-sm-6">
+
+		<section id="gallery" class="simplegallery">
+			<div class="thumb-nail">
+				<% @item_images.each_with_index do |p, index| %>
+					<div class="thumb">
+						<a href="#" rel="<%= index %>">
+							<%= image_tag p.image.url(:thumb) %>
+						</a>
+					</div>
+				<% end %>
+			</div>
+
+			<div class="content">
+				<% @item_images.each_with_index do |p, index| %>
+					<%= image_tag p.image.url(:large), style: (p.featured? ? "display:block" : "display:none"), class: "img-#{index}" %>
+				<% end %>
+			</div>
+
+			<div class="clear"></div>
+
+	</section>
+
+
+
+	</div>
+	<div class="col-sm-6">
+		<h1 style="margin: 0 0 20px 0;"><%= @item.title %></h1>
+
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="text-muted">Faixa etária</div>
+				<p class="lead"><i class="fa fa-child" aria-hidden="true"></i> <%= @item.item_age.title %></p>
+			</div>
+
+      <div class="col-sm-6">
+        <div class="text-muted">Categoria</div>
+        <p class="lead"><i class="fa fa-folder" aria-hidden="true"></i> <%= @item.item_category.title %></p>
+      </div>
+		</div>
+
+
+		<% if @item.user && @item.user.latitude %>
+		<script type="text/javascript">
+
+// First, create an object containing LatLng and population for each city.
+var citymap = {
+	chicago: {
+		center: {lat: <%= @item.user.latitude %>, lng: <%= @item.user.longitude %>},
+	},
+	// newyork: {
+	//   center: {lat: 40.714, lng: -74.005},
+	//   population: 8405837
+	// },
+	// losangeles: {
+	//   center: {lat: 34.052, lng: -118.243},
+	//   population: 3857799
+	// },
+	// vancouver: {
+	//   center: {lat: 49.25, lng: -123.1},
+	//   population: 603502
+	// }
+};
+
+function codeAddress() {
+	// Create the map.
+	var map = new google.maps.Map(document.getElementById('mapCanvas'), {
+		zoom: 13,
+		center: {lat: <%= @item.user.latitude %>, lng: <%= @item.user.longitude %>},
+		mapTypeId: google.maps.MapTypeId.TERRAIN
+	});
+
+	// Construct the circle for each value in citymap.
+	// Note: We scale the area of the circle based on the population.
+	for (var city in citymap) {
+		// Add the circle for this city to the map.
+		var cityCircle = new google.maps.Circle({
+			strokeColor: '#FF0000',
+			strokeOpacity: 0.8,
+			strokeWeight: 0,
+			fillColor: '#FF0000',
+			fillOpacity: 0.35,
+			map: map,
+			center: citymap[city].center,
+			radius: 500
+		});
+	}
+}
+</script>
+
+		<% end %>
+
+
+
+<p>
+	<strong>Descrição:</strong><br>
+	<%= @item.description %>
+</p>
+
+<hr>
+
+<%# link_to "Trocar", "", "data-toggle" => "modal", "data-target" => "#exchange", class: "btn btn-primary btn-lg go-private" %>
+
+<%= link_to "Solicitar troca", exchange_item_path(@item.id), "data-toggle" => (user_signed_in? ? "modal" : nil), "data-target" => "#exchange", class: "btn btn-primary btn-lg go-private exchange-item" %>
+
+<hr>
+<% if @item.user %>
+  
+<div class="row">
+	<div class="col-sm-6">
+    <p><span class="glyphicon glyphicon-user"></span> Cadastrado por</p>
+    <div class="profile-thumb" style="background-image:url('<%= default_img(@item.user) %>');float: left;margin-right:15px;"></div>
+		<%= link_to @item.user.name, user_path(@item.user) %>
+		<div class="text-muted">
+			<% if !@item.user.neighborhood.blank? %>
+        <%= @item.user.neighborhood %><br>
+      <% end %>
+			<%= @item.user.city %> / <%= @item.user.state %>
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div id="mapCanvas" class="item-detail-map"></div>
+	</div>
+</div>
+<% end %>
+
+</div>
+	</div>
+</div>
+
+
+		<% if @item.user && @item.user.latitude %>
+		<!-- script google maps ? -->
+<% end %>
+
+
+<!-- Exchange modal -->
+<div class="modal fade" id="exchange" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-body"></div>
+</div>
+

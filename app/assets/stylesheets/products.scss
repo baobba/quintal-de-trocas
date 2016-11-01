@@ -1,0 +1,130 @@
+.products {
+  div.item-filter {
+    background-color: #b8dc4c;
+    padding: 17px;
+    margin-bottom: 25px;
+
+    .main {
+      border-bottom: 0;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+
+  ul.cards {
+    h2 {
+      font-size: 17px;
+      margin: 0 0 10px 0;
+    }
+
+    &.cols-3 {
+      li {
+        width: 45%;
+      }
+    }
+    li {
+      border: 0;
+      background: #eee;
+      border-radius: 3px;
+      // margin-bottom: 40px;
+      // margin-right: 8%;
+      // display: block;
+      // float: left;
+      min-height: 270px;
+      width: 45%;
+
+
+      display: inline-block;
+      margin: 0 0 2.5% 2.5%;
+      vertical-align: top;
+
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+
+      @media screen and (min-width: $screen-sm-min) {
+        width: 21.5%;
+        // width: 22.1%;
+      }
+
+      // &:nth-of-type(2n+2) {
+      //   margin-right: 0;
+      // }
+
+      // @media screen and (min-width: $screen-sm-min) {
+      //   width: 30%;
+      //   float: left;
+      //   margin-right: 5%;
+      //   max-width: 250px;
+
+      //   &:nth-of-type(2n+2) {
+      //     margin-right: 5%;
+      //   }
+
+      //   &:nth-of-type(3n+3) {
+      //     margin-right: 0;
+      //   }
+      // }
+      .content {
+        padding: 10px;
+      }
+
+      .btn-success {
+        bottom: 0;
+        position: absolute;
+      }
+
+      .thumb {
+        background: #eee asset_url('no-image.png') no-repeat center center;
+        background-size: 70%;
+        text-align: center;
+        height: 130px;
+        white-space: nowrap;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+
+        @media screen and (min-width: $screen-sm-min) {
+          height: 180px;
+        }
+
+        .helper {
+          display: inline-block;
+          height: 100%;
+          vertical-align: middle;
+        }
+      }
+
+      img {
+        width: auto;
+        height: auto;
+        max-height: 100%;
+        max-width: 100%;
+        vertical-align: middle;
+        margin-left: -4px;
+      }
+    }
+
+    &.cards-small {
+      margin-bottom: 0;
+      padding-bottom: 0;
+
+      li {
+        max-width: 17%;
+        min-height: 195px;
+
+        .thumb {
+          height: 100px;
+        }
+      }
+    }
+
+    &.stack li {
+      display: block;
+      width: 100%;
+      min-height: auto;
+      margin: 0 0 25px 0;
+    }
+  }
+}

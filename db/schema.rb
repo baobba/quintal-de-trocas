@@ -112,6 +112,53 @@ ActiveRecord::Schema.define(version: 20161123103005) do
 
   add_index "exchanges", ["user_id"], name: "index_exchanges_on_user_id"
 
+  create_table "item_ages", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "item_categories", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "item_images", force: :cascade do |t|
+    t.integer  "item_id"
+    t.string   "image"
+    t.boolean  "featured",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "item_images", ["item_id"], name: "index_item_images_on_item_id"
+
+  create_table "items", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "item_category_id"
+    t.integer  "item_age_id"
+    t.integer  "user_id"
+    t.string   "zipcode"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.string   "image"
+    t.boolean  "is_active"
+    t.datetime "deleted_at"
+    t.string   "neighborhood"
+    t.date     "next_notification_at"
+    t.datetime "expired_at"
+    t.integer  "activate_qty",                                 default: 0
+    t.decimal  "price",                precision: 8, scale: 2
+  end
+
+  add_index "items", ["item_age_id"], name: "index_items_on_item_age_id"
+  add_index "items", ["item_category_id"], name: "index_items_on_item_category_id"
+  add_index "items", ["user_id"], name: "index_items_on_user_id"
+
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id"
     t.string  "unsubscriber_type"
