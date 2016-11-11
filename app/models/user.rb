@@ -29,13 +29,11 @@ class User < ActiveRecord::Base
 
   # geocoded_by :street, :city, :state, :zipcode
   after_validation :geocode
+  after_create :send_slack_message
 
-  def mailboxer_email(object)
-    #Check if an email should be sent for that object
-    #if true
-    return "netto16@gmail.com"
-    #if false
-    #return nil
+  def send_slack_message
+    message = "#{self.name} (#{self.email}), acabou de se cadasatrar."
+    NOTIFIER.ping(message)
   end
 
   def first_name
