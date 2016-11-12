@@ -35,7 +35,7 @@ class RegistrationsController < Devise::RegistrationsController
 
         respond_with resource, location: after_sign_up_path_for(resource)
       else
-        set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
+        # set_flash_message! :notice, :"signed_up_but_#{resource.inactive_message}"
         expire_data_after_sign_in!
         respond_with resource, location: after_inactive_sign_up_path_for(resource)
       end
@@ -75,6 +75,14 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   protected
+
+  def after_inactive_sign_up_path_for(resource)
+    confirm_email_path(email: resource.email)
+  end
+
+  def after_resending_confirmation_instructions_path_for(resource_name)
+    confirm_email_path(email: resource.email)
+  end
 
   def update_resource(resource, params)
     resource.update_without_password(params)

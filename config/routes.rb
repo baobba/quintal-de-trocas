@@ -53,6 +53,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get :confirm_email, to: 'pages#confirm', path: 'confirme-seu-email'
+
   resources :contacts, only: [:new, :create]
   post 'contact', to: 'messages#create'
 

@@ -30,6 +30,9 @@ class PagesController < ActionController::Base
     render layout: false
   end
 
+  def confirm
+  end
+
   def contact_us
     @message = Contact.new
   end

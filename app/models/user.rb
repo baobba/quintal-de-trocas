@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   validates :name, :email, :birthday, :gender, presence: true
   validates :zipcode, :phone, :street, :neighborhood, :city, :state, presence: true, if: :not_recovering_password?
@@ -55,6 +55,16 @@ class User < ActiveRecord::Base
 
   def full_address
     [street, complement, neighborhood, city, state].join(", ")
+  end
+
+  def confirm!
+    welcome_email
+    super
+  end
+
+  private
+  def welcome_email
+    QuintalMailer.welcome_message(self).deliver
   end
 
 end

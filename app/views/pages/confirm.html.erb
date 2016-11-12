@@ -1,0 +1,15 @@
+<br>
+<br>
+<div class="text-center">
+  <h3 class="header">
+    Uma mensagem com um link de confirmação foi enviada para o seu endereço de e-mail.<br>
+    Por favor, abra o link para confirmar a sua conta.
+  </h1>
+
+  <br>
+  <br>
+
+  <p class='lead'>Não recebeu o e-mail? <%= link_to "Clique aqui para reenviar", user_confirmation_path(user: {:email => params[:email]}) %></p>
+  <p>Não esqueça de adicionar nosso e-mail <strong>notificacoes@quintaldetrocas.com.br</strong> na sua lista de endereços.</p>
+</div>
+<br>
