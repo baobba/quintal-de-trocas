@@ -45,7 +45,7 @@
 
           <%= render :partial => '/devise/registrations/address', :locals => { :f => f } %>
 
-          <div class="form-group">
+          <div class="form-group hide">
             <label class="control-label">Se possuir algum cupom, digite abaixo:</label>
             <input type="text" name="coupon" size="5" class="form-control" value="<%= params[:coupon] if !params[:coupon].blank? %>">
           </div>

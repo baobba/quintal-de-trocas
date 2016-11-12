@@ -106,7 +106,7 @@ function codeAddress() {
 
 <%# link_to "Trocar", "", "data-toggle" => "modal", "data-target" => "#exchange", class: "btn btn-primary btn-lg go-private" %>
 
-<%= link_to "Solicitar troca", exchange_toy_path(@toy.id), "data-toggle" => (user_signed_in? ? "modal" : nil), "data-target" => "#exchange", class: "btn btn-primary btn-lg go-private exchange-toy" %>
+<%= link_to "Solicitar troca", exchange_toy_path(@toy.id), "data-toggle" => (user_signed_in? ? "modal" : nil), "data-target" => "#exchange", class: "btn btn-quintal btn-lg go-private exchange-toy" %>
 
 <hr>
 <% if @toy.user %>
