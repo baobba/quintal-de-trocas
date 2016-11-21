@@ -12,8 +12,8 @@ AdminUser.create!(email: 'admin@example.com', password: 'admin123', password_con
 
 # create users
 User.destroy_all
-User.create email: "netto16@gmail.com", password: "admin123", name: "Osny", birthday: 1989, gender: "M", phone: "48 99355794", username: "osnysantos", zipcode: "88110690", street: "Rua Bernardo Halfeld, 471", city: "São José", state: "SC", latitude: -27.5807659, longitude: -48.6194795
-User.create email: "test@test.com", password: "admin123", name: "Joao", birthday: 2000, gender: "M", phone: "48 788728787", username: "joao", zipcode: "88111120"
+User.create email: "netto16@gmail.com", password: "admin123", name: "Osny", birthday: 1989, gender: "M", phone: "48 99355794", username: "osnysantos", zipcode: "88110690", street: "Rua Bernardo Halfeld, 471", city: "São José", state: "SC", latitude: -27.5807659, longitude: -48.6194795, neighborhood: "xxx"
+User.create email: "test@test.com", password: "admin123", name: "Joao", birthday: 2000, gender: "M", phone: "48 788728787", username: "joao", zipcode: "88111120", neighborhood: "xxx"
 
 
 # create toy categories

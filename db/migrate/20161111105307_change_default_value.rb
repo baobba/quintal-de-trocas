@@ -3,7 +3,7 @@ class ChangeDefaultValue < ActiveRecord::Migration
     change_column_default(:exchanges, :accepted, nil)
   end
 
-  def up
+  def down
     change_column_default(:exchanges, :accepted, false)
   end
 end
