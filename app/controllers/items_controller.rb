@@ -1,3 +1,5 @@
+require 'correios-frete'
+
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy, :exchange, :activate]
   before_action :authenticate_user!, except: [:index, :show, :index_near, :exchange, :activate]
@@ -49,17 +51,17 @@ class ItemsController < ApplicationController
       zoom = params[:within] || 1000
     end
 
-    @q = @q.near(location, zoom, :units => :km, :order => 'distance')
+    # @q = @q.near(location, zoom, :units => :km, :order => 'distance')
     @q = @q.search(params[:q])
 
     respond_to do |format|
 
       format.all {
-        @items = @q.result(distinct: true).order("distance").page params[:page]
+        @items = @q.result(distinct: true).page params[:page]
       }
 
       format.js {
-        @items = @q.result(distinct: true).order("distance").page params[:page]
+        @items = @q.result(distinct: true).page params[:page]
       }
 
       format.json {
@@ -187,6 +189,29 @@ class ItemsController < ApplicationController
     end
   end
 
+  def frete
+    ap "GO"
+    frete = Correios::Frete::Calculador.new :cep_origem => "88110-690",
+      :cep_destino => params[:cep],
+      :peso => params[:weight],
+      :comprimento => params[:length],
+      :largura => params[:width],
+      :altura => params[:height]
+
+    ap "--------------------------------"
+    ap frete
+    servicos = frete.calcular :sedex, :pac
+    ap "--------------------------------"
+    ap servicos[:sedex].valor
+    ap "--------------------------------"
+    ap servicos[:pac].valor
+    ap "--------------------------------"
+    response = {}
+    response[:sedex] = servicos[:sedex]
+    response[:pac] = servicos[:pac]
+    render json: response
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
@@ -195,6 +220,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:title, :price, :description, :item_age_id, :item_category_id, :user_id, :tag_list, :zipcode, :latitude, :longitude, item_images_attributes: [:id, :item_id, :image, :featured])
+      params.require(:item).permit(:title, :price, :weight, :height, :width, :length, :description, :item_age_id, :item_category_id, :user_id, :tag_list, :zipcode, :latitude, :longitude, item_images_attributes: [:id, :item_id, :image, :featured])
     end
 end

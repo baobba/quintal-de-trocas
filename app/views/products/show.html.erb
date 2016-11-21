@@ -1,5 +1,9 @@
 <% content_for :subheader do %>
-  <h1>Quero trocar</h1>
+  <% if @item.for_sale? %>
+    <h1>Comprar</h1>
+  <% else %>
+    <h1>Quero trocar</h1>
+  <% end %>
 <% end %>
 
 <div class="row">
@@ -106,7 +110,38 @@ function codeAddress() {
 
 <%# link_to "Trocar", "", "data-toggle" => "modal", "data-target" => "#exchange", class: "btn btn-primary btn-lg go-private" %>
 
-<%= link_to "Solicitar troca", exchange_item_path(@item.id), "data-toggle" => (user_signed_in? ? "modal" : nil), "data-target" => "#exchange", class: "btn btn-primary btn-lg go-private exchange-item" %>
+<% if @item.for_sale? %>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <%= link_to "Comprar", new_order_path(product: @item.id), class: "btn btn-primary btn-lg go-private" %>
+    </div>
+    <div class="col-sm-6">
+      <div class="calculo-frete">
+        <form class="calcula-frete">
+        <input type="hidden" value="<%= @item.id %>" name="item">
+        <input type="hidden" value="<%= @item.weight %>" name="weight">
+        <input type="hidden" value="<%= @item.width %>" name="width">
+        <input type="hidden" value="<%= @item.height %>" name="height">
+        <input type="hidden" value="<%= @item.length %>" name="length">
+
+        <strong>Calcular frete e prazo:</strong>
+        <div class="input-group">
+          <input type="text" class="form-control" name="cep">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Calcular</button>
+          </span>
+        </div>
+
+        <div class="response"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<% else %>
+  <%= link_to "Solicitar troca", exchange_item_path(@item.id), "data-toggle" => (user_signed_in? ? "modal" : nil), "data-target" => "#exchange", class: "btn btn-primary btn-lg go-private exchange-item" %>
+<% end %>
 
 <hr>
 <% if @item.user %>

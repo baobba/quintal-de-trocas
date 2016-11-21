@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :credits
   has_many :credits_avail, -> (object){ where(expired_at: nil)}, :class_name => 'Credit'
   has_many :orders
+  has_one :store
 
   has_many :user_children
 
@@ -52,6 +53,12 @@ class User < ActiveRecord::Base
 
   def not_recovering_password?
     password_confirmation.nil?
+  end
+
+  def store?
+    ap self
+    ap self.store
+    store ? true : false
   end
 
   def full_address

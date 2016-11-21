@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :stores
   devise_for :admin_users, {class_name: 'User'}.merge(ActiveAdmin::Devise.config)
   ActiveAdmin.routes(self)
   # The priority is based upon order of creation: first created -> highest priority.
@@ -65,6 +66,7 @@ Rails.application.routes.draw do
 
   get 'brinquedos/:id/comprar' => 'orders#buy', as: 'buy'
   post 'brinquedos/:id/comprar' => 'orders#buy'
+  get 'brinquedos/:id/frete' => 'items#frete'
   post 'notify' => 'orders#notify'
 
   get 'sobre-nos' => 'pages#about_us', as: 'about_us'

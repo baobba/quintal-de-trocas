@@ -54,6 +54,7 @@ gem 'carrierwave-base64'
 gem 'whenever', :require => false
 gem 'pagseguro-oficial', '~> 2.5.0'
 gem 'slack-notifier'
+gem 'correios-frete'
 
 gem 'puma'
 

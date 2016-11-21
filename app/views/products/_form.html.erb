@@ -19,7 +19,7 @@
   <% end %>
 
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-5">
       
       <%= f.input :title %>
 
@@ -33,7 +33,52 @@
 
     </div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-7">
+      <div class="form-group">
+        <%= f.label :price %>
+        <div class="input-group">
+          <span class="input-group-addon">R$</span>
+          <%= f.text_field :price, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <% if current_user.store? %>
+
+          <div class="form-group col-sm-3">
+            <%= f.label :weight %>
+            <div class="input-group">
+              <%= f.text_field :weight, class: "form-control" %>
+              <span class="input-group-addon">gr</span>
+            </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <%= f.label :width %>
+            <div class="input-group">
+              <%= f.text_field :width, class: "form-control" %>
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <%= f.label :height %>
+            <div class="input-group">
+              <%= f.text_field :height, class: "form-control" %>
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+          <div class="form-group col-sm-3">
+            <%= f.label :length %>
+            <div class="input-group">
+              <%= f.text_field :length, class: "form-control" %>
+              <span class="input-group-addon">cm</span>
+            </div>
+          </div>
+
+          <br>
+          <br>
+        <% end %>
+      </div>
       
 
       <p class="lead">Imagens</p>

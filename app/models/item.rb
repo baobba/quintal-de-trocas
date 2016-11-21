@@ -29,6 +29,10 @@ class Item < ActiveRecord::Base
   after_destroy      :remove_credit
   after_restore      :add_credit
 
+  def for_sale?
+    price.blank? ? false : true
+  end
+
   def set_notification_date
     update_attribute(:next_notification_at, Date.today + 2.months)
     self.user.credits.create(item: self) if self.user

@@ -153,6 +153,11 @@ ActiveRecord::Schema.define(version: 20161123103005) do
     t.datetime "expired_at"
     t.integer  "activate_qty",                                 default: 0
     t.decimal  "price",                precision: 8, scale: 2
+    t.integer  "weight"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "length"
+    t.integer  "stock"
   end
 
   add_index "items", ["item_age_id"], name: "index_items_on_item_age_id"
@@ -246,6 +251,15 @@ ActiveRecord::Schema.define(version: 20161123103005) do
   end
 
   add_index "places", ["user_id"], name: "index_places_on_user_id"
+
+  create_table "stores", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "stores", ["user_id"], name: "index_stores_on_user_id"
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
