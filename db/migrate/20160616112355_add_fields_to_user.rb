@@ -2,7 +2,7 @@ class AddFieldsToUser < ActiveRecord::Migration
   def change
     add_column :users, :username, :string
     add_column :users, :name, :string
-    add_column :users, :birthday, :integer
+    add_column :users, :birthday, :date
     add_column :users, :phone, :string
     add_column :users, :gender, :string
 

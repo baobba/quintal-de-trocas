@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031165929) do
+ActiveRecord::Schema.define(version: 20161121101321) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -62,10 +62,11 @@ ActiveRecord::Schema.define(version: 20161031165929) do
 
   create_table "credits", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "expired_at"
+    t.boolean  "is_available"
     t.integer  "exchange_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.datetime "expired_at"
     t.integer  "toy_id"
     t.integer  "used_in_exchange_id"
   end
@@ -163,19 +164,6 @@ ActiveRecord::Schema.define(version: 20161031165929) do
 
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id"
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
-
-  create_table "orders", force: :cascade do |t|
-    t.string   "code"
-    t.string   "title"
-    t.string   "price"
-    t.string   "status"
-    t.integer  "user_id"
-    t.integer  "toy_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "places", force: :cascade do |t|
     t.string   "title"
@@ -304,8 +292,13 @@ ActiveRecord::Schema.define(version: 20161031165929) do
     t.string   "neighborhood"
     t.boolean  "newsletter"
     t.boolean  "admin",                  default: false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
