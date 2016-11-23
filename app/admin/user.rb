@@ -33,6 +33,7 @@ ActiveAdmin.register User do
     column :complement
     column :neighborhood
     column :newsletter
+    column :confirmed_at
 
     actions
   end
