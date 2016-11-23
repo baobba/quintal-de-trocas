@@ -5,7 +5,7 @@ class Exchange < ActiveRecord::Base
 
   belongs_to :toy, -> { with_deleted }, :foreign_key => "toy_to"
   belongs_to :user, -> { with_deleted }
-  has_many :exchange_messages
+  has_many :exchange_messages, dependent: :destroy
   has_many :credits
   accepts_nested_attributes_for :exchange_messages, 
     allow_destroy: true, 
