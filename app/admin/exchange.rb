@@ -24,7 +24,15 @@ ActiveAdmin.register Exchange do
       end
     end
     column "Troca efetuada?", :finalized
-    column "Troca aceita?", :accepted
+    column "Troca aceita?", :accepted do |exc|
+      if exc.accepted == false
+        raw "<span class='status_tag no'>Não</span>"
+      elsif exc.accepted == true
+        raw "<span class='status_tag no'>Sim</span>"
+      else
+        "--"
+      end
+    end
     column "Troca solicitada em", :created_at
     column "Troca recusada?", :reason do |exc|
       exc.reason.blank? ? "--" : raw("Sim<br>Motivo: #{exc.reason}")
