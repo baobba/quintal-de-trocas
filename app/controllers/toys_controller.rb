@@ -85,7 +85,7 @@ class ToysController < ApplicationController
 
 
   def exchange
-    @exchange = @toy.exchanges.new(toy_to: @toy.user.id)
+    @exchange = @toy.exchanges.new(toy_to: @toy.user.id, accepted: nil)
 
     @exchange.exchange_messages.build(
       user_from: current_user.id,
