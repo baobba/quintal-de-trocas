@@ -13,7 +13,7 @@ class ExchangeMessage < ActiveRecord::Base
   end
 
   def send_slack_message
-    message = "#{from_user.name} (#{from_user.email}), acabou de enviar uma mensagem para #{to_user.name} (#{to_user.email})."
-    NOTIFIER.ping(message, icon_emoji: ApplicationController.helpers.default_img(from_user))
+    message = "#{from_user.name} (#{from_user.email}), acabou de enviar uma mensagem para #{to_user.name} (#{to_user.email}).\n\n#{self.message}"
+    NOTIFIER.ping(message, icon_url: ApplicationController.helpers.default_img(from_user))
   end
 end
