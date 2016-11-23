@@ -28,7 +28,7 @@ ActiveAdmin.register Exchange do
       if exc.accepted == false
         raw "<span class='status_tag no'>Não</span>"
       elsif exc.accepted == true
-        raw "<span class='status_tag no'>Sim</span>"
+        raw "<span class='status_tag yes'>Sim</span>"
       else
         "--"
       end
