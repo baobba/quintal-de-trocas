@@ -14,6 +14,8 @@ class Exchange < ActiveRecord::Base
   scope :waiting, -> { where(accepted: nil) }
   default_scope { order("created_at DESC") }
 
+  after_create :send_slack_message
+
   acts_as_messageable
 
   def from_toy
@@ -34,6 +36,11 @@ class Exchange < ActiveRecord::Base
 
   def toy
     Toy.unscoped { super }
+  end
+
+  def send_slack_message
+    message = "#{from_user.name} (#{from_user.email}), acabou de se solicitar uma troca com #{to_user.name} (#{to_user.email})."
+    NOTIFIER.ping(message, icon_emoji: ApplicationController.helpers.default_img(from_user))
   end
 
 end
