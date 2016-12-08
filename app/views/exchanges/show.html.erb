@@ -177,7 +177,7 @@
     <% if @exchange.accepted %>
       <div class="alert alert-success">
       <h4 style="font-weight: bold"><span class="glyphicon glyphicon-ok"></span> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %> <%= @exchange.accepted == false ? "recusou" : "aceitou" %> essa troca</h4>
-      <p class="lead text-muted">Envie uma mensagem combinando como e onde será enviado ou entregue o brinquedo</p>
+      <p class="lead text-muted">Envie uma mensagem abaixo <% if !@exchange.to_user.phone.blank? %>ou por fone <strong><i class='fa fa-phone' aria-hidden='true'></i> <%= @exchange.to_user == current_user ? @exchange.from_user.phone : @exchange.to_user.phone %></strong><% end %> combinando como e onde será enviado ou entregue o brinquedo</p>
       </div>
       <br>
       <%= render 'exchanges/donation_bar' %>

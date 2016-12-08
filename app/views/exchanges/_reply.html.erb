@@ -3,9 +3,14 @@
   <div class="request-info">
     <div class="row">
       <div class="col-sm-4">
-        <p class="lead">Informações do solicitante</p>
+        <p class="lead">Quem solicitou</p>
         <div class="profile-thumb" style="background-image:url('<%= default_img(@exchange.from_user) %>');float: left;margin-right:15px;"></div>
         <%= link_to @exchange.from_user.name, user_path(@exchange.from_user) %>
+        <% if !@exchange.from_user.phone.blank? %>
+          <div class="user-phone">
+            <i class="fa fa-phone" aria-hidden="true"></i> <%= @exchange.from_user.phone %>
+          </div>
+        <% end %>
         <div class="text-muted">
           <small>
           <% if !@exchange.from_user.neighborhood.blank? %>
@@ -14,6 +19,25 @@
           <%= @exchange.from_user.city %> / <%= @exchange.from_user.state %>
           </small><br>
           <a href="https://www.google.com/maps/place/<%= @exchange.from_user.full_address %>?hl=en-US" target="_blank" class="btn-link">Ver no mapa</a>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <p class="lead">Quem recebeu a solicitação</p>
+        <div class="profile-thumb" style="background-image:url('<%= default_img(@exchange.to_user) %>');float: left;margin-right:15px;"></div>
+        <%= link_to @exchange.to_user.name, user_path(@exchange.to_user) %>
+        <% if !@exchange.to_user.phone.blank? %>
+          <div class="user-phone">
+            <i class="fa fa-phone" aria-hidden="true"></i> <%= @exchange.to_user.phone %>
+          </div>
+        <% end %>
+        <div class="text-muted">
+          <small>
+          <% if !@exchange.to_user.neighborhood.blank? %>
+            <%= @exchange.to_user.neighborhood %><br>
+          <% end %>
+          <%= @exchange.to_user.city %> / <%= @exchange.to_user.state %>
+          </small><br>
+          <a href="https://www.google.com/maps/place/<%= @exchange.to_user.full_address %>?hl=en-US" target="_blank" class="btn-link">Ver no mapa</a>
         </div>
       </div>
       <div class="col-sm-4">
