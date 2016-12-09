@@ -47,7 +47,7 @@
     <% else %>
 
     <div class="row exchange-header">
-      <div class="col-sm-4">
+      <div class="col-sm-5">
         <div class="well well-sm">
           <div class="text-muted"">Troca:</div>
 
@@ -60,8 +60,12 @@
               <% else %>
                <%= link_to @exchange.from_user.first_name, user_path(@exchange.from_user) %>
               <% end %>
-               <small>solicitou:</small>
+                <small>solicitou:</small>
               <%= link_to @exchange.to_toy.title, toy_path(@exchange.to_toy) if @exchange.toy %>
+
+              <% if !@exchange.from_user.phone.blank? %>
+                <div style="margin-top:10px;"><strong><i class='fa fa-phone' aria-hidden='true'></i> <%= @exchange.from_user.phone %></strong></div>
+              <% end %>
             </div>
             <div class="col-sm-6 exchange-profile" style="<%= 'opacity: 0.4' if @exchange.accepted.nil? %>">
               <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.toy.user) %>');float: left;margin-right:10px;"></div> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %> <small>respondeu:</small>
@@ -78,6 +82,10 @@
                 Recusou a troca
               <% else %>
                 <div class="text-muted"><%= @exchange.from_toy ? @exchange.from_toy.title : "--" %></div>
+              <% end %>
+
+              <% if !@exchange.to_user.phone.blank? %>
+                <div style="margin-top:10px;"><strong><i class='fa fa-phone' aria-hidden='true'></i> <%= @exchange.to_user.phone %></strong></div>
               <% end %>
             </div>
           </div>
@@ -118,7 +126,7 @@
           <% end %>
         </div>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-3">
         <div class="well well-sm">
           <div class="text-muted"">Troca foi efetuada?</div>
             <%= simple_form_for @exchange, :html => { :class => 'form-inline' } do |f| %>
