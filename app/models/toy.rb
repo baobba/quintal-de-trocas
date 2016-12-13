@@ -22,6 +22,7 @@ class Toy < ActiveRecord::Base
   geocoded_by :zipcode
   after_validation :geocode
   after_save :set_featured_image
+  after_save :check_active
   after_create :set_notification_date
 
   after_destroy      :remove_credit
@@ -29,15 +30,22 @@ class Toy < ActiveRecord::Base
 
   def set_notification_date
     update_attribute(:next_notification_at, Date.today + 2.months)
-    self.user.credits.create(toy: self) if self.user
   end
 
   def add_credit
-    self.credits.create(toy: self)
+    self.user.credits.create(toy: self) if self.user && self.credits.count == 0
   end
 
   def remove_credit
     self.credits.available.first.update_column(:expired_at, Time.now) if self.credits.available.count > 0
+  end
+
+  def check_active
+    if self.is_active_changed? && self.is_active
+      self.add_credit
+    elsif self.is_active_changed?
+      self.remove_credit
+    end
   end
 
   def set_featured_image

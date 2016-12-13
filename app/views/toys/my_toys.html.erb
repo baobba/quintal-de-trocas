@@ -24,7 +24,7 @@
 
   <tbody>
     <% @toys.each do |toy| %>
-      <tr>
+      <tr class="<%= 'danger' if !toy.is_active %>">
         <td>
           <div class="product-image">
             <%= link_to image_tag(toy.fet_image.image.url(:thumb), style: "max-width: 100%;"), toy %>
@@ -41,6 +41,10 @@
         <td>
           <%= toy.created_at.strftime("%d/%m/%Y") %>
           <div style="margin-top: 10px;font-size: 12px">
+            <% if !toy.is_active %>
+              <strong class="text-danger" style="font-size: 17px">Status: Inativo</strong><br>
+              <%= link_to "Reativar brinquedo", activate_toy_path(toy.id), class: "btn btn-xs btn-default" %>
+            <% end %>
             <% if !toy.expired_at.blank? %>
               <span class="text-danger">Expira em <%= distance_of_time_in_words_to_now(toy.next_notification_at) %></span>
               <div>
