@@ -6,7 +6,7 @@ namespace :quintal do
     email_list = []
     emails_count = 0
 
-    Toy.joins(:user).where(next_notification_at: Date.today).each do |toy|
+    Toy.actives.joins(:user).where(next_notification_at: Date.today).each do |toy|
       puts "Toy: #{toy.title}"
 
       if !toy.next_notification_at.blank? && toy.expired_at.blank?

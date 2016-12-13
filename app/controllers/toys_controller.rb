@@ -8,7 +8,7 @@ class ToysController < ApplicationController
   def index
     @bs_container = false
 
-    @q = Toy.includes(:toy_category, :toy_age, :toy_images)
+    @q = Toy.actives.includes(:toy_category, :toy_age, :toy_images)
 
     location = if !params[:lat].blank? && !params[:lon].blank?
       [params[:lat], params[:lon]].join(",")
@@ -144,6 +144,7 @@ class ToysController < ApplicationController
 
   def create
     @toy = current_user.toys.new(toy_params)
+    @toy.is_active = true
 
     respond_to do |format|
       if @toy.save

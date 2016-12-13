@@ -11,6 +11,8 @@ class Toy < ActiveRecord::Base
   has_many :exchanges, :foreign_key => "toy_to"
   has_many :credits
 
+  scope :actives, -> { where(is_active: true) }
+
   accepts_nested_attributes_for :toy_images, :allow_destroy => true, reject_if: :image_rejectable?
 
   validates :title, :description, :toy_category_id, :toy_age_id, presence: true

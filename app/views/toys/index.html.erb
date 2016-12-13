@@ -39,7 +39,7 @@
   </div>
 
   <div class="toy-content">
-  
+
   <% if @toys.total_count > 0 %>
 
     <div class="pull-right">
@@ -49,7 +49,7 @@
     </div>
 
     <div class="lead" style="margin-left: 20px;">
-      Mostrando <strong><%= Toy.default_per_page >= @toys.size ? @toys.size : Toy.default_per_page %></strong> de <%= @toys.total_count %> brinquedos
+      Mostrando <strong><%= Toy.actives.default_per_page >= @toys.size ? @toys.size : Toy.actives.default_per_page %></strong> de <%= @toys.total_count %> brinquedos
     </div>
 
     <ul class="cards list-unstyled">
