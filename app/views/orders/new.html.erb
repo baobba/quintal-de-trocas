@@ -245,7 +245,7 @@
 
 <h1 class="text-center">Comprar brinquedo: <small><%= @toy.title %></small>?</h1>
 
-<%= simple_form_for(@order, html: { multipart: true, class: "form-horizontal", :id => 'formu', :name => 'formu' }) do |f| %>
+<%= simple_form_for(@order, html: { multipart: true, class: "form-horizontal", :id => 'formu', :name => 'formu' }, defaults: {wrapper: :horizontal_form}) do |f| %>
 
 
 <div class="row">
@@ -306,14 +306,14 @@
     <div class="form-group">
       <label for="card_number" class="col-sm-3 control-label">Nº do cartão *</label>
       <div class="col-sm-9">
-        <input type="text" name="card_number" id="card_number" class="form-control"><span class="brand"></span>
+        <input type="text" name="card_number" id="card_number" class="form-control" value="4111111111111111"><span class="brand"></span>
       </div>
     </div>
 
     <div class="form-group">
       <label for="card_number" class="col-sm-3 control-label">Código de segurança *</label>
       <div class="col-sm-9">
-        <input type="text" name="card_cvv" id="card_cvv" class="form-control" style="width:90px;display:inline;">
+        <input type="text" name="card_cvv" id="card_cvv" class="form-control" value="123" style="width:90px;display:inline;">
 
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Validade *</strong> <select name="card_expiry_month" id="card_expiry_month" required="required" class="form-control" style="display:inline;width:60px;"><option value="01">01</option>
         <option value="02">02</option>
@@ -326,14 +326,14 @@
         <option value="09">09</option>
         <option value="10">10</option>
         <option value="11">11</option>
-        <option value="12">12</option></select> / 
+        <option value="12" selected>12</option></select> / 
       
         <select name="card_expiry_year" id="card_expiry_year" required="required" class="form-control" style="display:inline;width:70px;"><option value="2015">2015</option>
         <option value="2016">2016</option>
         <option value="2017">2017</option>
         <option value="2018">2018</option>
         <option value="2019">2019</option>
-        <option value="2020">2020</option>
+        <option value="2020" selected>2020</option>
         <option value="2021">2021</option>
         <option value="2022">2022</option>
         <option value="2023">2023</option>
@@ -357,26 +357,46 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="creditcard_name" class="col-sm-3 control-label">Nome (escrito no cartão) *</label>
-      <div class="col-sm-9">
-        <input type="text" name="creditcard_name" id="creditcard_name" class="form-control" required="required">
+      <div class="form-group">
+        <label for="creditcard_name" class="col-sm-3 control-label">Nome (escrito no cartão) *</label>
+        <div class="col-sm-9">
+          <input type="text" name="creditcard_name" id="creditcard_name" class="form-control" required="required">
+        </div>
       </div>
-    </div>
 
   </div>
   </div>
 
   <div class="general-fields">
     
-    <%= f.fields_for :user, @order.user do |user| %>
-      <%= user.input :phone %>
-      <%= user.input :zipcode %>
-      <%= user.input :street %>
-      <%= user.input :neighborhood %>
-      <%= user.input :city %>
-      <%= user.input :state %>
-      <%= user.select :state, [["Acre", "AC"],
+    <%= f.fields_for :user, @order.user, wrapper: :horizontal_form do |user| %>
+
+      <% if current_user.name.blank? %>
+        <%= user.input :phone %>
+      <% end %>
+
+      <% if current_user.zipcode.blank? %>
+        <%= user.input :zipcode %>
+      <% end %>
+
+      <% if !current_user.street.blank? %>
+        <%= user.input :street %>
+      <% end %>
+
+      <% if current_user.neighborhood.blank? %>
+        <%= user.input :neighborhood %>
+      <% end %>
+
+      <% if current_user.city.blank? %>
+        <%= user.input :city %>
+      <% end %>
+
+      <% if current_user.state.blank? %>
+        <%= user.input :state %>
+      <% end %>
+
+      <% if current_user.name.blank? %>
+        <%= user.select :state, [["Acre", "AC"],
             ["Alagoas", "AL"],
             ["Amapá", "AP"],
             ["Amazonas", "AM"],
@@ -404,7 +424,8 @@
             ["Sergipe", "SE"],
             ["Tocantins", "TO"]
           ], {}, class: "form-control" %>
-    <% end %>
+        <% end %>
+      <% end %>
     
     <div class="form-group">
       <label class="col-sm-3 control-label" for="cpf">
@@ -413,6 +434,19 @@
       <div class="col-sm-9">
         <%= radio_button_tag :cpf_radio, "CPF" %> CPF&nbsp;&nbsp;&nbsp;&nbsp;
         <%= radio_button_tag :cpf_radio, "CNPJ" %> CNPJ
+      </div>
+    </div>
+
+    <div class="form-group cpf-cnpj-box">
+      <label class="col-sm-3 col-sm-offset-1 control-label" for="cpf">CPF: *</label>
+      <div class="col-sm-5">
+        <input type="text" name="cpf" class="form-control" required="required">
+        <div class="help-block help-block-cpf">Exemplo: 
+          999.999.999-99
+        </div>
+        <div class="help-block help-block-cnpj" style="display:none">Exemplo: 
+          99.999.999/9999-99
+        </div>
       </div>
     </div>
     

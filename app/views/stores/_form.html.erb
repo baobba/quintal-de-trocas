@@ -5,8 +5,26 @@
 
       <%= f.input :name %>
 
+      <% if !@store.new_record? %>
+      <fieldset>
+        <legend>Habilitar Pagseguro</legend>
+
+        <%= debug @authorization %><br>
+        <% if @authorization && @authorization.permissions.first.status == "APPROVED" %>
+          <strong class="text-success">Habilitado</strong>
+        <% elsif @authorization_request_link || @authorization %>
+          <strong class="text-danger">Desabilitado</strong>
+          <%= link_to "Habilitar", @authorization_request_link, class: "btn btn-default" %>
+        <% else %>
+          <p class="text-danger">Erro de conexão com Pagseguro</p>
+        <% end %>
+      </fieldset>
+      <% end %>
+
+      <br>
+
     <div class="form-actions">
-      <%= f.button :submit %>
+      <%= f.button :submit, class: "btn btn-success" %>
     </div>
   <% end %>
 </div>

@@ -35,25 +35,55 @@ class OrdersController < ApplicationController
     headers['Access-Control-Allow-Origin'] = 'https://pagseguro.uol.com.br'
     headers['Access-Control-Allow-Origin'] = '177.97.184.66'
 
+    ap "params"
+    ap params
+
+    
+
     if request.post?
 
-      transaction = PagSeguro::Transaction.find_by_notification_code(params[:notificationCode])
-      @order = Order.find_by_code(transaction.code)
-      
-      if @order
-        @order.status = transaction.status.id
+      if params[:notificationType] == "applicationAuthorization"
 
-        tipo = @order.title.split(" ").first.downcase
-        if tipo == "produto" && (transaction.status.id == "3" || transaction.status.id == "4")
-          ap "paga"
+        credentials = PagSeguro::ApplicationCredentials.new(
+          Rails.application.secrets['pagseguro_appid'],
+          Rails.application.secrets['pagseguro_appkey']
+        )
+        options = { credentials: credentials }
+
+        authorization = PagSeguro::Authorization.find_by_notification_code(params[:notificationCode], options)
+
+        puts authorization.errors.inspect
+
+        if authorization.errors.any?
+          puts authorization.errors.join("\n")
         else
-          ap "nao foi paga"
+          authorization.permissions.each do |permission|
+            puts "Permission: "
+            puts permission.code
+            puts permission.status
+          end
         end
+        ap "................."
 
-        if @order.save
-          ap "salvou"
-        else
-          ap "n salvou"
+      else
+        transaction = PagSeguro::Transaction.find_by_notification_code(params[:notificationCode])
+        @order = Order.find_by_code(transaction.code)
+
+        if @order
+          @order.status = transaction.status.id
+
+          tipo = @order.title.split(" ").first.downcase
+          if tipo == "produto" && (transaction.status.id == "3" || transaction.status.id == "4")
+            ap "paga"
+          else
+            ap "nao foi paga"
+          end
+
+          if @order.save
+            ap "salvou"
+          else
+            ap "n salvou"
+          end
         end
       end
 
@@ -75,6 +105,7 @@ class OrdersController < ApplicationController
     # 1. Get Pagseguro valid session
     session = PagSeguro::Session.create
     @session_id = session.id
+    ap "...."
     ap @session_id
 
     respond_to do |format|
@@ -91,8 +122,10 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(params[:order])
-    @toy = @order.toy
+    @order = current_user.orders.new(order_params)
+    ap @order.user
+    @item = @order.item || Item.find(params[:id])
+    ap @item
 
     # Fields to add to user model
     # 1.1 price
@@ -114,7 +147,7 @@ class OrdersController < ApplicationController
       payment = PagSeguro::CreditCardTransactionRequest.new
       payment.notification_url = notification_url
       payment.payment_mode = "gateway"
-      payment.reference = "REF#{@order.id}-#{@toy.id}-credit-card"
+      payment.reference = "REF-credit-card"
 
     elsif params[:paymentMethod] == "boleto"
 
@@ -126,17 +159,20 @@ class OrdersController < ApplicationController
 
     # Set items
     payment.items << {
-      id: @order.id,
-      description: @toy.title,
-      amount: (@toy.price || 50.00),
+      id: 2,
+      description: @item.title,
+      amount: (@item.price || 50.00),
       weight: 1
     }
+
+    ap "payment.items"
+    ap payment.items
 
     # Set sender
     payment.sender = {
       hash: params[:sender_hash],
       name: current_user.name,
-      email: "c64135579735859220234@sandbox.pagseguro.com.br",
+      email: "netto@sandbox.pagseguro.com.br",
       #email: current_user.email,
       document: { type: "CPF", value: params[:cpf].gsub(/\D/, '') },
       phone: {
@@ -149,24 +185,35 @@ class OrdersController < ApplicationController
     payment.shipping = {
       type_name: "sedex",
       address: {
-        street: @order.street,
+        street: @order.user.street,
         number: 10,
-        complement: @order.complement,
-        city: @order.city,
-        state: @order.state,
-        district: @order.neighborhood,
-        postal_code: @order.zipcode
+        complement: @order.user.complement,
+        city: @order.user.city,
+        state: @order.user.state,
+        district: @order.user.neighborhood,
+        postal_code: @order.user.zipcode
       }
     }
 
+    payment.receivers = [
+      {
+        public_key: 'PUBLIC_KEY',
+        split: {
+          amount: 20.0,
+          rate_percent: 50.0,
+          fee_percent: 50.0
+        }
+      }
+    ]
+
     payment.billing_address = {
-      street: @order.street,
+      street: @order.user.street,
       number: 10,
-      complement: @order.complement,
-      city: @order.city,
-      state: @order.state,
-      district: @order.neighborhood,
-      postal_code: @order.zipcode
+      complement: @order.user.complement,
+      city: @order.user.city,
+      state: @order.user.state,
+      district: @order.user.neighborhood,
+      postal_code: @order.user.zipcode
     }
 
     if params[:paymentMethod] == "credit_card"
@@ -310,6 +357,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:code, :title, :price, :status, :user_id)
+      params.require(:order).permit(:code, :title, :price, :status, :user_id, user_attributes: [:cpf, :empresa, :tel_comercial, :tel_celular, :email, :region, :city])
     end
 end
