@@ -102,6 +102,15 @@ class OrdersController < ApplicationController
     @order.toy_id =  params[:product]
     @toy = @order.toy
 
+    @frete = Correios::Frete::Calculador.new :cep_origem => @item.user.zipcode,
+      :cep_destino => current_user.zipcode,
+      :peso => @item.weight,
+      :comprimento => @item.length,
+      :largura => @item.width,
+      :altura => @item.height
+
+    @fretes = @frete.calcular :sedex, :pac
+
     # 1. Get Pagseguro valid session
     session = PagSeguro::Session.create
     @session_id = session.id
@@ -127,12 +136,6 @@ class OrdersController < ApplicationController
     @item = @order.item || Item.find(params[:id])
     ap @item
 
-    # Fields to add to user model
-    # 1.1 price
-    # 1.2 weight
-    # 1.3 size
-    # 1.4 quantity
-
     # 2. Browser integration (load JS) - OK
     # 3. Buyer identification (JS) - ERB Page
     #    PagSeguroDirectPayment.getSenderHash(); // after form submit
@@ -140,9 +143,10 @@ class OrdersController < ApplicationController
     # 5. Get credit card token
     # 6. Get credit card installments (parcelamentos)
 
-    notification_url = "http://bff76df8.ngrok.io/notify"
+    notification_url = "http://b70d05a5.ngrok.io/notify"
 
     if params[:paymentMethod] == "credit_card"
+      ap "credit_card"
 
       payment = PagSeguro::CreditCardTransactionRequest.new
       payment.notification_url = notification_url
@@ -150,6 +154,7 @@ class OrdersController < ApplicationController
       payment.reference = "REF-credit-card"
 
     elsif params[:paymentMethod] == "boleto"
+      ap "boleto"
 
       payment = PagSeguro::BoletoTransactionRequest.new
       payment.notification_url = notification_url
@@ -169,21 +174,21 @@ class OrdersController < ApplicationController
     ap payment.items
 
     # Set sender
+    email = (Rails.env == "production" ? current_user.email : "netto@sandbox.pagseguro.com.br")
     payment.sender = {
       hash: params[:sender_hash],
       name: current_user.name,
-      email: "netto@sandbox.pagseguro.com.br",
-      #email: current_user.email,
+      email: email,
       document: { type: "CPF", value: params[:cpf].gsub(/\D/, '') },
       phone: {
-        area_code: 48,
-        number: "99355794"
+        area_code: current_user.phone.scan(/\d+/).first,
+        number: current_user.phone.split(" ").last
       }
     }
 
     # Set shipping
     payment.shipping = {
-      type_name: "sedex",
+      type_name: params[:frete],
       address: {
         street: @order.user.street,
         number: 10,
@@ -197,7 +202,7 @@ class OrdersController < ApplicationController
 
     payment.receivers = [
       {
-        public_key: 'PUBLIC_KEY',
+        public_key: 'PUB9EC3BFAE1BB045B0B353122050BF0EC6',
         split: {
           amount: 20.0,
           rate_percent: 50.0,

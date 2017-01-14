@@ -243,16 +243,18 @@
   </script>
 <% end %>
 
+<<<<<<< 1f0e0436cf2f729bd7d9a1238d680a72651d9913
 <h1 class="text-center">Comprar brinquedo: <small><%= @toy.title %></small>?</h1>
 
+=======
+>>>>>>> Marketplace
 <%= simple_form_for(@order, html: { multipart: true, class: "form-horizontal", :id => 'formu', :name => 'formu' }, defaults: {wrapper: :horizontal_form}) do |f| %>
 
 
-<div class="row">
-  <div class="col-sm-6">
-    
+<!-- <h1 class="text-center">Comprar brinquedo: <small><%= @item.title %></small>?</h1> -->
 
-<div class="promote">
+
+
 
 
 
@@ -269,207 +271,320 @@
 <br>
 
 
-<div class="form-group">
-  <label for="card_number" class="col-sm-3 control-label"></label>
-  <div class="col-sm-9">
-    <label for="order_payment_method_credit_card">
-      <input type="radio" value="credit_card" name="paymentMethod" id="order_payment_method_credit_card" required="required" checked="checked">
-      Cartão de crédito
-    </label>
-
-    &nbsp;&nbsp;&nbsp;
-
-    <label for="order_payment_method_boleto">
-      <input type="radio" value="boleto" name="paymentMethod" id="order_payment_method_boleto" required="required">
-      Boleto
-    </label>
-  </div>
-</div>
+<div class="row">
 
 
 
-<div class="forms-pagamento">
-  <div>
-  
-  <div class="form-boleto boleto" style="display:none;">
-    <div class="form-group">
-      <label for="card_number" class="col-sm-3 control-label"></label>
-      <div class="col-sm-9">
-        <strong>Preencha seus dados pessoais para que possamos gerar o boleto.</strong>
+
+
+
+
+
+
+  <div class="col-sm-4">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        1. Dados pessoais
       </div>
     </div>
 
-  </div>
-
-  <div class="form-cartao credit_card">
-
-    <div class="form-group">
-      <label for="card_number" class="col-sm-3 control-label">Nº do cartão *</label>
-      <div class="col-sm-9">
-        <input type="text" name="card_number" id="card_number" class="form-control" value="4111111111111111"><span class="brand"></span>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="card_number" class="col-sm-3 control-label">Código de segurança *</label>
-      <div class="col-sm-9">
-        <input type="text" name="card_cvv" id="card_cvv" class="form-control" value="123" style="width:90px;display:inline;">
-
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>Validade *</strong> <select name="card_expiry_month" id="card_expiry_month" required="required" class="form-control" style="display:inline;width:60px;"><option value="01">01</option>
-        <option value="02">02</option>
-        <option value="03">03</option>
-        <option value="04">04</option>
-        <option value="05">05</option>
-        <option value="06">06</option>
-        <option value="07">07</option>
-        <option value="08">08</option>
-        <option value="09">09</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12" selected>12</option></select> / 
-      
-        <select name="card_expiry_year" id="card_expiry_year" required="required" class="form-control" style="display:inline;width:70px;"><option value="2015">2015</option>
-        <option value="2016">2016</option>
-        <option value="2017">2017</option>
-        <option value="2018">2018</option>
-        <option value="2019">2019</option>
-        <option value="2020" selected>2020</option>
-        <option value="2021">2021</option>
-        <option value="2022">2022</option>
-        <option value="2023">2023</option>
-        <option value="2024">2024</option>
-        <option value="2025">2025</option>
-        <option value="2026">2026</option>
-        <option value="2027">2027</option>
-        <option value="2028">2028</option>
-        <option value="2029">2029</option>
-        <option value="2030">2030</option>
-        </select>
-
-
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label for="card_number" class="col-sm-3 control-label">Parcelamento *</label>
-      <div class="col-sm-9">
-        <select name="installments" id="installments" class="form-control"></select>
-      </div>
-    </div>
-
-      <div class="form-group">
-        <label for="creditcard_name" class="col-sm-3 control-label">Nome (escrito no cartão) *</label>
-        <div class="col-sm-9">
-          <input type="text" name="creditcard_name" id="creditcard_name" class="form-control" required="required">
-        </div>
-      </div>
-
-  </div>
-  </div>
-
-  <div class="general-fields">
+    <div class="general-fields">
     
     <%= f.fields_for :user, @order.user, wrapper: :horizontal_form do |user| %>
 
-      <% if current_user.name.blank? %>
-        <%= user.input :phone %>
-      <% end %>
+      <div class="form-group">
+        <label class="col-sm-3 control-label" for="cpf">
+        </label>
 
-      <% if current_user.zipcode.blank? %>
-        <%= user.input :zipcode %>
-      <% end %>
+        <div class="col-sm-9">
+          <%= radio_button_tag :cpf_radio, "CPF", checked: true %> CPF&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= radio_button_tag :cpf_radio, "CNPJ" %> CNPJ
+        </div>
+      </div>
 
-      <% if !current_user.street.blank? %>
-        <%= user.input :street %>
-      <% end %>
+      <div class="form-group cpf-cnpj-box">
+        <label class="col-sm-3 control-label" for="cpf">CPF: *</label>
+        <div class="col-sm-9">
+          <input type="text" name="cpf" class="form-control" required="required">
+          <div class="help-block help-block-cpf">Exemplo: 
+            999.999.999-99
+          </div>
+          <div class="help-block help-block-cnpj" style="display:none">Exemplo: 
+            99.999.999/9999-99
+          </div>
+        </div>
+      </div>
 
-      <% if current_user.neighborhood.blank? %>
-        <%= user.input :neighborhood %>
-      <% end %>
+      <%= user.input :phone %>
+      <%# user.input :phone %>
 
-      <% if current_user.city.blank? %>
-        <%= user.input :city %>
-      <% end %>
+      <%= user.input :zipcode %>
 
-      <% if current_user.state.blank? %>
-        <%= user.input :state %>
-      <% end %>
+      <%= user.input :street %>
 
-      <% if current_user.name.blank? %>
-        <%= user.select :state, [["Acre", "AC"],
-            ["Alagoas", "AL"],
-            ["Amapá", "AP"],
-            ["Amazonas", "AM"],
-            ["Bahia", "BA"],
-            ["Ceará", "CE"],
-            ["Distrito Federal", "DF"],
-            ["Espírito Santo", "ES"],
-            ["Goiás", "GO"],
-            ["Maranhão", "MA"],
-            ["Mato Grosso", "MT"],
-            ["Mato Grosso do Sul", "MS"],
-            ["Minas Gerais", "MG"],
-            ["Pará", "PA"],
-            ["Paraíba", "PB"],
-            ["Paraná", "PR"],
-            ["Pernambuco", "PE"],
-            ["Piauí", "PI"],
-            ["Rio de Janeiro", "RJ"],
-            ["Rio Grande do Norte", "RN"],
-            ["Rio Grande do Sul", "RS"],
-            ["Rondônia", "RO"],
-            ["Roraima", "RR"],
-            ["Santa Catarina", "SC"],
-            ["São Paulo", "SP"],
-            ["Sergipe", "SE"],
-            ["Tocantins", "TO"]
-          ], {}, class: "form-control" %>
-        <% end %>
-      <% end %>
+      <%= user.input :neighborhood %>
+
+      <%= user.input :city %>
+
+      <%= user.input :state, collection: [
+          ["Acre", "AC"],
+          ["Alagoas", "AL"],
+          ["Amapá", "AP"],
+          ["Amazonas", "AM"],
+          ["Bahia", "BA"],
+          ["Ceará", "CE"],
+          ["Distrito Federal", "DF"],
+          ["Espírito Santo", "ES"],
+          ["Goiás", "GO"],
+          ["Maranhão", "MA"],
+          ["Mato Grosso", "MT"],
+          ["Mato Grosso do Sul", "MS"],
+          ["Minas Gerais", "MG"],
+          ["Pará", "PA"],
+          ["Paraíba", "PB"],
+          ["Paraná", "PR"],
+          ["Pernambuco", "PE"],
+          ["Piauí", "PI"],
+          ["Rio de Janeiro", "RJ"],
+          ["Rio Grande do Norte", "RN"],
+          ["Rio Grande do Sul", "RS"],
+          ["Rondônia", "RO"],
+          ["Roraima", "RR"],
+          ["Santa Catarina", "SC"],
+          ["São Paulo", "SP"],
+          ["Sergipe", "SE"],
+          ["Tocantins", "TO"]
+        ] %>
     
+    <% end %>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="col-sm-4">
+    
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        2. Forma de pagamento
+      </div>
+    </div>
+
     <div class="form-group">
-      <label class="col-sm-3 control-label" for="cpf">
-      </label>
-
       <div class="col-sm-9">
-        <%= radio_button_tag :cpf_radio, "CPF" %> CPF&nbsp;&nbsp;&nbsp;&nbsp;
-        <%= radio_button_tag :cpf_radio, "CNPJ" %> CNPJ
+        <label for="order_payment_method_credit_card">
+          <input type="radio" value="credit_card" name="paymentMethod" id="order_payment_method_credit_card" required="required" checked="checked">
+          Cartão de crédito
+        </label>
+
+        &nbsp;&nbsp;&nbsp;
+
+        <label for="order_payment_method_boleto">
+          <input type="radio" value="boleto" name="paymentMethod" id="order_payment_method_boleto" required="required">
+          Boleto
+        </label>
       </div>
     </div>
 
-    <div class="form-group cpf-cnpj-box">
-      <label class="col-sm-3 col-sm-offset-1 control-label" for="cpf">CPF: *</label>
-      <div class="col-sm-5">
-        <input type="text" name="cpf" class="form-control" required="required">
-        <div class="help-block help-block-cpf">Exemplo: 
-          999.999.999-99
+    <div class="forms-pagamento">
+      <div>
+        <div class="form-boleto boleto" style="display:none;">
+          <strong>Preencha seus dados pessoais para que possamos gerar o boleto.</strong>
         </div>
-        <div class="help-block help-block-cnpj" style="display:none">Exemplo: 
-          99.999.999/9999-99
+
+        <div class="form-cartao credit_card">
+
+          <div class="form-group">
+            <label for="card_number" class="col-sm-4 control-label">Nº do cartão *</label>
+            <div class="col-sm-8">
+              <input type="text" name="card_number" id="card_number" class="form-control" value="4111111111111111" required><span class="brand"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="card_number" class="col-sm-4 control-label">Código de segurança *</label>
+            <div class="col-sm-8">
+              <input type="text" name="card_cvv" id="card_cvv" class="form-control" value="123" style="width:90px;display:inline;" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="card_number" class="col-sm-4 control-label">Validade *</label>
+            <div class="col-sm-8">
+              <select name="card_expiry_month" id="card_expiry_month" required="required" class="form-control" style="display:inline;width:60px;" required>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12" selected>12</option>
+              </select> / 
+              <select name="card_expiry_year" id="card_expiry_year" required="required" class="form-control" style="display:inline;width:70px;" required>
+                <option value="2015">2015</option>
+                <option value="2016">2016</option>
+                <option value="2017">2017</option>
+                <option value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020" selected>2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="card_number" class="col-sm-4 control-label">Parcelamento *</label>
+            <div class="col-sm-8">
+              <select name="installments" id="installments" class="form-control" required></select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="creditcard_name" class="col-sm-4 control-label">Nome no cartão *</label>
+            <div class="col-sm-8">
+              <input type="text" name="creditcard_name" id="creditcard_name" class="form-control" required>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
-    
+
+
+
+
+    <br>
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        3. Forma de entrega
+      </div>
+    </div>
+
+    <input type="hidden" value="<%= @item.id %>" name="item" class="item_id">
+    <input type="hidden" value="<%= @item.weight %>" name="weight">
+    <input type="hidden" value="<%= @item.width %>" name="width">
+    <input type="hidden" value="<%= @item.height %>" name="height">
+    <input type="hidden" value="<%= @item.length %>" name="length">
+
+    <div class="form-group">
+      <label for="creditcard_name" class="col-sm-4 control-label">Calcular frete e prazo:</label>
+      <div class="col-sm-8">
+
+        <div class="input-group">
+          <input type="text" class="form-control" name="cep" value="<%= @item.user.zipcode %>">
+          <span class="input-group-btn">
+            <button class="btn btn-default calcula-frete" type="submit">Calcular</button>
+          </span>
+        </div>
+        <br>
+
+        <div class="response">
+          <table class="table">
+            <% @fretes.each do |frete| %>
+              <tr>
+                <td><input type='radio' name='frete' value="<%= frete[1].nome.downcase %>"> <span class="freteNome"><%= frete[1].nome %></span></td>
+                <td>R$ <span class="fretePreco"><%= frete[1].valor %></span></td>
+                <td><%= frete[1].prazo_entrega %> dias</td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="col-sm-4">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        4. Resumo da compra
+      </div>
+    </div>
+
+    <table class="table">
+      <tr>
+        <td width="10%">
+          <div class="thumb">
+            <%= image_tag @item.fet_image.image.url(:thumb), width: 70 %>
+          </div>
+        </td>
+        <td width="65%"><%= link_to @item.title, item_path(@item) %>
+        <td width="25%" class="text-right">R$ <%= @item.price %></td>
+      </tr>
+      <tr class="trFrete">
+        <td></td>
+        <td class="text-right">
+          Frete:
+        </td>
+        <td class="text-right">
+          R$ <span class="frete-valor">0,00</span><br>
+          <small><span class="frete-nome"></span></small>
+        </td>
+      </tr>
+      <tfoot>
+        <tr>
+          <td class="active"></td>
+          <td class="active text-right">Total:</td>
+          <td class="active text-right checkout-total">R$ <%= @item.price %></td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <br>
+    <div class="text-center">
+      <%= button_tag "Finalizar pedido", data: { disable_with: 'Aguarde...' }, :class => "btn btn-success btn-buy" %>
+      <br>
+      <br>
+      <div class="logo-pagseguro">Sua transação será processada com <%= image_tag "logo-pagseguro.png" %></div>
+    </div>
   </div>
 </div>
 
-<br>
-<div class="form-group">
-  <div class="col-sm-5">
-    <%= button_tag "Finalizar pedido", data: { disable_with: 'Aguarde...' }, :class => "btn btn-success btn-buy" %>
-  </div>
-  <div class="col-sm-5">
-    <div class="logo-pagseguro">Sua transação será processada com <%= image_tag "logo-pagseguro.png" %></div>
-  </div>
-</div>
+
+
 
 
 <% end %>
-</div>
-
-  </div>
-  <div class="col-sm-offset-4">
-    toy details
-  </div>
-</div>
-    

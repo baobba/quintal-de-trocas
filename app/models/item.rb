@@ -15,6 +15,8 @@ class Item < ActiveRecord::Base
   has_many :credits
   has_many :orders
 
+  usar_como_dinheiro :price
+
   accepts_nested_attributes_for :item_images, :allow_destroy => true, reject_if: :image_rejectable?
 
   validates :title, :description, :item_category_id, :item_age_id, presence: true
@@ -67,5 +69,9 @@ class Item < ActiveRecord::Base
   def to_param
     [id, title.parameterize].join("-")
   end
+
+  # def price=(price)
+  #   write_attribute(:price, price.tr(',.', '').to_f/10)
+  # end
 
 end

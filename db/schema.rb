@@ -143,16 +143,16 @@ ActiveRecord::Schema.define(version: 20161123103005) do
     t.string   "zipcode"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
     t.string   "image"
     t.boolean  "is_active"
     t.datetime "deleted_at"
     t.string   "neighborhood"
     t.date     "next_notification_at"
     t.datetime "expired_at"
-    t.integer  "activate_qty",                                 default: 0
-    t.decimal  "price",                precision: 8, scale: 2
+    t.integer  "activate_qty",                                  default: 0
+    t.decimal  "price",                precision: 14, scale: 2
     t.integer  "weight"
     t.integer  "width"
     t.integer  "height"

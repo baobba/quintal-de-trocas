@@ -172,7 +172,7 @@ class ItemsController < ApplicationController
     respond_to do |format|
       if @item.update(item_params)
 
-        format.html { redirect_to my_items_path, notice: 'O brinquedo foi atualizado com sucesso' }
+        format.html { redirect_to edit_item_path(@item), notice: 'O brinquedo foi atualizado com sucesso' }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }

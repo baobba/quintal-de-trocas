@@ -4,17 +4,28 @@
     <%= f.error_notification %>
 
       <%= f.input :name %>
+      <br>
 
       <% if !@store.new_record? %>
       <fieldset>
         <legend>Habilitar Pagseguro</legend>
 
-        <%= debug @authorization %><br>
+        <p>Para que possamos realizar as cobranças diretamente em nosso site, você precisa permitir que o Quintal de Trocas utilize sua conta para isso.</p>
+
+        <%= debug @authorization %>
         <% if @authorization && @authorization.permissions.first.status == "APPROVED" %>
-          <strong class="text-success">Habilitado</strong>
+          <div class="panel panel-success">
+            <div class="panel-body">
+              <strong class="text-success"><i class="glyphicon glyphicon-ok"></i> Habilitado</strong>
+            </div>
+          </div>
         <% elsif @authorization_request_link || @authorization %>
-          <strong class="text-danger">Desabilitado</strong>
-          <%= link_to "Habilitar", @authorization_request_link, class: "btn btn-default" %>
+          <div class="panel panel-success">
+            <div class="panel-body">
+              <strong class="text-danger"><i class="glyphicon glyphicon-remove-circle"></i> Desabilitado</strong>
+            <%= link_to "Habilitar", @authorization_request_link, class: "btn btn-default" %>
+            </div>
+          </div>
         <% else %>
           <p class="text-danger">Erro de conexão com Pagseguro</p>
         <% end %>

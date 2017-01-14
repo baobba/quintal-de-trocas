@@ -1,0 +1,53 @@
+$(document).ready(function() {
+  $('#order_user_zipcode').mask('00000-000');
+  $('input[name=cep]').mask('00000-000');
+
+  $('.response').on("change", "input[name=frete]", function(e){
+    var $form = $(this).closest("tr");
+    var optionChecked = $(this).val();
+    var optionNome = $form.find(".freteNome");
+    var optionPreco = $form.find(".fretePreco");
+
+    $('tr.trFrete').find(".frete-nome").text("("+optionNome.html()+")");
+    $('tr.trFrete').find(".frete-valor").text(optionPreco.html());
+
+  });
+
+
+  $('.orders-new').on("click", ".calcula-frete", function(e){
+    e.preventDefault();
+    $this = $(this).closest("form");
+    item_id = $this.find(".item_id").val();
+    cep = $this.find("input[name='cep']").val();
+    weight = $this.find("input[name='weight']").val();
+    width = $this.find("input[name='width']").val();
+    height = $this.find("input[name='height']").val();
+    length = $this.find("input[name='length']").val();
+    $this.find(".response").html("");
+
+    $.ajax({
+      url: '/brinquedos/'+ item_id +"/frete",
+      dataType: 'json',
+      data: {cep: cep, weight: weight, width: width, height: height, length: length}
+    })
+    .success(function(data) {
+
+      // $this.parent().find(".item").html(e.title);
+      console.log(data);
+      console.log("this...");
+      var string = "<table class='table'>";
+      // string += "<thead><tr><td width='40%'>Tipo</td><td width='30%'>Frete</td><td width='30%'>Prazo</td></tr></thead>";
+      Object.keys(data).forEach(function(key){
+        // string += "<tr><td><input type='radio' name='frete'> "+data+"</td>"
+        string += "<tr><td><input type='radio' name='frete'> "+data[key].nome+"</td>"
+        string += "<td>R$ "+data[key].valor+"</td>";
+        string += "<td>"+data[key].prazo_entrega+" dias</td></tr>";
+      });
+      string += "</table>";
+
+      $this.find(".response").html(string);
+        
+    });
+
+  });
+});
