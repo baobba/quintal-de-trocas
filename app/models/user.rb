@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   validates :zipcode, :phone, :street, :neighborhood, :city, :state, presence: true, if: :not_recovering_password?
 
   has_many :places
-  has_many :toys
+  has_many :items
   has_many :exchanges
   has_many :exchanges_received, :class_name => 'Exchange', :foreign_key => "user_to"
   has_many :credits

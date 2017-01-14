@@ -45,9 +45,9 @@
             <td>
               <% if credit.exchange %>
                 Crédito adquirido pela <%= link_to "troca ##{credit.exchange.id}", exchange_path(credit.exchange.id) %>
-              <% elsif credit.toy %>
+              <% elsif credit.item %>
                 Crédito adquirido pelo cadastro:<br>
-                <%= link_to credit.toy.title, toy_path(credit.toy) %>
+                <%= link_to credit.item.title, item_path(credit.item) %>
               <% else %>
                 Crédito adquirido em promoção
               <% end %>
@@ -73,7 +73,7 @@
       <div class="alert alert-danger text-center">
         <h4>Você não possui nenhum crédito ainda.</h4>
         <p class="lead">Para ganhar um crédito, você precisa cadastrar um brinquedo deixando-o disponível para troca.</p>
-        <%= link_to "Cadastrar brinquedo", new_toy_path, class: "btn btn-success btn-lg" %>
+        <%= link_to "Cadastrar brinquedo", new_item_path, class: "btn btn-success btn-lg" %>
       </div>
     <% end %>
 

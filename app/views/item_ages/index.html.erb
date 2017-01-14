@@ -1,0 +1,25 @@
+<h1>Listing Item Ages</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @item_ages.each do |item_age| %>
+      <tr>
+        <td><%= item_age.title %></td>
+        <td><%= link_to 'Show', item_age %></td>
+        <td><%= link_to 'Edit', edit_item_age_path(item_age) %></td>
+        <td><%= link_to 'Destroy', item_age, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Item age', new_item_age_path %>

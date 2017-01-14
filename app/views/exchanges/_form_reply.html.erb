@@ -4,7 +4,7 @@
   <%= f.simple_fields_for :exchange_messages, @exchange.exchange_messages.build do |ff| %>
     <%= ff.hidden_field :user_id, value: current_user.id %>
     <%= ff.hidden_field :user_from, value: current_user.id %>
-    <%= ff.hidden_field :user_to, value: ([@exchange.user.id, @exchange.toy.user.id] - [current_user.id]).join("").to_i %>
+    <%= ff.hidden_field :user_to, value: ([@exchange.user.id, @exchange.item.user.id] - [current_user.id]).join("").to_i %>
   
     <%= ff.input :message, label: "Mensagem:" %>
   <% end %>

@@ -88,7 +88,7 @@
 </header>
 
 <% if current_user && !User.find(current_user.id).valid? %>
-  <% if params[:controller] == "toys" && params[:action] == "index" %>
+  <% if params[:controller] == "items" && params[:action] == "index" %>
   <% else %>
     <div class="container">
       <div class="alert alert-danger">Olá, seu cadastrado não está completo. <%= link_to "Complete seu cadastro", edit_user_registration_path, class: "btn btn-default btn-sm" %> para poder aproveitar todos benefícios do Quintal :)</div>

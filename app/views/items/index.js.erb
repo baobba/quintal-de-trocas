@@ -1,0 +1,5 @@
+$sidebar = $("#map_wrapper");
+$sidebar.css('top','0');
+
+$('.cards').append("<%= escape_javascript(render :partial => @items)%>");
+$('#load_more_link').replaceWith("<%= escape_javascript(link_to_next_page(@items, 'Veja mais', params: params, :remote => true, :id=>'load_more_link', :class=>'btn btn-lg btn-quintal'))%>");

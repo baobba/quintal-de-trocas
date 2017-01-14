@@ -2,12 +2,12 @@
 
 namespace :emails do
   
-  task :check_your_toys, [:limit] => [:environment] do |t, args|
+  task :check_your_items, [:limit] => [:environment] do |t, args|
     limit = args[:limit] || nil
 
     User.order("id DESC").limit(limit).each_with_index do |user|
       if !user.email.blank?
-        QuintalMailer.check_your_toys(user).deliver_now rescue next
+        QuintalMailer.check_your_items(user).deliver_now rescue next
       end
       sleep(1)
     end

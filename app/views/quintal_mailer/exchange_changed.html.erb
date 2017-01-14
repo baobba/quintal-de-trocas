@@ -1,6 +1,6 @@
 <h2>Olá <%= @user.first_name %>,</h2>
 
-<p><%= @current_user.first_name %> <%= @status %> sua solicitação de troca pelo brinquedo <strong><%= @exchange.toy.title %></strong>.</p>
+<p><%= @current_user.first_name %> <%= @status %> sua solicitação de troca pelo brinquedo <strong><%= @exchange.item.title %></strong>.</p>
 
 <% if @status == "aceitou" %>
   <p>Agora é hora de combinar como e quando será feita a troca.<br>

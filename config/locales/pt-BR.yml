@@ -25,7 +25,7 @@ pt-BR:
         name: Nome
         birthday: Data nasc.
         gender: Sexo
-      toy:
+      item:
         title: Título
         description: Descrição
         tag_list: Palavras chave

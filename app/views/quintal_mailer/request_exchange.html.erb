@@ -4,15 +4,15 @@
 
 <p>Brinquedo solicitado:</p>
 
-<div class="toy-detail">
-  <%= image_tag @exchange.to_toy.fet_image.image.url(:thumb), width: 90, class: "pull-left" %>
-  <%= link_to @exchange.to_toy.title, toy_path(@exchange.to_toy) if @exchange.toy %>
+<div class="item-detail">
+  <%= image_tag @exchange.to_item.fet_image.image.url(:thumb), width: 90, class: "pull-left" %>
+  <%= link_to @exchange.to_item.title, item_path(@exchange.to_item) if @exchange.item %>
   <p>
-    <% if @exchange.toy.toy_age %>
-      Faixa etária: <%= @exchange.toy.toy_age.title %><br>
+    <% if @exchange.item.item_age %>
+      Faixa etária: <%= @exchange.item.item_age.title %><br>
     <% end %>
-    <% if @exchange.toy.toy_category %>
-      Categoria: <%= @exchange.toy.toy_category.title %>
+    <% if @exchange.item.item_category %>
+      Categoria: <%= @exchange.item.item_category.title %>
     <% end %>
   </p>
 

@@ -43,9 +43,9 @@
 <br>
 
 <p class="lead">Brinquedos cadastrados</p>
-<% if @toys %>
+<% if @items %>
   <ul class="cards list-unstyled">
-    <%= render @toys, file: "/toys/_toy" %>
+    <%= render @items, file: "/items/_item" %>
   </ul>
 <% else %>
 <% end %>

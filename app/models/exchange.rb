@@ -3,7 +3,7 @@ class Exchange < ActiveRecord::Base
   acts_as_taggable
   acts_as_paranoid
 
-  belongs_to :toy, -> { with_deleted }, :foreign_key => "toy_to"
+  belongs_to :item, -> { with_deleted }, :foreign_key => "item_to"
   belongs_to :user, -> { with_deleted }
   has_many :exchange_messages, dependent: :destroy
   has_many :credits
@@ -18,12 +18,12 @@ class Exchange < ActiveRecord::Base
 
   acts_as_messageable
 
-  def from_toy
-    Toy.with_deleted.find_by_id(toy_from)
+  def from_item
+    Item.with_deleted.find_by_id(item_from)
   end
 
-  def to_toy
-    toy
+  def to_item
+    item
   end
 
   def from_user
@@ -31,11 +31,11 @@ class Exchange < ActiveRecord::Base
   end
 
   def to_user
-    Toy.with_deleted.find_by_id(toy_to).user
+    Item.with_deleted.find_by_id(item_to).user
   end
 
-  def toy
-    Toy.unscoped { super }
+  def item
+    Item.unscoped { super }
   end
 
   def send_slack_message

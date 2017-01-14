@@ -18,7 +18,7 @@ ActiveAdmin.register_page "Dashboard" do
       end
       column do
         panel "Brinquedos nos últimos 7 dias" do
-          Toy.where('created_at > ?', Date.today-1.week).count
+          Item.where('created_at > ?', Date.today-1.week).count
         end
       end
       column do
@@ -40,12 +40,12 @@ ActiveAdmin.register_page "Dashboard" do
       end
       column do
         panel "Qtdade brinquedos" do
-          Toy.count
+          Item.count
         end
       end
       column do
         panel "Qtdade usuários com brinquedos cadastrados" do
-          User.joins(:toys).count
+          User.joins(:items).count
         end
       end
       column do
@@ -69,10 +69,10 @@ ActiveAdmin.register_page "Dashboard" do
 
       column do
         panel "Últimos briquedos adicionados" do
-          table_for Toy.order("created_at desc").limit(20) do
+          table_for Item.order("created_at desc").limit(20) do
             column "Title",        :title
-            column "Faixa etária", :toy_age_id
-            column "Categoria",    :toy_category_id
+            column "Faixa etária", :item_age_id
+            column "Categoria",    :item_category_id
             column "Data",         :created_at
           end
         end

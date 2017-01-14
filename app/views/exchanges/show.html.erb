@@ -5,7 +5,7 @@
   </div>
   <div class="col-sm-9">
 
-    <% if @exchange.toy.deleted? %>
+    <% if @exchange.item.deleted? %>
       <br>
       <div class="alert alert-danger">
         <h4>O brinquedo para troca foi removido pelo usuário</h4>
@@ -22,7 +22,7 @@
       </li>
       <li class="<%= 'completed' if !@exchange.accepted.nil? %>">
           <span class="bubble"></span>
-          2. Resposta de <%= @exchange.toy.user.first_name %> se aceita ou não a troca
+          2. Resposta de <%= @exchange.item.user.first_name %> se aceita ou não a troca
       </li>
       <li class="<%= 'completed' if !@exchange.finalized.nil? %>">
           <span class="bubble"></span>
@@ -36,7 +36,7 @@
 
     <h2>
       <% if @exchange.user == current_user %>
-        Solicitação de troca com <%= @exchange.toy.user.name %>
+        Solicitação de troca com <%= @exchange.item.user.name %>
       <% else %>
         <%= @exchange.user.name %> quer trocar com você
       <% end %>
@@ -83,14 +83,14 @@
                 <% if @exchange.exchange_type == "credit" %>
                   Troca por crédito
                 <% elsif @exchange.exchange_type == "exchange" %>
-                  <% if @exchange.from_toy %>
-                    <%= link_to @exchange.from_toy.title, toy_path(@exchange.from_toy) if @exchange.toy %>
+                  <% if @exchange.from_item %>
+                    <%= link_to @exchange.from_item.title, item_path(@exchange.from_item) if @exchange.item %>
                   <% end %>
                 <% end %>
               <% elsif !@exchange.accepted.nil? && !@exchange.accepted %>
                 Recusou a troca
               <% else %>
-                <div class="text-muted"><%= @exchange.from_toy ? @exchange.from_toy.title : "--" %></div>
+                <div class="text-muted"><%= @exchange.from_item ? @exchange.from_item.title : "--" %></div>
               <% end %>
 
               
@@ -106,7 +106,7 @@
           <% if @exchange.accepted.nil? %>
             <% if @exchange.user == current_user %>
               <strong class="lead text-danger">
-                Aguardando resposta de <%= @exchange.toy.user.first_name %>
+                Aguardando resposta de <%= @exchange.item.user.first_name %>
               </strong>
             <% else %>
               <strong class="lead text-danger">

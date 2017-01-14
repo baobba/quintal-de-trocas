@@ -8,11 +8,11 @@ ActiveAdmin.register Exchange do
     column "Solicitante", :user_id do |exc|
       link_to exc.user.name, edit_admin_user_path(exc.user.id)
     end
-    column "Destinatário", :toy_to do |exc|
+    column "Destinatário", :item_to do |exc|
       link_to exc.to_user.name, edit_admin_user_path(exc.to_user.id)
     end
-    column "Brinquedo solicitado", :toy_to do |exc|
-      link_to exc.to_toy.title, toy_path(exc.to_toy)
+    column "Brinquedo solicitado", :item_to do |exc|
+      link_to exc.to_item.title, item_path(exc.to_item)
     end
     column "Tipo de troca", :exchange_type do |exc|
       if exc.exchange_type == "exchange"

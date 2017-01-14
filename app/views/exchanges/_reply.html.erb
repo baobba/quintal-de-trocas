@@ -42,8 +42,8 @@
       </div>
       <div class="col-sm-4">
         <p class="lead">Brinquedo solicitado</p>
-        <%= image_tag @exchange.to_toy.fet_image.image.url(:thumb), width: 70, class: "pull-left" %>
-        <%= link_to @exchange.to_toy.title, toy_path(@exchange.to_toy) if @exchange.toy %>
+        <%= image_tag @exchange.to_item.fet_image.image.url(:thumb), width: 70, class: "pull-left" %>
+        <%= link_to @exchange.to_item.title, item_path(@exchange.to_item) if @exchange.item %>
       </div>
     </div>
   </div>
@@ -86,11 +86,11 @@
 
             <div class="tab-pane fade in active" id="tab1default">
               <div class="row show-options">
-                <div class="user-toy-list">
-                  <p class="text-muted"><%= @exchange.user.name %> possui <%= @exchange.user.toys.count %> brinquedos. Caso não tenha interesse nesses brinquedos, você poderá trocar por 1 crédito.</p><br>
-                  <% if @exchange.user.toys.count>0 %>
+                <div class="user-item-list">
+                  <p class="text-muted"><%= @exchange.user.name %> possui <%= @exchange.user.items.count %> brinquedos. Caso não tenha interesse nesses brinquedos, você poderá trocar por 1 crédito.</p><br>
+                  <% if @exchange.user.items.count>0 %>
                     <ul class="cards list-unstyled cards-small">
-                      <%= render :partial => "toys/toy_small", :collection => @exchange.user.toys.order("id DESC"), :as => :toy, :locals => {:f => f} %>
+                      <%= render :partial => "items/item_small", :collection => @exchange.user.items.order("id DESC"), :as => :item, :locals => {:f => f} %>
                     </ul>
                   <% end %>
                 </div>

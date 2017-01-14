@@ -5,10 +5,10 @@ class HomeController < ActionController::Base
   def index
     @bs_container = false
     
-    @toys = Toy.actives.all
+    @items = Item.all
 
-    @toys = @toys.where(toy_category_id: params[:category]) unless params[:category].blank?
-    @toys = @toys.where(toy_age_id: params[:age]) unless params[:age].blank?
+    @items = @items.where(item_category_id: params[:category]) unless params[:category].blank?
+    @items = @items.where(item_age_id: params[:age]) unless params[:age].blank?
   end
 
   def get_mailgun_data

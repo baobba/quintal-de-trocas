@@ -114,7 +114,6 @@ class OrdersController < ApplicationController
     # 1. Get Pagseguro valid session
     session = PagSeguro::Session.create
     @session_id = session.id
-    ap "...."
     ap @session_id
 
     respond_to do |format|
@@ -159,12 +158,12 @@ class OrdersController < ApplicationController
       payment = PagSeguro::BoletoTransactionRequest.new
       payment.notification_url = notification_url
       payment.payment_mode = "default"
-      payment.reference = "REF#{@order.id}-#{@toy.id}-boleto"
+      payment.reference = "REF#{@order.id}-#{@item.id}-boleto"
     end
 
     # Set items
     payment.items << {
-      id: 2,
+      id: @order.id,
       description: @item.title,
       amount: (@item.price || 50.00),
       weight: 1

@@ -29,9 +29,9 @@ class QuintalMailer < ApplicationMailer
     mail(to: @user.email, subject: "#{@current_user.first_name} #{@status} sua solicitação")
   end
 
-  def toy_added(toy)
-    @toy = toy
-    @user = @toy.user
+  def item_added(item)
+    @item = item
+    @user = @item.user
     mail(to: @user.email, subject: 'Seu produto foi recebido')
   end
 
@@ -41,18 +41,18 @@ class QuintalMailer < ApplicationMailer
   end
 
   # 
-  def check_your_toys(user)
+  def check_your_items(user)
     @user = user
     mail(to: user.email, subject: 'Novidades... novo site, logotipo e geolocalização')
   end
 
-  def toy_reminder(toy)
-    @toy = toy
-    @user = toy.user
+  def item_reminder(item)
+    @item = item
+    @user = item.user
     mail(to: @user.email, subject: 'Seu brinquedo está prestes a expirar')
   end
 
-  def toy_arrived(exchange, user)
+  def item_arrived(exchange, user)
     @exchange = exchange
     @user_from = user
     @user_to = User.find_by_id([exchange.user_id, exchange.user_to].reject{ |e| e == user.id }.first)

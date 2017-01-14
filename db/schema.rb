@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 20161123103005) do
   end
 
   add_index "credits", ["exchange_id"], name: "index_credits_on_exchange_id"
-  add_index "credits", ["toy_id"], name: "index_credits_on_toy_id"
+  add_index "credits", ["item_id"], name: "index_credits_on_item_id"
   add_index "credits", ["user_id"], name: "index_credits_on_user_id"
 
   create_table "exchange_messages", force: :cascade do |t|
@@ -90,8 +90,8 @@ ActiveRecord::Schema.define(version: 20161123103005) do
   add_index "exchange_messages", ["user_id"], name: "index_exchange_messages_on_user_id"
 
   create_table "exchanges", force: :cascade do |t|
-    t.integer  "toy_from"
-    t.integer  "toy_to"
+    t.integer  "item_from"
+    t.integer  "item_to"
     t.string   "exchange_type"
     t.string   "exchange_deliver"
     t.integer  "rating_from"
@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(version: 20161123103005) do
     t.string   "price"
     t.string   "status"
     t.integer  "user_id"
-    t.integer  "toy_id"
+    t.integer  "item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -321,8 +321,13 @@ ActiveRecord::Schema.define(version: 20161123103005) do
     t.string   "neighborhood"
     t.boolean  "newsletter"
     t.boolean  "admin",                  default: false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 

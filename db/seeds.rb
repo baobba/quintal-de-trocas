@@ -16,27 +16,27 @@ User.create email: "netto16@gmail.com", password: "admin123", name: "Osny", birt
 User.create email: "test@test.com", password: "admin123", name: "Joao", birthday: 2000, gender: "M", phone: "48 788728787", username: "joao", zipcode: "88111120", neighborhood: "xxx"
 
 
-# create toy categories
-ToyCategory.destroy_all
-toy_categories = ["Bonecas", "Veículos Pequenos", "Veículos Grandes", "Quebra-cabeça", "Para montar", "Musicais", "Livros", "Jogos", "Fantasia", "Faz de conta", "Esportes", "Casinha de Boneca", "Bonecos", "Lego", "Outros"]
-toy_categories.each do |t|
-  ToyCategory.create title: t
+# create item categories
+ItemCategory.destroy_all
+item_categories = ["Bonecas", "Veículos Pequenos", "Veículos Grandes", "Quebra-cabeça", "Para montar", "Musicais", "Livros", "Jogos", "Fantasia", "Faz de conta", "Esportes", "Casinha de Boneca", "Bonecos", "Lego", "Outros"]
+item_categories.each do |t|
+  ItemCategory.create title: t
 end
 
 
-# create toy categories
-ToyAge.destroy_all
-toy_ages = ["0 a 12 meses", "1 a 2 anos", "3 a 6 anos", "Mais de 7 anos", "Indefinida"]
-toy_ages.each do |t|
-  ToyAge.create title: t
+# create item categories
+ItemAge.destroy_all
+item_ages = ["0 a 12 meses", "1 a 2 anos", "3 a 6 anos", "Mais de 7 anos", "Indefinida"]
+item_ages.each do |t|
+  ItemAge.create title: t
 end
 
 
-# create toys
-Toy.destroy_all
+# create items
+Item.destroy_all
 (1..20).each_with_index do |a, index|
-  a=Toy.create title: "Brinquedo #{index}", description: "...", toy_category_id: ToyCategory.all.map(&:id).sample, toy_age_id: ToyAge.all.map(&:id).sample || 0, user_id: User.all.map(&:id).sample
-  a.toy_images.create! image: File.open(Rails.root.join('public', "toy_images/image0#{[*1..6].sample}.jpg"))
+  a=Item.create title: "Brinquedo #{index}", description: "...", item_category_id: ItemCategory.all.map(&:id).sample, item_age_id: ItemAge.all.map(&:id).sample || 0, user_id: User.all.map(&:id).sample
+  a.item_images.create! image: File.open(Rails.root.join('public', "item_images/image0#{[*1..6].sample}.jpg"))
 end
 
 # create places

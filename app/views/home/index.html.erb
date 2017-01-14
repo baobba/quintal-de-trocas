@@ -2,17 +2,17 @@
 
 <div class="well">
   <%= form_tag("/", method: "get") do %>
-    <%= select_tag(:category, options_from_collection_for_select(ToyCategory.all, "id", "title", (params[:category] if params[:category])), include_blank: "Selecione...", :class=> "" ) %>
-    <%= select_tag(:age, options_from_collection_for_select(ToyAge.all, "id", "title", (params[:age] if params[:age])), include_blank: "Selecione...", :class=> "" ) %>
+    <%= select_tag(:category, options_from_collection_for_select(ItemCategory.all, "id", "title", (params[:category] if params[:category])), include_blank: "Selecione...", :class=> "" ) %>
+    <%= select_tag(:age, options_from_collection_for_select(ItemAge.all, "id", "title", (params[:age] if params[:age])), include_blank: "Selecione...", :class=> "" ) %>
     <%= submit_tag "Filtrar" %>
   <% end %>
 
   Hello, vc esta em: <%= request.safe_location.city %>.
 
-  <%= link_to "Cadastrar brinquedo", new_toy_path %>
+  <%= link_to "Cadastrar brinquedo", new_item_path %>
     
 </div>
 
 <ul class="cards list-unstyled">
-  <%= render @toys %>
+  <%= render @items %>
 </ul>

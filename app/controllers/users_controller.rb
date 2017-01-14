@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @toys = @user.toys
+    @items = @user.items
   end
 
   def edit

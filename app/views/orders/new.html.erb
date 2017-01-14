@@ -243,18 +243,10 @@
   </script>
 <% end %>
 
-<<<<<<< 1f0e0436cf2f729bd7d9a1238d680a72651d9913
-<h1 class="text-center">Comprar brinquedo: <small><%= @toy.title %></small>?</h1>
-
-=======
->>>>>>> Marketplace
 <%= simple_form_for(@order, html: { multipart: true, class: "form-horizontal", :id => 'formu', :name => 'formu' }, defaults: {wrapper: :horizontal_form}) do |f| %>
 
 
 <!-- <h1 class="text-center">Comprar brinquedo: <small><%= @item.title %></small>?</h1> -->
-
-
-
 
 
 
@@ -265,7 +257,7 @@
 <input type="hidden" name="token" class="token">
 
 <input type="hidden" name="tipo" class="tipo" value="BRL">
-<input type="hidden" name="id" class="id" value="<%= @toy.id || "xxx" %>">
+<input type="hidden" name="id" class="id" value="<%= @item.id || "xxx" %>">
 <input type="hidden" name="preco" class="preco" value="29.90">
 <br>
 <br>
@@ -588,3 +580,4 @@
 
 
 <% end %>
+

@@ -70,7 +70,7 @@ end
 
 namespace :import do
   desc 'All'
-  task all: [:users, :toys, :toy_images, :exchange, :exchange_messages, :news] do
+  task all: [:users, :items, :item_images, :exchange, :exchange_messages, :news] do
   end
 
   desc "Import users"
@@ -234,33 +234,33 @@ namespace :import do
   end
 
 
-  desc "Import toys"
-  task :toys => [:environment] do
+  desc "Import items"
+  task :items => [:environment] do
 
-    Toy.destroy_all
+    Item.destroy_all
 
-    ToyAge.destroy_all
+    ItemAge.destroy_all
     CSV.foreach("public/system/import/toy_age.csv") do |row|
-      ToyAge.create id: row[0], title: row[1]
+      ItemAge.create id: row[0], title: row[1]
     end
 
-    ToyCategory.destroy_all
+    ItemCategory.destroy_all
     CSV.foreach("public/system/import/toy_category.csv") do |row|
-      ToyCategory.create id: row[0], title: row[1]
+      ItemCategory.create id: row[0], title: row[1]
     end
 
     file = "db/import/toys.csv"
 
-    toys_existentes = 0
+    items_existentes = 0
 
     CSV.foreach(file) do |row|
 
       id = row[0]
-      cms_toy_brand_id = row[1]
-      cms_toy_category_id = row[2]
-      cms_toy_age_id = row[3]
+      cms_item_brand_id = row[1]
+      cms_item_category_id = row[2]
+      cms_item_age_id = row[3]
       cms_client_id = row[4]
-      cms_toy_city_id = row[5]
+      cms_item_city_id = row[5]
       name = row[6]
       description = row[7]
       weight = row[8]
@@ -272,68 +272,68 @@ namespace :import do
       age_interest = row[14]
       category_interest = row[15]
 
-      # toy_ex = Toy.find_by_name(name)
-      # toy_ex.destroy if user_ex
+      # item_ex = Item.find_by_name(name)
+      # item_ex.destroy if user_ex
 
-      toy = Toy.new
+      item = Item.new
       
-      toy.id = id == "NULL" ? nil : id
-      # toy.name = cms_toy_brand_id == "NULL" ? nil : cms_toy_brand_id
-      toy.toy_category_id = cms_toy_category_id == "NULL" ? nil : cms_toy_category_id
-      toy.toy_age_id = cms_toy_age_id == "NULL" ? nil : cms_toy_age_id
-      toy.user_id = cms_client_id == "NULL" ? nil : cms_client_id
-      # toy.xxx = cms_toy_city_id == "NULL" ? nil : cms_toy_city_id
-      toy.title = name == "NULL" ? nil : name.humanize
-      toy.description = description == "NULL" ? nil : description
-      toy.created_at = created_at == "NULL" ? nil : created_at
+      item.id = id == "NULL" ? nil : id
+      # item.name = cms_item_brand_id == "NULL" ? nil : cms_item_brand_id
+      item.item_category_id = cms_item_category_id == "NULL" ? nil : cms_item_category_id
+      item.item_age_id = cms_item_age_id == "NULL" ? nil : cms_item_age_id
+      item.user_id = cms_client_id == "NULL" ? nil : cms_client_id
+      # item.xxx = cms_item_city_id == "NULL" ? nil : cms_item_city_id
+      item.title = name == "NULL" ? nil : name.humanize
+      item.description = description == "NULL" ? nil : description
+      item.created_at = created_at == "NULL" ? nil : created_at
 
-      toy.zipcode = toy.user ? toy.user.zipcode : User.limit(100).map(&:zipcode).uniq.compact.sample
-      toy.latitude = toy.user ? toy.user.latitude : nil
-      toy.longitude = toy.user ? toy.user.longitude : nil
-      # toy.zipcode = User.limit(500).map(&:zipcode).uniq.compact.sample
-      # toy.latitude = "65656"
-      # toy.longitude = "65656"
+      item.zipcode = item.user ? item.user.zipcode : User.limit(100).map(&:zipcode).uniq.compact.sample
+      item.latitude = item.user ? item.user.latitude : nil
+      item.longitude = item.user ? item.user.longitude : nil
+      # item.zipcode = User.limit(500).map(&:zipcode).uniq.compact.sample
+      # item.latitude = "65656"
+      # item.longitude = "65656"
       
-      # puts toy
-      # puts toy.valid?
+      # puts item
+      # puts item.valid?
       puts row[0]
-      puts toy.inspect if !toy.valid?
-      puts toy.errors.full_messages if !toy.valid?
+      puts item.inspect if !item.valid?
+      puts item.errors.full_messages if !item.valid?
 
-      if toy.save
-        toys_existentes+1
+      if item.save
+        items_existentes+1
       end
-      # toy.toy_images.create! image: File.open(Rails.root.join('public', "uploads/uploads/image/#{avatar}")) if toy.valid?
+      # item.item_images.create! image: File.open(Rails.root.join('public', "uploads/uploads/image/#{avatar}")) if item.valid?
 
       puts "------------------------------------------------------------------------"
     end
 
     puts " "
-    puts "Brinquedos cadastrados: #{toys_existentes}"
+    puts "Brinquedos cadastrados: #{items_existentes}"
 
   end
 
-  desc "Import toy images"
-  task :toy_images => [:environment] do
+  desc "Import item images"
+  task :item_images => [:environment] do
 
-    ToyImage.destroy_all
-    CSV.foreach("public/system/import/toy_image.csv") do |row|
+    ItemImage.destroy_all
+    CSV.foreach("public/system/import/item_image.csv") do |row|
 
       puts "..............................................."
       id = row[0]
-      toy_id = row[1]
+      item_id = row[1]
       name = row[2]
       image = row[3]
 
-      puts toy_id
-      toy = Toy.find_by_id(toy_id)
-      # puts toy
+      puts item_id
+      item = Item.find_by_id(item_id)
+      # puts item
 
-      toy_i = ToyImage.find_by_id(id)
-      if !toy_i
-        if toy && s3_url("image/#{image}")
+      item_i = ItemImage.find_by_id(id)
+      if !item_i
+        if item && s3_url("image/#{image}")
           begin
-            toy.toy_images.create! id: id,
+            item.item_images.create! id: id,
               featured: (name == "main" ? true : false),
               remote_image_url: get_file("image/#{image}").public_url
             puts "salvou"
@@ -357,8 +357,8 @@ namespace :import do
 
       puts "..............................................."
       id = row[0]
-      from_toy = row[1]
-      to_toy = row[2]
+      from_item = row[1]
+      to_item = row[2]
       created_at = row[3]
       exchange_type = row[4] # 0=ponto de troca, 1=correio
       finalized = row[5]
@@ -370,15 +370,15 @@ namespace :import do
       exchange = Exchange.new
       
       exchange.id = id == "NULL" ? nil : id
-      exchange.toy_from = from_toy == "NULL" ? nil : from_toy
-      exchange.toy_to = to_toy == "NULL" ? nil : to_toy
+      exchange.item_from = from_item == "NULL" ? nil : from_item
+      exchange.item_to = to_item == "NULL" ? nil : to_item
       exchange.created_at = created_at == "NULL" ? nil : created_at
       exchange.exchange_deliver = exchange_type == "NULL" ? nil : exchange_type
       exchange.exchange_type = "exchange"
       exchange.finalized = finalized == "NULL" ? nil : finalized
       exchange.finalized_at = finalized_at == "NULL" ? nil : finalized_at
       exchange.accepted = accepted == "NULL" ? nil : accepted
-      exchange.user_id = Toy.find_by_id(from_toy) && Toy.find_by_id(from_toy).user ? Toy.find_by_id(from_toy).user.id : nil
+      exchange.user_id = Item.find_by_id(from_item) && Item.find_by_id(from_item).user ? Item.find_by_id(from_item).user.id : nil
 
       puts id
       puts exchange.inspect if !exchange.valid?

@@ -37,7 +37,7 @@ class ExchangesController < ApplicationController
 
   def my_exchanges
 
-    @exchanges_total = Exchange.where(["toy_from IN (?) OR toy_to IN (?) OR user_id = ?", current_user.toys.map(&:id), current_user.toys.map(&:id), current_user.id])
+    @exchanges_total = Exchange.where(["item_from IN (?) OR item_to IN (?) OR user_id = ?", current_user.items.map(&:id), current_user.items.map(&:id), current_user.id])
 
     @exchanges = @exchanges_total
     @exchanges = @exchanges_total.where(user_id: current_user.id) if !params[:type].blank? && params[:type] == "sent"
@@ -56,7 +56,7 @@ class ExchangesController < ApplicationController
   def create
     @exchange = current_user.exchanges.new(exchange_params)
     @exchange.exchange_messages.last.user_from = current_user.id
-    @exchange.exchange_messages.last.user_to = @exchange.toy.user.id
+    @exchange.exchange_messages.last.user_to = @exchange.item.user.id
 
     if @exchange.save
       QuintalMailer.request_exchange(@exchange).deliver_now
@@ -71,7 +71,7 @@ class ExchangesController < ApplicationController
     @exchange.assign_attributes(exchange_params)
 
     if !@exchange.user_from_received.blank? || !@exchange.user_to_received.blank?
-      QuintalMailer.toy_arrived(@exchange, current_user).deliver_now
+      QuintalMailer.item_arrived(@exchange, current_user).deliver_now
     end
 
     if !@exchange.user_from_received.blank? && !@exchange.user_to_received.blank?
@@ -133,6 +133,6 @@ class ExchangesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def exchange_params
-      params.require(:exchange).permit(:toy_from, :toy_to, :finalized, :finalized_at, :exchange_type, :exchange_deliver, :rating_from, :rating_to, :accepted, :user_id, :user_to, :user_to_received, :user_from_received, :reason, :credit_offer, :exchange_messages_attributes => [:id, :message, :user_to, :user_from, :exchange_id, :user_id])
+      params.require(:exchange).permit(:item_from, :item_to, :finalized, :finalized_at, :exchange_type, :exchange_deliver, :rating_from, :rating_to, :accepted, :user_id, :user_to, :user_to_received, :user_from_received, :reason, :credit_offer, :exchange_messages_attributes => [:id, :message, :user_to, :user_from, :exchange_id, :user_id])
     end
 end
