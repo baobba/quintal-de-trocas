@@ -190,7 +190,7 @@ class ItemsController < ApplicationController
   end
 
   def frete
-    ap "GO"
+    # ap "GO"
     frete = Correios::Frete::Calculador.new :cep_origem => "88110-690",
       :cep_destino => params[:cep],
       :peso => params[:weight],
@@ -198,14 +198,14 @@ class ItemsController < ApplicationController
       :largura => params[:width],
       :altura => params[:height]
 
-    ap "--------------------------------"
-    ap frete
+    # ap "--------------------------------"
+    # ap frete
     servicos = frete.calcular :sedex, :pac
-    ap "--------------------------------"
-    ap servicos[:sedex].valor
-    ap "--------------------------------"
-    ap servicos[:pac].valor
-    ap "--------------------------------"
+    # ap "--------------------------------"
+    # ap servicos[:sedex].valor
+    # ap "--------------------------------"
+    # ap servicos[:pac].valor
+    # ap "--------------------------------"
     response = {}
     response[:sedex] = servicos[:sedex]
     response[:pac] = servicos[:pac]

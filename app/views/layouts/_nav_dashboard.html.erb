@@ -2,7 +2,7 @@
   <br>
 
   <div class="list-group dashboard">
-    <%= link_to "<i class='fa fa-pencil'></i> Alterar dados pessoais".html_safe, edit_user_registration_path, class: (params[:controller] == "registrations" ? "list-group-item active" : "list-group-item") %>
+    <%= link_to "<i class='fa fa-user'></i> Alterar dados pessoais".html_safe, edit_user_registration_path, class: (params[:controller] == "registrations" ? "list-group-item active" : "list-group-item") %>
     <%= link_to "<i class='fa fa-shopping-cart'></i> Minhas compras".html_safe, my_orders_path, class: (params[:controller] == "orders" ? "list-group-item active" : "list-group-item") %>
   </div>
 
@@ -28,8 +28,6 @@
       <%= link_to "<i class='fa fa-exchange'></i> Minhas trocas".html_safe, my_exchanges_path, class: (params[:controller] == "exchanges" ? "list-group-item active" : "list-group-item") %>
 
       <%= link_to "#{image_tag 'quintalecas-icon.png', width: 20} Meus créditos".html_safe, my_credits_path, class: (params[:controller] == "credits" ? "list-group-item active" : "list-group-item") %>
-
-      <%= link_to "<i class='fa fa-shopping-cart'></i> Minhas compras".html_safe, my_orders_path, class: (params[:controller] == "orders" ? "list-group-item active" : "list-group-item") %>
 
     </div>
   <% end %>

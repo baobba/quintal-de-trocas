@@ -44,8 +44,6 @@ class OrdersController < ApplicationController
     headers['Access-Control-Allow-Origin'] = 'https://pagseguro.uol.com.br'
     headers['Access-Control-Allow-Origin'] = '177.97.184.66'
 
-    ap "params"
-    ap params
 
     
 
@@ -72,7 +70,6 @@ class OrdersController < ApplicationController
             puts permission.status
           end
         end
-        ap "................."
 
       else
         transaction = PagSeguro::Transaction.find_by_notification_code(params[:notificationCode])
@@ -83,15 +80,11 @@ class OrdersController < ApplicationController
 
           tipo = @order.title.split(" ").first.downcase
           if tipo == "produto" && (transaction.status.id == "3" || transaction.status.id == "4")
-            ap "paga"
           else
-            ap "nao foi paga"
           end
 
           if @order.save
-            ap "salvou"
           else
-            ap "n salvou"
           end
         end
       end
@@ -125,7 +118,6 @@ class OrdersController < ApplicationController
     # 1. Get Pagseguro valid session
     session = PagSeguro::Session.create
     @session_id = session.id
-    ap @session_id
 
     @total_amount
 
@@ -144,9 +136,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = current_user.orders.new(order_params)
-    ap @order.user
     @item = @order.item || Item.find(params[:id])
-    ap @item
 
     # 2. Browser integration (load JS) - OK
     # 3. Buyer identification (JS) - ERB Page
@@ -158,7 +148,6 @@ class OrdersController < ApplicationController
     notification_url = "http://f1259e7f.ngrok.io/notify"
 
     if params[:paymentMethod] == "credit_card"
-      ap "credit_card"
 
       payment = PagSeguro::CreditCardTransactionRequest.new
       payment.notification_url = notification_url
@@ -166,7 +155,6 @@ class OrdersController < ApplicationController
       payment.reference = "REF-credit-card"
 
     elsif params[:paymentMethod] == "boleto"
-      ap "boleto"
 
       payment = PagSeguro::BoletoTransactionRequest.new
       payment.notification_url = notification_url
@@ -182,16 +170,7 @@ class OrdersController < ApplicationController
       weight: 1
     }
 
-    ap "payment.items"
-    ap payment.items
-    ap order_params
-    ap order_params[:user_attributes]
-    # ap order_params[:user]
     @user_attr = order_params[:user_attributes]
-    ap @user_attr
-    # ap @order
-    # ap @order.user
-    # ap @order.user.phone
 
     # Set sender
     email = (Rails.env == "production" ? current_user.email : "netto@sandbox.pagseguro.com.br")
@@ -205,7 +184,6 @@ class OrdersController < ApplicationController
         number: current_user.phone.split(" ").last.gsub(/\D/, '')
       }
     }
-    ap "11111111111111"
 
     # Set shipping
     payment.shipping = {
@@ -233,7 +211,6 @@ class OrdersController < ApplicationController
     #   }
     # ]
     # 
-    ap "11111111111111"
 
     payment.billing_address = {
       street: @user_attr[:street],
@@ -244,10 +221,8 @@ class OrdersController < ApplicationController
       district: @user_attr[:neighborhood],
       postal_code: @user_attr[:zipcode]
     }
-    ap "11111111111111"
 
     if params[:paymentMethod] == "credit_card"
-    ap "11111111111111"
 
       payment.credit_card_token = params[:token]
       payment.holder = {
@@ -268,7 +243,6 @@ class OrdersController < ApplicationController
         quantity: params[:installment_quantity]
       }
     end
-    ap "11111111111111"
 
     puts "=> REQUEST"
     puts PagSeguro::TransactionRequest::RequestSerializer.new(payment).to_params
@@ -276,7 +250,6 @@ class OrdersController < ApplicationController
 
     payment.create
 
-    ap "11111111111111"
 
     a = Logger.new("#{Rails.root}/log/orders.log")
 

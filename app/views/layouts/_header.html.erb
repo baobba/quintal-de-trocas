@@ -47,7 +47,7 @@
                   <li><%= link_to "Admin", new_admin_user_session_path %></li>
                 <% end %>
 
-                <% if current_user.store.name %>
+                <% if current_user.store && current_user.store.name %>
                   <%= render '/layouts/header_store_menu' %>
                 <% else %>
                   <%= render '/layouts/header_user_menu' %>

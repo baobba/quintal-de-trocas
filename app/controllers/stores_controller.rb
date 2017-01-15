@@ -11,7 +11,6 @@ class StoresController < InheritedResources::Base
       Rails.application.secrets['pagseguro_appid'],
       Rails.application.secrets['pagseguro_appkey']
     )
-    ap credentials
 
     if params[:notificationCode]
       current_user.store.update_column(:pagseguro_notification_code, params[:notificationCode])
@@ -27,18 +26,15 @@ class StoresController < InheritedResources::Base
           type: 'SELLER'
         }
       }
-      ap options
 
       if current_user.store.pagseguro_notification_code
         @authorization = PagSeguro::Authorization.find_by_notification_code(current_user.store.pagseguro_notification_code, credentials: credentials )
       end
 
-      ap @authorization
 
       if !@authorization || (@authorization && @authorization.permissions.first.status == "DENIED")
 
         authorization_request = PagSeguro::AuthorizationRequest.new(options)
-        ap authorization_request
 
         if authorization_request.create
           print "Use this link to confirm authorizations: "
@@ -58,11 +54,9 @@ class StoresController < InheritedResources::Base
   def create
     # @store = current_user.build_store(store_params)
     @store = current_user.create_store(store_params)
-    ap @store
 
     respond_to do |format|
       if @store.save
-        ap @store
         format.html { redirect_to edit_store_path, success: 'Loja cadastrada com sucesso' }
         format.json { render :show, status: :created, location: @store }
       else
