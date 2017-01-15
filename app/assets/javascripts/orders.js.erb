@@ -2,6 +2,16 @@ $(document).ready(function() {
   $('#order_user_zipcode').mask('00000-000');
   $('input[name=cep]').mask('00000-000');
 
+  var maskBehavior = function (val) {
+   return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+  },
+  options = {onKeyPress: function(val, e, field, options) {
+   field.mask(maskBehavior.apply({}, arguments), options);
+   }
+  };
+   
+  $('#order_user_phone').mask(maskBehavior, options);
+
   $('.response').on("change", "input[name=frete]", function(e){
     var $form = $(this).closest("tr");
     var optionChecked = $(this).val();
@@ -19,7 +29,7 @@ $(document).ready(function() {
     $this = $(this).closest("form");
     item_id = $this.find(".item_id").val();
     cep = $this.find("input[name='cep']").val();
-    weight = $this.find("input[name='weight']").val();
+    weight = $this.find("input[name='weight']").val()/1000;
     width = $this.find("input[name='width']").val();
     height = $this.find("input[name='height']").val();
     length = $this.find("input[name='length']").val();
@@ -39,8 +49,8 @@ $(document).ready(function() {
       // string += "<thead><tr><td width='40%'>Tipo</td><td width='30%'>Frete</td><td width='30%'>Prazo</td></tr></thead>";
       Object.keys(data).forEach(function(key){
         // string += "<tr><td><input type='radio' name='frete'> "+data+"</td>"
-        string += "<tr><td><input type='radio' name='frete'> "+data[key].nome+"</td>"
-        string += "<td>R$ "+data[key].valor+"</td>";
+        string += "<tr><td><input type='radio' name='frete' value='"+data[key].tipo+"'> <span class='freteNome'>"+data[key].nome+"</span></td>"
+        string += "<td>R$ <span class='fretePreco'>"+data[key].valor+"</span></td>";
         string += "<td>"+data[key].prazo_entrega+" dias</td></tr>";
       });
       string += "</table>";

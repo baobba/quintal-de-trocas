@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :credits
   has_many :credits_avail, -> (object){ where(expired_at: nil)}, :class_name => 'Credit'
   has_many :orders
+  has_many :sales, :class_name => 'Order', :foreign_key => "seller_id"
   has_one :store
 
   has_many :user_children
@@ -56,8 +57,6 @@ class User < ActiveRecord::Base
   end
 
   def store?
-    ap self
-    ap self.store
     store ? true : false
   end
 

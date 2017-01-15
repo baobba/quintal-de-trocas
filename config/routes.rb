@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
     resources :orders, path: 'compras'
     get 'minhas-compras' => 'orders#my_orders', as: :my_orders
+    get 'minhas-vendas' => 'orders#my_sales', as: :my_sales
 
     resources :exchanges, path: 'trocas' do
       # post 'toggle_status', path: 'mudar_status'

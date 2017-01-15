@@ -63,13 +63,18 @@ class StoresController < InheritedResources::Base
     respond_to do |format|
       if @store.save
         ap @store
-        format.html { redirect_to root_path, success: 'Loja cadastrada com sucesso' }
+        format.html { redirect_to edit_store_path, success: 'Loja cadastrada com sucesso' }
         format.json { render :show, status: :created, location: @store }
       else
         format.html { render :new }
         format.json { render json: @store.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def show
+    @bs_container = false
+    @items = @store.user.items
   end
 
   private

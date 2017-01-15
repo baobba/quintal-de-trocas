@@ -3,13 +3,14 @@ $(document).ready(function() {
   $(".items").on("submit", ".calcula-frete", function(e){
       e.preventDefault();
       $this = $(this);
-      item_id = $this.find(".item_id").val();
+      item_id = $this.find("input[name=item]").val();
       cep = $this.find("input[name='cep']").val();
-      weight = $this.find("input[name='weight']").val();
+      weight = $this.find("input[name='weight']").val()/1000;
       width = $this.find("input[name='width']").val();
       height = $this.find("input[name='height']").val();
       length = $this.find("input[name='length']").val();
-      console.log("--------");
+      console.log("1--------");
+      console.log(weight);
       console.log($this);
       console.log(cep);
 

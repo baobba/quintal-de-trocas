@@ -70,6 +70,10 @@ class Item < ActiveRecord::Base
     [id, title.parameterize].join("-")
   end
 
+  def weight_in_kg
+    weight*100
+  end
+
   # def price=(price)
   #   write_attribute(:price, price.tr(',.', '').to_f/10)
   # end

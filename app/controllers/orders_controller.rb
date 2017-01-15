@@ -16,6 +16,15 @@ class OrdersController < ApplicationController
     end
   end
 
+  def my_sales
+    @sales = current_user.sales.order("id DESC").all
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @sales }
+    end
+  end
+
   # GET /orders/1
   # GET /orders/1.json
   def show
@@ -99,12 +108,14 @@ class OrdersController < ApplicationController
   # GET /orders/new.json
   def new
     @order = current_user.orders.new
-    @order.toy_id =  params[:product]
-    @toy = @order.toy
+    @order.item_id =  params[:product]
+    @item = @order.item
+
+
 
     @frete = Correios::Frete::Calculador.new :cep_origem => @item.user.zipcode,
       :cep_destino => current_user.zipcode,
-      :peso => @item.weight,
+      :peso => @item.weight/1000,
       :comprimento => @item.length,
       :largura => @item.width,
       :altura => @item.height
@@ -115,6 +126,8 @@ class OrdersController < ApplicationController
     session = PagSeguro::Session.create
     @session_id = session.id
     ap @session_id
+
+    @total_amount
 
     respond_to do |format|
       format.html # new.html.erb
@@ -142,7 +155,7 @@ class OrdersController < ApplicationController
     # 5. Get credit card token
     # 6. Get credit card installments (parcelamentos)
 
-    notification_url = "http://b70d05a5.ngrok.io/notify"
+    notification_url = "http://f1259e7f.ngrok.io/notify"
 
     if params[:paymentMethod] == "credit_card"
       ap "credit_card"
@@ -163,7 +176,7 @@ class OrdersController < ApplicationController
 
     # Set items
     payment.items << {
-      id: @order.id,
+      id: @item.id,
       description: @item.title,
       amount: (@item.price || 50.00),
       weight: 1
@@ -171,6 +184,14 @@ class OrdersController < ApplicationController
 
     ap "payment.items"
     ap payment.items
+    ap order_params
+    ap order_params[:user_attributes]
+    # ap order_params[:user]
+    @user_attr = order_params[:user_attributes]
+    ap @user_attr
+    # ap @order
+    # ap @order.user
+    # ap @order.user.phone
 
     # Set sender
     email = (Rails.env == "production" ? current_user.email : "netto@sandbox.pagseguro.com.br")
@@ -181,46 +202,52 @@ class OrdersController < ApplicationController
       document: { type: "CPF", value: params[:cpf].gsub(/\D/, '') },
       phone: {
         area_code: current_user.phone.scan(/\d+/).first,
-        number: current_user.phone.split(" ").last
+        number: current_user.phone.split(" ").last.gsub(/\D/, '')
       }
     }
+    ap "11111111111111"
 
     # Set shipping
     payment.shipping = {
       type_name: params[:frete],
       address: {
-        street: @order.user.street,
+        street: @user_attr[:street],
         number: 10,
-        complement: @order.user.complement,
-        city: @order.user.city,
-        state: @order.user.state,
-        district: @order.user.neighborhood,
-        postal_code: @order.user.zipcode
+        complement: @user_attr[:complement],
+        city: @user_attr[:city],
+        state: @user_attr[:state],
+        district: @user_attr[:neighborhood],
+        postal_code: @user_attr[:zipcode]
       }
     }
 
-    payment.receivers = [
-      {
-        public_key: 'PUB9EC3BFAE1BB045B0B353122050BF0EC6',
-        split: {
-          amount: 20.0,
-          rate_percent: 50.0,
-          fee_percent: 50.0
-        }
-      }
-    ]
+    # TODO Erro undefined method `receivers=' for #<PagSeguro::CreditCardTransactionRequest:
+    # payment.receivers = [
+    #   {
+    #     public_key: 'PUB9EC3BFAE1BB045B0B353122050BF0EC6',
+    #     split: {
+    #       amount: 20.0,
+    #       rate_percent: 50.0,
+    #       fee_percent: 50.0
+    #     }
+    #   }
+    # ]
+    # 
+    ap "11111111111111"
 
     payment.billing_address = {
-      street: @order.user.street,
+      street: @user_attr[:street],
       number: 10,
-      complement: @order.user.complement,
-      city: @order.user.city,
-      state: @order.user.state,
-      district: @order.user.neighborhood,
-      postal_code: @order.user.zipcode
+      complement: @user_attr[:complement],
+      city: @user_attr[:city],
+      state: @user_attr[:state],
+      district: @user_attr[:neighborhood],
+      postal_code: @user_attr[:zipcode]
     }
+    ap "11111111111111"
 
     if params[:paymentMethod] == "credit_card"
+    ap "11111111111111"
 
       payment.credit_card_token = params[:token]
       payment.holder = {
@@ -231,16 +258,17 @@ class OrdersController < ApplicationController
           value: params[:cpf].gsub(/\D/, '')
         },
         phone: {
-          area_code: 48,
-          number: "99355794"
+          area_code: @user_attr[:phone].split(" ").first.gsub(/\D/, ''),
+          number: @user_attr[:phone].split(" ").last.gsub(/\D/, '')
         }
       }
 
       payment.installment = {
-        value: 55.50,
-        quantity: 1
+        value: params[:installment_value],
+        quantity: params[:installment_quantity]
       }
     end
+    ap "11111111111111"
 
     puts "=> REQUEST"
     puts PagSeguro::TransactionRequest::RequestSerializer.new(payment).to_params
@@ -248,6 +276,7 @@ class OrdersController < ApplicationController
 
     payment.create
 
+    ap "11111111111111"
 
     a = Logger.new("#{Rails.root}/log/orders.log")
 
@@ -258,6 +287,7 @@ class OrdersController < ApplicationController
     if payment.errors.any?
       a.info "=> ERRORS"
       a.info payment.errors.join("\n")
+      redirect_to :back, error: payment.errors.join("\n")
     else
 
       a.info "=> Transaction"
@@ -309,7 +339,9 @@ class OrdersController < ApplicationController
       })
 
       if @order.save
-        redirect_to :back, notice: "Assim que o pagamento for aprovado, você receberá um e-mail com detalhes sobre entrega do brinquedo."
+        redirect_to order_path(@order), notice: "Assim que o pagamento for aprovado, você receberá um e-mail com detalhes sobre entrega do brinquedo."
+      else
+        redirect_to :back, error: "Não foi possível realizar o pagamento, encontre em contato conosco."
       end
     end
 
@@ -361,6 +393,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:code, :title, :price, :status, :user_id, user_attributes: [:cpf, :empresa, :tel_comercial, :tel_celular, :email, :region, :city])
+      params.require(:order).permit(:code, :title, :price, :status, :user_id, user_attributes: [:name, :phone, :street, :city, :state, :zipcode, :neighborhood, :complement])
     end
 end

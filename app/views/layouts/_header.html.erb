@@ -1,4 +1,4 @@
-<header class="<%= 'no-margin' if content_for?(:subheader) || (params[:controller] == "items" && params[:action] == "index") || (params[:controller] == "products" && params[:action] == "index") || current_page?(root_url) %>">
+<header class="<%= 'no-margin' if content_for?(:subheader) || (params[:controller] == "items" && params[:action] == "index") || (params[:controller] == "products" && params[:action] == "index") || (params[:controller] == "stores" && params[:action] == "show") || current_page?(root_url) %>">
   <nav class="navbar navbar-quintal">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -47,7 +47,7 @@
                   <li><%= link_to "Admin", new_admin_user_session_path %></li>
                 <% end %>
 
-                <% if current_user.store %>
+                <% if current_user.store.name %>
                   <%= render '/layouts/header_store_menu' %>
                 <% else %>
                   <%= render '/layouts/header_user_menu' %>

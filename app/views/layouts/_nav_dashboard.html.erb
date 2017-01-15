@@ -1,28 +1,31 @@
 <div class="nav-dashboard">
   <br>
+
+  <div class="list-group dashboard">
+    <%= link_to "<i class='fa fa-pencil'></i> Alterar dados pessoais".html_safe, edit_user_registration_path, class: (params[:controller] == "registrations" ? "list-group-item active" : "list-group-item") %>
+    <%= link_to "<i class='fa fa-shopping-cart'></i> Minhas compras".html_safe, my_orders_path, class: (params[:controller] == "orders" ? "list-group-item active" : "list-group-item") %>
+  </div>
+
   <% if current_user.store %>
-    <div class="list-group dashboard">
-      <%= link_to "<span class='glyphicon glyphicon-user'></span> Alterar dados pessoais".html_safe, edit_user_registration_path, class: (params[:controller] == "registrations" ? "list-group-item active" : "list-group-item") %>
-      <%= link_to "<i class='fa fa-shopping-cart'></i> Minhas compras".html_safe, my_orders_path, class: (params[:controller] == "orders" ? "list-group-item active" : "list-group-item") %>
-    </div>
 
     <% if current_user.store %>
       <p class="lead"><%= current_user.store.name %></p>
     <% end %>
 
     <div class="list-group dashboard">
-      <%= link_to "<span class='glyphicon glyphicon-list'></span> Alterar dados da loja".html_safe, edit_store_path(current_user.store), class: (params[:controller] == "stores" ? "list-group-item active" : "list-group-item") %>
+      <%= link_to "<i class='fa fa-pencil'></i> Alterar dados da loja".html_safe, edit_store_path(current_user.store), class: (params[:controller] == "stores" ? "list-group-item active" : "list-group-item") %>
 
-      <%= link_to "<span class='glyphicon glyphicon-list'></span> Meus produtos".html_safe, my_items_path, class: (params[:controller] == "items" ? "list-group-item active" : "list-group-item") %>
+      <%= link_to "<i class='fa fa-list-ul'></i> Produtos".html_safe, my_items_path, class: (params[:controller] == "items" ? "list-group-item active" : "list-group-item") %>
+      
+      <%= link_to "<i class='fa fa-usd'></i> Minhas vendas".html_safe, my_sales_path, class: (params[:controller] == "orders" ? "list-group-item active" : "list-group-item") %>
     </div>
 
   <% else %>
     <div class="list-group dashboard">
-      <%= link_to "<span class='glyphicon glyphicon-user'></span> Alterar dados pessoais".html_safe, edit_user_registration_path, class: (params[:controller] == "registrations" ? "list-group-item active" : "list-group-item") %>
 
-      <%= link_to "<span class='glyphicon glyphicon-list'></span> Meus brinquedos".html_safe, my_items_path, class: (params[:controller] == "items" ? "list-group-item active" : "list-group-item") %>
+      <%= link_to "<i class='fa fa-list-ul'></i> Meus brinquedos".html_safe, my_items_path, class: (params[:controller] == "items" ? "list-group-item active" : "list-group-item") %>
 
-      <%= link_to "<span class='glyphicon glyphicon-transfer'></span> Minhas trocas".html_safe, my_exchanges_path, class: (params[:controller] == "exchanges" ? "list-group-item active" : "list-group-item") %>
+      <%= link_to "<i class='fa fa-exchange'></i> Minhas trocas".html_safe, my_exchanges_path, class: (params[:controller] == "exchanges" ? "list-group-item active" : "list-group-item") %>
 
       <%= link_to "#{image_tag 'quintalecas-icon.png', width: 20} Meus créditos".html_safe, my_credits_path, class: (params[:controller] == "credits" ? "list-group-item active" : "list-group-item") %>
 

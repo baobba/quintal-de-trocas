@@ -1,11 +1,9 @@
 class Order < ActiveRecord::Base
   belongs_to :user
-<<<<<<< HEAD
-  belongs_to :toy
-=======
   belongs_to :item
->>>>>>> cf00e2e780b10aa9b0512eb642e00095b51aac69
   # attr_accessible :code, :price, :title, :status
+
+  accepts_nested_attributes_for :user
 
   before_save :normalize_status
 
@@ -42,6 +40,10 @@ class Order < ActiveRecord::Base
         "???"
       end
     end
+  end
+
+  def ref
+    code.split("-").first
   end
 
 end

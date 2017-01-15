@@ -100,46 +100,47 @@
 
   $(document).ready(function() {
 
-    $("input:radio[name='paymentMethod']").change(function() {   
-      console.log("mudou...");
-      console.log($("input:radio[name='paymentMethod']:checked").val());
+    $("input#installments").change(function() {
+      console.log("xxxxxxxxxxxxxx");
+    });
 
-      if ($("input:radio[name='paymentMethod']:checked").val() == "boleto"){
+    $("input:radio[name='paymentMethod']").change(function() {
+
+      $methodSelected = $("input:radio[name='paymentMethod']:checked").val();
+
+      console.log("Change payment method: "+ $methodSelected);
+
+      if ($methodSelected == "boleto"){
         $("#creditcard_name").removeAttr('required');
         $("#card_number").removeAttr('required');
         $("#card_cvv").removeAttr('required');
       }
 
       $('.general-fields').show();
-      $('.' + $("input:radio[name='paymentMethod']:checked").val() ).slideDown().siblings().slideUp();
+      $('.' + $methodSelected ).slideDown().siblings().slideUp();
     });
 
-    console.log('Id sessao: <%= @session_id %>');
+    console.log('1. Session ID: <%= @session_id %>');
     PagSeguroDirectPayment.setSessionId('<%= @session_id %>');
-
 
     // Get payment methods
     PagSeguroDirectPayment.getPaymentMethods({
-      success: function(response) {
-        console.log(response);
-        console.log(response.paymentMethods);
-      },
-      error: function(response) {
-        console.log(response);
-      },
+      amount: '<%= @item.price.to_f %>',
       complete: function(response) {
-        console.log('Meios de pagamento...');
+        console.log('2. Listing payment methods');
+        console.log(response);
       }
     });
 
-
+    // Get installments
     PagSeguroDirectPayment.getInstallments({
-      amount: '29.90',
-      brand: 'visa',
+      amount: '<%= @item.price.to_f %>',
+      // brand: 'visa',
       // maxInstallmentNoInterest: 3,
       success: function(response) {
         // console.log(response);
         // console.log(response.installments);
+        console.log("+++++++++++++++++++++++");
         console.log(response.installments.visa);
         // console.log(response.installments.visa[1]);
 
@@ -161,11 +162,10 @@
         //opções de parcelamento disponível
       },
       error: function(response) {
-            console.log(response);
-      //tratamento do erro
+        console.log(response);
       },
       complete: function(response) {
-        console.log('parcelamentos...');
+        console.log('3. Listing installments...');
       }
     });
 
@@ -183,7 +183,7 @@
 
 
     $(".credit_card, input[name='paymentMethod']").change(function(e) {
-      console.log( "formulario mudou..." );
+      console.log( "Form changed" );
 
       // Set params to get credit card token
       param = {
@@ -201,12 +201,12 @@
 
         },
         error: function(response) {
-          console.log("erro");
+          console.log("error");
         }
       }
 
       var get_hash = PagSeguroDirectPayment.getSenderHash();
-      console.log('sender hash: '+get_hash);
+      console.log('Sender hash: '+get_hash);
       $(".sender_hash").val(get_hash);
 
       console.log("param: ", param);
@@ -235,6 +235,9 @@
         }
       });
 
+      $("#installment_quantity").val($('#installments').val().split("-")[0]);
+      $("#installment_value").val($('#installments').val().split("-")[1]);
+
     });
 
 
@@ -250,15 +253,15 @@
 
 
 
-<input type="hidden" name="installment_quantity" id="installment_quantity" value="5">
-<input type="hidden" name="installment_value" id="installment_value" value="125.22">
+<input type="hidden" name="installment_quantity" id="installment_quantity" value="0">
+<input type="hidden" name="installment_value" id="installment_value" value="<%= @item.price.to_f %>">
       
 <input type="hidden" name="sender_hash" class="sender_hash">
 <input type="hidden" name="token" class="token">
 
 <input type="hidden" name="tipo" class="tipo" value="BRL">
 <input type="hidden" name="id" class="id" value="<%= @item.id || "xxx" %>">
-<input type="hidden" name="preco" class="preco" value="29.90">
+<input type="hidden" name="preco" class="preco" value="<%= @item.price.to_f %>">
 <br>
 <br>
 
@@ -307,7 +310,7 @@
         </div>
       </div>
 
-      <%= user.input :phone %>
+      <%= user.input :phone, value: "" %>
       <%# user.input :phone %>
 
       <%= user.input :zipcode %>
@@ -373,9 +376,47 @@
     
     <div class="panel panel-success">
       <div class="panel-heading">
-        2. Forma de pagamento
+        2. Entrega e pagamento
       </div>
     </div>
+
+    <input type="hidden" value="<%= @item.id %>" name="item" class="item_id">
+    <input type="hidden" value="<%= @item.weight %>" name="weight">
+    <input type="hidden" value="<%= @item.width %>" name="width">
+    <input type="hidden" value="<%= @item.height %>" name="height">
+    <input type="hidden" value="<%= @item.length %>" name="length">
+
+    <div class="form-group">
+      <label for="creditcard_name" class="col-sm-4 control-label">Forma de envio:</label>
+      <div class="col-sm-8">
+
+        <div class="input-group">
+          <input type="text" class="form-control input-sm" name="cep" value="<%= @item.user.zipcode %>">
+          <span class="input-group-btn">
+            <button class="btn btn-sm btn-default calcula-frete" type="submit">Realcular</button>
+          </span>
+        </div>
+        <br>
+
+        <div class="response">
+          <table class="table">
+            <% @fretes.each do |frete| %>
+              <tr>
+                <td><input type='radio' name='frete' value="<%= frete[1].nome.downcase %>"> <span class="freteNome"><%= frete[1].nome %></span></td>
+                <td>R$ <span class="fretePreco"><%= frete[1].valor %></span></td>
+                <td><%= frete[1].prazo_entrega %> dias</td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+
+
+    <hr>
+
 
     <div class="form-group">
       <div class="col-sm-9">
@@ -471,50 +512,6 @@
       </div>
     </div>
 
-
-
-
-    <br>
-    <div class="panel panel-success">
-      <div class="panel-heading">
-        3. Forma de entrega
-      </div>
-    </div>
-
-    <input type="hidden" value="<%= @item.id %>" name="item" class="item_id">
-    <input type="hidden" value="<%= @item.weight %>" name="weight">
-    <input type="hidden" value="<%= @item.width %>" name="width">
-    <input type="hidden" value="<%= @item.height %>" name="height">
-    <input type="hidden" value="<%= @item.length %>" name="length">
-
-    <div class="form-group">
-      <label for="creditcard_name" class="col-sm-4 control-label">Calcular frete e prazo:</label>
-      <div class="col-sm-8">
-
-        <div class="input-group">
-          <input type="text" class="form-control" name="cep" value="<%= @item.user.zipcode %>">
-          <span class="input-group-btn">
-            <button class="btn btn-default calcula-frete" type="submit">Calcular</button>
-          </span>
-        </div>
-        <br>
-
-        <div class="response">
-          <table class="table">
-            <% @fretes.each do |frete| %>
-              <tr>
-                <td><input type='radio' name='frete' value="<%= frete[1].nome.downcase %>"> <span class="freteNome"><%= frete[1].nome %></span></td>
-                <td>R$ <span class="fretePreco"><%= frete[1].valor %></span></td>
-                <td><%= frete[1].prazo_entrega %> dias</td>
-              </tr>
-            <% end %>
-          </table>
-        </div>
-        </form>
-
-      </div>
-    </div>
-
   </div>
 
 
@@ -532,7 +529,7 @@
   <div class="col-sm-4">
     <div class="panel panel-success">
       <div class="panel-heading">
-        4. Resumo da compra
+        3. Resumo da compra
       </div>
     </div>
 

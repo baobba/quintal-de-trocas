@@ -1,14 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="store-title">
+  <div class="container">
+    <h1><%= @store.name %></h1>
+    <p class="lead"><%= @store.user.city %> / <%= @store.user.state %></p>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @store.name %>
-</p>
+<br>
+<br>
 
-<p>
-  <strong>User:</strong>
-  <%= @store.user %>
-</p>
+<div class="container">
+  <% if @items %>
+    <ul class="cards list-unstyled">
+      <%= render @items, file: "/items/_item" %>
+    </ul>
+  <% end %>
+</div>
 
-<%= link_to 'Edit', edit_store_path(@store) %> |
-<%= link_to 'Back', stores_path %>
+</div>
+
