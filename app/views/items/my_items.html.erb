@@ -6,7 +6,12 @@
 
 <div class="page-header">
   <h1>
-    Meus brinquedos
+    <% if current_user.store %>
+      Produtos
+    <% else %>
+      Meus brinquedos
+    <% end %>
+    
     <%= link_to '<span class="glyphicon glyphicon-plus"></span> Cadastrar brinquedo'.html_safe, new_item_path, class: "btn btn-success btn-new pull-right" %>
   </h1>
 </div>
