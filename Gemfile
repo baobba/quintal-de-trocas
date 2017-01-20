@@ -55,6 +55,7 @@ gem 'whenever', :require => false
 gem 'pagseguro-oficial', '~> 2.5.0'
 gem 'slack-notifier'
 gem 'correios-frete'
+gem 'httparty'
 
 gem 'puma'
 

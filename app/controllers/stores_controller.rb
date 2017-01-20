@@ -7,10 +7,16 @@ class StoresController < InheritedResources::Base
   end
 
   def edit
+    a = Logger.new("#{Rails.root}/log/pagseguro_authorizations.log")
+    a.info "------------------------------------------------------"
+
     credentials = PagSeguro::ApplicationCredentials.new(
-      Rails.application.secrets['pagseguro_appid'],
-      Rails.application.secrets['pagseguro_appkey']
+      ENV["PAGSEGURO_APPID"],
+      ENV["PAGSEGURO_APPKEY"]
     )
+    a.info ENV["PAGSEGURO_APPID"]
+    a.info credentials
+    a.info "credentials"
 
     if params[:notificationCode]
       current_user.store.update_column(:pagseguro_notification_code, params[:notificationCode])
@@ -18,8 +24,8 @@ class StoresController < InheritedResources::Base
     else
       options = {
         credentials: credentials,
-        permissions: [:checkouts],
-        notification_url: 'http://2e7a2efd.ngrok.io/notify',
+        permissions: [:checkouts, :searches, :notifications],
+        notification_url: 'https://quintaldetrocas.com.br/notify',
         redirect_url: edit_store_url(current_user.store.id),
         account: {
           email: current_user.email,
@@ -27,14 +33,23 @@ class StoresController < InheritedResources::Base
         }
       }
 
+      a.info "options"
+      a.info options
+      a.info "options"
+
       if current_user.store.pagseguro_notification_code
         @authorization = PagSeguro::Authorization.find_by_notification_code(current_user.store.pagseguro_notification_code, credentials: credentials )
+
+        a.info "=> AUTHORIZATIONS"
+        a.info @authorization
       end
 
 
       if !@authorization || (@authorization && @authorization.permissions.first.status == "DENIED")
 
         authorization_request = PagSeguro::AuthorizationRequest.new(options)
+        a.info "authorization_request"
+        a.info authorization_request
 
         if authorization_request.create
           print "Use this link to confirm authorizations: "
@@ -57,7 +72,7 @@ class StoresController < InheritedResources::Base
 
     respond_to do |format|
       if @store.save
-        format.html { redirect_to edit_store_path, success: 'Loja cadastrada com sucesso' }
+        format.html { redirect_to edit_store_path(@store), success: 'Loja cadastrada com sucesso' }
         format.json { render :show, status: :created, location: @store }
       else
         format.html { render :new }

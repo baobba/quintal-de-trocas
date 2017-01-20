@@ -1,7 +1,8 @@
+require 'nokogiri'
+
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:my_orders, :show]
-
 
   # Dashboard
   
@@ -52,8 +53,8 @@ class OrdersController < ApplicationController
       if params[:notificationType] == "applicationAuthorization"
 
         credentials = PagSeguro::ApplicationCredentials.new(
-          Rails.application.secrets['pagseguro_appid'],
-          Rails.application.secrets['pagseguro_appkey']
+          ENV["PAGSEGURO_APPID"],
+          ENV["PAGSEGURO_APPKEY"]
         )
         options = { credentials: credentials }
 
@@ -104,8 +105,6 @@ class OrdersController < ApplicationController
     @order.item_id =  params[:product]
     @item = @order.item
 
-
-
     @frete = Correios::Frete::Calculador.new :cep_origem => @item.user.zipcode,
       :cep_destino => current_user.zipcode,
       :peso => @item.weight/1000,
@@ -116,10 +115,9 @@ class OrdersController < ApplicationController
     @fretes = @frete.calcular :sedex, :pac
 
     # 1. Get Pagseguro valid session
-    session = PagSeguro::Session.create
-    @session_id = session.id
+    session = HTTParty.post("https://ws.pagseguro.uol.com.br/sessions?appId=#{ENV['PAGSEGURO_APPID']}&appKey=#{ENV['PAGSEGURO_APPKEY']}")
 
-    @total_amount
+    @session_id = session.to_s.split("<id>").last.split("</id>").first
 
     respond_to do |format|
       format.html # new.html.erb

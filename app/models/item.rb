@@ -15,6 +15,8 @@ class Item < ActiveRecord::Base
   has_many :credits
   has_many :orders
 
+  scope :actives, -> { where(is_active: true) }
+
   usar_como_dinheiro :price
 
   accepts_nested_attributes_for :item_images, :allow_destroy => true, reject_if: :image_rejectable?

@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   def index
     @bs_container = false
 
-    @q = Item.for_buy.includes(:item_category, :item_age, :item_images)
+    @q = Item.actives.for_buy.includes(:item_category, :item_age, :item_images)
 
     location = if !params[:lat].blank? && !params[:lon].blank?
       [params[:lat], params[:lon]].join(",")

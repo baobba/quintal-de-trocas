@@ -5,7 +5,7 @@ class HomeController < ActionController::Base
   def index
     @bs_container = false
     
-    @items = Item.all
+    @items = Item.actives.all
 
     @items = @items.where(item_category_id: params[:category]) unless params[:category].blank?
     @items = @items.where(item_age_id: params[:age]) unless params[:age].blank?

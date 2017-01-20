@@ -24,7 +24,9 @@
             </ul>
           </li>
           <li><%= link_to 'Trocar', items_path %></li>
-          <li><%= link_to 'Comprar', products_path %></li>
+          <% if Rails.env == "development" %>
+            <li><%= link_to 'Comprar', products_path %></li>
+          <% end %>
           <li><%= link_to "Como funciona", how_it_works_path %></li>
           <li><%= link_to 'Apoie', support_path %></li>
 
@@ -38,7 +40,7 @@
                     </span>
                   <% end %>
                 </div>
-                
+
                 <%= current_user.name.blank? ? current_user.email : current_user.name.split(" ").first %> <span class="fa fa-angle-down" aria-hidden="true"></span>
               </a>
 
@@ -62,25 +64,25 @@
               <li><%= link_to "Login / Cadastre-se", new_user_session_path %></li>
           <% end %>
           <li class="social-icons">
-            
+
               <a href="https://www.facebook.com/pages/Quintal-de-Trocas/566744666744086" target="_blank">
                 <i class="fa fa-facebook"></i>
               </a>
-            
-            
+
+
               <a href="http://instagram.com/quintaldetrocas" target="_blank">
                 <i class="fa fa-instagram"></i>
               </a>
-            
-            
+
+
               <a href="https://www.youtube.com/channel/UCLRkwDF11WZMEFiX7kOLagg" target="_blank">
                 <i class="fa fa-youtube-play"></i>
               </a>
-            
+
           </li>
         </ul>
 
-        
+
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>

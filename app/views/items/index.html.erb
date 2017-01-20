@@ -49,7 +49,7 @@
     </div>
 
     <div class="lead" style="margin-left: 20px;">
-      Mostrando <strong><%= Item.default_per_page >= @items.size ? @items.size : item.default_per_page %></strong> de <%= @items.total_count %> brinquedos
+      Mostrando <strong><%= Item.actives.default_per_page >= @items.size ? @items.size : Item.actives.default_per_page %></strong> de <%= @items.total_count %> brinquedos
     </div>
 
     <ul class="cards list-unstyled">

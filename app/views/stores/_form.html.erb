@@ -10,9 +10,8 @@
       <fieldset>
         <legend>Habilitar Pagseguro</legend>
 
-        <p>Para que possamos realizar as cobranças diretamente em nosso site, você precisa permitir que o Quintal de Trocas utilize sua conta para isso.</p>
+        <p>Para que possamos realizar as cobranças diretamente em nosso site (sem precisar levar o visitante até o site do Pagseguro), você precisa permitir que o Quintal de Trocas faça essa intermediação.</p>
 
-        <%= debug @authorization %>
         <% if @authorization && @authorization.permissions.first.status == "APPROVED" %>
           <div class="panel panel-success">
             <div class="panel-body">
@@ -23,11 +22,12 @@
           <div class="panel panel-success">
             <div class="panel-body">
               <strong class="text-danger"><i class="glyphicon glyphicon-remove-circle"></i> Desabilitado</strong>
-            <%= link_to "Habilitar", @authorization_request_link, class: "btn btn-default" %>
+            <%= link_to "Habilitar", @authorization_request_link, class: "btn btn-default" %><br>
+            <small>Clicando em Habilitar, você será redirecionado ao site do Pagseguro para fazer a autorização.</small>
             </div>
           </div>
         <% else %>
-          <p class="text-danger">Erro de conexão com Pagseguro</p>
+          <p class="text-danger">Erro de conexão com Pagseguro.</p>
         <% end %>
       </fieldset>
       <% end %>

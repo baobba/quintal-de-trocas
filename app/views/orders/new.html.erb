@@ -1,10 +1,12 @@
 <% content_for(:head) do %>
-  <!-- For produtction -->
-  <!-- <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script> -->
 
-  <!-- For sandbox -->
-  <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
-
+  <% if Rails.env == "development" %>
+    <!-- Sandbox -->
+    <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+  <% else %>
+    <!-- Production -->
+    <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+  <% end %>
 
   <script type="text/javascript">
 
@@ -249,12 +251,10 @@
 <%= simple_form_for(@order, html: { multipart: true, class: "form-horizontal", :id => 'formu', :name => 'formu' }, defaults: {wrapper: :horizontal_form}) do |f| %>
 
 
-<!-- <h1 class="text-center">Comprar brinquedo: <small><%= @item.title %></small>?</h1> -->
-
-
 
 <input type="hidden" name="installment_quantity" id="installment_quantity" value="0">
 <input type="hidden" name="installment_value" id="installment_value" value="<%= @item.price.to_f %>">
+<input type="hidden" name="item_frete" id="item_frete" value="">
       
 <input type="hidden" name="sender_hash" class="sender_hash">
 <input type="hidden" name="token" class="token">
@@ -310,8 +310,7 @@
         </div>
       </div>
 
-      <%= user.input :phone, value: "" %>
-      <%# user.input :phone %>
+      <%= user.input :phone, input_html: {value: ""}, required: true %>
 
       <%= user.input :zipcode %>
 
@@ -393,7 +392,7 @@
         <div class="input-group">
           <input type="text" class="form-control input-sm" name="cep" value="<%= @item.user.zipcode %>">
           <span class="input-group-btn">
-            <button class="btn btn-sm btn-default calcula-frete" type="submit">Realcular</button>
+            <button class="btn btn-sm btn-default calcula-frete" type="button">Realcular</button>
           </span>
         </div>
         <br>
@@ -557,7 +556,7 @@
         <tr>
           <td class="active"></td>
           <td class="active text-right">Total:</td>
-          <td class="active text-right checkout-total">R$ <%= @item.price %></td>
+          <td class="active text-right checkout-total">R$ <span><%= @item.price %></span></td>
         </tr>
       </tfoot>
     </table>

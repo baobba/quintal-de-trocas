@@ -1,5 +1,14 @@
+function somaFrete(valorFrete, valorItem) {
+  var total = Number(valorFrete)+Number(valorItem);
+  console.log(total);
+
+  $('#installment_value').val(total);
+  $('.checkout-total span').html(total);
+
+}
+
 $(document).ready(function() {
-  $('#order_user_zipcode').mask('00000-000');
+  $('#order_user_attributes_zipcode').mask('00000-000');
   $('input[name=cep]').mask('00000-000');
 
   var maskBehavior = function (val) {
@@ -10,7 +19,7 @@ $(document).ready(function() {
    }
   };
    
-  $('#order_user_phone').mask(maskBehavior, options);
+  $('#order_user_attributes_phone').mask(maskBehavior, options);
 
   $('.response').on("change", "input[name=frete]", function(e){
     var $form = $(this).closest("tr");
@@ -21,8 +30,9 @@ $(document).ready(function() {
     $('tr.trFrete').find(".frete-nome").text("("+optionNome.html()+")");
     $('tr.trFrete').find(".frete-valor").text(optionPreco.html());
 
-  });
+    somaFrete($form.find(".fretePreco").text(), $("input.preco").val());
 
+  });
 
   $('.orders-new').on("click", ".calcula-frete", function(e){
     e.preventDefault();
@@ -44,7 +54,7 @@ $(document).ready(function() {
 
       // $this.parent().find(".item").html(e.title);
       console.log(data);
-      console.log("this...");
+      console.log("this...11");
       var string = "<table class='table'>";
       // string += "<thead><tr><td width='40%'>Tipo</td><td width='30%'>Frete</td><td width='30%'>Prazo</td></tr></thead>";
       Object.keys(data).forEach(function(key){

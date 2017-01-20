@@ -34,6 +34,8 @@
     </div>
 
     <div class="col-sm-7">
+      <% if current_user.store? %>
+      
       <div class="form-group">
         <%= f.label :price %>
         <div class="input-group">
@@ -43,8 +45,6 @@
       </div>
 
       <div class="row">
-
-        <% if current_user.store? %>
 
           <div class="form-group col-sm-3">
             <%= f.label :weight %>
@@ -77,10 +77,9 @@
 
           <br>
           <br>
-        <% end %>
       </div>
       
-      
+      <% end %>
 
       <p class="lead">Imagens</p>
 

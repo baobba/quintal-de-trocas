@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
   def index
     @bs_container = false
 
-    @q = Item.for_exc.includes(:item_category, :item_age, :item_images)
+    @q = Item.actives.for_exc.includes(:item_category, :item_age, :item_images)
 
     location = if !params[:lat].blank? && !params[:lon].blank?
       [params[:lat], params[:lon]].join(",")
@@ -146,11 +146,12 @@ class ItemsController < ApplicationController
 
   def create
     @item = current_user.items.new(item_params)
+    @item.is_active = true
 
     respond_to do |format|
       if @item.save
 
-        QuintalMailer.item_added(@item).deliver_now
+        QuintalMailer.item_added(@item).deliver_now if !@item.for_sale?
 
         if params[:item_images]
           params[:item_images]['image'].each do |a|
