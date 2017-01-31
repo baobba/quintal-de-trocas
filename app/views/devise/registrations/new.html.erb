@@ -7,7 +7,16 @@
         <h4><%= t('.sign_up', :default => "Sign up") %></h4>
       </div>
       <div class="panel-body">
-        <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: { role: "form" }) do |f| %>
+        <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name, store: params[:store]), html: { role: "form" }) do |f| %>
+
+          <% if params[:store] %>
+            <%= f.simple_fields_for :store, @user.build_store do |store| %>
+              <%= store.input :name %>
+            <% end %>
+          <% end %>
+
+          <hr>
+
           <div class="form-group">
             <%= f.label :email %>
             <%= f.email_field :email, autofocus: true, class: "form-control" %>

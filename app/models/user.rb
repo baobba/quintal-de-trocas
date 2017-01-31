@@ -22,9 +22,8 @@ class User < ActiveRecord::Base
 
   has_many :user_children
 
-  accepts_nested_attributes_for :user_children, 
-    allow_destroy: true, 
-    reject_if: :all_blank
+  accepts_nested_attributes_for :user_children, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :store, allow_destroy: true, reject_if: :all_blank
 
   mount_uploader :avatar, UserUploader
 

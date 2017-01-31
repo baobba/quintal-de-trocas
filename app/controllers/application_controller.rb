@@ -23,12 +23,11 @@ class ApplicationController < ActionController::Base
   def access_denied(exception)
     redirect_to root_path, alert: exception.message
   end
-  
 
   protected
 
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :name, :birthday, :gender, :phone, :username, :street, :complement, :neighborhood, :city, :state, :zipcode, :latitude, :longitude])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation, :name, :birthday, :gender, :phone, :username, :street, :complement, :neighborhood, :city, :state, :zipcode, :latitude, :longitude, store_attributes: [:id, :name]])
       devise_parameter_sanitizer.permit(:account_update, keys: [:email, :password, :password_confirmation, :current_password, :name, :birthday, :gender, :phone, :username, :street, :complement, :neighborhood, :city, :state, :zipcode, :latitude, :longitude])
     end
 

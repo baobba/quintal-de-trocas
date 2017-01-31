@@ -1,9 +1,11 @@
-<span class="text-muted">
-  Eba! Temos geolocalização! Vamos mostrar os brinquedos próximos a você, mas o seu endereço continua confidencial; Isso porque mostramos a localização aproximada no mapa.
-</span>
+<% if !params[:store] %>
+  <span class="text-muted">
+    Eba! Temos geolocalização! Vamos mostrar os brinquedos próximos a você, mas o seu endereço continua confidencial; Isso porque mostramos a localização aproximada no mapa.
+  </span>
 
-<br>
-<br>
+  <br>
+  <br>
+<% end %>
 
 <div class="row">
   <div class="col-sm-6">
