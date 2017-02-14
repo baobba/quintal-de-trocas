@@ -66,12 +66,12 @@
               <% end %>
 
               <small>solicitou:</small>
-              <%= link_to @exchange.to_toy.title, toy_path(@exchange.to_toy) if @exchange.toy %>
+              <%= link_to @exchange.to_item.title, item_path(@exchange.to_item) if @exchange.item %>
 
               
             </div>
             <div class="col-sm-6 exchange-profile" style="<%= 'opacity: 0.4' if @exchange.accepted.nil? %>">
-              <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.toy.user) %>');float: left;margin-right:10px;"></div> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %>
+              <div class="profile-mini" style="background-image:url('<%= default_img(@exchange.item.user) %>');float: left;margin-right:10px;"></div> <%= @exchange.to_user == current_user ? "Você" : @exchange.to_user.first_name %>
 
               <% if !@exchange.to_user.phone.blank? %>
                 <br><strong><%= @exchange.to_user.phone %></strong>
