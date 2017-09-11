@@ -80,6 +80,8 @@ $(document).ready(function() {
   $(document).on("click", ".login-button", function(e) {
     e.preventDefault();
 
+    mixpanel.track("Clicked login");
+
     source = $(this);
     $('#login').modal('show');
   });
