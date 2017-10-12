@@ -51,7 +51,7 @@ class ItemsController < ApplicationController
       zoom = params[:within] || 1000
     end
 
-    # @q = @q.near(location, zoom, :units => :km, :order => 'distance')
+    @q = @q.near(location, zoom, :units => :km, :order => 'distance')
     @q = @q.search(params[:q])
 
     respond_to do |format|
@@ -110,7 +110,7 @@ class ItemsController < ApplicationController
 
   def activate
     raise NotOwner unless current_user.id == @item.user_id
-    
+
     @item.update_column(:next_notification_at, Date.today + 2.months)
     @item.update_column(:expired_at, nil)
     @item.update_column(:activate_qty, @item.activate_qty + 1)
